@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="tid" name="tid" th:value="${swReleaseRecord.tid}"
+                               type="hidden">
+                                                                                                                                        <div class="form-group">
+                                    <label class="col-sm-3 control-label">用户持固币金id：</label>
+                                    <div class="col-sm-8">
+                                        <input id="principalUserId" name="principalUserId"
+                                               th:value="${swReleaseRecord.principalUserId}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">释放金额：</label>
+                                    <div class="col-sm-8">
+                                        <input id="amount" name="amount"
+                                               th:value="${swReleaseRecord.amount}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">导致释放的方式，1-自然释放，2-活币金释放，3-定币金释放：</label>
+                                    <div class="col-sm-8">
+                                        <input id="causeType" name="causeType"
+                                               th:value="${swReleaseRecord.causeType}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">导致释放的用户ID：</label>
+                                    <div class="col-sm-8">
+                                        <input id="causeUserId" name="causeUserId"
+                                               th:value="${swReleaseRecord.causeUserId}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">备注：</label>
+                                    <div class="col-sm-8">
+                                        <input id="remark" name="remark"
+                                               th:value="${swReleaseRecord.remark}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">创建时间：</label>
+                                    <div class="col-sm-8">
+                                        <input id="createDate" name="createDate"
+                                               th:value="${swReleaseRecord.createDate}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">更新时间：</label>
+                                    <div class="col-sm-8">
+                                        <input id="updateDate" name="updateDate"
+                                               th:value="${swReleaseRecord.updateDate}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">删除标记：</label>
+                                    <div class="col-sm-8">
+                                        <input id="delFlag" name="delFlag"
+                                               th:value="${swReleaseRecord.delFlag}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex1：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex1" name="ex1"
+                                               th:value="${swReleaseRecord.ex1}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex2：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex2" name="ex2"
+                                               th:value="${swReleaseRecord.ex2}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex3：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex3" name="ex3"
+                                               th:value="${swReleaseRecord.ex3}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                            <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/get/swReleaseRecord/edit.js">
+</script>
+</body>
+</html>

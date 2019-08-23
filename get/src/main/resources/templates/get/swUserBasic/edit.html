@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="tid" name="tid" th:value="${swUserBasic.tid}"
+                               type="hidden">
+                                                                                                                                        <div class="form-group">
+                                    <label class="col-sm-3 control-label">用户名：</label>
+                                    <div class="col-sm-8">
+                                        <input id="username" name="username"
+                                               th:value="${swUserBasic.username}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">推荐人编号：</label>
+                                    <div class="col-sm-8">
+                                        <input id="recomId" name="recomId"
+                                               th:value="${swUserBasic.recomId}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">手机号码：</label>
+                                    <div class="col-sm-8">
+                                        <input id="mobile" name="mobile"
+                                               th:value="${swUserBasic.mobile}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">邮箱：</label>
+                                    <div class="col-sm-8">
+                                        <input id="email" name="email"
+                                               th:value="${swUserBasic.email}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">登录密码：</label>
+                                    <div class="col-sm-8">
+                                        <input id="loginPass" name="loginPass"
+                                               th:value="${swUserBasic.loginPass}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">高级密码：</label>
+                                    <div class="col-sm-8">
+                                        <input id="highPass" name="highPass"
+                                               th:value="${swUserBasic.highPass}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">手机区域编号：</label>
+                                    <div class="col-sm-8">
+                                        <input id="areaCode" name="areaCode"
+                                               th:value="${swUserBasic.areaCode}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">用户类型 0-普通用户，1-布道者，2-合伙人：</label>
+                                    <div class="col-sm-8">
+                                        <input id="userType" name="userType"
+                                               th:value="${swUserBasic.userType}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">注册时间：</label>
+                                    <div class="col-sm-8">
+                                        <input id="createDate" name="createDate"
+                                               th:value="${swUserBasic.createDate}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">更新时间：</label>
+                                    <div class="col-sm-8">
+                                        <input id="updateDate" name="updateDate"
+                                               th:value="${swUserBasic.updateDate}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">删除标识：</label>
+                                    <div class="col-sm-8">
+                                        <input id="delFlag" name="delFlag"
+                                               th:value="${swUserBasic.delFlag}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex1：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex1" name="ex1"
+                                               th:value="${swUserBasic.ex1}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex2：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex2" name="ex2"
+                                               th:value="${swUserBasic.ex2}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex3：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex3" name="ex3"
+                                               th:value="${swUserBasic.ex3}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex4：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex4" name="ex4"
+                                               th:value="${swUserBasic.ex4}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex5：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex5" name="ex5"
+                                               th:value="${swUserBasic.ex5}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                            <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/get/swUserBasic/edit.js">
+</script>
+</body>
+</html>

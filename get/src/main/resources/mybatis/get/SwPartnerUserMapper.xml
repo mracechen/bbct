@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.get.dao.SwPartnerUserDao">
+
+    <select id="get" resultType="com.get.domain.SwPartnerUserDO">
+        select `tid`,`user_id`,`partner_id`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`        from t_sw_partner_user where tid = #{value}
+    </select>
+
+    <select id="list" resultType="com.get.domain.SwPartnerUserDO">
+        select `tid`,`user_id`,`partner_id`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`        from t_sw_partner_user
+        <where>
+                            <if test="tid != null and tid != ''">and tid =
+                    #{tid}
+                </if>
+                            <if test="userId != null and userId != ''">and user_id =
+                    #{userId}
+                </if>
+                            <if test="partnerId != null and partnerId != ''">and partner_id =
+                    #{partnerId}
+                </if>
+                            <if test="remark != null and remark != ''">and remark =
+                    #{remark}
+                </if>
+                            <if test="ex1 != null and ex1 != ''">and ex1 =
+                    #{ex1}
+                </if>
+                            <if test="ex2 != null and ex2 != ''">and ex2 =
+                    #{ex2}
+                </if>
+                            <if test="ex3 != null and ex3 != ''">and ex3 =
+                    #{ex3}
+                </if>
+                            <if test="createDate != null and createDate != ''">and create_date =
+                    #{createDate}
+                </if>
+                            <if test="updateDate != null and updateDate != ''">and update_date =
+                    #{updateDate}
+                </if>
+                            <if test="delFlag != null and delFlag != ''">and del_flag =
+                    #{delFlag}
+                </if>
+                    </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by tid desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_sw_partner_user
+        <where>
+                            <if test="tid != null and tid != ''">and tid =
+                    #{tid}
+                </if>
+                            <if test="userId != null and userId != ''">and user_id =
+                    #{userId}
+                </if>
+                            <if test="partnerId != null and partnerId != ''">and partner_id =
+                    #{partnerId}
+                </if>
+                            <if test="remark != null and remark != ''">and remark =
+                    #{remark}
+                </if>
+                            <if test="ex1 != null and ex1 != ''">and ex1 =
+                    #{ex1}
+                </if>
+                            <if test="ex2 != null and ex2 != ''">and ex2 =
+                    #{ex2}
+                </if>
+                            <if test="ex3 != null and ex3 != ''">and ex3 =
+                    #{ex3}
+                </if>
+                            <if test="createDate != null and createDate != ''">and create_date =
+                    #{createDate}
+                </if>
+                            <if test="updateDate != null and updateDate != ''">and update_date =
+                    #{updateDate}
+                </if>
+                            <if test="delFlag != null and delFlag != ''">and del_flag =
+                    #{delFlag}
+                </if>
+                    </where>
+    </select>
+
+    <insert id="save" parameterType="com.get.domain.SwPartnerUserDO">
+        insert into t_sw_partner_user
+        (
+                                    `tid`, 
+                                                `user_id`, 
+                                                `partner_id`, 
+                                                `remark`, 
+                                                `ex1`, 
+                                                `ex2`, 
+                                                `ex3`, 
+                                                `create_date`, 
+                                                `update_date`, 
+                                                `del_flag`
+                            )
+        values
+        (
+                                    #{tid}, 
+                                                #{userId}, 
+                                                #{partnerId}, 
+                                                #{remark}, 
+                                                #{ex1}, 
+                                                #{ex2}, 
+                                                #{ex3}, 
+                                                #{createDate}, 
+                                                #{updateDate}, 
+                                                #{delFlag}
+                            )
+    </insert>
+
+    <update id="update" parameterType="com.get.domain.SwPartnerUserDO">
+        update t_sw_partner_user
+        <set>
+                                                                            <if test="userId != null">`user_id` = #{userId
+                        }, </if>
+                                                                <if test="partnerId != null">`partner_id` = #{partnerId
+                        }, </if>
+                                                                <if test="remark != null">`remark` = #{remark
+                        }, </if>
+                                                                <if test="ex1 != null">`ex1` = #{ex1
+                        }, </if>
+                                                                <if test="ex2 != null">`ex2` = #{ex2
+                        }, </if>
+                                                                <if test="ex3 != null">`ex3` = #{ex3
+                        }, </if>
+                                                                <if test="createDate != null">`create_date` = #{createDate
+                        }, </if>
+                                                                <if test="updateDate != null">`update_date` = #{updateDate
+                        }, </if>
+                                                                <if test="delFlag != null">`del_flag` = #{delFlag
+                        }</if>
+                                    </set>
+        where tid = #{tid}
+    </update>
+
+    <delete id="remove">
+        delete from t_sw_partner_user where tid = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from t_sw_partner_user where tid in
+        <foreach item="tid" collection="array" open="(" separator="," close=")">
+            #{tid}
+        </foreach>
+    </delete>
+
+</mapper>

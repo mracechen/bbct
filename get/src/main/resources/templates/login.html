@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <link rel="icon" th:href="${websiteLogo}" type="image/x-icon" />
+
+    <title>
+        [[${backWebsiteFullName}]]
+
+    </title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/login.css" rel="stylesheet">
+    <style>
+        div.signup-footer {
+            position: absolute;
+            bottom: 15px;
+            color: black;
+            width: 16%;
+            border-top: solid 1px rgba(0, 0, 0, .3)
+        }
+
+        *{
+            font-family: initial;
+        }
+
+    </style>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <script>
+        if (window.top !== window.self) {
+            window.top.location = window.location;
+        }
+    </script>
+
+</head>
+
+<body class="signin">
+<ul class="cb-slideshow">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<div class="signinpanel">
+    <div class="row">
+
+        <div class="col-sm-12 " onkeydown="keyEvent(event)" >
+            <form id="signupForm">
+                <h3 class="text-center">用户登录</h3>
+                <!--<p class="m-t-md text-center">欢迎登录瑞银结算管理系统</p>-->
+
+                <input onkeyup="this.value=this.value.replace(/\s+/g,'')" type="text" name="username" id="username" class="form-control "
+                       placeholder = '请输入用户名'/>
+
+                <input onkeyup="this.value=this.value.replace(/\s+/g,'')" type="password" name="password"
+                       class="form-control  m-b" placeholder = '请输入密码'/>
+
+                <div class="Verification_code checkCode_style"  th:style="${isCheckCheckCode ? 'display: block': 'display:none'}">
+                    <input onkeyup="this.value=this.value.replace(/\s+/g,'')" type="text" name="checkCode" class="form-control  m-b" value="" placeholder="验证码" />
+                    <img id="wus" src="/manager/getVerify" onclick="this.src='/manager/getVerify?'+Math.random()"  />
+
+                </div>
+                <div class="wuss" th:style="${isCheckMobileCode == '0' ? 'display: block':'display:none'}">
+                    <input onkeyup="this.value=this.value.replace(/\s+/g,'')" type="text" name="mobileCheckCode"
+                           class="form-control  m-b" value="" placeholder="手机验证码" style="width: 55%;" />
+                    <input  type="button" id="btn" value="获取手机验证码" onclick="settime(this)"   />
+                 </div>
+                <a id="login" class="btn btn-login btn-block">登录</a>
+            </form>
+        </div>
+    </div>
+    <div class="signup-footer">
+        <div class="pull-left">&copy; 2019 K+ Wallet. All rights reserved.
+        </div>
+    </div>
+</div>
+<script th:inline="javascript"> var ctx = [[@{
+    /}]] ; </script>
+<!-- 全局js -->
+<script src="/js/jquery.min.js?v=2.1.4" th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6" th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
+
+<!-- 自定义js -->
+<!--<script src="/js/content.js?v=1.0.0" th:src="@{/js/content.js?v=1.0.0}"></script>-->
+
+<!-- jQuery Validation plugin javascript-->
+<script src="/js/ajax-util.js"></script>
+<script src="/js/plugins/validate/jquery.validate.min.js"
+        th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
+<script src="/js/plugins/validate/messages_zh.min.js" th:src="@{/js/plugins/validate/messages_zh.min.js}"></script>
+<script src="/js/plugins/layer/layer.min.js" th:src="@{/js/plugins/layer/layer.min.js}"></script>
+<script src="/js/login.js"></script>
+<script type="text/javascript">
+
+
+
+    function changeCheckCode(){
+        $("#wus").attr('src','/manager/getVerify?'+Math.random());
+    }
+
+
+    $(document).ready(function () {
+        $("#login").on('click', function () {
+            $("#signupForm").submit();
+        });
+        validateRule();
+    });
+
+    $.validator.setDefaults({
+        submitHandler: function () {
+            login();
+        }
+    });
+
+    function login() {
+        // ;
+        $.ajax({
+            type: "POST",
+            url: "/manager/login",
+            data: $('#signupForm').serialize(),
+            success: function (r) {
+                ;
+                if (r.code == 200) {
+                    var index = layer.load(1, {
+                        shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    });
+                    parent.location.href = '/manager/index';
+                } else {
+                    layer.msg(r.msg);
+                    changeCheckCode();
+                }
+            },
+        });
+    }
+
+    function validateRule() {
+        var icon = "<i class='fa fa-times-circle'></i> ";
+        $("#signupForm").validate({
+            rules: {
+                username: {
+                    required: true
+                },
+                password: {
+                    required: true
+                }
+            },
+            messages: {
+                username: {
+                    required: icon + "请输入您的用户名",
+                },
+                password: {
+                    required: icon + "请输入您的密码",
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

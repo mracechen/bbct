@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.tasklog.dao.TaskDao">
+
+    <select id="get" resultType="com.system.tasklog.domain.TaskDO">
+        select `tid`,`job_name`,`batch_num`,`type`,`start_date`,`end_date`,`message`,`create_date`,`del_flag`        from t_task where tid = #{value}
+    </select>
+
+    <select id="list" resultType="com.system.tasklog.domain.TaskDO">
+        select `tid`,`job_name`,`batch_num`,`type`,`start_date`,`end_date`,`message`,`create_date`,`del_flag` from
+        t_task
+        <where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="jobName != null and jobName != ''">and job_name =
+                #{jobName}
+            </if>
+            <if test="batchNum != null and batchNum != ''">and batch_num =
+                #{batchNum}
+            </if>
+            <if test="type != null and type != ''">and type =
+                #{type}
+            </if>
+            <if test="startDate != null and startDate != ''">and start_date =
+                #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">and end_date =
+                #{endDate}
+            </if>
+            <if test="message != null and message != ''">and message =
+                #{message}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="createStartDate != null and createStartDate != ''">and create_date &gt; #{createStartDate}</if>
+            <if test="createEndDate != null and createEndDate != ''">and create_date &lt; #{createEndDate}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by tid desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_task
+        <where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="jobName != null and jobName != ''">and job_name =
+                #{jobName}
+            </if>
+            <if test="batchNum != null and batchNum != ''">and batch_num =
+                #{batchNum}
+            </if>
+            <if test="type != null and type != ''">and type =
+                #{type}
+            </if>
+            <if test="startDate != null and startDate != ''">and start_date =
+                #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">and end_date =
+                #{endDate}
+            </if>
+            <if test="message != null and message != ''">and message =
+                #{message}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="createStartDate != null and createStartDate != ''">and create_date &gt; #{createStartDate}</if>
+            <if test="createEndDate != null and createEndDate != ''">and create_date &lt; #{createEndDate}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.system.tasklog.domain.TaskDO">
+        insert into t_task
+        (
+                                    `tid`, 
+                                                `job_name`, 
+                                                `batch_num`, 
+                                                `type`, 
+                                                `start_date`, 
+                                                `end_date`, 
+                                                `message`, 
+                                                `create_date`, 
+                                                `del_flag`
+                            )
+        values
+        (
+                                    #{tid}, 
+                                                #{jobName}, 
+                                                #{batchNum}, 
+                                                #{type}, 
+                                                #{startDate}, 
+                                                #{endDate}, 
+                                                #{message}, 
+                                                #{createDate}, 
+                                                #{delFlag}
+                            )
+    </insert>
+
+    <update id="update" parameterType="com.system.tasklog.domain.TaskDO">
+        update t_task
+        <set>
+            <if test="jobName != null">`job_name` = #{jobName
+                        },
+            </if>
+            <if test="batchNum != null">`batch_num` = #{batchNum
+                        },
+            </if>
+            <if test="type != null">`type` = #{type
+                        },
+            </if>
+            <if test="startDate != null">`start_date` = #{startDate
+                        },
+            </if>
+            <if test="endDate != null">`end_date` = #{endDate
+                        },
+            </if>
+            <if test="message != null">`message` = #{message
+                        },
+            </if>
+            <if test="createDate != null">`create_date` = #{createDate
+                        },
+            </if>
+            <if test="delFlag != null">`del_flag` = #{delFlag
+                        }
+            </if>
+        </set>
+        where tid = #{tid}
+    </update>
+
+    <delete id="remove">
+        delete from t_task where tid = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from t_task where tid in
+        <foreach item="tid" collection="array" open="(" separator="," close=")">
+            #{tid}
+        </foreach>
+    </delete>
+
+</mapper>

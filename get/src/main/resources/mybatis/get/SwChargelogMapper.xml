@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.get.dao.SwChargelogDao">
+
+    <select id="get" resultType="com.get.domain.SwChargelogDO">
+        select `tid`,`user_id`,`coin_id`,`amount`,`address`,`txid`,`status`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`        from t_sw_chargelog where tid = #{value}
+    </select>
+
+    <select id="list" resultType="com.get.domain.SwChargelogDO">
+        select `tid`,`user_id`,`coin_id`,`amount`,`address`,`txid`,`status`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`        from t_sw_chargelog
+        <where>
+                            <if test="tid != null and tid != ''">and tid =
+                    #{tid}
+                </if>
+                            <if test="userId != null and userId != ''">and user_id =
+                    #{userId}
+                </if>
+                            <if test="coinId != null and coinId != ''">and coin_id =
+                    #{coinId}
+                </if>
+                            <if test="amount != null and amount != ''">and amount =
+                    #{amount}
+                </if>
+                            <if test="address != null and address != ''">and address =
+                    #{address}
+                </if>
+                            <if test="txid != null and txid != ''">and txid =
+                    #{txid}
+                </if>
+                            <if test="status != null and status != ''">and status =
+                    #{status}
+                </if>
+                            <if test="createDate != null and createDate != ''">and create_date =
+                    #{createDate}
+                </if>
+                            <if test="updateDate != null and updateDate != ''">and update_date =
+                    #{updateDate}
+                </if>
+                            <if test="delFlag != null and delFlag != ''">and del_flag =
+                    #{delFlag}
+                </if>
+                            <if test="ex2 != null and ex2 != ''">and ex2 =
+                    #{ex2}
+                </if>
+                            <if test="ex4 != null and ex4 != ''">and ex4 =
+                    #{ex4}
+                </if>
+                            <if test="ex5 != null and ex5 != ''">and ex5 =
+                    #{ex5}
+                </if>
+                    </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by tid desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_sw_chargelog
+        <where>
+                            <if test="tid != null and tid != ''">and tid =
+                    #{tid}
+                </if>
+                            <if test="userId != null and userId != ''">and user_id =
+                    #{userId}
+                </if>
+                            <if test="coinId != null and coinId != ''">and coin_id =
+                    #{coinId}
+                </if>
+                            <if test="amount != null and amount != ''">and amount =
+                    #{amount}
+                </if>
+                            <if test="address != null and address != ''">and address =
+                    #{address}
+                </if>
+                            <if test="txid != null and txid != ''">and txid =
+                    #{txid}
+                </if>
+                            <if test="status != null and status != ''">and status =
+                    #{status}
+                </if>
+                            <if test="createDate != null and createDate != ''">and create_date =
+                    #{createDate}
+                </if>
+                            <if test="updateDate != null and updateDate != ''">and update_date =
+                    #{updateDate}
+                </if>
+                            <if test="delFlag != null and delFlag != ''">and del_flag =
+                    #{delFlag}
+                </if>
+                            <if test="ex2 != null and ex2 != ''">and ex2 =
+                    #{ex2}
+                </if>
+                            <if test="ex4 != null and ex4 != ''">and ex4 =
+                    #{ex4}
+                </if>
+                            <if test="ex5 != null and ex5 != ''">and ex5 =
+                    #{ex5}
+                </if>
+                    </where>
+    </select>
+
+    <insert id="save" parameterType="com.get.domain.SwChargelogDO">
+        insert into t_sw_chargelog
+        (
+                                    `tid`, 
+                                                `user_id`, 
+                                                `coin_id`, 
+                                                `amount`, 
+                                                `address`, 
+                                                `txid`, 
+                                                `status`, 
+                                                `create_date`, 
+                                                `update_date`, 
+                                                `del_flag`, 
+                                                `ex2`, 
+                                                `ex4`, 
+                                                `ex5`
+                            )
+        values
+        (
+                                    #{tid}, 
+                                                #{userId}, 
+                                                #{coinId}, 
+                                                #{amount}, 
+                                                #{address}, 
+                                                #{txid}, 
+                                                #{status}, 
+                                                #{createDate}, 
+                                                #{updateDate}, 
+                                                #{delFlag}, 
+                                                #{ex2}, 
+                                                #{ex4}, 
+                                                #{ex5}
+                            )
+    </insert>
+
+    <update id="update" parameterType="com.get.domain.SwChargelogDO">
+        update t_sw_chargelog
+        <set>
+                                                                            <if test="userId != null">`user_id` = #{userId
+                        }, </if>
+                                                                <if test="coinId != null">`coin_id` = #{coinId
+                        }, </if>
+                                                                <if test="amount != null">`amount` = #{amount
+                        }, </if>
+                                                                <if test="address != null">`address` = #{address
+                        }, </if>
+                                                                <if test="txid != null">`txid` = #{txid
+                        }, </if>
+                                                                <if test="status != null">`status` = #{status
+                        }, </if>
+                                                                <if test="createDate != null">`create_date` = #{createDate
+                        }, </if>
+                                                                <if test="updateDate != null">`update_date` = #{updateDate
+                        }, </if>
+                                                                <if test="delFlag != null">`del_flag` = #{delFlag
+                        }, </if>
+                                                                <if test="ex2 != null">`ex2` = #{ex2
+                        }, </if>
+                                                                <if test="ex4 != null">`ex4` = #{ex4
+                        }, </if>
+                                                                <if test="ex5 != null">`ex5` = #{ex5
+                        }</if>
+                                    </set>
+        where tid = #{tid}
+    </update>
+
+    <delete id="remove">
+        delete from t_sw_chargelog where tid = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from t_sw_chargelog where tid in
+        <foreach item="tid" collection="array" open="(" separator="," close=")">
+            #{tid}
+        </foreach>
+    </delete>
+
+</mapper>

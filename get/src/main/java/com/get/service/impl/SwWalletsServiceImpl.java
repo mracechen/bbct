@@ -1,0 +1,61 @@
+package com.get.service.impl;
+
+import com.get.statuc.CommonStatic;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+import com.get.dao.SwWalletsDao;
+import com.get.domain.SwWalletsDO;
+import com.get.service.SwWalletsService;
+
+
+@Service
+public class SwWalletsServiceImpl implements SwWalletsService {
+    @Autowired
+    private SwWalletsDao swWalletsDao;
+
+    @Override
+    public SwWalletsDO get(String tid) {
+        return swWalletsDao.get(tid);
+    }
+
+    @Override
+    public List<SwWalletsDO> list(Map<String, Object> map) {
+        return swWalletsDao.list(map);
+    }
+
+    @Override
+    public int count(Map<String, Object> map) {
+        return swWalletsDao.count(map);
+    }
+
+    @Override
+    public int save(SwWalletsDO swWallets) {
+        return swWalletsDao.save(swWallets);
+    }
+
+    @Override
+    public int update(SwWalletsDO swWallets) {
+        return swWalletsDao.update(swWallets);
+    }
+
+    @Override
+    public int remove(String tid) {
+        SwWalletsDO swWallets = new SwWalletsDO();
+        swWallets.setDelFlag(CommonStatic.DELETE);
+        swWallets.setTid(tid);
+        return swWalletsDao.update(swWallets);
+    }
+
+    @Override
+    public int batchRemove(String[]tids) {
+        int count = 0;
+        for(String ids : tids){
+            count = count + remove(ids);
+        }
+        return count;
+    }
+
+}

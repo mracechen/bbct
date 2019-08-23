@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link rel="stylesheet" href="/css/config/config.css">
+
+
+<body class="gray-bg">
+<input id="clazzName" type="text" style="display: none" th:value="${clazzName}">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <form class="layui-form" action="">
+
+                    <table style="width: 100%">
+                        <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                            <td class="header">
+                                基本配置
+                            </td>
+                            <td class="style-td" style="border-left: none">
+
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                后台系统全名:
+                            </td>
+                            <td class="style-td">
+                                <input name="BackWebsiteFullName" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                后台系统简称名称:
+                            </td>
+                            <td class="style-td">
+                                <input name="BackWebsiteSubName" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                网站域名:
+                            </td>
+                            <td class="style-td">
+                                <input name="WebsiteURL" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100% ;height: 200px">
+                            <td class="show-remark-text">
+                                后台网站LOGO:
+                            </td>
+                            <td class="style-td">
+                                <img name="WebsiteLogo" src="/img/noPicture.jpg"
+                                     onclick="upload(this)" class="input img-css 30">
+                                <button type="button" class="layui-btn test1" data-key="30">
+                                    <i class="fa fa-cloud"></i>上传文件
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                系统账户ID:
+                            </td>
+                            <td class="style-td">
+                                <input name="SystemAccountId" class="input input-frame"/>
+                            </td>
+                        </tr>
+
+
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                管理员登录开启手机号码验证:
+                            </td>
+                            <td class="style-td">
+                                <input class="input" type="checkbox" lay-skin="switch" name="IsEnableAdminLoginMobileCheck">
+                            </td>
+                        </tr>
+
+                        <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                            <td class="header">
+                                注册赠送配置
+                            </td>
+                            <td class="style-td" style="border-left: none">
+
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                用户注册后赠送的币种:
+                            </td>
+                            <td class="style-td">
+                                <input name="UserRegGiveCoin" class="input input-frame"/>
+                            </td>
+                        </tr>
+
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                用户注册后赠送的币种的数量:
+                            </td>
+                            <td class="style-td">
+                                <textarea name="UserRegGiveCoinTotalJson" class="input input-frame" style="width: 1012px; height: 100px"></textarea>
+                            </td>
+                        </tr>
+
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                直推多少人并实名，签到可领取奖励金额:
+                            </td>
+                            <td class="style-td">
+                                <input name="PushUserNumber" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                直推多少人可赠送的币种:
+                            </td>
+                            <td class="style-td">
+                                <input name="PushUserNumberCoin" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                直推多少人可赠送的币种数量:
+                            </td>
+                            <td class="style-td">
+                                <input name="PushUserNumberCoinNum" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                直推多少人可获得签到奖励:
+                            </td>
+                            <td class="style-td">
+                                <input name="PushUserNumberCheckIn" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                每推荐一定数量的人可赠送的币种:
+                            </td>
+                            <td class="style-td">
+                                <input name="PushReachedUserCoinType" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                每推荐一定数量的人可赠送的币数量:
+                            </td>
+                            <td class="style-td">
+                                <input name="PushReachedUserCoinNumber" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                每推荐多少个人可获得奖励:
+                            </td>
+                            <td class="style-td">
+                                <input name="PushReachedUserNumber" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                            <td class="header">
+                                礼包配置
+                            </td>
+                            <td class="style-td" style="border-left: none">
+
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                礼包奖励配置（packageCode：礼包code，ruleCode:规则code）
+                            </td>
+                            <td class="style-td">
+                                <textarea name="PackageRuleJson" class="input input-frame" style="width: 1012px; height: 100px"></textarea>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                超值礼包加快速率
+                            </td>
+                            <td class="style-td">
+                                <textarea name="SuperPackageRate" class="input input-frame" style="width: 1012px; height: 100px"></textarea>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+
+                            <td class="show-remark-text">
+                                满足分红第一阶段的礼包编码
+                            </td>
+                            <td class="style-td">
+                                <input name="FirstShareLevelOfPackage" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                满足分红第二阶段的礼包编码
+                            </td>
+                            <td class="style-td">
+                                <input name="SecondShareLevelOfPackage" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                满足分红第三阶段的礼包编码
+                            </td>
+                            <td class="style-td">
+                                <input name="ThirdShareLevelOfPackage" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+
+                            <td class="show-remark-text">
+                                分红第一阶段的代数界限
+                            </td>
+                            <td class="style-td">
+                                <input name="FirstShareLevelBorder" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                分红第二阶段的代数界限
+                            </td>
+                            <td class="style-td">
+                                <input name="SecondShareLevelBorder" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                分红第三阶段的代数界限
+                            </td>
+                            <td class="style-td">
+                                <input name="ThirdShareLevelOfBorder" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+
+                            <td class="show-remark-text">
+                                礼包优惠第一、二阶段分割点（天，例：7表示7天之内礼包计算采用第一阶段倍率，7天之后采用第二阶段倍率）
+                            </td>
+                            <td class="style-td">
+                                <input name="FirstLevelDay" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+
+                            <td class="show-remark-text">
+                                礼包优惠第二、三阶段分割点（天）
+                            </td>
+                            <td class="style-td">
+                                <input name="SecondLevelDay" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+
+                            <td class="show-remark-text">
+                                第一阶段内购买超值礼包附赠币种奖励倍数
+                            </td>
+                            <td class="style-td">
+                                <input name="Before7DayMultiple" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                第二阶段内购买超值礼包附赠币种奖励倍数
+                            </td>
+                            <td class="style-td">
+                                <input name="Before21DayMultiple" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                第三阶段内购买超值礼包附赠币种奖励倍数
+                            </td>
+                            <td class="style-td">
+                                <input name="After21DayMultiple" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+
+                            <td class="show-remark-text">
+                                第一阶段内购买超值礼包兑换币种奖励倍数
+                            </td>
+                            <td class="style-td">
+                                <input name="Before7DayMultipleInner" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                第二阶段内购买超值礼包兑换币种奖励倍数
+                            </td>
+                            <td class="style-td">
+                                <input name="Before21DayMultipleInner" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                第三阶段内购买超值礼包兑换币种奖励倍数
+                            </td>
+                            <td class="style-td">
+                                <input name="After21DayMultipleInner" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                每月礼包附赠币种
+                            </td>
+                            <td class="style-td">
+                                <input name="MonthPackageIncidentalCoin" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                每月礼包附赠币种数量
+                            </td>
+                            <td class="style-td">
+                                <input name="MonthPackageIncidentalCoinNum" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                超值礼包附赠币种
+                            </td>
+                            <td class="style-td">
+                                <input name="SuperPackageIncidentalCoin" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                购买超值礼包代替币种
+                            </td>
+                            <td class="style-td">
+                                <input name="MonthPackageInsteadCoin" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                购买超值礼包代替比例
+                            </td>
+                            <td class="style-td">
+                                <input name="MonthPackageInsteadPercent" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                1288特殊礼包编码
+                            </td>
+                            <td class="style-td">
+                                <input name="PackageOf1288Code" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                1288分红比例
+                            </td>
+                            <td class="style-td">
+                                <input name="PackageOf1288SharePercent" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                1288分红兑换源币种（指USDT）
+                            </td>
+                            <td class="style-td">
+                                <input name="ShareOf1288SourceCoin" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                1288分红兑换目标币种（当前指UP）
+                            </td>
+                            <td class="style-td">
+                                <input name="ShareOf1288TargetCoin" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                            <td class="header">
+                                全球分红配置
+                            </td>
+                            <td class="style-td" style="border-left: none">
+
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                达到1级领导需满足商家数量
+                            </td>
+                            <td class="style-td">
+                                <input name="ShopNumOfL1" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                达到1级领导需满足会员数量
+                            </td>
+                            <td class="style-td">
+                                <input name="UserNumOfL1" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                达到1级领导需满足消耗币种
+                            </td>
+                            <td class="style-td">
+                                <input name="CoinTypeOfL1" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                达到1级领导需满足消耗币种数量
+                            </td>
+                            <td class="style-td">
+                                <input name="CoinNumOfL1" class="input input-frame"/>
+                            </td>
+                        </tr>
+
+                        <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                            <td class="header">
+                                商家赠送配置
+                            </td>
+                            <td class="style-td" style="border-left: none">
+
+                            </td>
+                        </tr>
+                        <!--<tr style="width: 100%;">-->
+                            <!--<td class="show-remark-text">-->
+                                <!--商家消费返佣比例（如：0.5，表示返佣50%）:-->
+                            <!--</td>-->
+                            <!--<td class="style-td">-->
+                                <!--<input name="TranReturnPercent" class="input input-frame"/>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                商家消费返佣规则:(useLevel值为1-100整数，值越大优先级越高；returnPercent为0-1的小数,share为true表示给上级分红，否则不分)
+                            </td>
+                            <td class="style-td">
+                                <textarea name="ShopReturnTotalJson" class="input input-frame" style="width: 1012px; height: 100px"></textarea>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                消费GCP转换USDT比例
+                            </td>
+                            <td class="style-td">
+                                <input name="ConsumeRevertRatio" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                消费让利分红规则编码
+                            </td>
+                            <td class="style-td">
+                                <input name="RewardRuleCode" class="input input-frame"/>
+                            </td>
+                        </tr>
+
+                        <!--币种转化配置-->
+                        <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                            <td class="header">
+                                币种转化配置
+                            </td>
+                            <td class="style-td" style="border-left: none">
+
+                            </td>
+                        </tr>
+
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                1个KBT转化KBT+比例:
+                            </td>
+                            <td class="style-td">
+                                <input name="KbtToKb2Proportion" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <!--提现提币配置-->
+                        <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                            <td class="header">
+                                提现提币配置
+                            </td>
+                            <td class="style-td" style="border-left: none">
+
+                            </td>
+                        </tr>
+
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                提币手续费:
+                            </td>
+                            <td class="style-td">
+                                <input name="WithFee" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                最低提现提币额度:
+                            </td>
+                            <td class="style-td">
+                                <input name="MinWithLimit" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                商家消费返还币种:
+                            </td>
+                            <td class="style-td">
+                                <input name="ConsumeCoin" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                商家消费返还币种倍数:
+                            </td>
+                            <td class="style-td">
+                                <input name="ConsumeCoinMultiple" class="input input-frame"/>
+                            </td>
+                        </tr>
+                        <!--拦截接口配置-->
+                        <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                            <td class="header">
+                                拦截接口配置
+                            </td>
+                            <td class="style-td" style="border-left: none">
+
+                            </td>
+                        </tr>
+
+                        <tr style="width: 100%;">
+                            <td class="show-remark-text">
+                                是否拦截接口:
+                            </td>
+                            <td class="style-td">
+                                <input name="FilterInterface" class="input input-frame"/>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div style="width: 100%; text-align: center">
+        <button type="button" style="width: 15rem;"
+                class="btn  btn-primary">
+            <i class="fa fa-plus hidden" aria-hidden="true"></i>保存
+        </button>
+    </div>
+    <div id="loading"
+         style="position: fixed;width: 100%;height: 100%;top: 0;left: 0;right: 0;bottom: 0;background: rgba(0,0,0,0.5); display:none;"
+         onclick="this.style.display = 'none'">
+        <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%)">
+            <img src="#" id="upload">
+        </div>
+
+    </div>
+</div>
+<!--</div>-->
+<div th:include="include :: footer"></div>
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/js/bootstrap-paginator.min.js"></script>
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/layui.js"></script>
+<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/vue.min.js"></script>
+<script type="text/javascript" src="/js/appjs/sysconfig/config/config.js"></script>
+</body>
+</html>

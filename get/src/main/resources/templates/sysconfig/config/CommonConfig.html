@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link rel="stylesheet" href="/css/config/config.css">
+
+
+<body class="gray-bg">
+<input id="clazzName" type="text" style="display: none" th:value="${clazzName}">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+
+                <table style="width: 100%">
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header">
+                            页脚配置
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            联系电话:
+                        </td>
+                        <td class="style-td">
+                            <input
+                                    name="Mobile" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            公司业务邮箱:
+                        </td>
+                        <td class="style-td">
+                            <input
+                                    name="Email" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            公司地址:
+                        </td>
+                        <td class="style-td">
+                            <input
+                                    name="Address" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            联系人:
+                        </td>
+                        <td class="style-td">
+                            <input
+                                    name="Contact" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100% ;height: 200px">
+                        <td class="show-remark-text">
+                            瑞银RR社区公众号二维码:
+                        </td>
+                        <td class="style-td">
+                            <img name="RRPublicImg" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 3">
+                            <button type="button" class="layui-btn test1" data-key="3">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            瑞银RR社区公众号二维码名称:
+                        </td>
+                        <td class="style-td">
+                            <input
+                                    name="RRPublicImgName" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100% ;height: 200px">
+                        <td class="show-remark-text">
+                            汇集团公众号二维码:
+                        </td>
+                        <td class="style-td">
+                            <img name="ZYHPublicImg" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 2">
+                            <button type="button" class="layui-btn test1" data-key="2">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            集团公众号二维码名称:
+                        </td>
+                        <td class="style-td">
+                            <input
+                                    name="ZYHPublicImgName" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header">
+                            公共配置
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+                    <tr style="width: 100% ;height: 200px">
+                        <td class="show-remark-text">
+                            官网LOGO:
+                        </td>
+                        <td class="style-td">
+                            <img name="LogoImg" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 5">
+                            <button type="button" class="layui-btn test1" data-key="5">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            公司版权:
+                        </td>
+                        <td class="style-td">
+                            <input
+                                    name="CompanyCopyright" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            是否开启微信:
+                        </td>
+                        <td class="style-td">
+                            <input type="radio" name="IsEnableWaiXinImg" class="input" id="0"/>
+                            <label for="0">开启</label>
+                            <input type="radio" name="IsEnableWaiXinImg" class="input" id="1"/>
+                            <label for="1">关闭</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="width: 100%; text-align: center">
+        <button type="button" style="width: 15rem;"
+                class="btn  btn-primary">
+            <i class="fa fa-plus hidden" aria-hidden="true"></i>保存
+        </button>
+    </div>
+    <div id="loading"
+         style="position: fixed;width: 100%;height: 100%;top: 0;left: 0;right: 0;bottom: 0;background: rgba(0,0,0,0.5); display:none;"
+         onclick="this.style.display = 'none'">
+        <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%)">
+            <img src="#" id="upload">
+        </div>
+
+    </div>
+</div>
+</div>
+
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/js/bootstrap-paginator.min.js"></script>
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/layui.js"></script>
+<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/vue.min.js"></script>
+<script type="text/javascript" src="/js/appjs/sysconfig/config/config.js"></script>
+</body>
+</html>

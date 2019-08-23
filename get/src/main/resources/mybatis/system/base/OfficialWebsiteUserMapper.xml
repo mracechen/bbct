@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.base.dao.OfficialWebsiteUserDao">
+
+	<select id="get" resultType="com.system.base.domain.OfficialWebsiteUserDO">
+		select `id`,`username`,`password` from t_official_website_user where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.system.base.domain.OfficialWebsiteUserDO">
+		select `id`,`username`,`password` from t_official_website_user
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="username != null and username != ''"> and username = #{username} </if>
+		  		  <if test="password != null and password != ''"> and password = #{password} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from t_official_website_user
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="username != null and username != ''"> and username = #{username} </if>
+		  		  <if test="password != null and password != ''"> and password = #{password} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.system.base.domain.OfficialWebsiteUserDO" useGeneratedKeys="true" keyProperty="id">
+		insert into t_official_website_user
+		(
+			`username`, 
+			`password`
+		)
+		values
+		(
+			#{username}, 
+			#{password}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.base.domain.OfficialWebsiteUserDO">
+		update t_official_website_user 
+		<set>
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="password != null">`password` = #{password}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from t_official_website_user where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from t_official_website_user where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="findUserByUsername" resultType="com.system.base.domain.OfficialWebsiteUserDO" parameterType="string">
+		SELECT id,username,password FROM t_official_website_user WHERE username = #{username}
+	</select>
+
+</mapper>

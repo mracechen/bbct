@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.record.dao.MsgRecordDao">
+
+    <select id="get" resultType="com.system.record.domain.MsgRecordDO">
+        select `tid`,`mobile`,`msg_content`,`status`,`create_date`,`del_flag`        from t_msg_record where tid = #{value}
+    </select>
+
+    <select id="list" resultType="com.system.record.domain.MsgRecordDO">
+        select `tid`,`mobile`,`msg_content`,`status`,`create_date`,`del_flag` from t_msg_record
+        <where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="mobile != null and mobile != ''">and mobile =
+                #{mobile}
+            </if>
+            <if test="msgContent != null and msgContent != ''">and msg_content like '%${msgContent}%'
+            </if>
+            <if test="status != null and status != ''">and status =
+                #{status}
+            </if>
+            <if test="createDate != null">and create_date =
+                #{createDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+
+            <if test="createStartDate != null and createStartDate != ''"> and create_date &gt; #{createStartDate} </if>
+            <if test="createEndDate != null and createEndDate != ''"> and create_date &lt; #{createEndDate} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by tid desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_msg_record
+        <where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="mobile != null and mobile != ''">and mobile =
+                #{mobile}
+            </if>
+            <if test="msgContent != null and msgContent != ''">
+                and msg_content like '%${msgContent}%'
+            </if>
+            <if test="status != null and status != ''">and status =
+                #{status}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="createStartDate != null and createStartDate != ''"> and create_date &gt; #{createStartDate} </if>
+            <if test="createEndDate != null and createEndDate != ''"> and create_date &lt; #{createEndDate} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.system.record.domain.MsgRecordDO">
+        insert into t_msg_record
+        (
+        `tid`,
+        `mobile`,
+        `msg_content`,
+        `status`,
+        `create_date`,
+        `del_flag`
+        )
+        values
+        (
+        #{tid},
+        #{mobile},
+        #{msgContent},
+        #{status},
+        #{createDate},
+        #{delFlag}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.system.record.domain.MsgRecordDO">
+        update t_msg_record
+        <set>
+            <if test="mobile != null">`mobile` = #{mobile
+                        }, </if>
+            <if test="msgContent != null">`msg_content` = #{msgContent
+                        }, </if>
+            <if test="status != null">`status` = #{status
+                        }, </if>
+            <if test="createDate != null">`create_date` = #{createDate
+                        }, </if>
+            <if test="delFlag != null">`del_flag` = #{delFlag
+                        }</if>
+        </set>
+        where tid = #{tid}
+    </update>
+
+    <delete id="remove">
+        delete from t_msg_record where tid = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from t_msg_record where tid in
+        <foreach item="tid" collection="array" open="(" separator="," close=")">
+            #{tid}
+        </foreach>
+    </delete>
+
+</mapper>

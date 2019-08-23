@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.sysconfig.dao.ConfigDao">
+
+	<select id="get" resultType="com.system.sysconfig.domain.ConfigDO">
+		select `tid`,`field_name`,`field_value`,`filed_type`,`create_date`,`update_date`,`del_flag` from t_sys_config where tid = #{value}
+	</select>
+
+	<select id="list" resultType="com.system.sysconfig.domain.ConfigDO">
+		select `tid`,`field_name`,`field_value`,`filed_type`,`create_date`,`update_date`,`del_flag` from t_sys_config
+        <where>  
+		  		  <if test="tid != null and tid != ''"> and tid = #{tid} </if>
+		  		  <if test="fieldName != null and fieldName != ''"> and field_name = #{fieldName} </if>
+		  		  <if test="fieldValue != null and fieldValue != ''"> and field_value = #{fieldValue} </if>
+		  		  <if test="filedType != null and filedType != ''"> and filed_type = #{filedType} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+		  		  <if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by tid desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from t_sys_config
+		 <where>  
+		  		  <if test="tid != null and tid != ''"> and tid = #{tid} </if>
+		  		  <if test="fieldName != null and fieldName != ''"> and field_name = #{fieldName} </if>
+		  		  <if test="fieldValue != null and fieldValue != ''"> and field_value = #{fieldValue} </if>
+		  		  <if test="filedType != null and filedType != ''"> and filed_type = #{filedType} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+		  		  <if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.system.sysconfig.domain.ConfigDO">
+		insert into t_sys_config
+		(
+			`tid`, 
+			`field_name`, 
+			`field_value`, 
+			`filed_type`, 
+			`create_date`, 
+			`update_date`, 
+			`del_flag`
+		)
+		values
+		(
+			#{tid}, 
+			#{fieldName}, 
+			#{fieldValue}, 
+			#{filedType}, 
+			#{createDate}, 
+			#{updateDate}, 
+			#{delFlag}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.sysconfig.domain.ConfigDO">
+		update t_sys_config 
+		<set>
+			<if test="fieldName != null">`field_name` = #{fieldName}, </if>
+			<if test="fieldValue != null">`field_value` = #{fieldValue}, </if>
+			<if test="filedType != null">`filed_type` = #{filedType}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="updateDate != null">`update_date` = #{updateDate}, </if>
+			<if test="delFlag != null">`del_flag` = #{delFlag}</if>
+		</set>
+		where field_name = #{fieldName}
+	</update>
+	
+	<delete id="remove">
+		delete from t_sys_config where tid = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from t_sys_config where tid in 
+		<foreach item="tid" collection="array" open="(" separator="," close=")">
+			#{tid}
+		</foreach>
+	</delete>
+
+</mapper>

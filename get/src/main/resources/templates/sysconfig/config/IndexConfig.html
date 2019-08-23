@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link rel="stylesheet" href="/css/config/config.css">
+
+
+<body class="gray-bg">
+<input id="clazzName" type="text" style="display: none" th:value="${clazzName}">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+
+                <table style="width: 100%">
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header">
+                            首页配置分类
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ;height: 200px">
+                        <td class="show-remark-text">
+                            首页背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="IndexBackGroundImg" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 4">
+                            <button type="button" class="layui-btn test1" data-key="4">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            展示中文名称图片:
+                        </td>
+                        <td class="style-td">
+                            <img name="ChineseImg" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 6">
+                            <button type="button" class="layui-btn test1" data-key="6">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            展示英文名称图片:
+                        </td>
+                        <td class="style-td">
+                            <img name="EnglishImg" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 7">
+                            <button type="button" class="layui-btn test1" data-key="7">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            首页英文名称下面的文字展示:
+                        </td>
+                        <td class="style-td">
+                            <input
+                                    name="IndexShowText" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            按钮名称:
+                        </td>
+                        <td class="style-td">
+                            <input
+                                    name="IndexButtonName" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            按钮跳转地址:
+                        </td>
+                        <td class="style-td">
+                            <input
+                                    name="IndexButtonLinked" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header">
+                            首页核心业务分类
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            首页核心业务:
+                        </td>
+                        <td class="style-td">
+                            <input name="Core" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header2">
+                            首页核心业务第一个动态
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            第一个动态背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="CoreOneImage" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 20">
+                            <button type="button" class="layui-btn test1" data-key="20">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第一个动态第一行文字:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreOneOneText" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第一个动态第二行文字:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreOneTwoText" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第一个动态点击地址:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreOneUrl" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header2">
+                            首页核心业务第二个动态
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            第二个动态背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="CoreTwoImage" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 21">
+                            <button type="button" class="layui-btn test1" data-key="21">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第二个动态第一行文字:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreTwoOneText" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第二个动态第二行文字:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreTwoTwoText" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第二个动态点击地址:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreTwoUrl" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header2">
+                            首页核心业务第三个动态
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            第三个动态背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="CoreThreeImage" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 22">
+                            <button type="button" class="layui-btn test1" data-key="22">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第三个动态第一行文字:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreThreeOneText" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第三个动态第二行文字:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreThreeTwoText" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第三个动态点击地址:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreThreeUrl" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header2">
+                            首页核心业务第四个动态
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            第四个动态背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="CoreFourImage" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 23">
+                            <button type="button" class="layui-btn test1" data-key="23">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第四个动态第一行文字:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreFourOneText" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第四个动态第二行文字:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreFourTwoText" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第四个动态点击地址:
+                        </td>
+                        <td class="style-td">
+                            <input name="CoreFourUrl" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header">
+                            关于我们
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            关于我们(名称):
+                        </td>
+                        <td class="style-td">
+                            <input name="IndexAboutUs" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            为什么选择我们?:
+                        </td>
+                        <td class="style-td">
+                            <input name="IndexWhyCheckUs" class="input input-frame"/>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            解释为什么选择我们:
+                        </td>
+                        <td class="style-td">
+                            <input name="IndexAboutUSBecause" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header2">
+                            首页关于我们第一个轮播展示
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            第一个轮播图背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="AboutUSOneImage" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 24">
+                            <button type="button" class="layui-btn test1" data-key="24">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第一个轮播图名称:
+                        </td>
+                        <td class="style-td">
+                            <input name="AboutUSOneText" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header2">
+                            首页关于我们第二个轮播展示
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            第二个轮播图背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="AboutUSTwoImage" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 25">
+                            <button type="button" class="layui-btn test1" data-key="25">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第二个轮播图名称:
+                        </td>
+                        <td class="style-td">
+                            <input name="AboutUSTwoText" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header2">
+                            首页关于我们第三个轮播展示
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            第三个轮播图背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="AboutUSThreeImage" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 26">
+                            <button type="button" class="layui-btn test1" data-key="26">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第三个轮播图名称:
+                        </td>
+                        <td class="style-td">
+                            <input name="AboutUSThreeText" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header2">
+                            首页关于我们第四个轮播展示
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            第四个轮播图背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="AboutUSFourImage" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 27">
+                            <button type="button" class="layui-btn test1" data-key="27">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第四个轮播图名称:
+                        </td>
+                        <td class="style-td">
+                            <input name="AboutUSFourText" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header2">
+                            首页关于我们第五个轮播展示
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            第五个轮播图背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="AboutUSFiveImage" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 28">
+                            <button type="button" class="layui-btn test1" data-key="28">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第五个轮播图名称:
+                        </td>
+                        <td class="style-td">
+                            <input name="AboutUSFiveText" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 100% ; border: 1px solid #a39f9f;">
+                        <td class="header2">
+                            首页关于我们第六个轮播展示
+                        </td>
+                        <td class="style-td" style="border-left: none">
+
+                        </td>
+                    </tr>
+                    <tr style="width: 100%;">
+                        <td class="show-remark-text">
+                            第六个轮播图背景图:
+                        </td>
+                        <td class="style-td">
+                            <img name="AboutUSSixImage" src="/img/noPicture.jpg"
+                                 onclick="upload(this)" class="input img-css 29">
+                            <button type="button" class="layui-btn test1" data-key="29">
+                                <i class="fa fa-cloud"></i>上传文件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%">
+                        <td class="show-remark-text">
+                            第六个轮播图名称:
+                        </td>
+                        <td class="style-td">
+                            <input name="AboutUSSixText" class="input input-frame"/>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="width: 100%; text-align: center">
+        <button type="button" style="width: 15rem;"
+                class="btn  btn-primary">
+            <i class="fa fa-plus hidden" aria-hidden="true"></i>保存
+        </button>
+    </div>
+    <div id="loading"
+         style="position: fixed;width: 100%;height: 100%;top: 0;left: 0;right: 0;bottom: 0;background: rgba(0,0,0,0.5); display:none;"
+         onclick="this.style.display = 'none'">
+        <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%)">
+            <img src="#" id="upload">
+        </div>
+
+    </div>
+</div>
+</div>
+
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/js/bootstrap-paginator.min.js"></script>
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/layui.js"></script>
+<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/vue.min.js"></script>
+<script type="text/javascript" src="/js/appjs/sysconfig/config/config.js"></script>
+</body>
+</html>

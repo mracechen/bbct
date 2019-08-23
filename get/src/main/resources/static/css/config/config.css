@@ -1,0 +1,75 @@
+.layui-btn {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+
+.layui-upload-file {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none !important;
+}
+
+.layui-btn:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+}
+
+.show-remark-text {
+    width: 30%;
+    padding: 12px 20px;
+    border: 1px solid #a39f9f;
+}
+
+.text-area {
+    width: 100%;
+    height: 160px;
+    border: none;
+    border-bottom: 1px solid #a39f9f;
+    background: #f3f3f4;
+    outline: none;
+}
+
+.style-td {
+    border: 1px solid #a39f9f;
+    padding: 12px 20px;
+}
+
+.input-frame {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #a39f9f;
+    background: #f3f3f4;
+    outline: none;
+}
+
+.img-css {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 20px 0;
+}
+.header{
+    color: #1ab394;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px 20px;
+}
+
+.header2{
+    color: #b30600;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 12px 20px;
+}

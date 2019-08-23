@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                                                                                                                                        <div class="form-group">
+                                    <label class="col-sm-3 control-label">用户id：</label>
+                                    <div class="col-sm-8">
+                                        <input id="userId" name="userId" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">币种id：</label>
+                                    <div class="col-sm-8">
+                                        <input id="coinId" name="coinId" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">数量：</label>
+                                    <div class="col-sm-8">
+                                        <input id="amount" name="amount" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">提币地址id：</label>
+                                    <div class="col-sm-8">
+                                        <input id="addressId" name="addressId" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">状态 0-审核中 1-已完成 2-提币失败：</label>
+                                    <div class="col-sm-8">
+                                        <input id="status" name="status" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">审核信息：</label>
+                                    <div class="col-sm-8">
+                                        <input id="remark" name="remark" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">区块链交易id：</label>
+                                    <div class="col-sm-8">
+                                        <input id="txid" name="txid" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">提币手续费：</label>
+                                    <div class="col-sm-8">
+                                        <input id="fee" name="fee" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">创建时间：</label>
+                                    <div class="col-sm-8">
+                                        <input id="createDate" name="createDate" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">更新时间：</label>
+                                    <div class="col-sm-8">
+                                        <input id="updateDate" name="updateDate" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">删除标记：</label>
+                                    <div class="col-sm-8">
+                                        <input id="delFlag" name="delFlag" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex2：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex2" name="ex2" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex4：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex4" name="ex4" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex5：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex5" name="ex5" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                            <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/get/swWithlog/add.js">
+</script>
+</body>
+</html>

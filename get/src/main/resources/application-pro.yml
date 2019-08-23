@@ -1,0 +1,97 @@
+logging:
+  level:
+    root: info
+    org.apache.ibatis.logging.stdout: debug
+    com: debug
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.222.12.222:3306/kplus?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    username: kplus
+    password: Kplus.20190306
+    initialSize: 20
+    minIdle: 30
+    maxActive: 100
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,slf4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    #useGlobalDataSourceStat: true
+  redis:
+      host: 10.222.12.222
+      port: 6379
+      password:
+      # 连接超时时间（毫秒）
+      timeout: 10000
+      jedis:
+        pool:
+          # 连接池中的最大空闲连接
+          max-idle: 50
+          # 连接池中的最小空闲连接
+          min-idle: 40
+          # 连接池最大连接数（使用负值表示没有限制）
+          max-active: 40
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1
+    
+  messages:
+    encoding: UTF-8
+    basename: i18n/messages
+    
+# 系统基础一些关键的配置信息
+configs:
+  # 配置百度翻译接口,需要重新申请
+  translate:
+
+    url: afsdfsadfas
+    appid: sdafsdfsdaf
+    secretKey: asdfsdfsdf
+  trading:
+    url: sfsafdsf
+  file:
+    uploadPath: /data/ftps/styftp01/ayw/
+    serverIp: sdfasdfsdf
+  msg:
+    # 是否开启结算系统后台验证码
+    checkCheckCode: true
+    # 短信的appkey
+    apikey: sfasdafdsafdsaf
+    URI_SEND_SMS: sdfsdfdsafsdf
+    URI_GET_USER_INFO: sdafsdafsdfdsf
+  db:
+    dbHost: localhost
+    username: root
+    password:
+    port: 3306
+    dbname: settlement
+    savePath: D:/backup/
+    commandPath: D:\ProgramFiles\mysql-5.7.23-winx64\bin\
+  # 结算时配置
+  settlement:
+     # 结算时拦截的接口
+    interceptInterface: /api/app/tradeExchange
+    adminMobile: 17370666933
+    sqlFileName: settlement.sql
+  usercache:
+    prefix: User
+  push:
+    getui:
+      appId: p07AlS3mvR74QCJqdjwY85
+      appKey: TQsqbFQJKW7XQvHhqKEwx
+      masterSecret: eVBAK1QUXN8TruLkadQLC9
+      host: http://sdk.open.api.igexin.com/apiex.htm

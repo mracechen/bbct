@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.languagecat.dao.LanguageCategoryDao">
+
+	<select id="get" resultType="com.system.languagecat.domain.LanguageCategoryDO">
+		select `status`,`name`,`status_img`,`sort`,`remark`,`is_enable`,`create_date`,`update_date` from t_language_category where status = #{value}
+	</select>
+
+	<select id="list" resultType="com.system.languagecat.domain.LanguageCategoryDO">
+		select `status`,`name`,`status_img`,`sort`,`remark`,`is_enable`,`create_date`,`update_date` from t_language_category
+        <where>  
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="statusImg != null and statusImg != ''"> and status_img = #{statusImg} </if>
+		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="isEnable != null and isEnable != ''"> and is_enable = #{isEnable} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by sort ASC
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from t_language_category
+		 <where>  
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="statusImg != null and statusImg != ''"> and status_img = #{statusImg} </if>
+		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="isEnable != null and isEnable != ''"> and is_enable = #{isEnable} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.system.languagecat.domain.LanguageCategoryDO">
+		insert into t_language_category
+		(
+			`status`, 
+			`name`, 
+			`status_img`, 
+			`sort`, 
+			`remark`, 
+			`is_enable`, 
+			`create_date`, 
+			`update_date`
+		)
+		values
+		(
+			#{status}, 
+			#{name}, 
+			#{statusImg}, 
+			#{sort}, 
+			#{remark}, 
+			#{isEnable}, 
+			#{createDate}, 
+			#{updateDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.languagecat.domain.LanguageCategoryDO">
+		update t_language_category 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="statusImg != null">`status_img` = #{statusImg}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="isEnable != null">`is_enable` = #{isEnable}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="updateDate != null">`update_date` = #{updateDate}</if>
+		</set>
+		where status = #{status}
+	</update>
+	
+	<delete id="remove">
+		delete from t_language_category where status = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from t_language_category where status in 
+		<foreach item="status" collection="array" open="(" separator="," close=")">
+			#{status}
+		</foreach>
+	</delete>
+
+</mapper>

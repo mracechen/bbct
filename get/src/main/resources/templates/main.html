@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<!--<head>-->
+<!--<meta charset="utf-8">-->
+<!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--<title>欢迎页</title>-->
+<!--<link rel="shortcut icon" href="/favicon.jpg"  type="image/x-icon" >-->
+<!--<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">-->
+<!--&lt;!&ndash;<link rel="stylesheet" href="/css/bootstrap.min.css">&ndash;&gt;-->
+
+<!--&lt;!&ndash;<link rel="stylesheet" href="/css/plugins/bootstrap-table/bootstrap-table.min.css">&ndash;&gt;-->
+<!--</head>-->
+<head th:include="include :: header"></head>
+<body>
+
+<div class="row " style="margin: 20px 5px 20px">
+    <div class="col-md-3 w20">
+        <div class="card card-stats card-warning">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="icon-big text-center">
+                            <i class="fa fa-pie-chart"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-7  align-items-center">
+                        <div class="numbers">
+                            <p class="card-category">昨日总出售币</p>
+                            <h4 class="card-title">暂无数据</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 w20">
+        <div class="card card-stats card-success">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="icon-big text-center">
+                            <i class="fa fa-btc"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-7 d-flex align-items-center">
+                        <div class="numbers">
+                            <p class="card-category">昨日新增锁仓</p>
+                            <h4 class="card-title">暂无数据</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 w20">
+        <div class="card card-stats card-danger">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="icon-big text-center">
+                            <i class="fa  fa-university "></i>
+                        </div>
+                    </div>
+                    <div class="col-md-7 d-flex align-items-center">
+                        <div class="numbers">
+                            <p class="card-category">昨日新增锁仓</p>
+                            <h4 class="card-title">暂无数据</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 w20">
+        <div class="card card-stats card-primary">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="icon-big text-center">
+                            <i class="fa fa-btc"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-7 d-flex align-items-center">
+                        <div class="numbers">
+                            <p class="card-category">昨日释放量</p>
+                            <h4 class="card-title">暂无数据</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 w20">
+        <div class="card card-stats card-other">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="icon-big text-center">
+                            <i class="fa  fa-university "></i>
+                        </div>
+                    </div>
+                    <div class="col-md-7 d-flex align-items-center">
+                        <div class="numbers">
+                            <p class="card-category">昨日释放量</p>
+                            <h4 class="card-title">暂无数据</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--//通过时间插件完成highcharts数据渲染-->
+<div>
+    <div class="col-md-12 " style="padding: 5px 20px  5px">
+        <div class="panel panel-default" style="height: 100%">
+            <div class="panel-heading" style="height: 60px">
+                <div style="vertical-align: center;text-align: center">
+                    <div class="pull-left search col-md-2">
+                        <!--<h3 class="panel-title" style="vertical-align: center">注册量</h3>-->
+                    </div>
+                    <div class="pull-right search " role="group" style="margin-right: 15px">
+                        <button class="btn btn-success" onclick="searchRegisterDate()">
+                            <!--<button class="btn btn-success">-->
+                            <i class="fa fa-search"></i>查询
+                        </button>
+
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input type="text" class="laydate-icon layer-date form-control" id="registerEndDate"
+                               placeholder="结束时间"
+                               style="background-color: #fff;" readonly="readonly"/>
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input type="text" class="laydate-icon layer-date form-control" id="registerStartDate"
+                               placeholder="开始时间"
+                               style="background-color: #fff;" readonly="readonly"/>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="container2" style="max-width: 100%;min-height:100%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div>
+    <div class="col-md-12 " style="padding: 5px 20px  5px">
+        <div class="panel panel-default" style="height: 100%">
+            <div class="panel-heading" style="height: 60px">
+                <div style="vertical-align: center;text-align: center">
+                    <div class="pull-left search col-md-2">
+                        &lt;!&ndash;<h3 class="panel-title" style="vertical-align: center">释放量</h3>&ndash;&gt;
+                    </div>
+                    <div class="pull-right search " role="group" style="margin-right: 15px">
+                        <button class="btn btn-success" onclick="searchReleaseDate()">
+                            &lt;!&ndash;<button class="btn btn-success">&ndash;&gt;
+                            <i class="fa fa-search"></i>查询
+                        </button>
+
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input type="text" class="laydate-icon layer-date form-control" id="releaseEndDate"
+                               placeholder="结束时间"
+                               style="background-color: #fff;" readonly="readonly"/>
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input type="text" class="laydate-icon layer-date form-control" id="releaseStartDate"
+                               placeholder="开始时间"
+                               style="background-color: #fff;" readonly="readonly"/>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="container" style="max-width: 100%;min-height:100%"></div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+<div th:include="include :: footer"></div>
+<script>
+    $(function () {
+        var now = new Date();
+        var nowTime = now.toLocaleDateString().split('/').join('-') //当前日期
+        function Year() {
+            var time = new Date();
+            time.setDate(time.getDate());
+            var y = time.getFullYear() + 2;
+            var m = time.getMonth() + 1;
+            var d = time.getDate();
+            return y + "-" + m + "-" + d;
+        }
+
+        var afterYear = Year();  // 2年后日期
+        // console.log(nowTime,afterYear,'sssssssssssssssssssssssssssss')
+
+        function Month() {
+            var time = new Date();
+            time.setDate(time.getDate());
+            var y = time.getFullYear();
+            var m;
+            if (time.getMonth() - 1 + 1 > 12) {
+                y = y + 1;
+                m = time.getMonth() - 1 - 11;//获取当前月份的日期 d
+            } else if(time.getMonth() - 1 + 1 == 0){
+                y = y - 1;
+                m = 12;
+            }else {
+                m = time.getMonth() - 1 + 1;//获取当前月份的日期 d
+
+            }
+            var d = time.getDate();
+            return y + "-" + m + "-" + d;
+        }
+
+        var beforeMonth = Month(); //一月前日期
+
+        function Tips(value) {
+            var now = Date.parse(new Date());
+            var comp = Date.parse(value);
+            if (now < comp) {
+                layer.msg('建议选择查看今日之前数据', {offset: '100px', icon: 3})
+            }
+        }
+
+
+        /*layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            var start = laydate.render({
+                elem: '#releaseStartDate', //指定元素
+                type: 'date',
+                value: nowTime,
+                done: function (value, date) {
+                    if (value != '') {
+                        date.month = date.month - 1;
+                        end.config.min = date
+                    }
+                }
+            });
+            var end = laydate.render({
+                elem: '#releaseEndDate', //指定元素
+                type: 'date',
+                value: afterYear,
+                done: function (value, date) {
+                    if (value != '') {
+                        date.month = date.month - 1;
+                        start.config.max = date
+                    }
+                }
+            });
+            var start2 = laydate.render({
+                elem: '#registerStartDate', //指定元素
+                type: 'date',
+                value: beforeMonth,
+                // max: laydate.now(0),
+                done: function (value, date) {
+                    if (value != '') {
+                        date.month = date.month - 1;
+                        end2.config.min = date
+                    }
+                    // Tips(value);
+                }
+            });
+            var end2 = laydate.render({
+                elem: '#registerEndDate', //指定元素
+                type: 'date',
+                value: nowTime,
+                // max: laydate.now(),
+                done: function (value, date) {
+                    if (value != '') {
+                        date.month = date.month - 1;
+                        start2.config.max = date
+                    }
+                    // Tips(value);
+                }
+            });
+        });*/
+
+        //    字符后添加 '.00' 增加精度
+        var getFloatStr = function (num) {
+            num += '';
+            num = num.replace(/[^0-9|\.]/g, '');
+
+            if (/^0+/)
+                num = num.replace(/^0+/, '');
+            if (!/\./.test(num))
+                num += '.00';
+            if (/^\./.test(num))
+                num = '0' + num;
+            num += '00';
+            num = num.match(/\d+\.\d{2}/)[0];
+            return num;
+        };
+
+
+        //dashboard头部数据渲染
+        /*$.ajax({
+            url: "/api/report/getBaseReport",
+            type: "post",
+            data: {},
+            success: function (r) {
+                if (r.status == 200) {
+                    var a = r.data;
+                    $(".card-warning .card-title").html(getFloatStr(a.yesterdaySellCoin))
+                    $(".card-success .card-title").html(getFloatStr(a.ryhYesterdayAddLockCoin))
+                    $(".card-danger .card-title").html(getFloatStr(a.rybYesterdayAddLockCoin))
+                    $(".card-primary .card-title").html(getFloatStr(a.ryhYesterDayLockReleaseCoin))
+                    $(".card-other .card-title").html(getFloatStr(a.rybYesterDayLockReleaseCoin))
+                } else {
+                    console.error(r)
+                }
+            }
+        });*/
+
+//        getProfitCoinRelease(nowTime, afterYear)
+//
+//        getUserRegisteredNum(nowTime, beforeMonth)
+
+
+    })
+
+
+    function searchReleaseDate() {
+        var start = $('#releaseStartDate').val();
+        var end = $('#releaseEndDate').val();
+        if (Date.parse(start) > Date.parse(end)) {
+            layer.msg('开始时期不得大于结束日期', {offset: '100px', icon: 2})
+        }else{
+            getProfitCoinRelease(start, end)
+        }
+    }
+
+    function searchRegisterDate() {
+        var start = $('#registerStartDate').val();
+        var end = $('#registerEndDate').val();
+        var now = Date.parse(new Date());
+        if (Date.parse(start) > Date.parse(end)) {
+            layer.msg('开始时期不得大于结束日期', {offset: '100px', icon: 2})
+        }else{
+            if (now < Date.parse(start) || now < Date.parse(end)) {
+                layer.msg('请查看今日之前数据', {offset: '100px', icon: 3})
+            }else {
+                getUserRegisteredNum(end, start)
+            }
+        }
+
+    }
+
+
+    //释放量可视化数据
+    function getProfitCoinRelease(nowTime, afterYear) {
+        $.ajax({
+            url: "/api/report/getProfitCoinRelease",
+            type: "post",
+            data: {
+                startDate: nowTime,
+                endDate: afterYear
+            },
+            success: function (r) {
+                if (r.status == 200) {
+                    var chart1 = Highcharts.chart('container', {
+                        title: {
+                            text: '每日释放总量'
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        xAxis: {
+                            type: 'datetime',
+                            dateTimeLabelFormats: {
+                                millisecond: '%H:%M:%S.%L',
+                                second: '%H:%M:%S',
+                                minute: '%H:%M',
+                                hour: '%H:%M',
+                                day: '%Y-%m-%d',
+                                week: '%Y-%m-%d',
+                                month: '%Y-%m-%d',
+                                year: '%Y-%m-%d'
+                            }
+                        },
+                        tooltip: {
+                            formatter: function () {
+                                return '<strong>' + Highcharts.dateFormat('%Y-%m-%d ', this.x) + '</strong><br>' +
+                                    '当日释放 : ' + this.y + ' 币';
+                            }
+
+                        },
+                        yAxis: {
+                            title: {
+                                text: '总量'
+                            },
+                            labels: {
+
+                                formatter: function () {
+                                    return '<strong>' + this.value + '</strong>' + '币'
+                                        ;
+                                }
+                            }
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        plotOptions: {
+                            area: {
+                                fillColor: {
+                                    linearGradient: {
+                                        x1: 0,
+                                        y1: 0,
+                                        x2: 0,
+                                        y2: 1
+                                    },
+                                    stops: [
+                                        [0, Highcharts.getOptions().colors[0]],
+                                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                    ]
+                                },
+                                marker: {
+                                    radius: 2
+                                },
+                                lineWidth: 1,
+                                states: {
+                                    hover: {
+                                        lineWidth: 1
+                                    }
+                                },
+                                threshold: null
+                            }
+                        },
+                        series: [{
+                            type: 'area',
+                            name: '持币数量总数',
+                            data: $.parseJSON(r.data)
+                        }]
+                    });
+
+                } else {
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    }
+
+
+    //用户注册量可视化数据
+    function getUserRegisteredNum(nowTime, beforeMonth) {
+        $.ajax({
+            url: "/api/report/getUserRegisteredNum",
+            type: "post",
+            data: {
+                startDate: beforeMonth,
+                endDate: nowTime
+            },
+            success: function (r) {
+                // var e = $.parseJSON(r.data);
+
+                if (r.status == 200) {
+                    var chart2 = Highcharts.chart('container2', {
+                        title: {
+                            text: '每日用户注册总量'
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        xAxis: {
+                            type: 'datetime',
+                            dateTimeLabelFormats: {
+                                millisecond: '%H:%M:%S.%L',
+                                second: '%H:%M:%S',
+                                minute: '%H:%M',
+                                hour: '%H:%M',
+                                day: '%Y-%m-%d',
+                                week: '%Y-%m-%d',
+                                month: '%Y-%m-%d',
+                                year: '%Y-%m-%d'
+                            }
+                        },
+                        tooltip: {
+                            formatter: function () {
+                                return '<strong>' + Highcharts.dateFormat('%Y-%m-%d', this.x) + '</strong><br>' +
+                                    '注册量 : ' + this.y + '人 ';
+                            }
+
+                        },
+                        yAxis: {
+                            title: {
+                                text: '总量'
+                            },
+                            labels: {
+                                formatter: function () {
+                                    return '<strong>' + this.value + '</strong>' + '人';
+                                }
+                            }
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        plotOptions: {
+                            area: {
+                                fillColor: {
+                                    linearGradient: {
+                                        x1: 0,
+                                        y1: 0,
+                                        x2: 0,
+                                        y2: 1
+                                    },
+                                    stops: [
+                                        [0, Highcharts.getOptions().colors[0]],
+                                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                    ]
+                                },
+                                marker: {
+                                    radius: 2
+                                },
+                                lineWidth: 1,
+                                states: {
+                                    hover: {
+                                        lineWidth: 1
+                                    }
+                                },
+                                threshold: null
+                            }
+                        },
+                        series: [{
+                            type: 'area',
+                            name: '持币数量总数',
+                            data: formatData($.parseJSON(r.data), nowTime, beforeMonth)
+                        }]
+                    });
+
+                } else {
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    }
+
+
+    //后台返回数据处理
+    function formatData(e, nowTime, beforeMonth) {
+        var oneDay = 60 * 60 * 24 * 1000;
+        var nowTime = nowTime + ' 00:00:00';
+        var beforeMonth = beforeMonth + ' 00:00:00';
+        var start = new Date(beforeMonth).getTime() - oneDay;
+        var end = new Date(nowTime).getTime() - oneDay;
+        var result = [];
+        for (var i = start; i <= end; i += oneDay) {
+            result.push([i + oneDay, 0])
+            e.forEach(function (a, b) {
+                if (i == a[0]) {
+                    result.splice(result.length - 1, 1);
+                    result.push([i + oneDay, a[1]])
+                }
+            })
+        }
+        return result;
+    }
+</script>
+</body>
+</html>
