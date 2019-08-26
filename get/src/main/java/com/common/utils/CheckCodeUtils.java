@@ -1,5 +1,7 @@
 package com.common.utils;
 
+import com.get.domain.MailRecordDO;
+import com.get.service.MailRecordService;
 import com.system.record.domain.MsgRecordDO;
 import com.system.record.service.MsgRecordService;
 
@@ -72,7 +74,7 @@ public class CheckCodeUtils {
      * @return
      */
     public static boolean checkEmailCheckCode(String emailCheckcode,String email) {
-        /*try {
+        try {
             MailRecordService bean = (MailRecordService) ContextUtils.getBean(MailRecordService.class);
             Map<String, Object> queryParam = new LinkedHashMap<>();
             queryParam.put("email",email);
@@ -93,8 +95,7 @@ public class CheckCodeUtils {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
-        }*/
-        return false;
+        }
     }
 
 }

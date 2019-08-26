@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.get.dao.AppInfoDao" >
+  <resultMap id="BaseResultMap" type="com.get.domain.AppInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="downloadurl" property="downloadurl" jdbcType="VARCHAR" />
+    <result column="downloadurl1" property="downloadurl1" jdbcType="VARCHAR" />
+    <result column="version_number" property="versionNumber" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="download_ios" property="downloadIos" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, version, downloadurl, downloadurl1, version_number, create_time,download_ios
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sw_app_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sw_app_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.get.domain.AppInfo" >
+    insert into sw_app_info (id, version, downloadurl, 
+      downloadurl1, version_number, create_time,
+      )
+    values (#{id,jdbcType=INTEGER}, #{version,jdbcType=VARCHAR}, #{downloadurl,jdbcType=VARCHAR}, 
+      #{downloadurl1,jdbcType=VARCHAR}, #{versionNumber,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},#{downloadIos,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.get.domain.AppInfo" >
+    insert into sw_app_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="downloadurl != null" >
+        downloadurl,
+      </if>
+      <if test="downloadurl1 != null" >
+        downloadurl1,
+      </if>
+      <if test="versionNumber != null" >
+        version_number,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="downloadIos != null" >
+        download_ios,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadurl != null" >
+        #{downloadurl,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadurl1 != null" >
+        #{downloadurl1,jdbcType=VARCHAR},
+      </if>
+      <if test="versionNumber != null" >
+        #{versionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downloadIos != null" >
+        #{downloadIos,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.get.domain.AppInfo" >
+    update sw_app_info
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadurl != null" >
+        downloadurl = #{downloadurl,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadurl1 != null" >
+        downloadurl1 = #{downloadurl1,jdbcType=VARCHAR},
+      </if>
+      <if test="versionNumber != null" >
+        version_number = #{versionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downloadIos != null" >
+        download_ios = #{downloadIos,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.get.domain.AppInfo" >
+    update sw_app_info
+    set version = #{version,jdbcType=VARCHAR},
+      downloadurl = #{downloadurl,jdbcType=VARCHAR},
+      downloadurl1 = #{downloadurl1,jdbcType=VARCHAR},
+      version_number = #{versionNumber,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+      download_ios = #{downloadIos,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAppInfo" resultType="com.get.domain.AppInfo">
+    select
+    <include refid="Base_Column_List" />
+    from
+    sw_app_info
+    order by
+    create_time desc
+  </select>
+
+
+
+
+
+
+
+
+  <select id="get" resultType="com.get.domain.AppInfo">
+    select `id`,`version`,`downloadurl`,`downloadurl1`,`version_number`,`create_time`,`download_ios`        from sw_app_info where id = #{value}
+  </select>
+
+  <select id="list" resultType="com.get.domain.AppInfo">
+    select `id`,`version`,`downloadurl`,`downloadurl1`,`version_number`,`create_time`,`download_ios`        from sw_app_info
+    <where>
+      <if test="id != null and id != ''">and id =
+        #{id}
+      </if>
+      <if test="version != null and version != ''">and version =
+        #{version}
+      </if>
+      <if test="downloadurl != null and downloadurl != ''">and downloadurl =
+        #{downloadurl}
+      </if>
+      <if test="downloadurl1 != null and downloadurl1 != ''">and downloadurl1 =
+        #{downloadurl1}
+      </if>
+      <if test="versionNumber != null and versionNumber != ''">and version_number =
+        #{versionNumber}
+      </if>
+      <if test="createTime != null and createTime != ''">and create_time =
+        #{createTime}
+      </if>
+      <if test="downloadIos != null and downloadIos != ''">and download_ios =
+        #{downloadIos}
+      </if>
+    </where>
+    <choose>
+      <when test="sort != null and sort.trim() != ''">
+        order by ${sort} ${order}
+      </when>
+      <otherwise>
+        order by id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="count" resultType="int">
+    select count(*) from sw_app_info
+    <where>
+      <if test="id != null and id != ''">and id =
+        #{id}
+      </if>
+      <if test="version != null and version != ''">and version =
+        #{version}
+      </if>
+      <if test="downloadurl != null and downloadurl != ''">and downloadurl =
+        #{downloadurl}
+      </if>
+      <if test="downloadurl1 != null and downloadurl1 != ''">and downloadurl1 =
+        #{downloadurl1}
+      </if>
+      <if test="versionNumber != null and versionNumber != ''">and version_number =
+        #{versionNumber}
+      </if>
+      <if test="createTime != null and createTime != ''">and create_time =
+        #{createTime}
+      </if>
+      <if test="downloadIos != null and downloadIos != ''">and download_ios =
+        #{downloadIos}
+      </if>
+    </where>
+  </select>
+
+  <insert id="save" parameterType="com.get.domain.AppInfo">
+    insert into sw_app_info
+    (
+      `id`,
+      `version`,
+      `downloadurl`,
+      `downloadurl1`,
+      `version_number`,
+      `create_time`,
+      `download_ios`
+    )
+    values
+    (
+      #{id},
+      #{version},
+      #{downloadurl},
+      #{downloadurl1},
+      #{versionNumber},
+      #{createTime},
+      #{downloadIos}
+    )
+  </insert>
+
+  <update id="update" parameterType="com.get.domain.AppInfo">
+    update sw_app_info
+    <set>
+      <if test="version != null">`version` = #{version
+                        }, </if>
+      <if test="downloadurl != null">`downloadurl` = #{downloadurl
+                        }, </if>
+      <if test="downloadurl1 != null">`downloadurl1` = #{downloadurl1
+                        }, </if>
+      <if test="versionNumber != null">`version_number` = #{versionNumber
+                        }, </if>
+      <if test="createTime != null">`create_time` = #{createTime
+                        }, </if>
+      <if test="downloadIos != null">`download_ios` = #{downloadIos
+                        }</if>
+    </set>
+    where id = #{id}
+  </update>
+
+  <delete id="remove">
+    delete from sw_app_info where id = #{value}
+  </delete>
+
+  <delete id="batchRemove">
+    delete from sw_app_info where id in
+    <foreach item="id" collection="array" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+
+
+
+
+
+
+</mapper>

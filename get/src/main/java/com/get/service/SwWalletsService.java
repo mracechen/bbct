@@ -3,6 +3,7 @@ package com.get.service;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwWalletsDO;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 钱包表
@@ -26,4 +27,7 @@ public interface SwWalletsService {
     int remove(String tid);
 
     int batchRemove(String[] tids);
+
+    @Transactional(rollbackFor = Exception.class)
+    SwWalletsDO createWallet(Integer userID, String coinTypeId);
 }

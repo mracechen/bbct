@@ -8,7 +8,7 @@
     <version>2.2.0</version>
     <packaging>jar</packaging>
 
-    <name>get</name>
+    <name>bbct</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>

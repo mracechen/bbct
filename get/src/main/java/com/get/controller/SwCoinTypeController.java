@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.IDUtils;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.PageUtils;
 import com.get.statuc.Query;
@@ -72,6 +73,7 @@ public class SwCoinTypeController {
     public R save(SwCoinTypeDO swCoinType) {
         swCoinType.setCreateDate(new Date());
         swCoinType.setUpdateDate(new Date());
+        swCoinType.setTid(IDUtils.randomStr());
         swCoinType.setDelFlag(CommonStatic.NOTDELETE);
         if (swCoinTypeService.save(swCoinType) > 0) {
             return R.ok();

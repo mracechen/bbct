@@ -3,6 +3,7 @@ package com.get.service;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwUserBasicDO;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户基本表
@@ -14,6 +15,9 @@ import com.get.domain.SwUserBasicDO;
 public interface SwUserBasicService {
 
     SwUserBasicDO get(Integer tid);
+
+    @Transactional(rollbackFor = Exception.class)
+    Object userReg(SwUserBasicDO userBasicDO);
 
     List<SwUserBasicDO> list(Map<String, Object> map);
 

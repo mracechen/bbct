@@ -147,14 +147,14 @@ public class CommonStatic {
     public static Integer USER_TYPE_COMMON = 0;
 
     /**
-     * 用户类型-OTC商家
+     * 用户类型-布道者
      * */
-    public static Integer USER_TYPE_OTC_SELLER = 1;
+    public static Integer USER_TYPE_EVANGELIST = 1;
 
     /**
-     * 用户类型-实体商家
+     * 用户类型-合伙人
      * */
-    public static Integer USER_TYPE_ENEITY_SELLER = 2;
+    public static Integer USER_TYPE_PARTNER = 2;
 
     /**
      * 商户状态-待审核

@@ -1,14 +1,17 @@
 package com.get.service.impl;
 
+import com.common.utils.IDUtils;
 import com.get.statuc.CommonStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.dao.SwWalletsDao;
 import com.get.domain.SwWalletsDO;
 import com.get.service.SwWalletsService;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -58,4 +61,17 @@ public class SwWalletsServiceImpl implements SwWalletsService {
         return count;
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public SwWalletsDO createWallet(Integer userID, String coinTypeId){
+        SwWalletsDO swWalletsDO = new SwWalletsDO();
+        swWalletsDO.setTid(IDUtils.randomStr());
+        swWalletsDO.setCreateDate(new Date());
+        swWalletsDO.setUpdateDate(new Date());
+        swWalletsDO.setDelFlag(CommonStatic.NOTDELETE);
+        swWalletsDO.setIsActive(CommonStatic.ACTIVE);
+        swWalletsDO.setUserId(userID);
+        swWalletsDO.setCoinTypeId(coinTypeId);
+        return swWalletsDO;
+    }
 }
