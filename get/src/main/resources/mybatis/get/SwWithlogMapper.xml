@@ -4,11 +4,11 @@
 <mapper namespace="com.get.dao.SwWithlogDao">
 
     <select id="get" resultType="com.get.domain.SwWithlogDO">
-        select `tid`,`user_id`,`coin_id`,`amount`,`address_id`,`status`,`remark`,`txid`,`fee`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`        from t_sw_withlog where tid = #{value}
+        select `tid`,`user_id`,`coin_type_id`,`amount`,`address_id`,`status`,`remark`,`txid`,`fee`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`        from t_sw_withlog where tid = #{value}
     </select>
 
     <select id="list" resultType="com.get.domain.SwWithlogDO">
-        select `tid`,`user_id`,`coin_id`,`amount`,`address_id`,`status`,`remark`,`txid`,`fee`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`        from t_sw_withlog
+        select `tid`,`user_id`,`coin_type_id`,`amount`,`address_id`,`status`,`remark`,`txid`,`fee`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`        from t_sw_withlog
         <where>
                             <if test="tid != null and tid != ''">and tid =
                     #{tid}
@@ -16,8 +16,8 @@
                             <if test="userId != null and userId != ''">and user_id =
                     #{userId}
                 </if>
-                            <if test="coinId != null and coinId != ''">and coin_id =
-                    #{coinId}
+                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+                    #{coinTypeId}
                 </if>
                             <if test="amount != null and amount != ''">and amount =
                     #{amount}
@@ -78,8 +78,8 @@
                             <if test="userId != null and userId != ''">and user_id =
                     #{userId}
                 </if>
-                            <if test="coinId != null and coinId != ''">and coin_id =
-                    #{coinId}
+                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+                    #{coinTypeId}
                 </if>
                             <if test="amount != null and amount != ''">and amount =
                     #{amount}
@@ -125,7 +125,7 @@
         (
                                     `tid`, 
                                                 `user_id`, 
-                                                `coin_id`, 
+                                                `coin_type_id`, 
                                                 `amount`, 
                                                 `address_id`, 
                                                 `status`, 
@@ -143,7 +143,7 @@
         (
                                     #{tid}, 
                                                 #{userId}, 
-                                                #{coinId}, 
+                                                #{coinTypeId}, 
                                                 #{amount}, 
                                                 #{addressId}, 
                                                 #{status}, 
@@ -164,7 +164,7 @@
         <set>
                                                                             <if test="userId != null">`user_id` = #{userId
                         }, </if>
-                                                                <if test="coinId != null">`coin_id` = #{coinId
+                                                                <if test="coinTypeId != null">`coin_type_id` = #{coinTypeId
                         }, </if>
                                                                 <if test="amount != null">`amount` = #{amount
                         }, </if>

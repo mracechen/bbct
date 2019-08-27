@@ -95,3 +95,6 @@ configs:
       appKey: TQsqbFQJKW7XQvHhqKEwx
       masterSecret: eVBAK1QUXN8TruLkadQLC9
       host: http://sdk.open.api.igexin.com/apiex.htm
+
+  chargeAddress: asdfg
+  withdrawFee: 5
