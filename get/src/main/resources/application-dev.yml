@@ -96,7 +96,7 @@ configs:
     adminMobile: 17370666933
     sqlFileName: settlement.sql
   usercache:
-    prefix: User
+    prefix: bbct
   push:
     getui:
       appId: p07AlS3mvR74QCJqdjwY85

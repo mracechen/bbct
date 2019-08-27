@@ -1969,3 +1969,16 @@
 /log/applog/2019-08-24/2019-08-24.log
 /log/applog/2019-08-25/2019-08-25.log
 /log/applog/2019-08-26/2019-08-26.log
+/get/target/classes/com/api/AppPrivateAPI.class
+/get/target/classes/com/get/controller/SwEvangelistInfoController.class
+/get/target/classes/com/get/dao/SwEvangelistInfoDao.class
+/get/target/classes/com/get/domain/SwEvangelistInfoDO.class
+/get/target/classes/com/get/service/SwEvangelistInfoService.class
+/get/target/classes/com/get/service/impl/SwEvangelistInfoServiceImpl.class
+/get/target/classes/mybatis/get/SwEvangelistInfoMapper.xml
+/get/target/classes/static/js/appjs/get/swEvangelistInfo/add.js
+/get/target/classes/static/js/appjs/get/swEvangelistInfo/edit.js
+/get/target/classes/static/js/appjs/get/swEvangelistInfo/swEvangelistInfo.js
+/get/target/classes/templates/get/swEvangelistInfo/add.html
+/get/target/classes/templates/get/swEvangelistInfo/edit.html
+/get/target/classes/templates/get/swEvangelistInfo/swEvangelistInfo.html

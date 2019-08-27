@@ -76,18 +76,18 @@ public class AppPublicAPI {
      *
      * @return
      */
-    @RequestMapping("getEmailCheckCode")
+    @RequestMapping("get_email_check_code")
     public Object getEmailCheckCode(@RequestParam String email) {
-        Map<String, Object> queryParam = new HashMap<>();
-        if (StringUtils.isBlank(email)) {
-            return Result.error("参数不可为空");
-        }
-
-        String checkCode = IDUtils.getCheckCode();
-        MailRecordDO mailRecordDO = MailRecordDO.create(email, checkCode);
-        mailRecordService.save(mailRecordDO);
-        //发送邮箱验证码(待确认)
         try {
+            Map<String, Object> queryParam = new HashMap<>();
+            if (StringUtils.isBlank(email)) {
+                return Result.error("参数不可为空");
+            }
+
+            String checkCode = IDUtils.getCheckCode();
+            MailRecordDO mailRecordDO = MailRecordDO.create(email, checkCode);
+            mailRecordService.save(mailRecordDO);
+            //发送邮箱验证码(待确认)
             MailUtil.send_mail(email, checkCode);
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -99,37 +99,37 @@ public class AppPublicAPI {
      *
      * 注册并校验       1-邮箱注册，2-手机号注册
      */
-    @RequestMapping("checkRegister")
+    @RequestMapping("register")
     public Object checkRegister(String email, String checkCode, String loginPass, Integer recomId) {
-        SwUserBasicDO userBasicDO = new SwUserBasicDO();
-        userBasicDO.setUserType(CommonStatic.USER_TYPE_COMMON);
-        userBasicDO.setLoginPass(loginPass);
-        userBasicDO.setRecomId(recomId);
-        userBasicDO.setEmail(email);
-        if (StringUtils.isBlank(email)) {
-            return Result.error("邮箱不能为空");
-        }
-        Map<String, Object> queryParam = new HashMap<>();
-        queryParam.put("email", email);
-        List<SwUserBasicDO> exUser = swUserBasicService.list(queryParam);
-        if (exUser.size() > 0 && StringUtils.isNotBlank(email)) {
-            return Result.error("邮箱已经被注册");
-        }
-        //校验邮箱验证码
-        boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, email);
-        if (!mailRt) {
-            return Result.error("邮箱验证码不正确或已失效");
-        }
-        if (userBasicDO.getRecomId() == null || userBasicDO.getRecomId() <= 0) {
-            return Result.error("请输入推荐人");
-        } else {
-            SwUserBasicDO swUserBasicDO = swUserBasicService.get(userBasicDO.getRecomId());
-            if (swUserBasicDO == null) {
-                return Result.error("推荐人不存在");
-            }
-        }
         Object result = null;
         try {
+            SwUserBasicDO userBasicDO = new SwUserBasicDO();
+            userBasicDO.setUserType(CommonStatic.USER_TYPE_COMMON);
+            userBasicDO.setLoginPass(loginPass);
+            userBasicDO.setRecomId(recomId);
+            userBasicDO.setEmail(email);
+            if (StringUtils.isBlank(email)) {
+                return Result.error("邮箱不能为空");
+            }
+            Map<String, Object> queryParam = new HashMap<>();
+            queryParam.put("email", email);
+            List<SwUserBasicDO> exUser = swUserBasicService.list(queryParam);
+            if (exUser.size() > 0 && StringUtils.isNotBlank(email)) {
+                return Result.error("邮箱已经被注册");
+            }
+            //校验邮箱验证码
+            boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, email);
+            if (!mailRt) {
+                return Result.error("邮箱验证码不正确或已失效");
+            }
+            if (userBasicDO.getRecomId() == null || userBasicDO.getRecomId() <= 0) {
+                return Result.error("请输入推荐人");
+            } else {
+                SwUserBasicDO swUserBasicDO = swUserBasicService.get(userBasicDO.getRecomId());
+                if (swUserBasicDO == null) {
+                    return Result.error("推荐人不存在");
+                }
+            }
             result = swUserBasicService.userReg(userBasicDO);
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,74 +145,58 @@ public class AppPublicAPI {
      */
     @RequestMapping("login")
     public Object login(String email, String loginPass) {
+        try {
+            SwUserBasicDO swUserBasicDO = new SwUserBasicDO();
+            if (StringUtils.isBlank(email) || StringUtils.isBlank(loginPass)) {
+                return Result.error("请求参数不全");
+            }
+            swUserBasicDO.setEmail(email);
+            swUserBasicDO.setLoginPass(MyMD5Utils.encodingAdmin(loginPass));
+            SwUserBasicDO exSwUserBasicDO = swUserBasicService.get(swUserBasicDO);
+            if (exSwUserBasicDO == null || exSwUserBasicDO.getTid() <= 0) {
+                return Result.error("用户名或密码错误");
+            }
 
-        SwUserBasicDO swUserBasicDO = new SwUserBasicDO();
-        if (StringUtils.isBlank(email) || StringUtils.isBlank(loginPass)) {
-            return Result.error("请求参数不全");
-        }
-        swUserBasicDO.setEmail(email);
-        swUserBasicDO.setLoginPass(MyMD5Utils.encodingAdmin(loginPass));
-        SwUserBasicDO exSwUserBasicDO = swUserBasicService.get(swUserBasicDO);
-        if (exSwUserBasicDO == null || exSwUserBasicDO.getTid() <= 0) {
-            return Result.error("用户名或密码错误");
-        }
-
-        String accessKey = IDUtils.getUserIdEncode(prefix, exSwUserBasicDO.getTid() + "");
+            String accessKey = IDUtils.getUserIdEncode(prefix, exSwUserBasicDO.getTid() + "");
 //        String accessKey = "s"+exSwUserBasicDO.getTid();
-        AppUserUtils.pushUser(accessKey, exSwUserBasicDO.getTid() + "");
-        // 返回值
-        HashMap<Object, Object> result = new HashMap<>();
-        result.put("accessKey", accessKey);
-        result.put("userId", exSwUserBasicDO.getTid());
-        result.put("mobile", exSwUserBasicDO.getMobile());
-        result.put("username", exSwUserBasicDO.getUsername());
+            AppUserUtils.pushUser(accessKey, exSwUserBasicDO.getTid() + "");
+            // 返回值
+            HashMap<Object, Object> result = new HashMap<>();
+            result.put("accessKey", accessKey);
+            result.put("userId", exSwUserBasicDO.getTid());
+            result.put("mobile", exSwUserBasicDO.getMobile());
+            result.put("username", exSwUserBasicDO.getUsername());
 //        result.put("userPush",swUserBasicService.getUserRecomLike(exSwUserBasicDO));
 //        result.put("userAuth",exSwUserBasicDO.getCheckStatus());
-        result.put("recomId", exSwUserBasicDO.getRecomId());
-        String highPpassffective = StringUtils.isBlank(exSwUserBasicDO.getHighPass()) ? "1" : "2";
-        result.put("highPpassffective", highPpassffective);
-        result.put("email", exSwUserBasicDO.getEmail());
-        result.put("registerDate", DateUtils.dateFormat(exSwUserBasicDO.getCreateDate(), DateUtils.DATE_PATTERN));
-        result.put("userRole", exSwUserBasicDO.getUserType());
-        log.info("用户登录接口返回数据：【" + Result.ok(result).toString() + "】");
-        return Result.ok(result);
+            result.put("recomId", exSwUserBasicDO.getRecomId());
+            String highPpassffective = StringUtils.isBlank(exSwUserBasicDO.getHighPass()) ? "1" : "2";
+            result.put("highPpassffective", highPpassffective);
+            result.put("email", exSwUserBasicDO.getEmail());
+            result.put("registerDate", DateUtils.dateFormat(exSwUserBasicDO.getCreateDate(), DateUtils.DATE_PATTERN));
+            result.put("userRole", exSwUserBasicDO.getUserType());
+            log.info("用户登录接口返回数据：【" + Result.ok(result).toString() + "】");
+            return Result.ok(result);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("登录失败");
+        }
     }
 
-    @RequestMapping("setPass")
-    public Object setLoginPass(String areaCode, String mobileOrEmail, String checkCode, String pass, String registerType, String type) {
-        SwUserBasicDO user = new SwUserBasicDO();
-        if (CommonStatic.MOBILE_REGISTER.equals(registerType)) {
-            user.setMobile(mobileOrEmail);
-            user.setAreaCode(areaCode);
-            Map<String, Object> map = new HashMap<>();
-            map.put("mobile", mobileOrEmail);
-            map.put("areaCode", areaCode);
-            Integer userId = null;//swUserBasicDao.getUserId(map);
-            user.setTid(userId);
-            boolean newMobileCheck = CheckCodeUtils.checkMobileCheckCode(checkCode, mobileOrEmail, areaCode);
-            if (!newMobileCheck) {
-                return Result.error("手机验证码不正确或已失效");
+    @RequestMapping("set_password")
+    public Object resetLoginPassword(String email, String checkCode, String pass, String type) {
+        try {
+            if(StringUtils.isBlank(email) || StringUtils.isBlank(email) || StringUtils.isBlank(email) || StringUtils.isBlank(email)){
+                return Result.error("参数错误！");
             }
-            pass = MyMD5Utils.encodingAdmin(pass);
-            if (type.equals("1")) {
-                user.setLoginPass(pass);
-            } else if (type.equals("2")) {
-                /*if (pass.equals(exUser.getHighPass())) {
-                    return Result.error("登录密码与支付密码不能相同");
-                }*/
-                user.setHighPass(pass);
+            SwUserBasicDO user = new SwUserBasicDO();
+            user.setEmail(email);
+            SwUserBasicDO byEmail = swUserBasicService.getByEmail(email);
+            if(byEmail == null){
+                return Result.error("未找到该用户！");
             }
-
-            swUserBasicService.update(user);
-            return Result.ok();
-        } else {
-            user.setEmail(mobileOrEmail);
-            Map<String, Object> map = new HashMap<>();
-            map.put("email", mobileOrEmail);
-            Integer userId = null;//swUserBasicDao.getUserId(map);
-            user.setTid(userId);
+            user.setTid(byEmail.getTid());
             //发送邮箱验证码
-            boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, mobileOrEmail);
+            boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, email);
             if (!mailRt) {
                 return Result.error("邮箱验证码不正确或已失效");
             }
@@ -222,11 +206,12 @@ public class AppPublicAPI {
             } else if (type.equals("2")) {
                 user.setHighPass(pass);
             }
-
             swUserBasicService.update(user);
             return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("操作失败");
         }
-
     }
 
     /**

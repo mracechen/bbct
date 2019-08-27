@@ -38,6 +38,16 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
     }
 
     @Override
+    public SwUserBasicDO getByEmail(String email) {
+        return swUserBasicDao.getByEmail(email);
+    }
+
+    @Override
+    public SwUserBasicDO get(SwUserBasicDO swUserBasic) {
+        return swUserBasicDao.getByUserBasic(swUserBasic);
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Object userReg(SwUserBasicDO userBasicDO) {
 

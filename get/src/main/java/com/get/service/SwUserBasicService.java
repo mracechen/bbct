@@ -16,6 +16,10 @@ public interface SwUserBasicService {
 
     SwUserBasicDO get(Integer tid);
 
+    SwUserBasicDO getByEmail(String email);
+
+    SwUserBasicDO get(SwUserBasicDO swUserBasic);
+
     @Transactional(rollbackFor = Exception.class)
     Object userReg(SwUserBasicDO userBasicDO);
 

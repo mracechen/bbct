@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.get.dao.SwEvangelistInfoDao">
+
+    <select id="get" resultType="com.get.domain.SwEvangelistInfoDO">
+        select `tid`,`user_id`,`real_name`,`mobile`,`email`,`wechat`,`weibo`,`address`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`        from t_sw_evangelist_info where tid = #{value}
+    </select>
+
+    <select id="list" resultType="com.get.domain.SwEvangelistInfoDO">
+        select `tid`,`user_id`,`real_name`,`mobile`,`email`,`wechat`,`weibo`,`address`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`        from t_sw_evangelist_info
+        <where>
+                            <if test="tid != null and tid != ''">and tid =
+                    #{tid}
+                </if>
+                            <if test="userId != null and userId != ''">and user_id =
+                    #{userId}
+                </if>
+                            <if test="realName != null and realName != ''">and real_name =
+                    #{realName}
+                </if>
+                            <if test="mobile != null and mobile != ''">and mobile =
+                    #{mobile}
+                </if>
+                            <if test="email != null and email != ''">and email =
+                    #{email}
+                </if>
+                            <if test="wechat != null and wechat != ''">and wechat =
+                    #{wechat}
+                </if>
+                            <if test="weibo != null and weibo != ''">and weibo =
+                    #{weibo}
+                </if>
+                            <if test="address != null and address != ''">and address =
+                    #{address}
+                </if>
+                            <if test="createDate != null and createDate != ''">and create_date =
+                    #{createDate}
+                </if>
+                            <if test="updateDate != null and updateDate != ''">and update_date =
+                    #{updateDate}
+                </if>
+                            <if test="delFlag != null and delFlag != ''">and del_flag =
+                    #{delFlag}
+                </if>
+                            <if test="ex1 != null and ex1 != ''">and ex1 =
+                    #{ex1}
+                </if>
+                            <if test="ex2 != null and ex2 != ''">and ex2 =
+                    #{ex2}
+                </if>
+                            <if test="ex3 != null and ex3 != ''">and ex3 =
+                    #{ex3}
+                </if>
+                            <if test="ex4 != null and ex4 != ''">and ex4 =
+                    #{ex4}
+                </if>
+                    </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by tid desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_sw_evangelist_info
+        <where>
+                            <if test="tid != null and tid != ''">and tid =
+                    #{tid}
+                </if>
+                            <if test="userId != null and userId != ''">and user_id =
+                    #{userId}
+                </if>
+                            <if test="realName != null and realName != ''">and real_name =
+                    #{realName}
+                </if>
+                            <if test="mobile != null and mobile != ''">and mobile =
+                    #{mobile}
+                </if>
+                            <if test="email != null and email != ''">and email =
+                    #{email}
+                </if>
+                            <if test="wechat != null and wechat != ''">and wechat =
+                    #{wechat}
+                </if>
+                            <if test="weibo != null and weibo != ''">and weibo =
+                    #{weibo}
+                </if>
+                            <if test="address != null and address != ''">and address =
+                    #{address}
+                </if>
+                            <if test="createDate != null and createDate != ''">and create_date =
+                    #{createDate}
+                </if>
+                            <if test="updateDate != null and updateDate != ''">and update_date =
+                    #{updateDate}
+                </if>
+                            <if test="delFlag != null and delFlag != ''">and del_flag =
+                    #{delFlag}
+                </if>
+                            <if test="ex1 != null and ex1 != ''">and ex1 =
+                    #{ex1}
+                </if>
+                            <if test="ex2 != null and ex2 != ''">and ex2 =
+                    #{ex2}
+                </if>
+                            <if test="ex3 != null and ex3 != ''">and ex3 =
+                    #{ex3}
+                </if>
+                            <if test="ex4 != null and ex4 != ''">and ex4 =
+                    #{ex4}
+                </if>
+                    </where>
+    </select>
+
+    <insert id="save" parameterType="com.get.domain.SwEvangelistInfoDO">
+        insert into t_sw_evangelist_info
+        (
+                                    `tid`, 
+                                                `user_id`, 
+                                                `real_name`, 
+                                                `mobile`, 
+                                                `email`, 
+                                                `wechat`, 
+                                                `weibo`, 
+                                                `address`, 
+                                                `create_date`, 
+                                                `update_date`, 
+                                                `del_flag`, 
+                                                `ex1`, 
+                                                `ex2`, 
+                                                `ex3`, 
+                                                `ex4`
+                            )
+        values
+        (
+                                    #{tid}, 
+                                                #{userId}, 
+                                                #{realName}, 
+                                                #{mobile}, 
+                                                #{email}, 
+                                                #{wechat}, 
+                                                #{weibo}, 
+                                                #{address}, 
+                                                #{createDate}, 
+                                                #{updateDate}, 
+                                                #{delFlag}, 
+                                                #{ex1}, 
+                                                #{ex2}, 
+                                                #{ex3}, 
+                                                #{ex4}
+                            )
+    </insert>
+
+    <update id="update" parameterType="com.get.domain.SwEvangelistInfoDO">
+        update t_sw_evangelist_info
+        <set>
+                                                                            <if test="userId != null">`user_id` = #{userId
+                        }, </if>
+                                                                <if test="realName != null">`real_name` = #{realName
+                        }, </if>
+                                                                <if test="mobile != null">`mobile` = #{mobile
+                        }, </if>
+                                                                <if test="email != null">`email` = #{email
+                        }, </if>
+                                                                <if test="wechat != null">`wechat` = #{wechat
+                        }, </if>
+                                                                <if test="weibo != null">`weibo` = #{weibo
+                        }, </if>
+                                                                <if test="address != null">`address` = #{address
+                        }, </if>
+                                                                <if test="createDate != null">`create_date` = #{createDate
+                        }, </if>
+                                                                <if test="updateDate != null">`update_date` = #{updateDate
+                        }, </if>
+                                                                <if test="delFlag != null">`del_flag` = #{delFlag
+                        }, </if>
+                                                                <if test="ex1 != null">`ex1` = #{ex1
+                        }, </if>
+                                                                <if test="ex2 != null">`ex2` = #{ex2
+                        }, </if>
+                                                                <if test="ex3 != null">`ex3` = #{ex3
+                        }, </if>
+                                                                <if test="ex4 != null">`ex4` = #{ex4
+                        }</if>
+                                    </set>
+        where tid = #{tid}
+    </update>
+
+    <delete id="remove">
+        delete from t_sw_evangelist_info where tid = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from t_sw_evangelist_info where tid in
+        <foreach item="tid" collection="array" open="(" separator="," close=")">
+            #{tid}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -16,6 +16,10 @@ public interface SwUserBasicDao {
 
     SwUserBasicDO get(Integer tid);
 
+    SwUserBasicDO getByEmail(String email);
+
+    SwUserBasicDO getByUserBasic(SwUserBasicDO swUserBasic);
+
     List<SwUserBasicDO> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);
