@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.get.dao.SwConsumeLogDao">
+
+    <select id="get" resultType="com.get.domain.SwConsumeLogDO">
+        select `tid`,`consume_amount`,`destoryed`,`pay_user`,`receive_user`,`coin_type_id`,`last_consume`,`score`,`business_id`,`remark`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex3`,`ex4`,`ex5`        from t_sw_consume_log where tid = #{value}
+    </select>
+
+    <select id="checkDrawCondition" resultType="com.get.domain.SwConsumeLogDO">
+        select `tid`,`consume_amount`,`destoryed`,`pay_user`,`receive_user`,`coin_type_id`,`last_consume`,`score`,`business_id`,`remark`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex3`,`ex4`,`ex5`
+        from t_sw_consume_log
+        where create_date &gt; #{beginDate}
+        <if test="endDate != null">
+            and create_date &lt; #{endDate}
+        </if>
+        and pay_user = #{payUser}
+        and ex4 = 1
+    </select>
+
+    <select id="list" resultType="com.get.domain.SwConsumeLogDO">
+        select `tid`,`consume_amount`,`destoryed`,`pay_user`,`receive_user`,`coin_type_id`,`last_consume`,`score`,`business_id`,`remark`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex3`,`ex4`,`ex5`        from t_sw_consume_log
+        <where>
+                            <if test="tid != null and tid != ''">and tid =
+                    #{tid}
+                </if>
+                            <if test="consumeAmount != null and consumeAmount != ''">and consume_amount =
+                    #{consumeAmount}
+                </if>
+                            <if test="destoryed != null and destoryed != ''">and destoryed =
+                    #{destoryed}
+                </if>
+                            <if test="payUser != null and payUser != ''">and pay_user =
+                    #{payUser}
+                </if>
+                            <if test="receiveUser != null and receiveUser != ''">and receive_user =
+                    #{receiveUser}
+                </if>
+                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+                    #{coinTypeId}
+                </if>
+                            <if test="lastConsume != null and lastConsume != ''">and last_consume =
+                    #{lastConsume}
+                </if>
+                            <if test="score != null and score != ''">and score =
+                    #{score}
+                </if>
+                            <if test="businessId != null and businessId != ''">and business_id =
+                    #{businessId}
+                </if>
+                            <if test="remark != null and remark != ''">and remark =
+                    #{remark}
+                </if>
+                            <if test="createDate != null and createDate != ''">and create_date =
+                    #{createDate}
+                </if>
+                            <if test="updateDate != null and updateDate != ''">and update_date =
+                    #{updateDate}
+                </if>
+                            <if test="delFlag != null and delFlag != ''">and del_flag =
+                    #{delFlag}
+                </if>
+                            <if test="ex2 != null and ex2 != ''">and ex2 =
+                    #{ex2}
+                </if>
+                            <if test="ex3 != null and ex3 != ''">and ex3 =
+                    #{ex3}
+                </if>
+                            <if test="ex4 != null and ex4 != ''">and ex4 =
+                    #{ex4}
+                </if>
+                            <if test="ex5 != null and ex5 != ''">and ex5 =
+                    #{ex5}
+                </if>
+                <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">and date_format(create_date,'%Y%m%d')
+                    between #{startDate} and #{endDate}
+                </if>
+                    </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by create_date desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="list1" resultType="com.get.domain.SwConsumeLogDO">
+        select `tid`,`consume_amount`,`destoryed`,`pay_user`,`receive_user`,`coin_type_id`,`last_consume`,`score`,`business_id`,`remark`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex3`,`ex4`,`ex5`        from t_sw_consume_log
+        <where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="consumeAmount != null and consumeAmount != ''">and consume_amount =
+                #{consumeAmount}
+            </if>
+            <if test="destoryed != null and destoryed != ''">and destoryed =
+                #{destoryed}
+            </if>
+            <if test="payUser != null and payUser != ''">and pay_user =
+                #{payUser}
+            </if>
+            <if test="receiveUser != null and receiveUser != ''">and receive_user =
+                #{receiveUser}
+            </if>
+            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+                #{coinTypeId}
+            </if>
+            <if test="lastConsume != null and lastConsume != ''">and last_consume =
+                #{lastConsume}
+            </if>
+            <if test="score != null and score != ''">and score =
+                #{score}
+            </if>
+            <if test="businessId != null and businessId != ''">and business_id =
+                #{businessId}
+            </if>
+            <if test="remark != null and remark != ''">and remark =
+                #{remark}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+            <if test="ex4 != null and ex4 != ''">and ex4 &lt;&gt; 0
+            </if>
+            <if test="ex5 != null and ex5 != ''">and ex5 =
+                #{ex5}
+            </if>
+            <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">and date_format(create_date,'%Y%m%d')
+                between #{startDate} and #{endDate}
+            </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by create_date desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_sw_consume_log
+        <where>
+                            <if test="tid != null and tid != ''">and tid =
+                    #{tid}
+                </if>
+                            <if test="consumeAmount != null and consumeAmount != ''">and consume_amount =
+                    #{consumeAmount}
+                </if>
+                            <if test="destoryed != null and destoryed != ''">and destoryed =
+                    #{destoryed}
+                </if>
+                            <if test="payUser != null and payUser != ''">and pay_user =
+                    #{payUser}
+                </if>
+                            <if test="receiveUser != null and receiveUser != ''">and receive_user =
+                    #{receiveUser}
+                </if>
+                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+                    #{coinTypeId}
+                </if>
+                            <if test="lastConsume != null and lastConsume != ''">and last_consume =
+                    #{lastConsume}
+                </if>
+                            <if test="score != null and score != ''">and score =
+                    #{score}
+                </if>
+                            <if test="businessId != null and businessId != ''">and business_id =
+                    #{businessId}
+                </if>
+                            <if test="remark != null and remark != ''">and remark =
+                    #{remark}
+                </if>
+                            <if test="createDate != null and createDate != ''">and create_date =
+                    #{createDate}
+                </if>
+                            <if test="updateDate != null and updateDate != ''">and update_date =
+                    #{updateDate}
+                </if>
+                            <if test="delFlag != null and delFlag != ''">and del_flag =
+                    #{delFlag}
+                </if>
+                            <if test="ex2 != null and ex2 != ''">and ex2 =
+                    #{ex2}
+                </if>
+                            <if test="ex3 != null and ex3 != ''">and ex3 =
+                    #{ex3}
+                </if>
+                            <if test="ex4 != null and ex4 != ''">and ex4 =
+                    #{ex4}
+                </if>
+                            <if test="ex5 != null and ex5 != ''">and ex5 =
+                    #{ex5}
+                </if>
+                    </where>
+    </select>
+
+    <insert id="save" parameterType="com.get.domain.SwConsumeLogDO">
+        insert into t_sw_consume_log
+        (
+                                    `tid`, 
+                                                `consume_amount`, 
+                                                `destoryed`, 
+                                                `pay_user`, 
+                                                `receive_user`, 
+                                                `coin_type_id`, 
+                                                `last_consume`, 
+                                                `score`, 
+                                                `business_id`, 
+                                                `remark`, 
+                                                `create_date`, 
+                                                `update_date`, 
+                                                `del_flag`, 
+                                                `ex2`, 
+                                                `ex3`, 
+                                                `ex4`, 
+                                                `ex5`
+                            )
+        values
+        (
+                                    #{tid}, 
+                                                #{consumeAmount}, 
+                                                #{destoryed}, 
+                                                #{payUser}, 
+                                                #{receiveUser}, 
+                                                #{coinTypeId}, 
+                                                #{lastConsume}, 
+                                                #{score}, 
+                                                #{businessId}, 
+                                                #{remark}, 
+                                                #{createDate}, 
+                                                #{updateDate}, 
+                                                #{delFlag}, 
+                                                #{ex2}, 
+                                                #{ex3}, 
+                                                #{ex4}, 
+                                                #{ex5}
+                            )
+    </insert>
+
+    <update id="update" parameterType="com.get.domain.SwConsumeLogDO">
+        update t_sw_consume_log
+        <set>
+                                                                            <if test="consumeAmount != null">`consume_amount` = #{consumeAmount
+                        }, </if>
+                                                                <if test="destoryed != null">`destoryed` = #{destoryed
+                        }, </if>
+                                                                <if test="payUser != null">`pay_user` = #{payUser
+                        }, </if>
+                                                                <if test="receiveUser != null">`receive_user` = #{receiveUser
+                        }, </if>
+                                                                <if test="coinTypeId != null">`coin_type_id` = #{coinTypeId
+                        }, </if>
+                                                                <if test="lastConsume != null">`last_consume` = #{lastConsume
+                        }, </if>
+                                                                <if test="score != null">`score` = #{score
+                        }, </if>
+                                                                <if test="businessId != null">`business_id` = #{businessId
+                        }, </if>
+                                                                <if test="remark != null">`remark` = #{remark
+                        }, </if>
+                                                                <if test="createDate != null">`create_date` = #{createDate
+                        }, </if>
+                                                                <if test="updateDate != null">`update_date` = #{updateDate
+                        }, </if>
+                                                                <if test="delFlag != null">`del_flag` = #{delFlag
+                        }, </if>
+                                                                <if test="ex2 != null">`ex2` = #{ex2
+                        }, </if>
+                                                                <if test="ex3 != null">`ex3` = #{ex3
+                        }, </if>
+                                                                <if test="ex4 != null">`ex4` = #{ex4
+                        }, </if>
+                                                                <if test="ex5 != null">`ex5` = #{ex5
+                        }</if>
+                                    </set>
+        where tid = #{tid}
+    </update>
+
+    <delete id="remove">
+        delete from t_sw_consume_log where tid = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from t_sw_consume_log where tid in
+        <foreach item="tid" collection="array" open="(" separator="," close=")">
+            #{tid}
+        </foreach>
+    </delete>
+
+    <select id="getConsumeRecord" resultType="com.get.domain.SwConsumeLogDO">
+        SELECT consume.tid as tid,basic.username as username,consume.consume_amount as consumeAmount,
+        consume.coin_type_id as coinTypeId,consume.ex3 as ex3,consume.ex2 as ex2,consume.ex4 as ex4, consume.score, consume.remark,consume.create_date
+        FROM t_sw_consume_log consume
+        left join t_sw_user_basic basic on consume.receive_user = basic.tid
+        <where>
+            <if test="payUser != null and payUser != ''">and consume.pay_user = #{payUser} </if>
+            <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">and date_format(consume.create_date,'%Y%m%d')
+                between #{startDate} and #{endDate}
+            </if>
+            and consume.ex4 &lt;&gt; 0
+        </where>
+        order by consume.create_date desc
+    </select>
+
+    <select id="getConsumeRecordDetail" resultType="com.get.domain.SwConsumeLogDO" parameterType="java.lang.String">
+        SELECT consume.tid as tid,basic.username,consume.consume_amount as consumeAmount,
+        consume.coin_type_id as coinTypeId,consume.ex3 as ex3,consume.ex2 as ex2,consume.create_date as createDate,consume.ex4 as ex4,
+         consume.score, consume.remark
+        FROM t_sw_consume_log consume
+        left join t_sw_user_basic basic on consume.receive_user = basic.tid
+        where consume.tid = #{consumeId}
+    </select>
+
+</mapper>

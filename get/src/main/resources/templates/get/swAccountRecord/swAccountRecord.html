@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="pull-right search col-md-2">
+                        <select id="coinTypeId" name="coinTypeId"
+                                class="form-control input select2-hidden-accessible">
+                            <option value="">所有币种</option>
+                            <option th:each="map:${maps}" th:value="${map.getKey()}"
+                                    th:text="${map.getValue()}"></option>
+                        </select>
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <select id="type" name="type"
+                                class="form-control input select2-hidden-accessible">
+                            <option value="">交易类型</option>
+                            <option value="1">推广赠送</option>
+                            <option value="2">利润分成</option>
+                            <option value="3">提币</option>
+                            <option value="4">后台操作</option>
+                            <option value="5">消费</option>
+                            <option value="6">转账</option>
+                            <option value="7">收款</option>
+                            <option value="8">礼包</option>
+                        </select>
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input id="num" type="text" class="form-control"
+                               placeholder="流水号">
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input id="userId" type="text" class="form-control"
+                               placeholder="用户ID">
+                    </div>
+
+                </div>
+                <div class="fixed-table-toolbar">
+                    <div class="pull-right search col-md-2">
+                        <input type="text" class="laydate-icon layer-date form-control" id="createEndDate"
+                               name="birth"
+                               placeholder="创建结束时间"
+                               style="background-color: #fff;" readonly="readonly"/>
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input type="text" class="laydate-icon layer-date form-control" id="createStartDate"
+                               name="birth"
+                               placeholder="创建开始时间"
+                               style="background-color: #fff;" readonly="readonly"/>
+                    </div>
+                </div>
+
+            </div>
+            <div class="fixed-table-toolbar" style="clear: both">
+                <div class="columns pull-left" style="margin-left: 15px">
+                    <button shiro:hasPermission="get:swAccountRecord:add" type="button"
+                            class="btn  btn-primary" onclick="add()">
+                        <i class="fa fa-plus" aria-hidden="true"></i>添加
+                    </button>
+                    <button shiro:hasPermission="get:swAccountRecord:batchRemove" type="button"
+                            class="btn  btn-danger"
+                            onclick="batchRemove()">
+                        <i class="fa fa-trash" aria-hidden="true"></i>删除
+                    </button>
+                </div>
+                <div class="columns pull-right" style="margin-left: 15px">
+                    <button s type="button" class="btn  btn-danger"
+                            onclick="clearForm()">
+                        <i class="fa fa-trash" aria-hidden="true"></i>清空
+                    </button>
+                </div>
+
+                <div class="columns pull-right" role="group" style="margin-left: 15px ;margin-right: 15px">
+                    <button class="btn btn-success" onclick="reLoad()">
+                        <i class="fa fa-search" aria-hidden="true"></i>查询
+                    </button>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+    </script>
+</div>
+<div shiro:hasPermission="get:swAccountRecord:edit">
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="get:swAccountRecord:remove">
+    <script type="text/javascript">
+        var s_remove_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="get:swAccountRecord:resetPwd">
+    <script type="text/javascript">
+        var s_resetPwd_h = '';
+    </script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/get/swAccountRecord/swAccountRecord.js"></script>
+</body>
+</html>

@@ -30,4 +30,6 @@ public interface SwWalletsService {
 
     @Transactional(rollbackFor = Exception.class)
     SwWalletsDO createWallet(Integer userID, String coinTypeId);
+
+    SwWalletsDO getWallet(Integer user_id,String coin_id);
 }

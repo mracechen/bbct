@@ -9,6 +9,8 @@ import com.evowallet.utils.MailUtil;
 import com.get.domain.*;
 import com.get.service.*;
 import com.get.statuc.CommonStatic;
+import com.get.statuc.NumberStatic;
+import com.get.statuc.RecordEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +51,18 @@ public class AppPrivateAPI {
 
     @Autowired
     private SwWithdrawAddressService swWithdrawAddressService;
+
+    @Autowired
+    private SwWalletsService swWalletsService;
+
+    @Autowired
+    private SwAccountRecordService swAccountRecordService;
+
+    @Autowired
+    private SwConsumeLogService swConsumeLogService;
+
+    @Autowired
+    private Languagei18nUtils languagei18nUtils;
 
     @Value("${configs.chargeAddress}")
     private String chargeAddress;
@@ -246,5 +261,42 @@ public class AppPrivateAPI {
             e.printStackTrace();
             return Result.error("获取失败！");
         }
+    }
+
+    /**
+     * 转账-校验收款用户
+     * */
+    @RequestMapping("check_user")
+    @ResponseBody
+    public Object checkUser(HttpServletRequest request, String userId) {
+        if(StringUtils.isBlank(userId)){
+            return ServerResponse.createByError("收款账户不存在");
+        }
+        SwUserBasicDO user = swUserBasicService.get(Integer.parseInt(userId));
+        if (user == null) {
+            return ServerResponse.createByError("收款账户不存在");
+        }
+        if(user.getEmail() != null){
+            if(user.getEmail().endsWith("canceled")){
+                return ServerResponse.createByError("收款账户已注销");
+            }
+        }
+        return Result.ok(user);
+    }
+
+    /**
+     * 转账
+     * */
+    @RequestMapping("transfer")
+    @ResponseBody
+    public ServerResponse<String> TransferAccount(HttpServletRequest request, @RequestParam String userId, @RequestParam double amount,
+                                                  @RequestParam String coinId, @RequestParam String remark, @RequestParam String tradingPassword) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        String msg = swConsumeLogService.transfer(user, userId, amount, coinId, remark, tradingPassword);
+        if(StringUtils.isNotBlank(msg)){
+            return ServerResponse.createByError(msg);
+        }
+        return ServerResponse.createBySuccess("转账成功");
+
     }
 }

@@ -48,6 +48,21 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
     }
 
     @Override
+    public Boolean checkTradingPassword(Integer userId, String email, String sPassword){
+        Map<String, Object> queryparams = new HashMap<>();
+        String password = MyMD5Utils.encodingAdmin(sPassword);
+        queryparams.put("highPass", password);
+        queryparams.put("tid", userId);
+        queryparams.put("email", email);
+        List<SwUserBasicDO> list = this.list(queryparams);
+        if (list.size() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Object userReg(SwUserBasicDO userBasicDO) {
 

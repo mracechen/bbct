@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwWalletsDO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 钱包表
@@ -27,4 +28,6 @@ public interface SwWalletsDao {
     int remove(String tid);
 
     int batchRemove(String[] tids);
+
+    SwWalletsDO getWallet(@Param("user_id") Integer userId, @Param("coin_id") String coinId);
 }

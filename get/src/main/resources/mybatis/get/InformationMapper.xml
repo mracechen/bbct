@@ -1,37 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.get.dao.SwWalletsDao">
+<mapper namespace="com.get.dao.InformationDao">
 
-    <select id="get" resultType="com.get.domain.SwWalletsDO">
-        select `tid`,`user_id`,`coin_type_id`,`currency`,`is_active`,`frozen_amount`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`        from t_sw_wallets where tid = #{value}
+    <select id="get" resultType="com.get.domain.InformationDO">
+        select `tid`,`title`,`content`,`type`,`status`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`        from t_sys_information where tid = #{value}
     </select>
 
-    <select id="getWallet" resultType="com.get.domain.SwWalletsDO" parameterType="map">
-        select `tid`,`user_id`,`coin_type_id`,`currency`,`is_active`,`frozen_amount`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`
-        from t_sw_wallets where user_id = #{user_id} and coin_type_id = #{coin_id}
-    </select>
-
-    <select id="list" resultType="com.get.domain.SwWalletsDO">
-        select `tid`,`user_id`,`coin_type_id`,`currency`,`is_active`,`frozen_amount`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`        from t_sw_wallets
+    <select id="list" resultType="com.get.domain.InformationDO">
+        select `tid`,`title`,`content`,`type`,`status`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`        from t_sys_information
         <where>
                             <if test="tid != null and tid != ''">and tid =
                     #{tid}
                 </if>
-                            <if test="userId != null and userId != ''">and user_id =
-                    #{userId}
+                            <if test="title != null and title != ''">and title =
+                    #{title}
                 </if>
-                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
-                    #{coinTypeId}
+                            <if test="content != null and content != ''">and content =
+                    #{content}
                 </if>
-                            <if test="currency != null and currency != ''">and currency =
-                    #{currency}
+                            <if test="type != null and type != ''">and type =
+                    #{type}
                 </if>
-                            <if test="isActive != null and isActive != ''">and is_active =
-                    #{isActive}
-                </if>
-                            <if test="frozenAmount != null and frozenAmount != ''">and frozen_amount =
-                    #{frozenAmount}
+                            <if test="status != null and status != ''">and status =
+                    #{status}
                 </if>
                             <if test="createDate != null and createDate != ''">and create_date =
                     #{createDate}
@@ -50,9 +42,6 @@
                 </if>
                             <if test="ex3 != null and ex3 != ''">and ex3 =
                     #{ex3}
-                </if>
-                            <if test="ex4 != null and ex4 != ''">and ex4 =
-                    #{ex4}
                 </if>
                     </where>
         <choose>
@@ -69,25 +58,22 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from t_sw_wallets
+        select count(*) from t_sys_information
         <where>
                             <if test="tid != null and tid != ''">and tid =
                     #{tid}
                 </if>
-                            <if test="userId != null and userId != ''">and user_id =
-                    #{userId}
+                            <if test="title != null and title != ''">and title =
+                    #{title}
                 </if>
-                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
-                    #{coinTypeId}
+                            <if test="content != null and content != ''">and content =
+                    #{content}
                 </if>
-                            <if test="currency != null and currency != ''">and currency =
-                    #{currency}
+                            <if test="type != null and type != ''">and type =
+                    #{type}
                 </if>
-                            <if test="isActive != null and isActive != ''">and is_active =
-                    #{isActive}
-                </if>
-                            <if test="frozenAmount != null and frozenAmount != ''">and frozen_amount =
-                    #{frozenAmount}
+                            <if test="status != null and status != ''">and status =
+                    #{status}
                 </if>
                             <if test="createDate != null and createDate != ''">and create_date =
                     #{createDate}
@@ -107,59 +93,50 @@
                             <if test="ex3 != null and ex3 != ''">and ex3 =
                     #{ex3}
                 </if>
-                            <if test="ex4 != null and ex4 != ''">and ex4 =
-                    #{ex4}
-                </if>
                     </where>
     </select>
 
-    <insert id="save" parameterType="com.get.domain.SwWalletsDO">
-        insert into t_sw_wallets
+    <insert id="save" parameterType="com.get.domain.InformationDO">
+        insert into t_sys_information
         (
                                     `tid`, 
-                                                `user_id`, 
-                                                `coin_type_id`, 
-                                                `currency`, 
-                                                `is_active`, 
-                                                `frozen_amount`, 
+                                                `title`, 
+                                                `content`, 
+                                                `type`, 
+                                                `status`, 
                                                 `create_date`, 
                                                 `update_date`, 
                                                 `del_flag`, 
                                                 `ex1`, 
                                                 `ex2`, 
-                                                `ex3`, 
-                                                `ex4`
+                                                `ex3`
                             )
         values
         (
                                     #{tid}, 
-                                                #{userId}, 
-                                                #{coinTypeId}, 
-                                                #{currency}, 
-                                                #{isActive}, 
-                                                #{frozenAmount}, 
+                                                #{title}, 
+                                                #{content}, 
+                                                #{type}, 
+                                                #{status}, 
                                                 #{createDate}, 
                                                 #{updateDate}, 
                                                 #{delFlag}, 
                                                 #{ex1}, 
                                                 #{ex2}, 
-                                                #{ex3}, 
-                                                #{ex4}
+                                                #{ex3}
                             )
     </insert>
 
-    <update id="update" parameterType="com.get.domain.SwWalletsDO">
-        update t_sw_wallets
+    <update id="update" parameterType="com.get.domain.InformationDO">
+        update t_sys_information
         <set>
-                                                                            <if test="userId != null">`user_id` = #{userId
+                                                                            <if test="title != null">`title` = #{title
                         }, </if>
-                                                                <if test="coinTypeId != null">`coin_type_id` = #{coinTypeId
+                                                                <if test="content != null">`content` = #{content
                         }, </if>
-                                                                <if test="currency != null">`currency` = #{currency
+                                                                <if test="type != null">`type` = #{type
                         }, </if>
-                                                                <if test="isActive != null">`is_active` = #{isActive
-                        }, </if>
-                                                                <if test="frozenAmount != null">`frozen_amount` = #{frozenAmount
+                                                                <if test="status != null">`status` = #{status
                         }, </if>
                                                                 <if test="createDate != null">`create_date` = #{createDate
                         }, </if>
@@ -172,19 +149,17 @@
                                                                 <if test="ex2 != null">`ex2` = #{ex2
                         }, </if>
                                                                 <if test="ex3 != null">`ex3` = #{ex3
-                        }, </if>
-                                                                <if test="ex4 != null">`ex4` = #{ex4
                         }</if>
                                     </set>
         where tid = #{tid}
     </update>
 
     <delete id="remove">
-        delete from t_sw_wallets where tid = #{value}
+        delete from t_sys_information where tid = #{value}
     </delete>
 
     <delete id="batchRemove">
-        delete from t_sw_wallets where tid in
+        delete from t_sys_information where tid in
         <foreach item="tid" collection="array" open="(" separator="," close=")">
             #{tid}
         </foreach>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="pull-right search col-md-2">
+                        <select id="isBigWallet" name="city" lay-verify="" class="form-control" placeholder="是否为大钱包">
+                            <option value="" selected>是否为大钱包</option>
+                            <option value="0">是</option>
+                            <option value="1">否</option>
+                        </select>
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input id="parentWalletId" type="text" class="form-control"
+                               placeholder="父钱包编号">
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input onkeyup="this.value=this.value.replace(/\s+/g,'')" id="currency" type="text"
+                               class="form-control"
+                               placeholder="币的总量余额">
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <select id="accountId" name="city" lay-verify="" class="form-control" placeholder="账户类型">
+                            <option value="" selected>账户类型</option>
+                            <option value="RYHFlow">自由RYH</option>
+                            <option value="RYHLock">锁仓RYH</option>
+                            <option value="RYHFreed">释放RYH</option>
+                            <option value="RYBFlow">自由RYB</option>
+                            <option value="RYBLock">锁仓RYB</option>
+                            <option value="RYBFreed">释放RYB</option>
+                        </select>
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input id="userId" type="text" class="form-control"
+                               placeholder="账号">
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input id="tid" type="text" class="form-control"
+                               placeholder="钱包编号">
+                    </div>
+
+                </div>
+                <div class="fixed-table-toolbar">
+                    <div class="pull-right search col-md-2">
+                        <input type="text" class="laydate-icon layer-date form-control" id="createEndDate"
+                               name="birth"
+                               placeholder="创建结束时间"
+                               style="background-color: #fff;" readonly="readonly"/>
+                    </div>
+                    <div class="pull-right search col-md-2">
+                        <input type="text" class="laydate-icon layer-date form-control" id="createStartDate"
+                               name="birth"
+                               placeholder="创建开始时间"
+                               style="background-color: #fff;" readonly="readonly"/>
+                    </div>
+                </div>
+
+            </div>
+            <div class="fixed-table-toolbar" style="clear: both">
+                <div class="columns pull-left" style="margin-left: 15px">
+                    <button shiro:hasPermission="get:information:add" type="button"
+                            class="btn  btn-primary" onclick="add()">
+                        <i class="fa fa-plus" aria-hidden="true"></i>添加
+                    </button>
+                    <button shiro:hasPermission="get:information:batchRemove" type="button"
+                            class="btn  btn-danger"
+                            onclick="batchRemove()">
+                        <i class="fa fa-trash" aria-hidden="true"></i>删除
+                    </button>
+                </div>
+                <div class="columns pull-right" style="margin-left: 15px">
+                    <button s type="button" class="btn  btn-danger"
+                            onclick="clearForm()">
+                        <i class="fa fa-trash" aria-hidden="true"></i>清空
+                    </button>
+                </div>
+
+                <div class="columns pull-right" role="group" style="margin-left: 15px ;margin-right: 15px">
+                    <button class="btn btn-success" onclick="reLoad()">
+                        <i class="fa fa-search" aria-hidden="true"></i>查询
+                    </button>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+    </script>
+</div>
+<div shiro:hasPermission="get:information:edit">
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="get:information:remove">
+    <script type="text/javascript">
+        var s_remove_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="get:information:resetPwd">
+    <script type="text/javascript">
+        var s_resetPwd_h = '';
+    </script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/get/information/information.js"></script>
+</body>
+</html>

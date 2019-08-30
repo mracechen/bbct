@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="tid" name="tid" th:value="${swAccountRecord.tid}"
+                               type="hidden">
+                                                                                                                                        <div class="form-group">
+                                    <label class="col-sm-3 control-label">用户ID：</label>
+                                    <div class="col-sm-8">
+                                        <input id="userId" name="userId"
+                                               th:value="${swAccountRecord.userId}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">流水号：</label>
+                                    <div class="col-sm-8">
+                                        <input id="num" name="num"
+                                               th:value="${swAccountRecord.num}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">交易类型，1推广赠送，2利润分成，3提币，4后台操作,5消费，6转账，7收款，8礼包：</label>
+                                    <div class="col-sm-8">
+                                        <input id="type" name="type"
+                                               th:value="${swAccountRecord.type}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">币种类型id：</label>
+                                    <div class="col-sm-8">
+                                        <input id="coinTypeId" name="coinTypeId"
+                                               th:value="${swAccountRecord.coinTypeId}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">金额：</label>
+                                    <div class="col-sm-8">
+                                        <input id="currency" name="currency"
+                                               th:value="${swAccountRecord.currency}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">备注：</label>
+                                    <div class="col-sm-8">
+                                        <input id="remark" name="remark"
+                                               th:value="${swAccountRecord.remark}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">当前账户金额：</label>
+                                    <div class="col-sm-8">
+                                        <input id="currentAmount" name="currentAmount"
+                                               th:value="${swAccountRecord.currentAmount}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex2：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex2" name="ex2"
+                                               th:value="${swAccountRecord.ex2}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex3：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex3" name="ex3"
+                                               th:value="${swAccountRecord.ex3}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">创建时间：</label>
+                                    <div class="col-sm-8">
+                                        <input id="createDate" name="createDate"
+                                               th:value="${swAccountRecord.createDate}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">更新时间：</label>
+                                    <div class="col-sm-8">
+                                        <input id="updateDate" name="updateDate"
+                                               th:value="${swAccountRecord.updateDate}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">删除标识：</label>
+                                    <div class="col-sm-8">
+                                        <input id="delFlag" name="delFlag"
+                                               th:value="${swAccountRecord.delFlag}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                            <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/get/swAccountRecord/edit.js">
+</script>
+</body>
+</html>

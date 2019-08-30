@@ -20,6 +20,8 @@ public interface SwUserBasicService {
 
     SwUserBasicDO get(SwUserBasicDO swUserBasic);
 
+    Boolean checkTradingPassword(Integer userId, String email, String sPassword);
+
     @Transactional(rollbackFor = Exception.class)
     Object userReg(SwUserBasicDO userBasicDO);
 

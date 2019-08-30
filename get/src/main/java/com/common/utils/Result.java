@@ -19,10 +19,22 @@ public class Result {
 
     private String sign;
 
+    private String msgCode;
+
+    private Object[] msgParams;
+
     public Result(String status, String msg, Object data) {
         this.status = status;
         this.msg = msg;
         this.data = data;
+        this.sign = IDUtils.randomStr();
+    }
+
+    public Result(String status, String msgCode, Object data, Object[] msgParams) {
+        this.status = status;
+        this.data = data;
+        this.msgCode = msgCode;
+        this.msgParams = msgParams;
         this.sign = IDUtils.randomStr();
     }
 
@@ -47,6 +59,9 @@ public class Result {
 
     public static Result error(String msg) {
         return new Result("500", msg, null);
+    }
+    public static Result error(String msgCode,Object[] msgParams) {
+        return new Result("500",msgCode,null,msgParams);
     }
 
     public String getStatus() {
@@ -79,5 +94,21 @@ public class Result {
 
     public void setSign(String sign) {
         this.sign = sign;
+    }
+
+    public String getMsgCode() {
+        return msgCode;
+    }
+
+    public void setMsgCode(String msgCode) {
+        this.msgCode = msgCode;
+    }
+
+    public Object[] getMsgParams() {
+        return msgParams;
+    }
+
+    public void setMsgParams(Object[] msgParams) {
+        this.msgParams = msgParams;
     }
 }

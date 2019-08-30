@@ -4,6 +4,7 @@ import com.get.statuc.CommonStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.get.dao.SwCoinTypeDao;
@@ -56,6 +57,20 @@ public class SwCoinTypeServiceImpl implements SwCoinTypeService {
             count = count + remove(ids);
         }
         return count;
+    }
+
+    @Override
+    public Map<String, String> getCoinTypeMap() {
+        Map<String, Object> queryParam = new HashMap<>();
+        queryParam.put("delFlag", CommonStatic.NOTDELETE);
+        queryParam.put("enable", "0");
+        List<SwCoinTypeDO> list = this.list(queryParam);
+
+        Map<String, String> coinTypeResult = new HashMap<>();
+        for (SwCoinTypeDO swCoinTypeDO : list) {
+            coinTypeResult.put(swCoinTypeDO.getTid(), swCoinTypeDO.getCoinName());
+        }
+        return coinTypeResult;
     }
 
 }

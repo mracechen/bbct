@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="tid" name="tid" th:value="${information.tid}"
+                               type="hidden">
+                                                                                                                                        <div class="form-group">
+                                    <label class="col-sm-3 control-label">标题：</label>
+                                    <div class="col-sm-8">
+                                        <input id="title" name="title"
+                                               th:value="${information.title}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">内容：</label>
+                                    <div class="col-sm-8">
+                                        <input id="content" name="content"
+                                               th:value="${information.content}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">类型，1-新闻，2-公告：</label>
+                                    <div class="col-sm-8">
+                                        <input id="type" name="type"
+                                               th:value="${information.type}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">状态，0-可用，1-不可用：</label>
+                                    <div class="col-sm-8">
+                                        <input id="status" name="status"
+                                               th:value="${information.status}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">创建时间：</label>
+                                    <div class="col-sm-8">
+                                        <input id="createDate" name="createDate"
+                                               th:value="${information.createDate}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">更新时间：</label>
+                                    <div class="col-sm-8">
+                                        <input id="updateDate" name="updateDate"
+                                               th:value="${information.updateDate}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">删除标记：</label>
+                                    <div class="col-sm-8">
+                                        <input id="delFlag" name="delFlag"
+                                               th:value="${information.delFlag}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex1：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex1" name="ex1"
+                                               th:value="${information.ex1}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex2：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex2" name="ex2"
+                                               th:value="${information.ex2}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                                                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">ex3：</label>
+                                    <div class="col-sm-8">
+                                        <input id="ex3" name="ex3"
+                                               th:value="${information.ex3}" class="form-control"
+                                               type="text">
+                                    </div>
+                                </div>
+                                                                            <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/get/information/edit.js">
+</script>
+</body>
+</html>

@@ -26,4 +26,6 @@ public interface SwCoinTypeService {
     int remove(String tid);
 
     int batchRemove(String[] tids);
+
+    Map<String, String> getCoinTypeMap();
 }

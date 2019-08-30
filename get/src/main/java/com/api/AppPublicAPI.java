@@ -7,9 +7,11 @@ import com.common.utils.i18n.Languagei18nUtils;
 import com.evowallet.common.ServerResponse;
 import com.evowallet.utils.MailUtil;
 import com.get.domain.AppInfo;
+import com.get.domain.InformationDO;
 import com.get.domain.MailRecordDO;
 import com.get.domain.SwUserBasicDO;
 import com.get.service.AppInfoService;
+import com.get.service.InformationService;
 import com.get.service.MailRecordService;
 import com.get.service.SwUserBasicService;
 import com.get.statuc.CommonStatic;
@@ -42,6 +44,9 @@ public class AppPublicAPI {
 
     @Autowired
     private AppInfoService appInfoService;
+
+    @Autowired
+    private InformationService informationService;
 
     @Autowired
     private LogService logService;
@@ -148,7 +153,7 @@ public class AppPublicAPI {
         try {
             SwUserBasicDO swUserBasicDO = new SwUserBasicDO();
             if (StringUtils.isBlank(email) || StringUtils.isBlank(loginPass)) {
-                return Result.error("请求参数不全");
+                return Result.error("system.params.error",null);
             }
             swUserBasicDO.setEmail(email);
             swUserBasicDO.setLoginPass(MyMD5Utils.encodingAdmin(loginPass));
@@ -215,18 +220,40 @@ public class AppPublicAPI {
     }
 
     /**
-     * 获取文章列表
+     * 获取资讯列表
      * */
-/*    @RequestMapping(value = "get_information")
+    @RequestMapping(value = "get_information")
     @ResponseBody
-    public ServerResponse<List<InformationDO>> get_information(Integer type, Integer status){
-        Map<String,Object> params = new HashedMap();
-        params.put("delFlag", CommonStatic.NOTDELETE);
-        params.put("type", type);
-        params.put("status", status);
-        List<InformationDO> informationList = informationService.list(params);
-        return ServerResponse.createBySuccess(informationList);
-    }*/
+    public Object get_information(String type){
+        try {
+            Map<String,Object> params = new HashMap();
+            params.put("delFlag", CommonStatic.NOTDELETE);
+            params.put("type", type);
+            params.put("status", CommonStatic.ACTIVE);
+            List<InformationDO> informationList = informationService.list(params);
+            return Result.ok(informationList);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("操作失败");
+        }
+    }
+
+    /**
+     * 获取资讯详情
+     * */
+    @RequestMapping(value = "get_information_detail")
+    @ResponseBody
+    public Object get_information_detail(String tid){
+        try {
+            if(StringUtils.isBlank(tid)){
+                return Result.error("参数错误");
+            }
+            return Result.ok(informationService.get(tid));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("操作失败");
+        }
+    }
 
 
     /**

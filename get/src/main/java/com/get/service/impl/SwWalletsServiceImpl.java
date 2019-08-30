@@ -74,4 +74,9 @@ public class SwWalletsServiceImpl implements SwWalletsService {
         swWalletsDO.setCoinTypeId(coinTypeId);
         return swWalletsDO;
     }
+
+    @Override
+    public SwWalletsDO getWallet(Integer user_id, String coin_id) {
+        return swWalletsDao.getWallet(user_id,coin_id);
+    }
 }
