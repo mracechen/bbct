@@ -52,7 +52,7 @@ spring:
   messages:
     encoding: UTF-8
     basename: i18n/messages
-    
+
 # 系统基础一些关键的配置信息
 configs:
   # 配置百度翻译接口,需要重新申请

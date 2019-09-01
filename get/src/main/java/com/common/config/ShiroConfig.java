@@ -19,6 +19,7 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,6 +31,7 @@ import java.util.LinkedHashMap;
  * @author bootdo 1992lcg@163.com
  */
 @Configuration
+@PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true)
 public class ShiroConfig {
     @Value("${spring.redis.host}")
     private String host;

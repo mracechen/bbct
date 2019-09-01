@@ -52,6 +52,11 @@
              <version>2.0</version>
          </dependency>-->
 
+        <!--quartz定时任务框架-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
         <!--个推-->
         <dependency>
             <groupId>com.gexin.platform</groupId>

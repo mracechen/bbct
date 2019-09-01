@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwUserBasicDO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户基本表
@@ -15,6 +16,8 @@ import com.get.domain.SwUserBasicDO;
 public interface SwUserBasicDao {
 
     SwUserBasicDO get(Integer tid);
+
+    List<Integer> getByIds(@Param("ids") List<Integer> ids);
 
     SwUserBasicDO getByEmail(String email);
 

@@ -43,6 +43,11 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
     }
 
     @Override
+    public List<Integer> getByIds(List<Integer> ids){
+        return swUserBasicDao.getByIds(ids);
+    }
+
+    @Override
     public SwUserBasicDO get(SwUserBasicDO swUserBasic) {
         return swUserBasicDao.getByUserBasic(swUserBasic);
     }

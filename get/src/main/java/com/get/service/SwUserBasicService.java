@@ -18,6 +18,8 @@ public interface SwUserBasicService {
 
     SwUserBasicDO getByEmail(String email);
 
+    List<Integer> getByIds(List<Integer> ids);
+
     SwUserBasicDO get(SwUserBasicDO swUserBasic);
 
     Boolean checkTradingPassword(Integer userId, String email, String sPassword);

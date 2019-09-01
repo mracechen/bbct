@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eovwallet" />
+        <module name="get" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="eovwallet" target="1.8" />
+      <module name="get" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
