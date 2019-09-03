@@ -194,7 +194,7 @@ public class releaseTask {
                         swPrincipalDO.getCoinTypeId(), releaseNum.doubleValue(),
                         curcurrency.add(releaseNum).doubleValue()));
                 //记录释放记录
-                swReleaseRecordService.save(SwReleaseRecordDO.create(principalId,releaseNum.doubleValue(),CommonStatic.CURRENT_CAUSE_RELEASE,userId));
+                swReleaseRecordService.save(SwReleaseRecordDO.create(principalId,releaseNum.doubleValue(),CommonStatic.CURRENT_CAUSE_RELEASE,userId,CommonStatic.RELEASE_TARGET_PRINCIPAL));
                 return true;
             }
         }
@@ -222,19 +222,19 @@ public class releaseTask {
             BigDecimal leftNum = new BigDecimal(swEvangelistUserDO.getLeftNum().toString());
             //如果剩余金额大于本次释放的金额，则剩余金额减去此次释放金额，否则全部扣掉
             if(leftNum.compareTo(releaseNum) > 0){
-                //固币金减少释放数量
+                //优币金减少释放数量
                 swEvangelistUserDO.setLeftNum(new BigDecimal("0").subtract(releaseNum).doubleValue());
             }else{
-                //固币金全部释放，且状态改为已释放完
+                //优币金全部释放，且状态改为已释放完
                 swEvangelistUserDO.setLeftNum(-swEvangelistUserDO.getLeftNum());
                 swEvangelistUserDO.setStatus(CommonStatic.RELEASED);
-                //标记此次释放的数量等于固币金剩余的全部数量
+                //标记此次释放的数量等于优币金剩余的全部数量
                 releaseNum = new BigDecimal(String.valueOf(swEvangelistUserDO.getLeftNum()));
             }
-            //更新用户的固币金
-            swPrincipalUserService.update(swEvangelistUserDO);
-            //把固币金释放的金额放入钱包
-            SwWalletsDO wallet = swWalletsService.getWallet(userId, swPrincipalDO.getCoinTypeId());
+            //更新用户的优币金
+            swEvangelistUserService.update(swEvangelistUserDO);
+            //把优币金释放的金额放入钱包
+            SwWalletsDO wallet = swWalletsService.getWallet(userId, swEvangelistDO.getCoinTypeId());
             BigDecimal curcurrency = wallet.getCurrency();
             if(wallet != null){
                 wallet.setCurrency(releaseNum);
@@ -243,12 +243,12 @@ public class releaseTask {
                 //记录资金明细
                 swAccountRecordService.save(SwAccountRecordDO.create(
                         userId,
-                        RecordEnum.current_accelerate.getType(),
-                        languagei18nUtils.getMessage(RecordEnum.current_accelerate.getDesc()),
-                        swPrincipalDO.getCoinTypeId(), releaseNum.doubleValue(),
+                        RecordEnum.evangelist_normal_release.getType(),
+                        languagei18nUtils.getMessage(RecordEnum.evangelist_normal_release.getDesc()),
+                        swEvangelistDO.getCoinTypeId(), releaseNum.doubleValue(),
                         curcurrency.add(releaseNum).doubleValue()));
-                //记录释放记录
-                swReleaseRecordService.save(SwReleaseRecordDO.create(principalId,releaseNum.doubleValue(),CommonStatic.CURRENT_CAUSE_RELEASE,userId));
+                //记录优币金释放记录
+                swReleaseRecordService.save(SwReleaseRecordDO.create(evangelistId,releaseNum.doubleValue(),CommonStatic.CURRENT_CAUSE_RELEASE,userId,CommonStatic.RELEASE_TARGET_EVANGELIST));
                 return true;
             }
         }

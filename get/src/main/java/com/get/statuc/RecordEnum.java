@@ -6,6 +6,7 @@ package com.get.statuc;
 public enum  RecordEnum {
 
     principal_normal_release(1,"system.release.principal.normal"),
+    evangelist_normal_release(1,"system.release.evangelist.normal"),
     current_accelerate(2,"system.release.current.accelerate"),
     period_accelerate(3,"system.release.period.accelerate"),
     transfer(4,"system.transfer"),

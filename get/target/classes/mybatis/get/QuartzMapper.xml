@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.get.dao.SwReleaseRecordDao">
+<mapper namespace="com.get.dao.QuartzDao">
 
-    <select id="get" resultType="com.get.domain.SwReleaseRecordDO">
-        select `tid`,`target_id`,`amount`,`cause_type`,`cause_user_id`,`remark`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`        from t_sw_release_record where tid = #{value}
+    <select id="get" resultType="com.get.domain.QuartzDO">
+        select `tid`,`job_name`,`job_group`,`start_time`,`cron`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`        from sw_quartz where tid = #{value}
     </select>
 
-    <select id="list" resultType="com.get.domain.SwReleaseRecordDO">
-        select `tid`,`target_id`,`amount`,`cause_type`,`cause_user_id`,`remark`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`        from t_sw_release_record
+    <select id="list" resultType="com.get.domain.QuartzDO">
+        select `tid`,`job_name`,`job_group`,`start_time`,`cron`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`        from sw_quartz
         <where>
                             <if test="tid != null and tid != ''">and tid =
                     #{tid}
                 </if>
-                            <if test="targetId != null and targetId != ''">and target_id =
-                    #{targetId}
+                            <if test="jobName != null and jobName != ''">and job_name =
+                    #{jobName}
                 </if>
-                            <if test="amount != null and amount != ''">and amount =
-                    #{amount}
+                            <if test="jobGroup != null and jobGroup != ''">and job_group =
+                    #{jobGroup}
                 </if>
-                            <if test="causeType != null and causeType != ''">and cause_type =
-                    #{causeType}
+                            <if test="startTime != null and startTime != ''">and start_time =
+                    #{startTime}
                 </if>
-                            <if test="causeUserId != null and causeUserId != ''">and cause_user_id =
-                    #{causeUserId}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
+                            <if test="cron != null and cron != ''">and cron =
+                    #{cron}
                 </if>
                             <if test="createDate != null and createDate != ''">and create_date =
                     #{createDate}
@@ -42,9 +39,6 @@
                 </if>
                             <if test="ex2 != null and ex2 != ''">and ex2 =
                     #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
                 </if>
                     </where>
         <choose>
@@ -61,25 +55,22 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from t_sw_release_record
+        select count(*) from sw_quartz
         <where>
                             <if test="tid != null and tid != ''">and tid =
                     #{tid}
                 </if>
-                            <if test="targetId != null and targetId != ''">and target_id =
-                    #{targetId}
+                            <if test="jobName != null and jobName != ''">and job_name =
+                    #{jobName}
                 </if>
-                            <if test="amount != null and amount != ''">and amount =
-                    #{amount}
+                            <if test="jobGroup != null and jobGroup != ''">and job_group =
+                    #{jobGroup}
                 </if>
-                            <if test="causeType != null and causeType != ''">and cause_type =
-                    #{causeType}
+                            <if test="startTime != null and startTime != ''">and start_time =
+                    #{startTime}
                 </if>
-                            <if test="causeUserId != null and causeUserId != ''">and cause_user_id =
-                    #{causeUserId}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
+                            <if test="cron != null and cron != ''">and cron =
+                    #{cron}
                 </if>
                             <if test="createDate != null and createDate != ''">and create_date =
                     #{createDate}
@@ -96,57 +87,48 @@
                             <if test="ex2 != null and ex2 != ''">and ex2 =
                     #{ex2}
                 </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
                     </where>
     </select>
 
-    <insert id="save" parameterType="com.get.domain.SwReleaseRecordDO">
-        insert into t_sw_release_record
+    <insert id="save" parameterType="com.get.domain.QuartzDO">
+        insert into sw_quartz
         (
                                     `tid`, 
-                                                `target_id`, 
-                                                `amount`, 
-                                                `cause_type`, 
-                                                `cause_user_id`, 
-                                                `remark`, 
+                                                `job_name`, 
+                                                `job_group`, 
+                                                `start_time`, 
+                                                `cron`, 
                                                 `create_date`, 
                                                 `update_date`, 
                                                 `del_flag`, 
                                                 `ex1`, 
-                                                `ex2`, 
-                                                `ex3`
+                                                `ex2`
                             )
         values
         (
                                     #{tid}, 
-                                                #{targetId}, 
-                                                #{amount}, 
-                                                #{causeType}, 
-                                                #{causeUserId}, 
-                                                #{remark}, 
+                                                #{jobName}, 
+                                                #{jobGroup}, 
+                                                #{startTime}, 
+                                                #{cron}, 
                                                 #{createDate}, 
                                                 #{updateDate}, 
                                                 #{delFlag}, 
                                                 #{ex1}, 
-                                                #{ex2}, 
-                                                #{ex3}
+                                                #{ex2}
                             )
     </insert>
 
-    <update id="update" parameterType="com.get.domain.SwReleaseRecordDO">
-        update t_sw_release_record
+    <update id="update" parameterType="com.get.domain.QuartzDO">
+        update sw_quartz
         <set>
-                                                                            <if test="targetId != null">`target_id` = #{targetId
+                                                                            <if test="jobName != null">`job_name` = #{jobName
                         }, </if>
-                                                                <if test="amount != null">`amount` = #{amount
+                                                                <if test="jobGroup != null">`job_group` = #{jobGroup
                         }, </if>
-                                                                <if test="causeType != null">`cause_type` = #{causeType
+                                                                <if test="startTime != null">`start_time` = #{startTime
                         }, </if>
-                                                                <if test="causeUserId != null">`cause_user_id` = #{causeUserId
-                        }, </if>
-                                                                <if test="remark != null">`remark` = #{remark
+                                                                <if test="cron != null">`cron` = #{cron
                         }, </if>
                                                                 <if test="createDate != null">`create_date` = #{createDate
                         }, </if>
@@ -157,19 +139,17 @@
                                                                 <if test="ex1 != null">`ex1` = #{ex1
                         }, </if>
                                                                 <if test="ex2 != null">`ex2` = #{ex2
-                        }, </if>
-                                                                <if test="ex3 != null">`ex3` = #{ex3
                         }</if>
                                     </set>
         where tid = #{tid}
     </update>
 
     <delete id="remove">
-        delete from t_sw_release_record where tid = #{value}
+        delete from sw_quartz where tid = #{value}
     </delete>
 
     <delete id="batchRemove">
-        delete from t_sw_release_record where tid in
+        delete from sw_quartz where tid in
         <foreach item="tid" collection="array" open="(" separator="," close=")">
             #{tid}
         </foreach>
