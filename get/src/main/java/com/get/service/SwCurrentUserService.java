@@ -1,5 +1,6 @@
 package com.get.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwCurrentUserDO;
@@ -14,6 +15,8 @@ import com.get.domain.SwCurrentUserDO;
 public interface SwCurrentUserService {
 
     SwCurrentUserDO get(String tid);
+
+    List<SwCurrentUserDO> getWaitingResolveCurrent(Date beginDate, Date endDate);
 
     List<SwCurrentUserDO> list(Map<String, Object> map);
 

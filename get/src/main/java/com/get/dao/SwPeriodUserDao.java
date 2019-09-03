@@ -1,9 +1,12 @@
 package com.get.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwPeriodUserDO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户持有定币金表
@@ -17,6 +20,8 @@ public interface SwPeriodUserDao {
     SwPeriodUserDO get(String tid);
 
     List<SwPeriodUserDO> list(Map<String, Object> map);
+
+    List<SwPeriodUserDO> getWaitingResolvePeriod(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate);
 
     int count(Map<String, Object> map);
 

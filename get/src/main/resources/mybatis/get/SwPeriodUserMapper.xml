@@ -4,11 +4,26 @@
 <mapper namespace="com.get.dao.SwPeriodUserDao">
 
     <select id="get" resultType="com.get.domain.SwPeriodUserDO">
-        select `tid`,`user_id`,`period_id`,`release_time`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_period_user where tid = #{value}
+        select `tid`,`user_id`,`period_id`,`release_time`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_period_user where tid = #{value}
+    </select>
+
+    <select id="getWaitingResolvePeriod" resultType="com.get.domain.SwPeriodUserDO">
+        select
+        `tid`,`user_id`,`period_id`,`release_time`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`
+        from t_sw_period_user
+        where 1=1
+        <if test="beginDate != null">
+            and release_time &gt;= #{beginDate}
+        </if>
+        <if test="endDate != null">
+            and release_time &lt;= #{endDate}
+        </if>
+        and status = 0
+        and del_flag = 0
     </select>
 
     <select id="list" resultType="com.get.domain.SwPeriodUserDO">
-        select `tid`,`user_id`,`period_id`,`release_time`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_period_user
+        select `tid`,`user_id`,`period_id`,`release_time`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_period_user
         <where>
                             <if test="tid != null and tid != ''">and tid =
                     #{tid}
@@ -21,6 +36,9 @@
                 </if>
                             <if test="releaseTime != null and releaseTime != ''">and release_time =
                     #{releaseTime}
+                </if>
+                            <if test="status != null and status != ''">and status =
+                    #{status}
                 </if>
                             <if test="ex1 != null and ex1 != ''">and ex1 =
                     #{ex1}
@@ -72,6 +90,9 @@
                             <if test="releaseTime != null and releaseTime != ''">and release_time =
                     #{releaseTime}
                 </if>
+                            <if test="status != null and status != ''">and status =
+                    #{status}
+                </if>
                             <if test="ex1 != null and ex1 != ''">and ex1 =
                     #{ex1}
                 </if>
@@ -103,6 +124,7 @@
                                                 `user_id`, 
                                                 `period_id`, 
                                                 `release_time`, 
+                                                `status`, 
                                                 `ex1`, 
                                                 `ex2`, 
                                                 `ex3`, 
@@ -117,6 +139,7 @@
                                                 #{userId}, 
                                                 #{periodId}, 
                                                 #{releaseTime}, 
+                                                #{status}, 
                                                 #{ex1}, 
                                                 #{ex2}, 
                                                 #{ex3}, 
@@ -135,6 +158,8 @@
                                                                 <if test="periodId != null">`period_id` = #{periodId
                         }, </if>
                                                                 <if test="releaseTime != null">`release_time` = #{releaseTime
+                        }, </if>
+                                                                <if test="status != null">`status` = #{status
                         }, </if>
                                                                 <if test="ex1 != null">`ex1` = #{ex1
                         }, </if>

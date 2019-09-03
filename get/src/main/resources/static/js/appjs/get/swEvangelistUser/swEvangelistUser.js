@@ -72,6 +72,18 @@ function load() {
                             title: '优币金id',
                                                     },
                                             {
+                            field: 'totalNum',
+                            title: '总金额',
+                                                    },
+                                            {
+                            field: 'leftNum',
+                            title: '剩余金额',
+                                                    },
+                                            {
+                            field: 'status',
+                            title: '状态，0-正常，1-已释放完',
+                                                    },
+                                            {
                             field: 'ex1',
                             title: 'ex1',
                                                     },

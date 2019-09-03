@@ -4,11 +4,11 @@
 <mapper namespace="com.get.dao.SwPartnerUserDao">
 
     <select id="get" resultType="com.get.domain.SwPartnerUserDO">
-        select `tid`,`user_id`,`partner_id`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`        from t_sw_partner_user where tid = #{value}
+        select `tid`,`user_id`,`partner_id`,`total_num`,`left_num`,`status`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`        from t_sw_partner_user where tid = #{value}
     </select>
 
     <select id="list" resultType="com.get.domain.SwPartnerUserDO">
-        select `tid`,`user_id`,`partner_id`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`        from t_sw_partner_user
+        select `tid`,`user_id`,`partner_id`,`total_num`,`left_num`,`status`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`        from t_sw_partner_user
         <where>
                             <if test="tid != null and tid != ''">and tid =
                     #{tid}
@@ -18,6 +18,15 @@
                 </if>
                             <if test="partnerId != null and partnerId != ''">and partner_id =
                     #{partnerId}
+                </if>
+                            <if test="totalNum != null and totalNum != ''">and total_num =
+                    #{totalNum}
+                </if>
+                            <if test="leftNum != null and leftNum != ''">and left_num =
+                    #{leftNum}
+                </if>
+                            <if test="status != null and status != ''">and status =
+                    #{status}
                 </if>
                             <if test="remark != null and remark != ''">and remark =
                     #{remark}
@@ -66,6 +75,15 @@
                             <if test="partnerId != null and partnerId != ''">and partner_id =
                     #{partnerId}
                 </if>
+                            <if test="totalNum != null and totalNum != ''">and total_num =
+                    #{totalNum}
+                </if>
+                            <if test="leftNum != null and leftNum != ''">and left_num =
+                    #{leftNum}
+                </if>
+                            <if test="status != null and status != ''">and status =
+                    #{status}
+                </if>
                             <if test="remark != null and remark != ''">and remark =
                     #{remark}
                 </if>
@@ -96,6 +114,9 @@
                                     `tid`, 
                                                 `user_id`, 
                                                 `partner_id`, 
+                                                `total_num`, 
+                                                `left_num`, 
+                                                `status`, 
                                                 `remark`, 
                                                 `ex1`, 
                                                 `ex2`, 
@@ -109,6 +130,9 @@
                                     #{tid}, 
                                                 #{userId}, 
                                                 #{partnerId}, 
+                                                #{totalNum}, 
+                                                #{leftNum}, 
+                                                #{status}, 
                                                 #{remark}, 
                                                 #{ex1}, 
                                                 #{ex2}, 
@@ -125,6 +149,12 @@
                                                                             <if test="userId != null">`user_id` = #{userId
                         }, </if>
                                                                 <if test="partnerId != null">`partner_id` = #{partnerId
+                        }, </if>
+                                                                <if test="totalNum != null">`total_num` = #{totalNum
+                        }, </if>
+                                                                <if test="leftNum != null">`left_num` = #{leftNum
+                        }, </if>
+                                                                <if test="status != null">`status` = #{status
                         }, </if>
                                                                 <if test="remark != null">`remark` = #{remark
                         }, </if>

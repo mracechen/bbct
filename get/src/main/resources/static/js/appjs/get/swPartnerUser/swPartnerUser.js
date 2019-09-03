@@ -72,6 +72,18 @@ function load() {
                             title: '升币金ID',
                                                     },
                                             {
+                            field: 'totalNum',
+                            title: '总数量',
+                                                    },
+                                            {
+                            field: 'leftNum',
+                            title: '剩余数量',
+                                                    },
+                                            {
+                            field: 'status',
+                            title: '状态，0-正常，1-已释放完',
+                                                    },
+                                            {
                             field: 'remark',
                             title: '说明',
                                                     },

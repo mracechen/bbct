@@ -23,6 +23,8 @@ public interface SwUserBasicDao {
 
     SwUserBasicDO getByUserBasic(SwUserBasicDO swUserBasic);
 
+    List<SwUserBasicDO> findRecommenders(@Param("userId") Integer userId, @Param("generate") Integer generate);
+
     List<SwUserBasicDO> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);

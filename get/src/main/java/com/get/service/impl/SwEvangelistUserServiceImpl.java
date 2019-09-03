@@ -58,4 +58,9 @@ public class SwEvangelistUserServiceImpl implements SwEvangelistUserService {
         return count;
     }
 
+    @Override
+    public SwEvangelistUserDO getByUserId(Integer userId, Integer status, String delFlag) {
+        return swEvangelistUserDao.getByUserId(userId,status,delFlag);
+    }
+
 }

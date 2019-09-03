@@ -22,6 +22,11 @@ public class SwPrincipalUserServiceImpl implements SwPrincipalUserService {
     }
 
     @Override
+    public SwPrincipalUserDO getByUserId(Integer userId, Integer status, String delFlag) {
+        return swPrincipalUserDao.getByUserId(userId,status,delFlag);
+    }
+
+    @Override
     public List<SwPrincipalUserDO> list(Map<String, Object> map) {
         return swPrincipalUserDao.list(map);
     }

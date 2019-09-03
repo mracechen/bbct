@@ -9,7 +9,7 @@ import java.util.Date;
  *
  * @author chglee
  * @email sun1920185681@163.com
- * @date 2019-08-22 16:25:02
+ * @date 2019-09-02 11:39:40
  */
 public class SwPeriodUserDO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -22,6 +22,8 @@ public class SwPeriodUserDO implements Serializable {
     private String periodId;
             //释放时间
     private Date releaseTime;
+            //状态，0-正常，1-已释放完
+    private Integer status;
             //ex1
     private String ex1;
             //ex2
@@ -88,6 +90,19 @@ public class SwPeriodUserDO implements Serializable {
      */
     public Date getReleaseTime() {
         return releaseTime;
+    }
+        /**
+     * 设置：状态，0-正常，1-已释放完
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    /**
+     * 获取：状态，0-正常，1-已释放完
+     */
+    public Integer getStatus() {
+        return status;
     }
         /**
      * 设置：ex1

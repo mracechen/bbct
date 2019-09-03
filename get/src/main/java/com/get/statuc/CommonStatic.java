@@ -39,15 +39,6 @@ public class CommonStatic {
      */
     public static String NOTACTIVE = "1";
 
-    /**
-     * 大钱包
-     */
-    public static String BITWALLET = "0";
-
-    /**
-     * 非大钱包
-     */
-    public static String NOTBITWALLET = "1";
 
     /**
      * 计算持币算力
@@ -106,25 +97,6 @@ public class CommonStatic {
 
     public static String MAIN_WALLET_ID  = "000";
 
-    /**
-     * 注册送虚拟币数量
-     * */
-    public static double REGISTER_REWARD_COIN_NUM = 10;
-
-    /**
-     * 实名认证送虚拟币数量
-     * */
-    public static double AUTH_REWARD_COIN_NUM = 10;
-
-    /**
-     * 推荐达量送虚拟币数量
-     * */
-    public static double RECOMMENT_REWARD_COIN_NUM = 30;
-
-    /**
-     * 交易返还百分比
-     * */
-    public static double TRAN_RETURN_PERCENT = 0.34;
 
     /**
      * 是否通过实名认证,0-未提交未通过
@@ -157,31 +129,6 @@ public class CommonStatic {
     public static Integer USER_TYPE_PARTNER = 2;
 
     /**
-     * 商户状态-待审核
-     * */
-    public static String SHOP_CHECK_WAIT = "0";
-
-    /**
-     * 商户状态-审核通过
-     * */
-    public static String SHOP_CHECK_PASSED = "1";
-
-    /**
-     * 商户状态-审核拒绝
-     * */
-    public static String SHOP_CHECK_FAILED = "2";
-
-    /**
-     * 分红方式-按百分比分红
-     * */
-    public static Integer SHARE_TYPE_PERCENT = 1;
-
-    /**
-     * 分红方式-按个数分红
-     * */
-    public static Integer SHARE_TYPE_NUMBER = 2;
-
-    /**
      * 用户实名状态-提交
      * */
     public static String USER_AUTH_STATUS_WAIT = "0";
@@ -195,16 +142,6 @@ public class CommonStatic {
      * 用户实名状态-驳回
      * */
     public static String USER_AUTH_STATUS_FAILED = "2";
-
-    /**
-     * 礼包类型-超值礼包
-     * */
-    public static Integer SUPER_PACKAGE = 1;
-
-    /**
-     * 礼包类型-每月礼包
-     * */
-    public static Integer MONTH_PACKAGE = 2;
 
     /**
      * 已发送
@@ -226,25 +163,6 @@ public class CommonStatic {
      * */
     public static String EMAIL_REGISTER = "2";
 
-    /**
-     * 支付方式-全款
-     * */
-    public static String PAY_FULL = "1";
-
-    /**
-     * 支付方式-抵扣
-     * */
-    public static String PAY_DISCOUNT = "2";
-
-    /**
-     * 购买行为-正常购买
-     * */
-    public static Integer NORMAL_BOUGHT = 1;
-
-    /**
-     * 购买行为-赠送
-     * */
-    public static Integer SEND_FOR_GIFT = 2;
 
     /**
      * 提币状态-提币中
@@ -262,27 +180,28 @@ public class CommonStatic {
     public static Integer WITH_FAILED = 2;
 
     /**
-     * 待处理
+     * 释放状态，0-未释放
      * */
-    public static String IS_DEAL = "0";
+    public static Integer NO_RELEASE = 0;
 
     /**
-     * 商家确认
+     * 释放状态，1-已释放
      * */
-    public static String SHOP_PASS = "1";
+    public static Integer RELEASED = 1;
 
     /**
-     * 商家拒绝
+     * 导致释放的方式，1-自然释放
      * */
-    public static String SHOP_REFUSE = "2";
+    public static Integer NORMAL_RELEASE = 1;
 
     /**
-     * 搜索类型，1-店铺搜索
+     * 导致释放的方式，2-活币金释放
      * */
-    public static Integer SEARCH_TYPE_BUSINESS = 1;
+    public static Integer CURRENT_CAUSE_RELEASE = 2;
 
     /**
-     * 缓存店铺名列表
+     * 导致释放的方式，3-定币金释放
      * */
-    public static String CACHE_BUSINESS_NAME_LIST = "BusinessNameList";
+    public static Integer PERIOD_CAUSE_RELEASE = 3;
+
 }

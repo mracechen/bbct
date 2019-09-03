@@ -53,6 +53,11 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
     }
 
     @Override
+    public List<SwUserBasicDO> findRecommenders(Integer userId, Integer generate) {
+        return swUserBasicDao.findRecommenders(userId,generate);
+    }
+
+    @Override
     public Boolean checkTradingPassword(Integer userId, String email, String sPassword){
         Map<String, Object> queryparams = new HashMap<>();
         String password = MyMD5Utils.encodingAdmin(sPassword);

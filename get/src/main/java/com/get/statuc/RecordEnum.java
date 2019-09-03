@@ -5,15 +5,11 @@ package com.get.statuc;
  * */
 public enum  RecordEnum {
 
-    popularize(1,"system.popularize"),
-    reward(2,"system.reward"),
-    withdraw(3,"system.withdraw"),
-    user_operation(4,"system.admin.operation"),
-    cost(5,"system.user.cost"),
-    transfer(6,"system.user.transference"),
-    receivables(7,"system.user.receivables"),
-    packages(8,"system.packages");
-
+    principal_normal_release(1,"system.release.principal.normal"),
+    current_accelerate(2,"system.release.current.accelerate"),
+    period_accelerate(3,"system.release.period.accelerate"),
+    transfer(4,"system.transfer"),
+    receivables(5,"system.receivables");
     private final Integer type;
     private final String desc;
 

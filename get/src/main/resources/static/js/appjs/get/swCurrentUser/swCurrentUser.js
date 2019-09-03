@@ -76,6 +76,10 @@ function load() {
                             title: '释放时间',
                                                     },
                                             {
+                            field: 'status',
+                            title: '状态，0-正常，1-已释放完',
+                                                    },
+                                            {
                             field: 'ex1',
                             title: 'ex1',
                                                     },

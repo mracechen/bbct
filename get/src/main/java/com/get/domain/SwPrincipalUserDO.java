@@ -9,7 +9,7 @@ import java.util.Date;
  *
  * @author chglee
  * @email sun1920185681@163.com
- * @date 2019-08-22 16:28:52
+ * @date 2019-09-03 16:25:41
  */
 public class SwPrincipalUserDO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -23,7 +23,11 @@ public class SwPrincipalUserDO implements Serializable {
             //剩余合约期限（天）
     private Integer leftTerm;
             //剩余金额
-    private Integer leftNum;
+    private Double leftNum;
+            //总金额
+    private Double totalNum;
+            //状态，0-正常，1-已释放完
+    private Integer status;
             //创建时间
     private Date createDate;
             //更新时间
@@ -94,15 +98,41 @@ public class SwPrincipalUserDO implements Serializable {
         /**
      * 设置：剩余金额
      */
-    public void setLeftNum(Integer leftNum) {
+    public void setLeftNum(Double leftNum) {
         this.leftNum = leftNum;
     }
 
     /**
      * 获取：剩余金额
      */
-    public Integer getLeftNum() {
+    public Double getLeftNum() {
         return leftNum;
+    }
+        /**
+     * 设置：总金额
+     */
+    public void setTotalNum(Double totalNum) {
+        this.totalNum = totalNum;
+    }
+
+    /**
+     * 获取：总金额
+     */
+    public Double getTotalNum() {
+        return totalNum;
+    }
+        /**
+     * 设置：状态，0-正常，1-已释放完
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    /**
+     * 获取：状态，0-正常，1-已释放完
+     */
+    public Integer getStatus() {
+        return status;
     }
         /**
      * 设置：创建时间

@@ -9,7 +9,7 @@ import java.util.Date;
  *
  * @author chglee
  * @email sun1920185681@163.com
- * @date 2019-08-22 16:21:37
+ * @date 2019-09-03 16:20:41
  */
 public class SwPartnerUserDO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -20,6 +20,12 @@ public class SwPartnerUserDO implements Serializable {
     private Integer userId;
             //升币金ID
     private String partnerId;
+            //总数量
+    private Double totalNum;
+            //剩余数量
+    private Double leftNum;
+            //状态，0-正常，1-已释放完
+    private Integer status;
             //说明
     private String remark;
             //ex1
@@ -73,6 +79,45 @@ public class SwPartnerUserDO implements Serializable {
      */
     public String getPartnerId() {
         return partnerId;
+    }
+        /**
+     * 设置：总数量
+     */
+    public void setTotalNum(Double totalNum) {
+        this.totalNum = totalNum;
+    }
+
+    /**
+     * 获取：总数量
+     */
+    public Double getTotalNum() {
+        return totalNum;
+    }
+        /**
+     * 设置：剩余数量
+     */
+    public void setLeftNum(Double leftNum) {
+        this.leftNum = leftNum;
+    }
+
+    /**
+     * 获取：剩余数量
+     */
+    public Double getLeftNum() {
+        return leftNum;
+    }
+        /**
+     * 设置：状态，0-正常，1-已释放完
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    /**
+     * 获取：状态，0-正常，1-已释放完
+     */
+    public Integer getStatus() {
+        return status;
     }
         /**
      * 设置：说明

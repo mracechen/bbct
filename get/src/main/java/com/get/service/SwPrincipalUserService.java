@@ -15,6 +15,8 @@ public interface SwPrincipalUserService {
 
     SwPrincipalUserDO get(String tid);
 
+    SwPrincipalUserDO getByUserId(Integer userId, Integer status, String delFlag);
+
     List<SwPrincipalUserDO> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);

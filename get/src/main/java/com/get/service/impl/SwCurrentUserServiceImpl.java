@@ -4,6 +4,7 @@ import com.get.statuc.CommonStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.dao.SwCurrentUserDao;
@@ -19,6 +20,10 @@ public class SwCurrentUserServiceImpl implements SwCurrentUserService {
     @Override
     public SwCurrentUserDO get(String tid) {
         return swCurrentUserDao.get(tid);
+    }
+    @Override
+    public List<SwCurrentUserDO> getWaitingResolveCurrent(Date beginDate, Date endDate) {
+        return swCurrentUserDao.getWaitingResolveCurrent(beginDate,endDate);
     }
 
     @Override

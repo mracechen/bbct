@@ -80,6 +80,14 @@ function load() {
                             title: '剩余金额',
                                                     },
                                             {
+                            field: 'totalNum',
+                            title: '总金额',
+                                                    },
+                                            {
+                            field: 'status',
+                            title: '状态，0-正常，1-已释放完',
+                                                    },
+                                            {
                             field: 'createDate',
                             title: '创建时间',
                                                             sortable: true,

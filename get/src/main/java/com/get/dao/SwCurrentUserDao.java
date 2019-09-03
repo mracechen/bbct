@@ -1,9 +1,12 @@
 package com.get.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwCurrentUserDO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户持有活币金表
@@ -17,6 +20,8 @@ public interface SwCurrentUserDao {
     SwCurrentUserDO get(String tid);
 
     List<SwCurrentUserDO> list(Map<String, Object> map);
+
+    List<SwCurrentUserDO> getWaitingResolveCurrent(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate);
 
     int count(Map<String, Object> map);
 

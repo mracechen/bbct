@@ -4,6 +4,7 @@ import com.get.statuc.CommonStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.dao.SwPeriodUserDao;
@@ -24,6 +25,11 @@ public class SwPeriodUserServiceImpl implements SwPeriodUserService {
     @Override
     public List<SwPeriodUserDO> list(Map<String, Object> map) {
         return swPeriodUserDao.list(map);
+    }
+
+    @Override
+    public List<SwPeriodUserDO> getWaitingResolvePeriod(Date beginDate, Date endDate) {
+        return swPeriodUserDao.getWaitingResolvePeriod(beginDate,endDate);
     }
 
     @Override

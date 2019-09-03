@@ -1,5 +1,6 @@
 package com.get.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwPeriodUserDO;
@@ -16,6 +17,8 @@ public interface SwPeriodUserService {
     SwPeriodUserDO get(String tid);
 
     List<SwPeriodUserDO> list(Map<String, Object> map);
+
+    List<SwPeriodUserDO> getWaitingResolvePeriod(Date beginDate, Date endDate);
 
     int count(Map<String, Object> map);
 

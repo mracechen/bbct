@@ -4,11 +4,18 @@
 <mapper namespace="com.get.dao.SwEvangelistUserDao">
 
     <select id="get" resultType="com.get.domain.SwEvangelistUserDO">
-        select `tid`,`user_id`,`evangelist_id`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_evangelist_user where tid = #{value}
+        select `tid`,`user_id`,`evangelist_id`,`total_num`,`left_num`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_evangelist_user where tid = #{value}
+    </select>
+
+    <select id="getByUserId" resultType="com.get.domain.SwEvangelistUserDO">
+        select
+        `tid`,`user_id`,`evangelist_id`,`total_num`,`left_num`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`
+        from t_sw_evangelist_user
+        where user_id = #{userId} and status = #{status} and del_flag = #{delFlag}
     </select>
 
     <select id="list" resultType="com.get.domain.SwEvangelistUserDO">
-        select `tid`,`user_id`,`evangelist_id`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_evangelist_user
+        select `tid`,`user_id`,`evangelist_id`,`total_num`,`left_num`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_evangelist_user
         <where>
                             <if test="tid != null and tid != ''">and tid =
                     #{tid}
@@ -18,6 +25,15 @@
                 </if>
                             <if test="evangelistId != null and evangelistId != ''">and evangelist_id =
                     #{evangelistId}
+                </if>
+                            <if test="totalNum != null and totalNum != ''">and total_num =
+                    #{totalNum}
+                </if>
+                            <if test="leftNum != null and leftNum != ''">and left_num =
+                    #{leftNum}
+                </if>
+                            <if test="status != null and status != ''">and status =
+                    #{status}
                 </if>
                             <if test="ex1 != null and ex1 != ''">and ex1 =
                     #{ex1}
@@ -66,6 +82,15 @@
                             <if test="evangelistId != null and evangelistId != ''">and evangelist_id =
                     #{evangelistId}
                 </if>
+                            <if test="totalNum != null and totalNum != ''">and total_num =
+                    #{totalNum}
+                </if>
+                            <if test="leftNum != null and leftNum != ''">and left_num =
+                    #{leftNum}
+                </if>
+                            <if test="status != null and status != ''">and status =
+                    #{status}
+                </if>
                             <if test="ex1 != null and ex1 != ''">and ex1 =
                     #{ex1}
                 </if>
@@ -96,6 +121,9 @@
                                     `tid`, 
                                                 `user_id`, 
                                                 `evangelist_id`, 
+                                                `total_num`, 
+                                                `left_num`, 
+                                                `status`, 
                                                 `ex1`, 
                                                 `ex2`, 
                                                 `ex3`, 
@@ -109,6 +137,9 @@
                                     #{tid}, 
                                                 #{userId}, 
                                                 #{evangelistId}, 
+                                                #{totalNum}, 
+                                                #{leftNum}, 
+                                                #{status}, 
                                                 #{ex1}, 
                                                 #{ex2}, 
                                                 #{ex3}, 
@@ -125,6 +156,12 @@
                                                                             <if test="userId != null">`user_id` = #{userId
                         }, </if>
                                                                 <if test="evangelistId != null">`evangelist_id` = #{evangelistId
+                        }, </if>
+                                                                <if test="totalNum != null">`total_num` = #{totalNum
+                        }, </if>
+                                                                <if test="leftNum != null">`left_num` = #{leftNum
+                        }, </if>
+                                                                <if test="status != null">`status` = #{status
                         }, </if>
                                                                 <if test="ex1 != null">`ex1` = #{ex1
                         }, </if>

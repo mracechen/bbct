@@ -26,4 +26,6 @@ public interface SwEvangelistUserService {
     int remove(String tid);
 
     int batchRemove(String[] tids);
+
+    SwEvangelistUserDO getByUserId(Integer userId, Integer status, String delFlag);
 }

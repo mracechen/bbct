@@ -36,7 +36,7 @@ spring:
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
   redis:
-    host: 127.0.0.1
+    host: 10.236.10.1
     port: 6379
     password:
     # 连接超时时间（毫秒）
@@ -106,3 +106,6 @@ configs:
 
   chargeAddress: asdfg
   withdrawFee: 5
+  # 上面多少代可以获得加速
+  generateReleaseCode: 859ND9
+  generateNum: 3

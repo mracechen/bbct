@@ -22,6 +22,8 @@ public interface SwUserBasicService {
 
     SwUserBasicDO get(SwUserBasicDO swUserBasic);
 
+    List<SwUserBasicDO> findRecommenders(Integer userId, Integer generate);
+
     Boolean checkTradingPassword(Integer userId, String email, String sPassword);
 
     @Transactional(rollbackFor = Exception.class)

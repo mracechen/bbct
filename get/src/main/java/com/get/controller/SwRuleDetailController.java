@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.IDUtils;
 import com.get.domain.SwRuleDetailDO;
 import com.get.service.SwRuleDetailService;
 import com.get.statuc.CommonStatic;
@@ -70,6 +71,7 @@ public class SwRuleDetailController {
     @PostMapping("/save")
     @RequiresPermissions("get:swRuleDetail:add")
     public R save(SwRuleDetailDO swRuleDetail) {
+        swRuleDetail.setTid(IDUtils.randomStr());
         swRuleDetail.setCreateDate(new Date());
         swRuleDetail.setUpdateDate(new Date());
         swRuleDetail.setDelFlag(CommonStatic.NOTDELETE);

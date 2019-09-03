@@ -1,5 +1,6 @@
 package com.common.utils;
 
+import com.get.domain.SwRuleDetailDO;
 import com.get.domain.SwUserBasicDO;
 
 import java.math.BigDecimal;
@@ -43,23 +44,23 @@ public class UserUtils {
      * @param currency 红利总额
      * @return result key为用户id，value分红金额的map
      * */
-    /*public static Map<Integer,Double> rewardCommenders(List<UserListHelper> userTreeList, List<SwRuleDetailDO> ruleList, Double currency){
-        Map<Integer,Double> result = new HashMap<>();
+    public static Map<Integer,BigDecimal> rewardCommenders(List<UserListHelper> userTreeList, List<SwRuleDetailDO> ruleList, Double currency){
+        Map<Integer,BigDecimal> result = new HashMap<>();
         BigDecimal bcurrency = new BigDecimal(currency);
         for(UserListHelper userListHelper:userTreeList){
             if(userListHelper != null){
-                *//*for(SwRuleDetailDO swRuleDetailDO:ruleList){
+                for(SwRuleDetailDO swRuleDetailDO:ruleList){
                     if(userListHelper.getLevel().equals(swRuleDetailDO.getLevel())){
                         SwUserBasicDO swUserBasicDO = userListHelper.getSwUserBasicDO();
                         BigDecimal ruleValue = new BigDecimal(swRuleDetailDO.getValue());
                         BigDecimal rewardValue = bcurrency.multiply(ruleValue);
-                        result.put(swUserBasicDO.getTid(),rewardValue.doubleValue());
+                        result.put(swUserBasicDO.getTid(),rewardValue);
                     }
-                }*//*
+                }
             }
         }
         return result;
-    }*/
+    }
     /**
      * 按个数分红
      * @param userTreeList 用户列表
