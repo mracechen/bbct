@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 30/08/2019 18:56:47
+ Date: 03/09/2019 18:19:10
 */
 
 SET NAMES utf8mb4;
@@ -426,7 +426,7 @@ CREATE TABLE `sys_log`  (
   `gmt_create` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `app` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'settlement' COMMENT '应用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7464204 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7464323 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_log
@@ -1719,6 +1719,125 @@ INSERT INTO `sys_log` VALUES (7464200, -1, '获取用户信息为空', 'normal',
 INSERT INTO `sys_log` VALUES (7464201, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"aaa111111\"}', '127.0.0.1', '2019-08-29 21:35:43', 'sesame');
 INSERT INTO `sys_log` VALUES (7464202, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"aaa111111\"}', '127.0.0.1', '2019-08-29 21:36:37', 'sesame');
 INSERT INTO `sys_log` VALUES (7464203, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"aaa111111\"}', '127.0.0.1', '2019-08-29 21:37:09', 'sesame');
+INSERT INTO `sys_log` VALUES (7464204, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=f5b2140e-2c3b-479b-8ab8-d3aabb3f1545', '{}', '127.0.0.1', '2019-09-02 11:32:23', 'sesame');
+INSERT INTO `sys_log` VALUES (7464205, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-02 11:33:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464206, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-02 11:33:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464207, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-02 11:33:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464208, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-02 11:33:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464209, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-02 11:33:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464210, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-02 11:33:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464211, 1, 'admin', 'normal', NULL, '/manager/common/generator', '{}', '127.0.0.1', '2019-09-02 11:33:15', 'sesame');
+INSERT INTO `sys_log` VALUES (7464212, 1, 'admin', 'normal', NULL, '/manager/common/generator/list', '{}', '127.0.0.1', '2019-09-02 11:33:15', 'sesame');
+INSERT INTO `sys_log` VALUES (7464213, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_current_user', '{}', '127.0.0.1', '2019-09-02 11:33:27', 'sesame');
+INSERT INTO `sys_log` VALUES (7464214, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_evangelist_user', '{}', '127.0.0.1', '2019-09-02 11:36:56', 'sesame');
+INSERT INTO `sys_log` VALUES (7464215, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_partner_user', '{}', '127.0.0.1', '2019-09-02 11:38:30', 'sesame');
+INSERT INTO `sys_log` VALUES (7464216, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_period_user', '{}', '127.0.0.1', '2019-09-02 11:39:40', 'sesame');
+INSERT INTO `sys_log` VALUES (7464217, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_principal_user', '{}', '127.0.0.1', '2019-09-02 11:42:11', 'sesame');
+INSERT INTO `sys_log` VALUES (7464218, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=5e3573ea-5e74-4e14-841f-2a6bd166ce72', '{}', '127.0.0.1', '2019-09-03 15:51:41', 'sesame');
+INSERT INTO `sys_log` VALUES (7464219, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-03 15:51:44', 'sesame');
+INSERT INTO `sys_log` VALUES (7464220, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-03 15:51:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464221, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-03 15:51:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464222, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-03 15:51:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464223, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-03 15:51:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464224, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-03 15:51:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464225, 1, 'admin', 'normal', NULL, '/manager/common/generator', '{}', '127.0.0.1', '2019-09-03 15:51:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464226, 1, 'admin', 'normal', NULL, '/manager/common/generator/list', '{}', '127.0.0.1', '2019-09-03 15:51:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464227, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_evangelist_user', '{}', '127.0.0.1', '2019-09-03 15:52:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464228, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_partner_user', '{}', '127.0.0.1', '2019-09-03 16:20:41', 'sesame');
+INSERT INTO `sys_log` VALUES (7464229, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_principal_user', '{}', '127.0.0.1', '2019-09-03 16:25:41', 'sesame');
+INSERT INTO `sys_log` VALUES (7464230, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=e9642432-04bd-4235-bc7d-4cbebe146f13', '{}', '127.0.0.1', '2019-09-03 16:50:35', 'sesame');
+INSERT INTO `sys_log` VALUES (7464231, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-03 16:50:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464232, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-03 16:50:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464233, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-03 16:50:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464234, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-03 16:50:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464235, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-03 16:50:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464236, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-03 16:50:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464237, 1, 'admin', 'normal', NULL, '/manager/sys/menu/', '{}', '127.0.0.1', '2019-09-03 16:50:51', 'sesame');
+INSERT INTO `sys_log` VALUES (7464238, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-03 16:50:52', 'sesame');
+INSERT INTO `sys_log` VALUES (7464239, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/109', '{}', '127.0.0.1', '2019-09-03 16:50:56', 'sesame');
+INSERT INTO `sys_log` VALUES (7464240, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"规则列表\",\"icon\":\"\",\"orderNum\":\"2\",\"perms\":\"get:swRewardRule:swRewardRule\",\"type\":\"1\",\"parentId\":\"109\",\"url\":\"/manager/get/swRewardRule\"}', '127.0.0.1', '2019-09-03 16:52:24', 'sesame');
+INSERT INTO `sys_log` VALUES (7464241, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-03 16:52:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464242, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/284', '{}', '127.0.0.1', '2019-09-03 16:52:52', 'sesame');
+INSERT INTO `sys_log` VALUES (7464243, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"添加\",\"icon\":\"\",\"orderNum\":\"1\",\"perms\":\"get:swRewardRule:add\",\"type\":\"2\",\"parentId\":\"284\",\"url\":\"\"}', '127.0.0.1', '2019-09-03 16:53:02', 'sesame');
+INSERT INTO `sys_log` VALUES (7464244, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-03 16:53:02', 'sesame');
+INSERT INTO `sys_log` VALUES (7464245, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/284', '{}', '127.0.0.1', '2019-09-03 16:53:14', 'sesame');
+INSERT INTO `sys_log` VALUES (7464246, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"更新\",\"icon\":\"\",\"orderNum\":\"2\",\"perms\":\"get:swRewardRule:edit\",\"type\":\"2\",\"parentId\":\"284\",\"url\":\"\"}', '127.0.0.1', '2019-09-03 16:53:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464247, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-03 16:53:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464248, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/284', '{}', '127.0.0.1', '2019-09-03 16:53:34', 'sesame');
+INSERT INTO `sys_log` VALUES (7464249, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"删除\",\"icon\":\"\",\"orderNum\":\"3\",\"perms\":\"get:swRewardRule:remove\",\"type\":\"2\",\"parentId\":\"284\",\"url\":\"\"}', '127.0.0.1', '2019-09-03 16:53:40', 'sesame');
+INSERT INTO `sys_log` VALUES (7464250, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-03 16:53:40', 'sesame');
+INSERT INTO `sys_log` VALUES (7464251, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/109', '{}', '127.0.0.1', '2019-09-03 16:53:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464252, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"规则详情\",\"icon\":\"\",\"orderNum\":\"3\",\"perms\":\"/manager/get/swRuleDetail\",\"type\":\"1\",\"parentId\":\"109\",\"url\":\"\"}', '127.0.0.1', '2019-09-03 16:54:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464253, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-03 16:54:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464254, 1, 'admin', 'normal', NULL, '/manager/sys/menu/edit/288', '{}', '127.0.0.1', '2019-09-03 16:54:22', 'sesame');
+INSERT INTO `sys_log` VALUES (7464255, 1, 'admin', 'normal', NULL, '/manager/sys/menu/update', '{\"name\":\"规则详情\",\"icon\":\"\",\"menuId\":\"288\",\"orderNum\":\"3\",\"perms\":\"get:swRuleDetail:swRuleDetail\",\"type\":\"1\",\"parentId\":\"109\",\"url\":\"/manager/get/swRuleDetail\"}', '127.0.0.1', '2019-09-03 16:54:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464256, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-03 16:54:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464257, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/288', '{}', '127.0.0.1', '2019-09-03 16:54:47', 'sesame');
+INSERT INTO `sys_log` VALUES (7464258, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"添加\",\"icon\":\"\",\"orderNum\":\"1\",\"perms\":\"get:swRuleDetail:add\",\"type\":\"2\",\"parentId\":\"288\",\"url\":\"\"}', '127.0.0.1', '2019-09-03 16:54:54', 'sesame');
+INSERT INTO `sys_log` VALUES (7464259, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-03 16:54:54', 'sesame');
+INSERT INTO `sys_log` VALUES (7464260, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/288', '{}', '127.0.0.1', '2019-09-03 16:55:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464261, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"更新\",\"icon\":\"\",\"orderNum\":\"2\",\"perms\":\"get:swRuleDetail:edit\",\"type\":\"2\",\"parentId\":\"288\",\"url\":\"\"}', '127.0.0.1', '2019-09-03 16:55:09', 'sesame');
+INSERT INTO `sys_log` VALUES (7464262, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-03 16:55:09', 'sesame');
+INSERT INTO `sys_log` VALUES (7464263, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/288', '{}', '127.0.0.1', '2019-09-03 16:55:17', 'sesame');
+INSERT INTO `sys_log` VALUES (7464264, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"删除\",\"icon\":\"\",\"orderNum\":\"3\",\"perms\":\"get:swRuleDetail:remove\",\"type\":\"2\",\"parentId\":\"288\",\"url\":\"\"}', '127.0.0.1', '2019-09-03 16:55:22', 'sesame');
+INSERT INTO `sys_log` VALUES (7464265, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-03 16:55:22', 'sesame');
+INSERT INTO `sys_log` VALUES (7464266, 1, 'admin', 'normal', NULL, '/manager/sys/role', '{}', '127.0.0.1', '2019-09-03 16:55:24', 'sesame');
+INSERT INTO `sys_log` VALUES (7464267, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '127.0.0.1', '2019-09-03 16:55:24', 'sesame');
+INSERT INTO `sys_log` VALUES (7464268, 1, 'admin', 'normal', NULL, '/manager/sys/role/edit/1', '{}', '127.0.0.1', '2019-09-03 16:55:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464269, 1, 'admin', 'normal', NULL, '/manager/sys/menu/tree/1', '{}', '127.0.0.1', '2019-09-03 16:55:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464270, 1, 'admin', 'normal', NULL, '/manager/sys/role/update', '{\"roleId\":\"1\",\"roleName\":\"开发管理员角色\",\"remark\":\"拥有最高权限\",\"menuIds\":\"283,282,281,278,277,273,205,92,57,30,29,28,206,118,48,209,207,203,76,75,74,62,56,55,15,26,25,24,14,13,12,61,22,21,20,83,81,80,79,71,280,279,276,274,272,204,27,91,77,202,73,7,6,2,3,78,1,288,291,290,289,284,287,286,285,109,-1\"}', '127.0.0.1', '2019-09-03 16:55:29', 'sesame');
+INSERT INTO `sys_log` VALUES (7464271, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '127.0.0.1', '2019-09-03 16:55:29', 'sesame');
+INSERT INTO `sys_log` VALUES (7464272, -1, '获取用户信息为空', 'normal', NULL, '/manager/logout', '{}', '127.0.0.1', '2019-09-03 16:55:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464273, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=6046e7ad-cb84-4dc3-b649-4a5166f6a9b3', '{}', '127.0.0.1', '2019-09-03 16:55:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464274, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-03 16:55:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464275, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-03 16:55:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464276, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-03 16:55:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464277, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-03 16:55:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464278, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-03 16:55:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464279, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-03 16:55:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464280, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule', '{}', '127.0.0.1', '2019-09-03 16:55:36', 'sesame');
+INSERT INTO `sys_log` VALUES (7464281, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/list', '{}', '127.0.0.1', '2019-09-03 16:55:36', 'sesame');
+INSERT INTO `sys_log` VALUES (7464282, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/list', '{}', '127.0.0.1', '2019-09-03 16:55:36', 'sesame');
+INSERT INTO `sys_log` VALUES (7464283, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail', '{}', '127.0.0.1', '2019-09-03 16:55:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464284, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/queryAll', '{}', '127.0.0.1', '2019-09-03 16:55:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464285, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/list', '{}', '127.0.0.1', '2019-09-03 16:55:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464286, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/add', '{}', '127.0.0.1', '2019-09-03 16:55:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464287, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/save', '{\"name\":\"给上级加速规则\",\"remark\":\"\",\"type\":\"1\",\"status\":\"0\"}', '127.0.0.1', '2019-09-03 16:56:10', 'sesame');
+INSERT INTO `sys_log` VALUES (7464288, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/list', '{}', '127.0.0.1', '2019-09-03 16:56:10', 'sesame');
+INSERT INTO `sys_log` VALUES (7464289, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/add', '{}', '127.0.0.1', '2019-09-03 16:56:16', 'sesame');
+INSERT INTO `sys_log` VALUES (7464290, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/queryAll', '{}', '127.0.0.1', '2019-09-03 16:56:16', 'sesame');
+INSERT INTO `sys_log` VALUES (7464291, 1, 'admin', 'error', NULL, 'http://localhost:8081/manager/get/swRuleDetail/save', 'org.springframework.dao.DataIntegrityViolationException: \r\n### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column \'tid\' cannot be null\r\n### The error may involve com.get.dao.SwRuleDetailDao.save-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into t_sw_rule_detail         (                                     `tid`,                                                  `rule_id`,                                                  `level`,                                                  `type`,                                                  `value`,                                                  `ex1`,                                                  `ex2`,                                                  `ex3`,                                                  `create_date`,                                                  `update_date`,                                                  `del_flag`                             )         values         (                                     ?,                                                  ?,                                                  ?,                                                  ?,                                                  ?,                                                  ?,                                                  ?,                                                  ?,                                                  ?,                                                  ?,                                                  ?                             )\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column \'tid\' cannot be null\n; ]; Column \'tid\' cannot be null; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column \'tid\' cannot be null', NULL, '2019-09-03 16:58:25', NULL);
+INSERT INTO `sys_log` VALUES (7464292, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/save', '{\"level\":\"1\",\"ruleId\":\"9a5da7e1e7554b7dbffefed7e49eaad3\",\"value\":\"0.05\"}', '127.0.0.1', '2019-09-03 16:58:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464293, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=56896ad3-5197-466b-9dfc-613666a8535c', '{}', '127.0.0.1', '2019-09-03 17:00:55', 'sesame');
+INSERT INTO `sys_log` VALUES (7464294, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-03 17:00:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464295, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-03 17:00:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464296, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-03 17:00:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464297, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-03 17:00:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464298, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-03 17:00:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464299, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-03 17:00:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464300, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail', '{}', '127.0.0.1', '2019-09-03 17:01:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464301, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/queryAll', '{}', '127.0.0.1', '2019-09-03 17:01:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464302, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/list', '{}', '127.0.0.1', '2019-09-03 17:01:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464303, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/add', '{}', '127.0.0.1', '2019-09-03 17:01:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464304, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/queryAll', '{}', '127.0.0.1', '2019-09-03 17:01:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464305, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/save', '{\"level\":\"1\",\"ruleId\":\"9a5da7e1e7554b7dbffefed7e49eaad3\",\"value\":\"0.05\"}', '127.0.0.1', '2019-09-03 17:01:08', 'sesame');
+INSERT INTO `sys_log` VALUES (7464306, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/list', '{}', '127.0.0.1', '2019-09-03 17:01:08', 'sesame');
+INSERT INTO `sys_log` VALUES (7464307, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/edit/3ac5183837d843628bb9e28205ce5c17', '{}', '127.0.0.1', '2019-09-03 17:01:16', 'sesame');
+INSERT INTO `sys_log` VALUES (7464308, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/add', '{}', '127.0.0.1', '2019-09-03 17:01:21', 'sesame');
+INSERT INTO `sys_log` VALUES (7464309, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/queryAll', '{}', '127.0.0.1', '2019-09-03 17:01:21', 'sesame');
+INSERT INTO `sys_log` VALUES (7464310, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/save', '{\"level\":\"2\",\"ruleId\":\"9a5da7e1e7554b7dbffefed7e49eaad3\",\"value\":\"0.1\"}', '127.0.0.1', '2019-09-03 17:01:28', 'sesame');
+INSERT INTO `sys_log` VALUES (7464311, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/list', '{}', '127.0.0.1', '2019-09-03 17:01:28', 'sesame');
+INSERT INTO `sys_log` VALUES (7464312, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/add', '{}', '127.0.0.1', '2019-09-03 17:01:30', 'sesame');
+INSERT INTO `sys_log` VALUES (7464313, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/queryAll', '{}', '127.0.0.1', '2019-09-03 17:01:30', 'sesame');
+INSERT INTO `sys_log` VALUES (7464314, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/save', '{\"level\":\"3\",\"ruleId\":\"9a5da7e1e7554b7dbffefed7e49eaad3\",\"value\":\"0.15\"}', '127.0.0.1', '2019-09-03 17:01:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464315, 1, 'admin', 'normal', NULL, '/manager/get/swRuleDetail/list', '{}', '127.0.0.1', '2019-09-03 17:01:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464316, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule', '{}', '127.0.0.1', '2019-09-03 17:01:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464317, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/list', '{}', '127.0.0.1', '2019-09-03 17:01:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464318, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/list', '{}', '127.0.0.1', '2019-09-03 17:01:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464319, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/update', '{\"tid\":\"9a5da7e1e7554b7dbffefed7e49eaad3\",\"status\":\"1\"}', '127.0.0.1', '2019-09-03 17:03:24', 'sesame');
+INSERT INTO `sys_log` VALUES (7464320, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/update', '{\"tid\":\"9a5da7e1e7554b7dbffefed7e49eaad3\",\"status\":\"0\"}', '127.0.0.1', '2019-09-03 17:03:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464321, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/update', '{\"tid\":\"9a5da7e1e7554b7dbffefed7e49eaad3\",\"status\":\"1\"}', '127.0.0.1', '2019-09-03 17:03:36', 'sesame');
+INSERT INTO `sys_log` VALUES (7464322, 1, 'admin', 'normal', NULL, '/manager/get/swRewardRule/update', '{\"tid\":\"9a5da7e1e7554b7dbffefed7e49eaad3\",\"status\":\"0\"}', '127.0.0.1', '2019-09-03 17:03:37', 'sesame');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1736,7 +1855,7 @@ CREATE TABLE `sys_menu`  (
   `gmt_create` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `gmt_modified` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 284 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单管理' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 292 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单管理' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -1799,6 +1918,14 @@ INSERT INTO `sys_menu` VALUES (280, 279, '资讯管理', '/manager/get/informati
 INSERT INTO `sys_menu` VALUES (281, 280, '添加', '', 'get:information:add', 2, '', 1, NULL, NULL);
 INSERT INTO `sys_menu` VALUES (282, 280, '更新', '', 'get:information:edit', 2, '', 2, NULL, NULL);
 INSERT INTO `sys_menu` VALUES (283, 280, '删除', '', 'get:information:remove', 2, '', 3, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (284, 109, '规则列表', '/manager/get/swRewardRule', 'get:swRewardRule:swRewardRule', 1, '', 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (285, 284, '添加', '', 'get:swRewardRule:add', 2, '', 1, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (286, 284, '更新', '', 'get:swRewardRule:edit', 2, '', 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (287, 284, '删除', '', 'get:swRewardRule:remove', 2, '', 3, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (288, 109, '规则详情', '/manager/get/swRuleDetail', 'get:swRuleDetail:swRuleDetail', 1, '', 3, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (289, 288, '添加', '', 'get:swRuleDetail:add', 2, '', 1, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (290, 288, '更新', '', 'get:swRuleDetail:edit', 2, '', 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (291, 288, '删除', '', 'get:swRuleDetail:remove', 2, '', 3, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -1831,7 +1958,7 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) NULL DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7875 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7942 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -1953,65 +2080,73 @@ INSERT INTO `sys_role_menu` VALUES (7654, 6, 270);
 INSERT INTO `sys_role_menu` VALUES (7655, 6, 255);
 INSERT INTO `sys_role_menu` VALUES (7656, 6, -1);
 INSERT INTO `sys_role_menu` VALUES (7657, 6, 109);
-INSERT INTO `sys_role_menu` VALUES (7816, 1, 278);
-INSERT INTO `sys_role_menu` VALUES (7817, 1, 277);
-INSERT INTO `sys_role_menu` VALUES (7818, 1, 273);
-INSERT INTO `sys_role_menu` VALUES (7819, 1, 205);
-INSERT INTO `sys_role_menu` VALUES (7820, 1, 92);
-INSERT INTO `sys_role_menu` VALUES (7821, 1, 57);
-INSERT INTO `sys_role_menu` VALUES (7822, 1, 30);
-INSERT INTO `sys_role_menu` VALUES (7823, 1, 29);
-INSERT INTO `sys_role_menu` VALUES (7824, 1, 28);
-INSERT INTO `sys_role_menu` VALUES (7825, 1, 206);
-INSERT INTO `sys_role_menu` VALUES (7826, 1, 118);
-INSERT INTO `sys_role_menu` VALUES (7827, 1, 48);
-INSERT INTO `sys_role_menu` VALUES (7828, 1, 209);
-INSERT INTO `sys_role_menu` VALUES (7829, 1, 207);
-INSERT INTO `sys_role_menu` VALUES (7830, 1, 203);
-INSERT INTO `sys_role_menu` VALUES (7831, 1, 76);
-INSERT INTO `sys_role_menu` VALUES (7832, 1, 75);
-INSERT INTO `sys_role_menu` VALUES (7833, 1, 74);
-INSERT INTO `sys_role_menu` VALUES (7834, 1, 62);
-INSERT INTO `sys_role_menu` VALUES (7835, 1, 56);
-INSERT INTO `sys_role_menu` VALUES (7836, 1, 55);
-INSERT INTO `sys_role_menu` VALUES (7837, 1, 15);
-INSERT INTO `sys_role_menu` VALUES (7838, 1, 26);
-INSERT INTO `sys_role_menu` VALUES (7839, 1, 25);
-INSERT INTO `sys_role_menu` VALUES (7840, 1, 24);
-INSERT INTO `sys_role_menu` VALUES (7841, 1, 14);
-INSERT INTO `sys_role_menu` VALUES (7842, 1, 13);
-INSERT INTO `sys_role_menu` VALUES (7843, 1, 12);
-INSERT INTO `sys_role_menu` VALUES (7844, 1, 61);
-INSERT INTO `sys_role_menu` VALUES (7845, 1, 22);
-INSERT INTO `sys_role_menu` VALUES (7846, 1, 21);
-INSERT INTO `sys_role_menu` VALUES (7847, 1, 20);
-INSERT INTO `sys_role_menu` VALUES (7848, 1, 83);
-INSERT INTO `sys_role_menu` VALUES (7849, 1, 81);
-INSERT INTO `sys_role_menu` VALUES (7850, 1, 80);
-INSERT INTO `sys_role_menu` VALUES (7851, 1, 79);
-INSERT INTO `sys_role_menu` VALUES (7852, 1, 71);
-INSERT INTO `sys_role_menu` VALUES (7853, 1, 276);
-INSERT INTO `sys_role_menu` VALUES (7854, 1, 274);
-INSERT INTO `sys_role_menu` VALUES (7855, 1, 272);
-INSERT INTO `sys_role_menu` VALUES (7856, 1, 204);
-INSERT INTO `sys_role_menu` VALUES (7857, 1, 109);
-INSERT INTO `sys_role_menu` VALUES (7858, 1, 27);
-INSERT INTO `sys_role_menu` VALUES (7859, 1, 91);
-INSERT INTO `sys_role_menu` VALUES (7860, 1, 77);
-INSERT INTO `sys_role_menu` VALUES (7861, 1, 202);
-INSERT INTO `sys_role_menu` VALUES (7862, 1, 73);
-INSERT INTO `sys_role_menu` VALUES (7863, 1, 7);
-INSERT INTO `sys_role_menu` VALUES (7864, 1, 6);
-INSERT INTO `sys_role_menu` VALUES (7865, 1, 2);
-INSERT INTO `sys_role_menu` VALUES (7866, 1, 3);
-INSERT INTO `sys_role_menu` VALUES (7867, 1, 78);
-INSERT INTO `sys_role_menu` VALUES (7868, 1, 1);
-INSERT INTO `sys_role_menu` VALUES (7869, 1, 279);
-INSERT INTO `sys_role_menu` VALUES (7870, 1, 283);
-INSERT INTO `sys_role_menu` VALUES (7871, 1, 282);
-INSERT INTO `sys_role_menu` VALUES (7872, 1, 281);
-INSERT INTO `sys_role_menu` VALUES (7873, 1, 280);
-INSERT INTO `sys_role_menu` VALUES (7874, 1, -1);
+INSERT INTO `sys_role_menu` VALUES (7875, 1, 283);
+INSERT INTO `sys_role_menu` VALUES (7876, 1, 282);
+INSERT INTO `sys_role_menu` VALUES (7877, 1, 281);
+INSERT INTO `sys_role_menu` VALUES (7878, 1, 278);
+INSERT INTO `sys_role_menu` VALUES (7879, 1, 277);
+INSERT INTO `sys_role_menu` VALUES (7880, 1, 273);
+INSERT INTO `sys_role_menu` VALUES (7881, 1, 205);
+INSERT INTO `sys_role_menu` VALUES (7882, 1, 92);
+INSERT INTO `sys_role_menu` VALUES (7883, 1, 57);
+INSERT INTO `sys_role_menu` VALUES (7884, 1, 30);
+INSERT INTO `sys_role_menu` VALUES (7885, 1, 29);
+INSERT INTO `sys_role_menu` VALUES (7886, 1, 28);
+INSERT INTO `sys_role_menu` VALUES (7887, 1, 206);
+INSERT INTO `sys_role_menu` VALUES (7888, 1, 118);
+INSERT INTO `sys_role_menu` VALUES (7889, 1, 48);
+INSERT INTO `sys_role_menu` VALUES (7890, 1, 209);
+INSERT INTO `sys_role_menu` VALUES (7891, 1, 207);
+INSERT INTO `sys_role_menu` VALUES (7892, 1, 203);
+INSERT INTO `sys_role_menu` VALUES (7893, 1, 76);
+INSERT INTO `sys_role_menu` VALUES (7894, 1, 75);
+INSERT INTO `sys_role_menu` VALUES (7895, 1, 74);
+INSERT INTO `sys_role_menu` VALUES (7896, 1, 62);
+INSERT INTO `sys_role_menu` VALUES (7897, 1, 56);
+INSERT INTO `sys_role_menu` VALUES (7898, 1, 55);
+INSERT INTO `sys_role_menu` VALUES (7899, 1, 15);
+INSERT INTO `sys_role_menu` VALUES (7900, 1, 26);
+INSERT INTO `sys_role_menu` VALUES (7901, 1, 25);
+INSERT INTO `sys_role_menu` VALUES (7902, 1, 24);
+INSERT INTO `sys_role_menu` VALUES (7903, 1, 14);
+INSERT INTO `sys_role_menu` VALUES (7904, 1, 13);
+INSERT INTO `sys_role_menu` VALUES (7905, 1, 12);
+INSERT INTO `sys_role_menu` VALUES (7906, 1, 61);
+INSERT INTO `sys_role_menu` VALUES (7907, 1, 22);
+INSERT INTO `sys_role_menu` VALUES (7908, 1, 21);
+INSERT INTO `sys_role_menu` VALUES (7909, 1, 20);
+INSERT INTO `sys_role_menu` VALUES (7910, 1, 83);
+INSERT INTO `sys_role_menu` VALUES (7911, 1, 81);
+INSERT INTO `sys_role_menu` VALUES (7912, 1, 80);
+INSERT INTO `sys_role_menu` VALUES (7913, 1, 79);
+INSERT INTO `sys_role_menu` VALUES (7914, 1, 71);
+INSERT INTO `sys_role_menu` VALUES (7915, 1, 280);
+INSERT INTO `sys_role_menu` VALUES (7916, 1, 279);
+INSERT INTO `sys_role_menu` VALUES (7917, 1, 276);
+INSERT INTO `sys_role_menu` VALUES (7918, 1, 274);
+INSERT INTO `sys_role_menu` VALUES (7919, 1, 272);
+INSERT INTO `sys_role_menu` VALUES (7920, 1, 204);
+INSERT INTO `sys_role_menu` VALUES (7921, 1, 27);
+INSERT INTO `sys_role_menu` VALUES (7922, 1, 91);
+INSERT INTO `sys_role_menu` VALUES (7923, 1, 77);
+INSERT INTO `sys_role_menu` VALUES (7924, 1, 202);
+INSERT INTO `sys_role_menu` VALUES (7925, 1, 73);
+INSERT INTO `sys_role_menu` VALUES (7926, 1, 7);
+INSERT INTO `sys_role_menu` VALUES (7927, 1, 6);
+INSERT INTO `sys_role_menu` VALUES (7928, 1, 2);
+INSERT INTO `sys_role_menu` VALUES (7929, 1, 3);
+INSERT INTO `sys_role_menu` VALUES (7930, 1, 78);
+INSERT INTO `sys_role_menu` VALUES (7931, 1, 1);
+INSERT INTO `sys_role_menu` VALUES (7932, 1, 288);
+INSERT INTO `sys_role_menu` VALUES (7933, 1, 291);
+INSERT INTO `sys_role_menu` VALUES (7934, 1, 290);
+INSERT INTO `sys_role_menu` VALUES (7935, 1, 289);
+INSERT INTO `sys_role_menu` VALUES (7936, 1, 284);
+INSERT INTO `sys_role_menu` VALUES (7937, 1, 287);
+INSERT INTO `sys_role_menu` VALUES (7938, 1, 286);
+INSERT INTO `sys_role_menu` VALUES (7939, 1, 285);
+INSERT INTO `sys_role_menu` VALUES (7940, 1, 109);
+INSERT INTO `sys_role_menu` VALUES (7941, 1, -1);
 
 -- ----------------------------
 -- Table structure for sys_task
@@ -2324,9 +2459,9 @@ CREATE TABLE `t_sw_current`  (
   `tid` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'ID',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
   `coin_type_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '币种id',
-  `t_percent` double(8, 4) NULL DEFAULT NULL COMMENT '购买最高倍率',
-  `b_percent` double(8, 4) NULL DEFAULT NULL COMMENT '购买最低倍率',
-  `accelerate_percent` double(8, 4) NULL DEFAULT NULL COMMENT '加速倍率',
+  `t_percent` double(20, 4) NULL DEFAULT NULL COMMENT '购买最高倍率',
+  `b_percent` double(20, 4) NULL DEFAULT NULL COMMENT '购买最低倍率',
+  `accelerate_percent` double(20, 4) NULL DEFAULT NULL COMMENT '加速倍率',
   `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
   `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
   `ex3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex3',
@@ -2347,7 +2482,8 @@ CREATE TABLE `t_sw_current_user`  (
   `user_id` int(11) NULL DEFAULT NULL COMMENT '用户ID',
   `current_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '活币金id',
   `release_time` datetime(0) NULL DEFAULT NULL COMMENT '释放时间',
-  `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
+  `status` int(1) NULL DEFAULT NULL COMMENT '状态，0-正常，1-已释放完',
+  `ex1` double(20, 4) NULL DEFAULT NULL COMMENT '认购金额',
   `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
   `ex3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex3',
   `ex4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex4',
@@ -2367,7 +2503,7 @@ CREATE TABLE `t_sw_evangelist`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
   `coin_type_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '币种id',
   `evangelist_num` double(20, 4) NULL DEFAULT NULL COMMENT '优币金额度',
-  `percent` double(8, 4) NULL DEFAULT NULL COMMENT '倍率',
+  `percent` double(20, 4) NULL DEFAULT NULL COMMENT '倍率',
   `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
   `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
   `ex3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex3',
@@ -2414,6 +2550,9 @@ CREATE TABLE `t_sw_evangelist_user`  (
   `tid` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'ID',
   `user_id` int(11) NULL DEFAULT NULL COMMENT '用户ID',
   `evangelist_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '优币金id',
+  `total_num` double(20, 4) NULL DEFAULT NULL COMMENT '总金额',
+  `left_num` double(20, 4) NULL DEFAULT NULL COMMENT '剩余金额',
+  `status` int(1) NULL DEFAULT NULL COMMENT '状态，0-正常，1-已释放完',
   `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
   `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
   `ex3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex3',
@@ -2433,7 +2572,7 @@ CREATE TABLE `t_sw_partner`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
   `coin_type_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '币种id',
   `partner_num` double(20, 4) NULL DEFAULT NULL COMMENT '升币金额度',
-  `percent` double(8, 4) NULL DEFAULT NULL COMMENT '倍率',
+  `percent` double(20, 4) NULL DEFAULT NULL COMMENT '倍率',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '说明',
   `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
   `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
@@ -2452,6 +2591,9 @@ CREATE TABLE `t_sw_partner_user`  (
   `tid` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'ID',
   `user_id` int(11) NULL DEFAULT NULL COMMENT '用户ID',
   `partner_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '升币金ID',
+  `total_num` double(20, 4) NULL DEFAULT NULL COMMENT '总数量',
+  `left_num` double(20, 4) NULL DEFAULT NULL COMMENT '剩余数量',
+  `status` int(1) NULL DEFAULT NULL COMMENT '状态，0-正常，1-已释放完',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '说明',
   `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
   `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
@@ -2471,9 +2613,9 @@ CREATE TABLE `t_sw_period`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
   `coin_type_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '币种id',
   `period_term` int(5) NULL DEFAULT NULL COMMENT '定币金周期（天）',
-  `t_percent` double(8, 4) NULL DEFAULT NULL COMMENT '购买最高倍率',
-  `b_percent` double(8, 4) NULL DEFAULT NULL COMMENT '购买最低倍率',
-  `accelerate_percent` double(8, 4) NULL DEFAULT NULL COMMENT '加速倍率',
+  `t_percent` double(20, 4) NULL DEFAULT NULL COMMENT '购买最高倍率',
+  `b_percent` double(20, 4) NULL DEFAULT NULL COMMENT '购买最低倍率',
+  `accelerate_percent` double(20, 4) NULL DEFAULT NULL COMMENT '加速倍率',
   `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
   `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
   `ex3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex3',
@@ -2493,7 +2635,8 @@ CREATE TABLE `t_sw_period_user`  (
   `user_id` int(11) NULL DEFAULT NULL COMMENT '用户ID',
   `period_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '定币金ID',
   `release_time` datetime(0) NULL DEFAULT NULL COMMENT '释放时间',
-  `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
+  `status` int(1) NULL DEFAULT NULL COMMENT '状态，0-正常，1-已释放完',
+  `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '认购金额',
   `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
   `ex3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex3',
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
@@ -2512,10 +2655,10 @@ CREATE TABLE `t_sw_principal`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
   `coin_type_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '币种id',
   `principal_num` double(20, 4) NULL DEFAULT NULL COMMENT '固本金额度',
-  `reward_percent` double(8, 4) NULL DEFAULT NULL COMMENT '收益倍率',
+  `reward_percent` double(20, 4) NULL DEFAULT NULL COMMENT '收益倍率',
   `contract_term` int(5) NULL DEFAULT NULL COMMENT '合约期限（天）',
   `charge_term` int(10) NULL DEFAULT NULL COMMENT '收取手续费期限（小时）',
-  `charge_percent` double(8, 4) NULL DEFAULT NULL COMMENT '手续费比例',
+  `charge_percent` double(20, 4) NULL DEFAULT NULL COMMENT '手续费比例',
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_date` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '0为可用,1为不可用',
@@ -2535,7 +2678,9 @@ CREATE TABLE `t_sw_principal_user`  (
   `user_id` int(11) NULL DEFAULT NULL COMMENT '用户id',
   `principal_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '固币金id',
   `left_term` int(5) NULL DEFAULT NULL COMMENT '剩余合约期限（天）',
-  `left_num` int(11) NULL DEFAULT NULL COMMENT '剩余金额',
+  `left_num` double(20, 4) NULL DEFAULT NULL COMMENT '剩余金额',
+  `total_num` double(20, 4) NULL DEFAULT NULL COMMENT '总金额',
+  `status` int(1) NULL DEFAULT NULL COMMENT '状态，0-正常，1-已释放完',
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_date` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '0为可用,1为不可用',
@@ -2584,6 +2729,11 @@ CREATE TABLE `t_sw_reward_rule`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '推荐人奖励规则表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of t_sw_reward_rule
+-- ----------------------------
+INSERT INTO `t_sw_reward_rule` VALUES ('9a5da7e1e7554b7dbffefed7e49eaad3', '859ND9', '给上级加速规则', '0', 1, '', '2019-09-03 16:56:10', '2019-09-03 17:03:37', '0');
+
+-- ----------------------------
 -- Table structure for t_sw_rule_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `t_sw_rule_detail`;
@@ -2601,6 +2751,13 @@ CREATE TABLE `t_sw_rule_detail`  (
   `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '删除标识',
   PRIMARY KEY (`tid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '推荐人奖励规则详情表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_sw_rule_detail
+-- ----------------------------
+INSERT INTO `t_sw_rule_detail` VALUES ('2b4b54808c5f4c2fa0adf564f57c8444', '9a5da7e1e7554b7dbffefed7e49eaad3', 2, NULL, 0.10000000, NULL, NULL, NULL, '2019-09-03 17:01:28', '2019-09-03 17:01:28', '0');
+INSERT INTO `t_sw_rule_detail` VALUES ('3ac5183837d843628bb9e28205ce5c17', '9a5da7e1e7554b7dbffefed7e49eaad3', 1, NULL, 0.05000000, NULL, NULL, NULL, '2019-09-03 17:01:08', '2019-09-03 17:01:08', '0');
+INSERT INTO `t_sw_rule_detail` VALUES ('43000d6b18d841cdb0a4f64a78531e99', '9a5da7e1e7554b7dbffefed7e49eaad3', 3, NULL, 0.15000000, NULL, NULL, NULL, '2019-09-03 17:01:37', '2019-09-03 17:01:37', '0');
 
 -- ----------------------------
 -- Table structure for t_sw_transfer_record
@@ -2653,7 +2810,7 @@ CREATE TABLE `t_sw_user_basic`  (
 -- ----------------------------
 INSERT INTO `t_sw_user_basic` VALUES (1, 'system', 0, '888888', 'aaa@aa.com', '12345678', '12345678', '86', 1, '2019-08-24 14:07:36', '2019-08-24 14:07:38', '0', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_user_basic` VALUES (104397, 'sz104397', 1, NULL, '1143178854@qq.com', '2cea958616ebafce8f5a3a92aef5873c', NULL, NULL, 0, '2019-08-24 14:10:51', '2019-08-24 14:10:51', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104398, 'sz104398', 1, NULL, '27592285@qq.com', 'da621990825bdb3d3674fe64af41e5d8', NULL, NULL, 0, '2019-08-26 19:08:55', '2019-08-26 19:08:55', '0', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `t_sw_user_basic` VALUES (104398, 'sz104398', 104397, NULL, '27592285@qq.com', 'da621990825bdb3d3674fe64af41e5d8', NULL, NULL, 0, '2019-08-26 19:08:55', '2019-08-26 19:08:55', '0', NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_sw_wallets
@@ -3178,5 +3335,29 @@ INSERT INTO `t_task` VALUES ('fc472b2822eb4ba7a4398465906844a5', 'cleanLog', '20
 INSERT INTO `t_task` VALUES ('fc501edff5e54211932ddaeae991ea4c', 'FixedDepositTask', '20190418', 'normal', '2019-04-18 01:00:00', '2019-04-18 01:00:00', '定存检查定时任务成功检查,取消定存用户：0人，成功释放利息：0人', '2019-04-18 01:00:00', '0');
 INSERT INTO `t_task` VALUES ('feb20784a2fe4cd7b3614d2e94502618', 'FixedDepositTask', '20190331', 'normal', '2019-03-31 01:00:17', '2019-03-31 01:00:17', '定存检查定时任务成功检查,取消定存用户：0人，成功释放利息：0人', '2019-03-31 01:00:17', '0');
 INSERT INTO `t_task` VALUES ('ffa840033fb149969fd20a7bf237833f', 'FixedDepositTask', '20190424', 'normal', '2019-04-24 01:00:00', '2019-04-24 01:00:00', '定存检查定时任务成功检查,取消定存用户：0人，成功释放利息：0人', '2019-04-24 01:00:00', '0');
+
+-- ----------------------------
+-- Procedure structure for find_recommenders
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `find_recommenders`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `find_recommenders`(in id int,in generate int)
+BEGIN
+      	DECLARE var INT default 0;
+        DECLARE ftid int;
+        declare idstr text(50000) default '-1';
+	while var < generate do
+		select recom_id into ftid from t_sw_user_basic where tid = id;
+				if ftid != 1 then
+					set idstr = concat(idstr,',',ftid); 
+					set id = ftid;
+				end if;
+		set var = var +1;
+	end while;
+	
+	select * from t_sw_user_basic where find_in_set(tid,idstr);
+END
+;;
+delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;
