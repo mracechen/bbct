@@ -204,4 +204,18 @@ public class CommonStatic {
      * */
     public static Integer PERIOD_CAUSE_RELEASE = 3;
 
+    /**
+     * 释放目标类型，1-固币金
+     * */
+    public static Integer RELEASE_TARGET_PRINCIPAL = 1;
+
+    /**
+     * 释放目标类型，2-优币金
+     * */
+    public static Integer RELEASE_TARGET_EVANGELIST = 2;
+
+    /**
+     * 释放目标类型，3-升币金
+     * */
+    public static Integer RELEASE_TARGET_PARTNER = 3;
 }

@@ -15,48 +15,50 @@
     </select>
 
     <select id="list" resultType="com.get.domain.SwEvangelistUserDO">
-        select `tid`,`user_id`,`evangelist_id`,`total_num`,`left_num`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_evangelist_user
+        select
+        `tid`,`user_id`,`evangelist_id`,`total_num`,`left_num`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`
+        from t_sw_evangelist_user
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="userId != null and userId != ''">and user_id =
-                    #{userId}
-                </if>
-                            <if test="evangelistId != null and evangelistId != ''">and evangelist_id =
-                    #{evangelistId}
-                </if>
-                            <if test="totalNum != null and totalNum != ''">and total_num =
-                    #{totalNum}
-                </if>
-                            <if test="leftNum != null and leftNum != ''">and left_num =
-                    #{leftNum}
-                </if>
-                            <if test="status != null and status != ''">and status =
-                    #{status}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="userId != null and userId != ''">and user_id =
+                #{userId}
+            </if>
+            <if test="evangelistId != null and evangelistId != ''">and evangelist_id =
+                #{evangelistId}
+            </if>
+            <if test="totalNum != null and totalNum != ''">and total_num =
+                #{totalNum}
+            </if>
+            <if test="leftNum != null and leftNum != ''">and left_num =
+                #{leftNum}
+            </if>
+            <if test="status != null and status != ''">and status =
+                #{status}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="remark != null and remark != ''">and remark =
+                #{remark}
+            </if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -73,46 +75,46 @@
     <select id="count" resultType="int">
         select count(*) from t_sw_evangelist_user
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="userId != null and userId != ''">and user_id =
-                    #{userId}
-                </if>
-                            <if test="evangelistId != null and evangelistId != ''">and evangelist_id =
-                    #{evangelistId}
-                </if>
-                            <if test="totalNum != null and totalNum != ''">and total_num =
-                    #{totalNum}
-                </if>
-                            <if test="leftNum != null and leftNum != ''">and left_num =
-                    #{leftNum}
-                </if>
-                            <if test="status != null and status != ''">and status =
-                    #{status}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="userId != null and userId != ''">and user_id =
+                #{userId}
+            </if>
+            <if test="evangelistId != null and evangelistId != ''">and evangelist_id =
+                #{evangelistId}
+            </if>
+            <if test="totalNum != null and totalNum != ''">and total_num =
+                #{totalNum}
+            </if>
+            <if test="leftNum != null and leftNum != ''">and left_num =
+                #{leftNum}
+            </if>
+            <if test="status != null and status != ''">and status =
+                #{status}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="remark != null and remark != ''">and remark =
+                #{remark}
+            </if>
+        </where>
     </select>
 
     <insert id="save" parameterType="com.get.domain.SwEvangelistUserDO">
@@ -153,31 +155,43 @@
     <update id="update" parameterType="com.get.domain.SwEvangelistUserDO">
         update t_sw_evangelist_user
         <set>
-                                                                            <if test="userId != null">`user_id` = #{userId
-                        }, </if>
-                                                                <if test="evangelistId != null">`evangelist_id` = #{evangelistId
-                        }, </if>
-                                                                <if test="totalNum != null">`total_num` = #{totalNum
-                        }, </if>
-                                                                <if test="leftNum != null">`left_num` = #{leftNum
-                        }, </if>
-                                                                <if test="status != null">`status` = #{status
-                        }, </if>
-                                                                <if test="ex1 != null">`ex1` = #{ex1
-                        }, </if>
-                                                                <if test="ex2 != null">`ex2` = #{ex2
-                        }, </if>
-                                                                <if test="ex3 != null">`ex3` = #{ex3
-                        }, </if>
-                                                                <if test="createDate != null">`create_date` = #{createDate
-                        }, </if>
-                                                                <if test="updateDate != null">`update_date` = #{updateDate
-                        }, </if>
-                                                                <if test="delFlag != null">`del_flag` = #{delFlag
-                        }, </if>
-                                                                <if test="remark != null">`remark` = #{remark
-                        }</if>
-                                    </set>
+            <if test="userId != null">`user_id` = #{userId
+                        },
+            </if>
+            <if test="evangelistId != null">`evangelist_id` = #{evangelistId
+                        },
+            </if>
+            <if test="totalNum != null">`total_num` = `total_num` + #{totalNum
+                        },
+            </if>
+            <if test="leftNum != null">`left_num` = `left_num` + #{leftNum
+                        },
+            </if>
+            <if test="status != null">`status` = #{status
+                        },
+            </if>
+            <if test="ex1 != null">`ex1` = #{ex1
+                        },
+            </if>
+            <if test="ex2 != null">`ex2` = #{ex2
+                        },
+            </if>
+            <if test="ex3 != null">`ex3` = #{ex3
+                        },
+            </if>
+            <if test="createDate != null">`create_date` = #{createDate
+                        },
+            </if>
+            <if test="updateDate != null">`update_date` = #{updateDate
+                        },
+            </if>
+            <if test="delFlag != null">`del_flag` = #{delFlag
+                        },
+            </if>
+            <if test="remark != null">`remark` = #{remark
+                        }
+            </if>
+        </set>
         where tid = #{tid}
     </update>
 

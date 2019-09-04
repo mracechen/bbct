@@ -318,6 +318,10 @@
             <version>3.10-FINAL</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.github.qcloudsms</groupId>
