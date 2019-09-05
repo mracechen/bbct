@@ -11,7 +11,16 @@
         select
         principalUser.*
         from t_sw_principal_user principalUser
-        where principalUser.user_id = #{userId} and principalUser.status = #{status} and del_flag = #{delFlag}
+        where principalUser.user_id = #{userId} and principalUser.status = #{status} and principalUser.del_flag = #{delFlag}
+    </select>
+
+    <select id="getWaitingResolvePrincipal" resultType="com.get.domain.SwPrincipalUserDO">
+        select
+        `tid`,`user_id`,`principal_id`,`left_term`,`left_num`,`total_num`,`status`,`create_date`,`update_date`,`del_flag`,`remark`,`ex1`,`ex2`,`ex3`
+        from t_sw_principal_user
+        where 1=1
+        and status = 0
+        and del_flag = 0
     </select>
 
     <select id="list" resultType="com.get.domain.SwPrincipalUserDO">

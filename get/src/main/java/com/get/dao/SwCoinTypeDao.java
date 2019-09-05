@@ -16,6 +16,8 @@ public interface SwCoinTypeDao {
 
     SwCoinTypeDO get(String tid);
 
+    SwCoinTypeDO getByCoinName(String coinName);
+
     List<SwCoinTypeDO> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);

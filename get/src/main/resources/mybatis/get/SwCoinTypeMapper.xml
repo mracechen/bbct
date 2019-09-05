@@ -7,6 +7,13 @@
         select `tid`,`coin_name`,`coin_phot`,`enable`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`        from t_sw_coin_type where tid = #{value}
     </select>
 
+    <select id="getByCoinName" resultType="com.get.domain.SwCoinTypeDO">
+        select
+        `tid`,`coin_name`,`coin_phot`,`enable`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`
+        from t_sw_coin_type
+        where coin_name = #{coinName} and enable = 0 and del_flag = 0
+    </select>
+
     <select id="list" resultType="com.get.domain.SwCoinTypeDO">
         select `tid`,`coin_name`,`coin_phot`,`enable`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`        from t_sw_coin_type
         <where>

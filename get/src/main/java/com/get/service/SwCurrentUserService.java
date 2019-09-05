@@ -18,6 +18,8 @@ public interface SwCurrentUserService {
 
     List<SwCurrentUserDO> getWaitingResolveCurrent(Date beginDate, Date endDate);
 
+    SwCurrentUserDO getByUserId(Integer userId, Integer status, String delFlag);
+
     List<SwCurrentUserDO> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);

@@ -7,6 +7,13 @@
         select `tid`,`user_id`,`period_id`,`release_time`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_period_user where tid = #{value}
     </select>
 
+    <select id="getByUserId" resultType="com.get.domain.SwPeriodUserDO">
+        select
+        periodUser.*
+        from t_sw_period_user periodUser
+        where periodUser.user_id = #{userId} and periodUser.status = #{status} and periodUser.del_flag = #{delFlag}
+    </select>
+
     <select id="getWaitingResolvePeriod" resultType="com.get.domain.SwPeriodUserDO">
         select
         `tid`,`user_id`,`period_id`,`release_time`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`

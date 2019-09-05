@@ -27,6 +27,11 @@ public class SwPrincipalUserServiceImpl implements SwPrincipalUserService {
     }
 
     @Override
+    public List<SwPrincipalUserDO> getWaitingResolvePrincipal() {
+        return swPrincipalUserDao.getWaitingResolvePrincipal();
+    }
+
+    @Override
     public List<SwPrincipalUserDO> list(Map<String, Object> map) {
         return swPrincipalUserDao.list(map);
     }

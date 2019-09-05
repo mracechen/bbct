@@ -7,6 +7,13 @@
         select `tid`,`user_id`,`current_id`,`release_time`,`status`,`ex1`,`ex2`,`ex3`,`ex4`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_current_user where tid = #{value}
     </select>
 
+    <select id="getByUserId" resultType="com.get.domain.SwCurrentUserDO">
+        select
+        currentUser.*
+        from t_sw_current_user currentUser
+        where currentUser.user_id = #{userId} and currentUser.status = #{status} and periodUser.del_flag = #{delFlag}
+    </select>
+
     <select id="getWaitingResolveCurrent" resultType="com.get.domain.SwCurrentUserDO">
         select
         `tid`,`user_id`,`current_id`,`release_time`,`status`,`ex1`,`ex2`,`ex3`,`ex4`,`create_date`,`update_date`,`del_flag`,`remark`

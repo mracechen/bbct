@@ -6,11 +6,12 @@ package com.get.statuc;
 public enum  RecordEnum {
 
     principal_normal_release(1,"system.release.principal.normal"),
-    evangelist_normal_release(1,"system.release.evangelist.normal"),
-    current_accelerate(2,"system.release.current.accelerate"),
-    period_accelerate(3,"system.release.period.accelerate"),
-    transfer(4,"system.transfer"),
-    receivables(5,"system.receivables");
+    principal_accelerate(2,"system.release.principal.accelerate"),
+    evangelist_accelerate(3,"system.release.evangelist.accelerate"),
+    partner_accelerate(4,"system.release.partner.accelerate"),
+    transfer(5,"system.transfer"),
+    receivables(6,"system.receivables"),
+    period_normal_release(6,"system.release.period.normal");
     private final Integer type;
     private final String desc;
 

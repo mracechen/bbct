@@ -23,6 +23,8 @@ public interface SwCurrentUserDao {
 
     List<SwCurrentUserDO> getWaitingResolveCurrent(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate);
 
+    SwCurrentUserDO getByUserId(@Param("userId") Integer userId, @Param("status") Integer status, @Param("delFlag") String delFlag);
+
     int count(Map<String, Object> map);
 
     int save(SwCurrentUserDO swCurrentUser);

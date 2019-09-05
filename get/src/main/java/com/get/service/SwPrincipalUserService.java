@@ -17,6 +17,8 @@ public interface SwPrincipalUserService {
 
     SwPrincipalUserDO getByUserId(Integer userId, Integer status, String delFlag);
 
+    List<SwPrincipalUserDO> getWaitingResolvePrincipal();
+
     List<SwPrincipalUserDO> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);

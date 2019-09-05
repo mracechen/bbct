@@ -2,63 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64cefd14-6715-4a65-b634-a4d74a46e00a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/api/AppProductAPI.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/common/utils/blockChain/BaseParamEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/common/utils/blockChain/ParanEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/controller/SwBenchlogController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/controller/SwBenchmarkingController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/controller/SwFiatCoinController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwBenchlogDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwBenchmarkingDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwFiatCoinDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/domain/SwBenchlogDO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/domain/SwBenchmarkingDO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/domain/SwFiatCoinDO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwBenchlogService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwBenchmarkingService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwFiatCoinService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwBenchlogServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwBenchmarkingServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwFiatCoinServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwBenchlogMapper.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwBenchmarkingMapper.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwFiatCoinMapper.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appjs/get/swBenchlog/add.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appjs/get/swBenchlog/edit.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appjs/get/swBenchlog/swBenchlog.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appjs/get/swFiatCoin/add.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appjs/get/swFiatCoin/edit.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appjs/get/swFiatCoin/swFiatCoin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appjs/swBenchmarking/add.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appjs/swBenchmarking/edit.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appjs/swBenchmarking/swBenchmarking.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchlog/add.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchlog/edit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchlog/swBenchlog.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchmarking/add.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchmarking/edit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchmarking/swBenchmarking.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/get/swFiatCoin/add.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/get/swFiatCoin/edit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/get/swFiatCoin/swFiatCoin.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_16_10.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchmarking/add.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchmarking/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchmarking/swBenchmarking.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/api/AppPrivateAPI.java" afterPath="$PROJECT_DIR$/src/main/java/com/api/AppPrivateAPI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/api/AppProductAPI.java" afterPath="$PROJECT_DIR$/src/main/java/com/api/AppProductAPI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/common/task/releaseTask.java" afterPath="$PROJECT_DIR$/src/main/java/com/common/task/releaseTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/common/utils/IDUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/common/utils/IDUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/dao/SwPartnerUserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwPartnerUserDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/domain/SwReleaseRecordDO.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/domain/SwReleaseRecordDO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/SwPartnerUserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwPartnerUserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/SwUserBasicService.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwUserBasicService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwConsumeLogServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwConsumeLogServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPartnerUserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPartnerUserServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwUserBasicServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwUserBasicServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application-pro.yml" afterPath="$PROJECT_DIR$/src/main/resources/application-pro.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/config.json" afterPath="$PROJECT_DIR$/src/main/resources/config.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/dao/SwCoinTypeDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwCoinTypeDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/dao/SwCurrentUserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwCurrentUserDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/dao/SwPeriodUserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwPeriodUserDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/dao/SwPrincipalUserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwPrincipalUserDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/domain/SwPeriodUserDO.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/domain/SwPeriodUserDO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/SwCoinTypeService.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwCoinTypeService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/SwCurrentUserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwCurrentUserService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/SwPeriodUserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwPeriodUserService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/SwPrincipalUserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwPrincipalUserService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCoinTypeServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCoinTypeServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCurrentUserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCurrentUserServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPeriodUserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPeriodUserServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPrincipalUserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPrincipalUserServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/statuc/RecordEnum.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/statuc/RecordEnum.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/i18n/messages.properties" afterPath="$PROJECT_DIR$/src/main/resources/i18n/messages.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPartnerUserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPartnerUserMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCoinTypeMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCoinTypeMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCurrentUserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCurrentUserMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPeriodUserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPeriodUserMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPrincipalUserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPrincipalUserMapper.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -141,48 +109,67 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AppProductAPI.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/api/AppProductAPI.java">
+      <file leaf-file-name="SwEvangelistUserMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/get/SwEvangelistUserMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="97" column="30" lean-forward="false" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SwPrincipalUserMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/get/SwPrincipalUserMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="198">
+              <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
               <folding>
-                <marker date="1567499493840" expanded="true" signature="277:477" ph="select `tid`... t_sw_principal_user" />
-                <marker date="1567499493840" expanded="true" signature="577:765" ph="select princ... t_sw_principal_user" />
-                <marker date="1567499493840" expanded="true" signature="4867:6653" ph="insert into t_sw_principal_user... " />
-                <marker date="1567499493840" expanded="true" signature="6751:8188" ph="update t_sw_... " />
-                <marker date="1567499493840" expanded="true" signature="8237:8289" ph="delete from " />
+                <marker date="1567562168625" expanded="true" signature="279:469" ph="select `tid`... t_sw_evangelist_user" />
+                <marker date="1567562168625" expanded="true" signature="570:831" ph="select `tid`... t_sw_evangelist_user" />
+                <marker date="1567562168625" expanded="true" signature="4692:6357" ph="insert into t_sw_evangelist_user... " />
+                <marker date="1567562168625" expanded="true" signature="6456:7835" ph="update t_sw_... " />
+                <marker date="1567562168625" expanded="true" signature="7884:7937" ph="delete from " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppPrivateAPI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/api/AppPrivateAPI.java">
+      <file leaf-file-name="AppProductAPI.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/api/AppProductAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="296" column="37" lean-forward="true" selection-start-line="296" selection-start-column="37" selection-end-line="296" selection-end-column="37" />
+            <state relative-caret-position="1915">
+              <caret line="229" column="45" lean-forward="true" selection-start-line="229" selection-start-column="45" selection-end-line="229" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SwConsumeLogServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/get/service/impl/SwConsumeLogServiceImpl.java">
+      <file leaf-file-name="SwCoinTypeMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/get/SwCoinTypeMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1514">
-              <caret line="156" column="45" lean-forward="true" selection-start-line="156" selection-start-column="45" selection-end-line="156" selection-end-column="45" />
+            <state relative-caret-position="66">
+              <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+              <folding>
+                <marker date="1567686864422" expanded="true" signature="267:411" ph="select `tid`... t_sw_coin_type" />
+                <marker date="1567686864422" expanded="true" signature="508:710" ph="select `tid`... t_sw_coin_type" />
+                <marker date="1567686864422" expanded="true" signature="4038:5215" ph="insert into t_sw_coin_type... " />
+                <marker date="1567686864422" expanded="true" signature="5308:6593" ph="update t_sw_... " />
+                <marker date="1567686864422" expanded="true" signature="6642:6689" ph="delete from " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SwCoinTypeDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/get/dao/SwCoinTypeDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="362">
+              <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SwCoinTypeServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCoinTypeServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="25" column="37" lean-forward="false" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="37" />
+              <folding>
+                <element signature="e#803#804#0" expanded="true" />
+                <element signature="e#849#850#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -190,25 +177,13 @@
       <file leaf-file-name="messages.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/messages.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
+            <state relative-caret-position="66">
               <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="23" />
               <folding />
             </state>
           </provider>
           <provider editor-type-id="ResourceBundle">
             <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="releaseTask.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/common/task/releaseTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="74" selection-end-column="48" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
           </provider>
         </entry>
       </file>
@@ -226,10 +201,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>com.sesame.system.city.domain.CityDO</find>
-      <find>com.sesame.system.province.domain.ProvinceDO</find>
-      <find>com.sesame.system.countryside.domain.CountrysideDO</find>
-      <find>com.sesame.system.industry.domain.IndustryDO</find>
       <find>mobileArea</find>
       <find>ex</find>
       <find>prefix</find>
@@ -256,6 +227,10 @@
       <find>SwConsumeLogServiceImpl.transfer.wallet.error</find>
       <find>SwConsumeLogServiceImpl.transfer.password.error</find>
       <find>SwConsumeLogServiceImpl.transfer.currency.not.enough</find>
+      <find>system.release.current.accelerate</find>
+      <find>system.release.principal.normal</find>
+      <find>causeType</find>
+      <find>wallet</find>
     </findStrings>
     <replaceStrings>
       <replace>SecondShareLevelOfPackage</replace>
@@ -300,21 +275,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCurrentUserMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPeriodUserMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/get/domain/SwCurrentUserDO.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/get/SwWalletsMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/get/statuc/CommonStatic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/get/domain/SwPrincipalUserDO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/get/dao/SwEvangelistUserDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/get/dao/SwPrincipalUserDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPrincipalUserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/get/service/SwPrincipalUserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/get/service/SwEvangelistUserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwEvangelistUserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/get/statuc/RecordEnum.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/get/SwEvangelistUserMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPrincipalUserMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/get/controller/SwRuleDetailController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/common/utils/UserUtils/UserListHelper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/get/SwUserBasicMapper.xml" />
@@ -329,7 +289,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/get/service/SwUserBasicService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application-pro.yml" />
         <option value="$PROJECT_DIR$/src/main/resources/config.json" />
-        <option value="$PROJECT_DIR$/src/main/java/com/common/task/releaseTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/common/utils/blockChain/BaseParamEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/common/utils/blockChain/ParanEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwUserBasicServiceImpl.java" />
@@ -348,8 +307,24 @@
         <option value="$PROJECT_DIR$/src/main/java/com/get/service/SwBenchmarkingService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwBenchmarkingServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/api/AppPrivateAPI.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/i18n/messages.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwConsumeLogServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/get/dao/SwCurrentUserDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCurrentUserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPeriodUserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCurrentUserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/get/dao/SwPeriodUserDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPeriodUserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/get/domain/SwPeriodUserDO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/get/statuc/RecordEnum.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/i18n/messages.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/common/task/normalReleaseTask.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPrincipalUserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/get/dao/SwPrincipalUserDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPrincipalUserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/common/task/releaseTask.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCoinTypeMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/get/dao/SwCoinTypeDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCoinTypeServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/api/AppProductAPI.java" />
       </list>
     </option>
@@ -836,40 +811,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="task" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eovwallet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="get" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="aspect" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -932,11 +873,11 @@
       <recent name="com" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.common.task" />
       <recent name="com.get.service.impl" />
       <recent name="com.get.service" />
       <recent name="com.get.domain" />
       <recent name="com.get.dao" />
-      <recent name="com.get.controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\java_project\bbct\bbct\get\src\main\resources\templates\get" />
@@ -1475,12 +1416,12 @@
       <workItem from="1567243671711" duration="9842000" />
       <workItem from="1567303622182" duration="8166000" />
       <workItem from="1567389660090" duration="380000" />
-      <workItem from="1567390080826" duration="68381000" />
+      <workItem from="1567390080826" duration="82440000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="749372000" />
+    <option name="totallyTimeSpent" value="763431000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1506,7 +1447,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39933258" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19799778" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40044492" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1555,176 +1496,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/statuc/CommonStatic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="189" column="26" lean-forward="false" selection-start-line="189" selection-start-column="26" selection-end-line="189" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-dependencies/2.0.3.RELEASE/spring-boot-dependencies-2.0.3.RELEASE.pom">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="1376" column="12" lean-forward="false" selection-start-line="1376" selection-start-column="12" selection-end-line="1376" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/common/utils/IDUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="32" column="35" lean-forward="false" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="35" />
-          <folding>
-            <element signature="e#683#684#0" expanded="false" />
-            <element signature="e#729#730#0" expanded="false" />
-            <element signature="e#769#770#0" expanded="false" />
-            <element signature="e#814#815#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.5/httpclient-4.5.5.jar!/org/apache/http/client/methods/HttpGet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="20" column="11" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
-          <folding>
-            <element signature="e#448#449#0" expanded="true" />
-            <element signature="e#492#493#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.5/httpclient-4.5.5.jar!/org/apache/http/client/methods/HttpPost.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-          <folding>
-            <element signature="e#527#528#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/generatorConfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/generator.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-330">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1603">
-          <caret line="6" column="45" lean-forward="true" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/common/config/ShiroConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/api/AppPublicAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="32" column="15" lean-forward="true" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-pro.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/service/SwUserBasicService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="29" column="62" lean-forward="false" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/common/utils/blockChain/ParanEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="24" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/common/utils/blockChain/BaseParamEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/get/SwFiatCoinMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="78" lean-forward="true" selection-start-line="15" selection-start-column="78" selection-end-line="15" selection-end-column="78" />
-          <folding>
-            <marker date="1563353798136" expanded="true" signature="1344:1531" ph="select `id`,... t_sw_fiat_coin" />
-            <marker date="1563353798136" expanded="true" signature="1609:1706" ph="select from t_sw_fiat_coin" />
-            <marker date="1563353798136" expanded="true" signature="1804:1984" ph="select from t_sw_fiat_coin" />
-            <marker date="1563353798136" expanded="true" signature="2080:2210" ph="select from t_sw_fiat_coin" />
-            <marker date="1563353798136" expanded="true" signature="6767:8362" ph="insert into t_sw_fiat_coin... " />
-            <marker date="1563353798136" expanded="true" signature="8455:10331" ph="update t_sw_... " />
-            <marker date="1563353798136" expanded="true" signature="10380:10426" ph="delete from " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/service/impl/SwFiatCoinServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/service/SwFiatCoinService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/domain/SwFiatCoinDO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/get/dao/SwFiatCoinDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1938,36 +1709,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/common/task/releaseTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="74" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/common/utils/Result.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="52" column="32" lean-forward="true" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
           <folding>
-            <element signature="e#1036#1037#0" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
+            <element signature="e#1036#1037#0" expanded="false" />
+            <element signature="e#1075#1076#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/messages.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/api/AppPrivateAPI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="23" />
+        <state relative-caret-position="348">
+          <caret line="296" column="37" lean-forward="true" selection-start-line="296" selection-start-column="37" selection-end-line="296" selection-end-column="37" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/get/service/impl/SwConsumeLogServiceImpl.java">
@@ -1978,32 +1736,236 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/api/AppPrivateAPI.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCurrentUserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="296" column="37" lean-forward="true" selection-start-line="296" selection-start-column="37" selection-end-line="296" selection-end-column="37" />
+        <state relative-caret-position="258">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="32" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/dao/SwCurrentUserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="132" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/get/SwPeriodUserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="40" lean-forward="true" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+          <folding>
+            <marker date="1567674197385" expanded="true" signature="271:445" ph="select `tid`... t_sw_period_user" />
+            <marker date="1567674197385" expanded="true" signature="542:726" ph="select perio... t_sw_period_user" />
+            <marker date="1567674197385" expanded="true" signature="835:1259" ph="select `tid`... t_sw_period_user" />
+            <marker date="1567674197385" expanded="true" signature="5441:6978" ph="insert into t_sw_period_user... " />
+            <marker date="1567674197385" expanded="true" signature="7073:8790" ph="update t_sw_... " />
+            <marker date="1567674197385" expanded="true" signature="8839:8888" ph="delete from " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/dao/SwPeriodUserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="23" column="39" lean-forward="false" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPeriodUserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="34" column="9" lean-forward="true" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/domain/SwUserBasicDO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="165" column="19" lean-forward="false" selection-start-line="165" selection-start-column="19" selection-end-line="165" selection-end-column="19" />
+          <folding>
+            <element signature="e#3009#3010#0" expanded="false" />
+            <element signature="e#3040#3041#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/common/task/normalReleaseTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="97" column="22" lean-forward="true" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPrincipalUserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="29" column="61" lean-forward="false" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/domain/SwPeriodUserDO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/get/SwPrincipalMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1566462424000" expanded="true" signature="269:497" ph="select `tid`... t_sw_principal" />
+            <marker date="1566462424000" expanded="true" signature="5753:7699" ph="insert into t_sw_principal... " />
+            <marker date="1566462424000" expanded="true" signature="7793:10016" ph="update t_sw_... " />
+            <marker date="1566462424000" expanded="true" signature="10065:10112" ph="delete from " />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/get/SwPrincipalUserMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="-3542">
+          <caret line="16" column="42" lean-forward="false" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="42" />
           <folding>
-            <marker date="1567499493840" expanded="true" signature="277:477" ph="select `tid`... t_sw_principal_user" />
-            <marker date="1567499493840" expanded="true" signature="577:765" ph="select princ... t_sw_principal_user" />
-            <marker date="1567499493840" expanded="true" signature="4867:6653" ph="insert into t_sw_principal_user... " />
-            <marker date="1567499493840" expanded="true" signature="6751:8188" ph="update t_sw_... " />
-            <marker date="1567499493840" expanded="true" signature="8237:8289" ph="delete from " />
+            <marker date="1567679845255" expanded="true" signature="277:477" ph="select `tid`... t_sw_principal_user" />
+            <marker date="1567679845255" expanded="true" signature="577:779" ph="select princ... t_sw_principal_user" />
+            <marker date="1567679845255" expanded="true" signature="894:1148" ph="select `tid`... t_sw_principal_user" />
+            <marker date="1567679845255" expanded="true" signature="5250:7036" ph="insert into t_sw_principal_user... " />
+            <marker date="1567679845255" expanded="true" signature="7134:8571" ph="update t_sw_... " />
+            <marker date="1567679845255" expanded="true" signature="8620:8672" ph="delete from " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/statuc/RecordEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="28" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/dao/SwPrincipalUserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="23" column="29" lean-forward="false" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/common/task/releaseTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="319" column="41" lean-forward="false" selection-start-line="319" selection-start-column="30" selection-end-line="319" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/get/SwCurrentUserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="29" selection-end-column="13" />
+          <folding>
+            <marker date="1567674196231" expanded="true" signature="273:455" ph="select `tid`... t_sw_current_user" />
+            <marker date="1567674196231" expanded="true" signature="553:742" ph="select curre... t_sw_current_user" />
+            <marker date="1567674196231" expanded="true" signature="741:742" ph="select `tid`... t_sw_current_user" />
+            <marker date="1567674196231" expanded="true" signature="853:1285" ph="select `tid`... t_sw_current_user" />
+            <marker date="1567674196231" expanded="true" signature="5734:7387" ph="insert into t_sw_current_user... " />
+            <marker date="1567674196231" expanded="true" signature="7483:9338" ph="update t_sw_... " />
+            <marker date="1567674196231" expanded="true" signature="9387:9437" ph="delete from " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/domain/SwPeriodDO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-232">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/common/utils/DateUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="331" column="41" lean-forward="false" selection-start-line="331" selection-start-column="31" selection-end-line="331" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/get/SwEvangelistUserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding>
+            <marker date="1567562168625" expanded="true" signature="279:469" ph="select `tid`... t_sw_evangelist_user" />
+            <marker date="1567562168625" expanded="true" signature="570:831" ph="select `tid`... t_sw_evangelist_user" />
+            <marker date="1567562168625" expanded="true" signature="4692:6357" ph="insert into t_sw_evangelist_user... " />
+            <marker date="1567562168625" expanded="true" signature="6456:7835" ph="update t_sw_... " />
+            <marker date="1567562168625" expanded="true" signature="7884:7937" ph="delete from " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/messages.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/get/SwCoinTypeMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+          <folding>
+            <marker date="1567686864422" expanded="true" signature="267:411" ph="select `tid`... t_sw_coin_type" />
+            <marker date="1567686864422" expanded="true" signature="508:710" ph="select `tid`... t_sw_coin_type" />
+            <marker date="1567686864422" expanded="true" signature="4038:5215" ph="insert into t_sw_coin_type... " />
+            <marker date="1567686864422" expanded="true" signature="5308:6593" ph="update t_sw_... " />
+            <marker date="1567686864422" expanded="true" signature="6642:6689" ph="delete from " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/dao/SwCoinTypeDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCoinTypeServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="25" column="37" lean-forward="false" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="37" />
+          <folding>
+            <element signature="e#803#804#0" expanded="true" />
+            <element signature="e#849#850#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/api/AppProductAPI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="97" column="30" lean-forward="false" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
+        <state relative-caret-position="1915">
+          <caret line="229" column="45" lean-forward="true" selection-start-line="229" selection-start-column="45" selection-end-line="229" selection-end-column="45" />
           <folding />
         </state>
       </provider>

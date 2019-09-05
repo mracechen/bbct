@@ -21,9 +21,15 @@ public class SwCurrentUserServiceImpl implements SwCurrentUserService {
     public SwCurrentUserDO get(String tid) {
         return swCurrentUserDao.get(tid);
     }
+
     @Override
     public List<SwCurrentUserDO> getWaitingResolveCurrent(Date beginDate, Date endDate) {
         return swCurrentUserDao.getWaitingResolveCurrent(beginDate,endDate);
+    }
+
+    @Override
+    public SwCurrentUserDO getByUserId(Integer userId, Integer status, String delFlag){
+        return swCurrentUserDao.getByUserId(userId,status,delFlag);
     }
 
     @Override

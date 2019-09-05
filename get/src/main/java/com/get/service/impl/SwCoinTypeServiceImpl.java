@@ -23,6 +23,11 @@ public class SwCoinTypeServiceImpl implements SwCoinTypeService {
     }
 
     @Override
+    public SwCoinTypeDO getByCoinName(String coinName) {
+        return swCoinTypeDao.getByCoinName(coinName);
+    }
+
+    @Override
     public List<SwCoinTypeDO> list(Map<String, Object> map) {
         return swCoinTypeDao.list(map);
     }
