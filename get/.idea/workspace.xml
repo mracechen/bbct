@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64cefd14-6715-4a65-b634-a4d74a46e00a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchmarking/add.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchmarking/edit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/templates/get/swBenchmarking/swBenchmarking.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/api/AppProductAPI.java" afterPath="$PROJECT_DIR$/src/main/java/com/api/AppProductAPI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/common/task/releaseTask.java" afterPath="$PROJECT_DIR$/src/main/java/com/common/task/releaseTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/dao/SwCoinTypeDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwCoinTypeDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/dao/SwCurrentUserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwCurrentUserDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/dao/SwPeriodUserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwPeriodUserDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/dao/SwPrincipalUserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/dao/SwPrincipalUserDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/domain/SwPeriodUserDO.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/domain/SwPeriodUserDO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/SwCoinTypeService.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwCoinTypeService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/SwCurrentUserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwCurrentUserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/SwPeriodUserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwPeriodUserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/SwPrincipalUserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/SwPrincipalUserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCoinTypeServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCoinTypeServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCurrentUserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwCurrentUserServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPeriodUserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPeriodUserServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPrincipalUserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/service/impl/SwPrincipalUserServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/get/statuc/RecordEnum.java" afterPath="$PROJECT_DIR$/src/main/java/com/get/statuc/RecordEnum.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/i18n/messages.properties" afterPath="$PROJECT_DIR$/src/main/resources/i18n/messages.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCoinTypeMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCoinTypeMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCurrentUserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwCurrentUserMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPeriodUserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPeriodUserMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPrincipalUserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/get/SwPrincipalUserMapper.xml" />
-    </list>
+    <list default="true" id="64cefd14-6715-4a65-b634-a4d74a46e00a" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -1416,12 +1390,12 @@
       <workItem from="1567243671711" duration="9842000" />
       <workItem from="1567303622182" duration="8166000" />
       <workItem from="1567389660090" duration="380000" />
-      <workItem from="1567390080826" duration="82440000" />
+      <workItem from="1567390080826" duration="82461000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="763431000" />
+    <option name="totallyTimeSpent" value="763452000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
