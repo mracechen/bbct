@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * @author longge
- * @desc app不需要登录的接口
+ * @desc app需要登录的接口
  * @date 2018-10-12
  */
 
@@ -82,11 +82,11 @@ public class AppPrivateAPI {
                     || StringUtils.isBlank(swEvangelistInfoDO.getWechat())
                     || StringUtils.isBlank(swEvangelistInfoDO.getRealName())
                     || StringUtils.isBlank(swEvangelistInfoDO.getMobile())){
-                return Result.error("参数错误");
+                return Result.error("system.params.error",null);
             }
             SwUserBasicDO byEmail = swUserBasicService.getByEmail(swEvangelistInfoDO.getEmail());
             if(byEmail != null){
-                return Result.error("该邮箱已注册过");
+                return Result.error("AppPrivateAPI.resetLoginPassword.email.exist",null);
             }
             swEvangelistInfoDO.setTid(IDUtils.randomStr());
             swEvangelistInfoDO.setUpdateDate(new Date());
@@ -96,7 +96,7 @@ public class AppPrivateAPI {
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("申请失败");
+            return Result.error("AppPrivateAPI.resetLoginPassword.register.failed",null);
         }
     }
 
@@ -109,7 +109,7 @@ public class AppPrivateAPI {
             return Result.ok(chargeAddress);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("获取失败！");
+            return Result.error("system.failed.operation",null);
         }
     }
 
@@ -127,7 +127,7 @@ public class AppPrivateAPI {
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("获取失败！");
+            return Result.error("system.failed.operation",null);
         }
     }
 
@@ -138,13 +138,13 @@ public class AppPrivateAPI {
     public Result chargeLogDetail(String tid) {
         try {
             if(StringUtils.isBlank(tid)){
-                return Result.error("获取失败！");
+                return Result.error("system.failed.operation",null);
             }
             SwChargelogDO swChargelogDO = swChargelogService.get(tid);
             return Result.ok(swChargelogDO);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("获取失败！");
+            return Result.error("system.failed.operation",null);
         }
     }
 
@@ -162,7 +162,7 @@ public class AppPrivateAPI {
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("获取失败！");
+            return Result.error("system.failed.operation",null);
         }
     }
 
@@ -174,7 +174,7 @@ public class AppPrivateAPI {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             if(StringUtils.isBlank(swWithdrawAddressDO.getAddress())){
-                return Result.error("参数错误！");
+                return Result.error("system.params.error",null);
             }
             swWithdrawAddressDO.setTid(IDUtils.randomStr());
             swWithdrawAddressDO.setCreateDate(new Date());
@@ -185,7 +185,7 @@ public class AppPrivateAPI {
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("新增失败！");
+            return Result.error("system.failed.operation",null);
         }
     }
 
@@ -196,14 +196,14 @@ public class AppPrivateAPI {
     public Result editWithdrawAddress(@RequestBody SwWithdrawAddressDO swWithdrawAddressDO) {
         try {
             if(StringUtils.isBlank(swWithdrawAddressDO.getTid())){
-                return Result.error("参数错误！");
+                return Result.error("system.params.error",null);
             }
             swWithdrawAddressDO.setUpdateDate(new Date());
             swWithdrawAddressService.update(swWithdrawAddressDO);
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("编辑失败！");
+            return Result.error("system.failed.operation",null);
         }
     }
 
@@ -216,10 +216,10 @@ public class AppPrivateAPI {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             SwWithdrawAddressDO swWithdrawAddressDO = swWithdrawAddressService.get(tid);
             if(!user.getTid().equals(swWithdrawAddressDO.getUserId())){
-                return Result.error("操作拒绝！");
+                return Result.error("system.reject.operation",null);
             }
             if(swWithdrawAddressDO == null){
-                return Result.error("删除失败！");
+                return Result.error("system.failed.operation",null);
             }
             swWithdrawAddressDO.setUpdateDate(new Date());
             swWithdrawAddressDO.setDelFlag(CommonStatic.DELETE);
@@ -227,7 +227,7 @@ public class AppPrivateAPI {
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("删除失败！");
+            return Result.error("system.failed.operation",null);
         }
     }
 
@@ -245,7 +245,7 @@ public class AppPrivateAPI {
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("获取失败！");
+            return Result.error("system.failed.operation",null);
         }
     }
 
@@ -259,7 +259,7 @@ public class AppPrivateAPI {
             return Result.ok(swWithlogDO);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("获取失败！");
+            return Result.error("system.failed.operation",null);
         }
     }
 
@@ -268,17 +268,17 @@ public class AppPrivateAPI {
      * */
     @RequestMapping("check_user")
     @ResponseBody
-    public Object checkUser(HttpServletRequest request, String userId) {
+    public Result checkUser(HttpServletRequest request, String userId) {
         if(StringUtils.isBlank(userId)){
-            return ServerResponse.createByError("收款账户不存在");
+            return Result.error("AppPrivateAPI.checkUser.receiver.not.exist",null);
         }
         SwUserBasicDO user = swUserBasicService.get(Integer.parseInt(userId));
         if (user == null) {
-            return ServerResponse.createByError("收款账户不存在");
+            return Result.error("AppPrivateAPI.checkUser.receiver.not.exist",null);
         }
         if(user.getEmail() != null){
             if(user.getEmail().endsWith("canceled")){
-                return ServerResponse.createByError("收款账户已注销");
+                return Result.error("AppPrivateAPI.checkUser.receiver.written.off",null);
             }
         }
         return Result.ok(user);
@@ -289,14 +289,14 @@ public class AppPrivateAPI {
      * */
     @RequestMapping("transfer")
     @ResponseBody
-    public ServerResponse<String> TransferAccount(HttpServletRequest request, @RequestParam String userId, @RequestParam double amount,
+    public Result TransferAccount(HttpServletRequest request, @RequestParam String userId, @RequestParam double amount,
                                                   @RequestParam String coinId, @RequestParam String remark, @RequestParam String tradingPassword) {
         SwUserBasicDO user = AppUserUtils.getUser(request);
         String msg = swConsumeLogService.transfer(user, userId, amount, coinId, remark, tradingPassword);
         if(StringUtils.isNotBlank(msg)){
-            return ServerResponse.createByError(msg);
+            return Result.error(msg);
         }
-        return ServerResponse.createBySuccess("转账成功");
+        return Result.ok();
 
     }
 }

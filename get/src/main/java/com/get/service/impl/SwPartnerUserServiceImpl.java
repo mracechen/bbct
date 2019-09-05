@@ -25,6 +25,10 @@ public class SwPartnerUserServiceImpl implements SwPartnerUserService {
     public List<SwPartnerUserDO> list(Map<String, Object> map) {
         return swPartnerUserDao.list(map);
     }
+    @Override
+    public SwPartnerUserDO getByUserId(Integer userId, Integer status, String delFlag) {
+        return swPartnerUserDao.getByUserId(userId,status,delFlag);
+    }
 
     @Override
     public int count(Map<String, Object> map) {

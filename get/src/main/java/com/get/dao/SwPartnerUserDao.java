@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwPartnerUserDO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户持有升币金表
@@ -17,6 +18,8 @@ public interface SwPartnerUserDao {
     SwPartnerUserDO get(String tid);
 
     List<SwPartnerUserDO> list(Map<String, Object> map);
+
+    SwPartnerUserDO getByUserId(@Param("userId") Integer userId, @Param("status") Integer status, @Param("delFlag") String delFlag);
 
     int count(Map<String, Object> map);
 

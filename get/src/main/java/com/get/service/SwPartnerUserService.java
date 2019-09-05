@@ -17,6 +17,8 @@ public interface SwPartnerUserService {
 
     List<SwPartnerUserDO> list(Map<String, Object> map);
 
+    SwPartnerUserDO getByUserId(Integer userId, Integer status, String delFlag);
+
     int count(Map<String, Object> map);
 
     int save(SwPartnerUserDO swPartnerUser);

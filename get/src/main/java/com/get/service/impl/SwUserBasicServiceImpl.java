@@ -1,7 +1,10 @@
 package com.get.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.common.utils.MyMD5Utils;
 import com.common.utils.Result;
+import com.common.utils.blockChain.BaseParamEntity;
+import com.common.utils.blockChain.ParanEntity;
 import com.get.domain.SwCoinTypeDO;
 import com.get.domain.SwWalletsDO;
 import com.get.service.SwCoinTypeService;
@@ -9,7 +12,20 @@ import com.get.service.SwWalletsService;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.NumberStatic;
 import com.get.statuc.RecordEnum;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -22,6 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+@Component
 public class SwUserBasicServiceImpl implements SwUserBasicService {
     @Autowired
     private SwUserBasicDao swUserBasicDao;
@@ -31,6 +48,14 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
 
     @Autowired
     private SwCoinTypeService swCoinTypeService;
+
+    @Value("${configs.blockChain.url}")
+    private String blockChainUrl;
+
+    @Value("${configs.blockChain.method.insertMemo}")
+    private String insertMemoMethod;
+
+    Log log = LogFactory.getLog(SwUserBasicServiceImpl.class);
 
     @Override
     public SwUserBasicDO get(Integer tid) {
@@ -74,21 +99,35 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Object userReg(SwUserBasicDO userBasicDO) {
-
+    public Object userReg(SwUserBasicDO userBasicDO) throws Exception{
         userBasicDO.setLoginPass(MyMD5Utils.encodingAdmin(userBasicDO.getLoginPass()));
         userBasicDO.setCreateDate(new Date());
         userBasicDO.setUpdateDate(new Date());
         userBasicDO.setDelFlag(CommonStatic.NOTDELETE);
         save(userBasicDO);
-
+        HttpPost post = new HttpPost(blockChainUrl);
+        ParanEntity params = new ParanEntity();
+        params.setUserId(userBasicDO.getTid());
+        BaseParamEntity baseParamEntity = new BaseParamEntity(insertMemoMethod,params);
+        StringEntity entity = new StringEntity(JSON.toJSONString(baseParamEntity));
+        post.setHeader("Content-Type", "application/json;charset=utf8");
+        post.setEntity(entity);
+        log.info("注册用户，将userID["+userBasicDO.getTid()+"]传给区块链");
+        CloseableHttpResponse response = HttpClientBuilder.create().build().execute(post);
+        Boolean resultStatus = false;
+        if(response.getStatusLine() != null){
+            int statusCode = response.getStatusLine().getStatusCode();
+            if(statusCode == 200){
+                resultStatus = true;
+            }
+        }
+        if(!resultStatus){
+            throw new Exception("区块链注册用户失败！");
+        }
         Map<String, Object> queryParam = new HashMap<>();
         queryParam.put("email", userBasicDO.getEmail());
         List<SwUserBasicDO> list = swUserBasicDao.list(queryParam);
-
         SwUserBasicDO user = list.get(0);
-
-
         //取出数据库所有币种，每个币种均给他创建一个钱包
         queryParam.clear();
         queryParam.put("delFlag", CommonStatic.NOTDELETE);
@@ -111,7 +150,6 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
                 }
             }
         }
-        //TODO 调用区块链接口，将UserID传过去
 
         user.setUsername("sz" + user.getTid());
         swUserBasicDao.update(user);

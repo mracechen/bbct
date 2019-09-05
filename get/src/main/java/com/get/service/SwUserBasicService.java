@@ -27,7 +27,7 @@ public interface SwUserBasicService {
     Boolean checkTradingPassword(Integer userId, String email, String sPassword);
 
     @Transactional(rollbackFor = Exception.class)
-    Object userReg(SwUserBasicDO userBasicDO);
+    Object userReg(SwUserBasicDO userBasicDO) throws Exception;
 
     List<SwUserBasicDO> list(Map<String, Object> map);
 

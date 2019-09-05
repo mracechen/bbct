@@ -106,29 +106,27 @@ public class SwConsumeLogServiceImpl implements SwConsumeLogService {
     public String transfer(SwUserBasicDO user, String userId, double amount, String coinId, String remark, String tradingPassword) {
 
         if(StringUtils.isBlank(userId) || StringUtils.isBlank(amount) || StringUtils.isBlank(coinId)){
-            return "参数错误";
+            return "system.failed.operation";
         }
         Boolean aBoolean = swUserBasicService.checkTradingPassword(user.getTid(), user.getEmail(), tradingPassword);
         if (!aBoolean) {
-            return "交易密码错误";
+            return "system.password.error";
         }
         //转账
         SwWalletsDO walletsDO = swWalletsService.getWallet(user.getTid(), coinId);
         if (walletsDO == null) {
-            return "转账账户钱包异常，转账失败";
+            return "system.wallet.error";
         }
         if (walletsDO.getCurrency() == null || walletsDO.getCurrency().doubleValue() < amount) {
-            return "账户余额不足";
+            return "system.balance.not.enough";
         }
         SwUserBasicDO swUserBasicDOReceive = swUserBasicService.get(Integer.parseInt(userId));
         SwWalletsDO walletsDOReceive = swWalletsService.getWallet(swUserBasicDOReceive.getTid(), coinId);
         if (walletsDOReceive == null) {
-            return "收款账户钱包异常，转账失败";
+            return "system.wallet.error";
         }
         //记录转账账户流水
-        if (remark.equals("")) {
-            remark = languagei18nUtils.getMessage("user.transfer.account",swUserBasicDOReceive.getUsername());
-        }
+        remark = languagei18nUtils.getMessage("system.transfer",swUserBasicDOReceive.getUsername());
         SwAccountRecordDO accountRecordTransfer = SwAccountRecordDO.create(
                 user.getTid(),
                 RecordEnum.transfer.getType(),
@@ -140,7 +138,7 @@ public class SwConsumeLogServiceImpl implements SwConsumeLogService {
         swAccountRecordService.save(accountRecordTransfer);
 
         //记录收款账户流水
-        String receiveRemark = languagei18nUtils.getMessage("user.receive.account",user.getUsername());
+        String receiveRemark = languagei18nUtils.getMessage("system.receivables",user.getUsername());
         SwAccountRecordDO accountRecordReceive = SwAccountRecordDO.create(
                 swUserBasicDOReceive.getTid(),
                 RecordEnum.receivables.getType(),
@@ -156,7 +154,7 @@ public class SwConsumeLogServiceImpl implements SwConsumeLogService {
         walletsDOReceive.setCurrency(new BigDecimal(amount).setScale(NumberStatic.BigDecimal_Scale_Num, NumberStatic.BigDecimal_Scale_Model));
         int updateReceive = swWalletsService.update(walletsDOReceive);
         if(updateTransfer < 1 || updateReceive < 1){
-            return "转账失败";
+            return "system.failed.operation";
         }else{
             return "";
         }

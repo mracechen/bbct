@@ -7,6 +7,13 @@
         select `tid`,`user_id`,`partner_id`,`total_num`,`left_num`,`status`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`        from t_sw_partner_user where tid = #{value}
     </select>
 
+    <select id="getByUserId" resultType="com.get.domain.SwPartnerUserDO">
+        select
+        `tid`,`user_id`,`partner_id`,`total_num`,`left_num`,`status`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`
+        from t_sw_partner_user
+        where user_id = #{userId} and status = #{status} and del_flag = #{delFlag}
+    </select>
+
     <select id="list" resultType="com.get.domain.SwPartnerUserDO">
         select `tid`,`user_id`,`partner_id`,`total_num`,`left_num`,`status`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`        from t_sw_partner_user
         <where>

@@ -30,6 +30,9 @@ public class IDUtils {
     public static Long randomNumber() {
         return new Random().nextLong();
     }
+    public static Integer randomInt() {
+        return new Random().nextInt();
+    }
 
     public static String getCheckCode() {
         int random = (int) ((Math.random() * 9 + 1) * 1000);

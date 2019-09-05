@@ -39,12 +39,12 @@ public class SwReleaseRecordDO implements Serializable {
     private String delFlag;
             //释放目标类型，1-固币金，2-优币金，3-升币金
     private Integer ex1;
-            //ex2
-    private String ex2;
+            //释放目标用户ID
+    private Integer ex2;
             //ex3
     private String ex3;
 
-    public static SwReleaseRecordDO create(String targetId, Double amount, Integer causeType, Integer causeUserId, Integer targetType){
+    public static SwReleaseRecordDO create(String targetId, String causeId, Double amount, Integer causeType, Integer causeUserId, Integer targetUserId, Integer targetType){
         SwReleaseRecordDO swReleaseRecordDO = new SwReleaseRecordDO();
         swReleaseRecordDO.setTid(IDUtils.randomStr());
         swReleaseRecordDO.setTargetId(targetId);
@@ -54,6 +54,8 @@ public class SwReleaseRecordDO implements Serializable {
         swReleaseRecordDO.setCreateDate(new Date());
         swReleaseRecordDO.setUpdateDate(new Date());
         swReleaseRecordDO.setEx1(targetType);
+        swReleaseRecordDO.setEx2(targetUserId);
+        swReleaseRecordDO.setEx3(causeId);
         swReleaseRecordDO.setDelFlag(CommonStatic.NOTDELETE);
         return swReleaseRecordDO;
     }

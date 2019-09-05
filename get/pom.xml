@@ -40,7 +40,6 @@
             <artifactId>javase</artifactId>
             <version>2.0</version>
         </dependency>
-
         <!-- <dependency>
              <groupId>com.sunyalong</groupId>
              <artifactId>validate</artifactId>

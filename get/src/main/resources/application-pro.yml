@@ -98,3 +98,16 @@ configs:
 
   chargeAddress: asdfg
   withdrawFee: 5
+  # 上面多少代可以获得加速
+  generateReleaseCode: 859ND9
+  generateNum: 3
+
+  blockChain:
+    url: http://10.235.20.211:8082
+    method:
+      #插入userID
+      insertMemo: contract.insert_memo
+      #提现
+      withdraw: balance.withdraw
+      #删除userID
+      deleteMemo: contract.erase_memo
