@@ -75,6 +75,7 @@ public class AppPrivateAPI {
      * */
     @RequestMapping(value = "apply_for_evangelist",method = RequestMethod.POST)
     public Result resetLoginPassword(@RequestBody SwEvangelistInfoDO swEvangelistInfoDO) {
+        //TODO 如果审核通过，系统用申请资料中提供的邮箱自动创建一个布道者账号
         try {
             if(swEvangelistInfoDO.getUserId() == null
                     || StringUtils.isBlank(swEvangelistInfoDO.getEmail())
@@ -297,6 +298,5 @@ public class AppPrivateAPI {
             return Result.error(msg);
         }
         return Result.ok();
-
     }
 }

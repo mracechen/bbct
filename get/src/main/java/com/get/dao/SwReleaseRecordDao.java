@@ -1,9 +1,12 @@
 package com.get.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwReleaseRecordDO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 释放记录表
@@ -15,6 +18,8 @@ import com.get.domain.SwReleaseRecordDO;
 public interface SwReleaseRecordDao {
 
     SwReleaseRecordDO get(String tid);
+
+    Double getSumByUserIdAndDate(@Param("userId") Integer userId, @Param("beginDate") Date beginDate, @Param("endDate") Date endDate);
 
     List<SwReleaseRecordDO> list(Map<String, Object> map);
 

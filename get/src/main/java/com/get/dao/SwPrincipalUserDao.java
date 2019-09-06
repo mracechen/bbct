@@ -21,7 +21,7 @@ public interface SwPrincipalUserDao {
 
     List<SwPrincipalUserDO> getWaitingResolvePrincipal();
 
-    SwPrincipalUserDO getByUserId(@Param("userId") Integer userId, @Param("status") Integer status, @Param("delFlag") String delFlag);
+    List<SwPrincipalUserDO> getByUserId(@Param("userId") Integer userId, @Param("status") Integer status, @Param("delFlag") String delFlag);
 
     int count(Map<String, Object> map);
 

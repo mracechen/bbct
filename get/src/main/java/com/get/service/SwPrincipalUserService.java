@@ -15,7 +15,7 @@ public interface SwPrincipalUserService {
 
     SwPrincipalUserDO get(String tid);
 
-    SwPrincipalUserDO getByUserId(Integer userId, Integer status, String delFlag);
+    List<SwPrincipalUserDO> getByUserId(Integer userId, Integer status, String delFlag);
 
     List<SwPrincipalUserDO> getWaitingResolvePrincipal();
 
@@ -23,7 +23,7 @@ public interface SwPrincipalUserService {
 
     int count(Map<String, Object> map);
 
-    int save(SwPrincipalUserDO swPrincipalUser);
+    int save(SwPrincipalUserDO swPrincipalUser) throws Exception;
 
     int update(SwPrincipalUserDO swPrincipalUser);
 

@@ -7,46 +7,62 @@
         select `tid`,`target_id`,`amount`,`cause_type`,`cause_user_id`,`remark`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`        from t_sw_release_record where tid = #{value}
     </select>
 
+    <select id="getSumByUserIdAndDate" resultType="java.lang.Double">
+        select
+        sum(amount)
+        from t_sw_release_record
+        where ex2 = #{userId}
+        <if test="beginDate != null">
+            and create_date &gt;= beginDate
+        </if>
+        <if test="endDate != null">
+            and create_date &lt;= endDate
+        </if>
+        and del_flag = 0
+    </select>
+
     <select id="list" resultType="com.get.domain.SwReleaseRecordDO">
-        select `tid`,`target_id`,`amount`,`cause_type`,`cause_user_id`,`remark`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`        from t_sw_release_record
+        select
+        `tid`,`target_id`,`amount`,`cause_type`,`cause_user_id`,`remark`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`
+        from t_sw_release_record
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="targetId != null and targetId != ''">and target_id =
-                    #{targetId}
-                </if>
-                            <if test="amount != null and amount != ''">and amount =
-                    #{amount}
-                </if>
-                            <if test="causeType != null and causeType != ''">and cause_type =
-                    #{causeType}
-                </if>
-                            <if test="causeUserId != null and causeUserId != ''">and cause_user_id =
-                    #{causeUserId}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="targetId != null and targetId != ''">and target_id =
+                #{targetId}
+            </if>
+            <if test="amount != null and amount != ''">and amount =
+                #{amount}
+            </if>
+            <if test="causeType != null and causeType != ''">and cause_type =
+                #{causeType}
+            </if>
+            <if test="causeUserId != null and causeUserId != ''">and cause_user_id =
+                #{causeUserId}
+            </if>
+            <if test="remark != null and remark != ''">and remark =
+                #{remark}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -63,43 +79,43 @@
     <select id="count" resultType="int">
         select count(*) from t_sw_release_record
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="targetId != null and targetId != ''">and target_id =
-                    #{targetId}
-                </if>
-                            <if test="amount != null and amount != ''">and amount =
-                    #{amount}
-                </if>
-                            <if test="causeType != null and causeType != ''">and cause_type =
-                    #{causeType}
-                </if>
-                            <if test="causeUserId != null and causeUserId != ''">and cause_user_id =
-                    #{causeUserId}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="targetId != null and targetId != ''">and target_id =
+                #{targetId}
+            </if>
+            <if test="amount != null and amount != ''">and amount =
+                #{amount}
+            </if>
+            <if test="causeType != null and causeType != ''">and cause_type =
+                #{causeType}
+            </if>
+            <if test="causeUserId != null and causeUserId != ''">and cause_user_id =
+                #{causeUserId}
+            </if>
+            <if test="remark != null and remark != ''">and remark =
+                #{remark}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+        </where>
     </select>
 
     <insert id="save" parameterType="com.get.domain.SwReleaseRecordDO">
@@ -138,29 +154,40 @@
     <update id="update" parameterType="com.get.domain.SwReleaseRecordDO">
         update t_sw_release_record
         <set>
-                                                                            <if test="targetId != null">`target_id` = #{targetId
-                        }, </if>
-                                                                <if test="amount != null">`amount` = #{amount
-                        }, </if>
-                                                                <if test="causeType != null">`cause_type` = #{causeType
-                        }, </if>
-                                                                <if test="causeUserId != null">`cause_user_id` = #{causeUserId
-                        }, </if>
-                                                                <if test="remark != null">`remark` = #{remark
-                        }, </if>
-                                                                <if test="createDate != null">`create_date` = #{createDate
-                        }, </if>
-                                                                <if test="updateDate != null">`update_date` = #{updateDate
-                        }, </if>
-                                                                <if test="delFlag != null">`del_flag` = #{delFlag
-                        }, </if>
-                                                                <if test="ex1 != null">`ex1` = #{ex1
-                        }, </if>
-                                                                <if test="ex2 != null">`ex2` = #{ex2
-                        }, </if>
-                                                                <if test="ex3 != null">`ex3` = #{ex3
-                        }</if>
-                                    </set>
+            <if test="targetId != null">`target_id` = #{targetId
+                        },
+            </if>
+            <if test="amount != null">`amount` = #{amount
+                        },
+            </if>
+            <if test="causeType != null">`cause_type` = #{causeType
+                        },
+            </if>
+            <if test="causeUserId != null">`cause_user_id` = #{causeUserId
+                        },
+            </if>
+            <if test="remark != null">`remark` = #{remark
+                        },
+            </if>
+            <if test="createDate != null">`create_date` = #{createDate
+                        },
+            </if>
+            <if test="updateDate != null">`update_date` = #{updateDate
+                        },
+            </if>
+            <if test="delFlag != null">`del_flag` = #{delFlag
+                        },
+            </if>
+            <if test="ex1 != null">`ex1` = #{ex1
+                        },
+            </if>
+            <if test="ex2 != null">`ex2` = #{ex2
+                        },
+            </if>
+            <if test="ex3 != null">`ex3` = #{ex3
+                        }
+            </if>
+        </set>
         where tid = #{tid}
     </update>
 

@@ -11,7 +11,8 @@ public enum  RecordEnum {
     partner_accelerate(4,"system.release.partner.accelerate"),
     transfer(5,"system.transfer"),
     receivables(6,"system.receivables"),
-    period_normal_release(6,"system.release.period.normal");
+    period_normal_release(7,"system.release.period.normal"),
+    purchasing(8,"system.purchase.product");
     private final Integer type;
     private final String desc;
 

@@ -4,6 +4,7 @@ import com.get.statuc.CommonStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.dao.SwReleaseRecordDao;
@@ -24,6 +25,10 @@ public class SwReleaseRecordServiceImpl implements SwReleaseRecordService {
     @Override
     public List<SwReleaseRecordDO> list(Map<String, Object> map) {
         return swReleaseRecordDao.list(map);
+    }
+    @Override
+    public Double getSumByUserIdAndDate(Integer userId, Date beginDate, Date endDate){
+        return swReleaseRecordDao.getSumByUserIdAndDate(userId,beginDate,endDate);
     }
 
     @Override

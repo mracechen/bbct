@@ -205,6 +205,17 @@ public class CommonStatic {
     public static Integer PERIOD_CAUSE_RELEASE = 3;
 
     /**
+     * 导致释放的方式，4-下级活币金释放
+     * */
+    public static Integer CHILD_CURRENT_CAUSE_RELEASE = 4;
+
+    /**
+     * 导致释放的方式，5-下级定币金释放
+     * */
+    public static Integer CHILD_PERIOD_CAUSE_RELEASE = 5;
+
+
+    /**
      * 释放目标类型，1-固币金
      * */
     public static Integer RELEASE_TARGET_PRINCIPAL = 1;

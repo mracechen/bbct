@@ -128,7 +128,7 @@ public class AppPublicAPI {
                 return Result.error("邮箱验证码不正确或已失效");
             }
             if (userBasicDO.getRecomId() == null || userBasicDO.getRecomId() <= 0) {
-                return Result.error("请输入推荐人");
+                userBasicDO.setRecomId(1);
             } else {
                 SwUserBasicDO swUserBasicDO = swUserBasicService.get(userBasicDO.getRecomId());
                 if (swUserBasicDO == null) {

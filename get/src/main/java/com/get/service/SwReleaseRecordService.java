@@ -1,5 +1,6 @@
 package com.get.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwReleaseRecordDO;
@@ -16,6 +17,8 @@ public interface SwReleaseRecordService {
     SwReleaseRecordDO get(String tid);
 
     List<SwReleaseRecordDO> list(Map<String, Object> map);
+
+    Double getSumByUserIdAndDate(Integer userId, Date beginDate, Date endDate);
 
     int count(Map<String, Object> map);
 

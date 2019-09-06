@@ -20,7 +20,7 @@ public interface SwPeriodUserService {
 
     List<SwPeriodUserDO> getWaitingResolvePeriod(Date beginDate, Date endDate);
 
-    SwPeriodUserDO getByUserId(Integer userId, Integer status, String delFlag);
+    List<SwPeriodUserDO> getByUserId(Integer userId, Integer status, String delFlag);
 
     int count(Map<String, Object> map);
 

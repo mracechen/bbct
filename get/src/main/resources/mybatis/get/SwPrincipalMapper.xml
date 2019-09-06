@@ -8,60 +8,62 @@
     </select>
 
     <select id="list" resultType="com.get.domain.SwPrincipalDO">
-        select `tid`,`name`,`coin_type_id`,`principal_num`,`reward_percent`,`contract_term`,`charge_term`,`charge_percent`,`create_date`,`update_date`,`del_flag`,`remark`,`ex1`,`ex2`,`ex3`        from t_sw_principal
+        select
+        `tid`,`name`,`coin_type_id`,`principal_num`,`reward_percent`,`contract_term`,`charge_term`,`charge_percent`,`create_date`,`update_date`,`del_flag`,`remark`,`ex1`,`ex2`,`ex3`
+        from t_sw_principal
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="name != null and name != ''">and name =
-                    #{name}
-                </if>
-                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
-                    #{coinTypeId}
-                </if>
-                            <if test="principalNum != null and principalNum != ''">and principal_num =
-                    #{principalNum}
-                </if>
-                            <if test="rewardPercent != null and rewardPercent != ''">and reward_percent =
-                    #{rewardPercent}
-                </if>
-                            <if test="contractTerm != null and contractTerm != ''">and contract_term =
-                    #{contractTerm}
-                </if>
-                            <if test="chargeTerm != null and chargeTerm != ''">and charge_term =
-                    #{chargeTerm}
-                </if>
-                            <if test="chargePercent != null and chargePercent != ''">and charge_percent =
-                    #{chargePercent}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="name != null and name != ''">and name =
+                #{name}
+            </if>
+            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+                #{coinTypeId}
+            </if>
+            <if test="principalNum != null and principalNum != ''">and principal_num =
+                #{principalNum}
+            </if>
+            <if test="rewardPercent != null and rewardPercent != ''">and reward_percent =
+                #{rewardPercent}
+            </if>
+            <if test="contractTerm != null and contractTerm != ''">and contract_term =
+                #{contractTerm}
+            </if>
+            <if test="chargeTerm != null and chargeTerm != ''">and charge_term =
+                #{chargeTerm}
+            </if>
+            <if test="chargePercent != null and chargePercent != ''">and charge_percent =
+                #{chargePercent}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="remark != null and remark != ''">and remark =
+                #{remark}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by principal_num asc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -72,52 +74,52 @@
     <select id="count" resultType="int">
         select count(*) from t_sw_principal
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="name != null and name != ''">and name =
-                    #{name}
-                </if>
-                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
-                    #{coinTypeId}
-                </if>
-                            <if test="principalNum != null and principalNum != ''">and principal_num =
-                    #{principalNum}
-                </if>
-                            <if test="rewardPercent != null and rewardPercent != ''">and reward_percent =
-                    #{rewardPercent}
-                </if>
-                            <if test="contractTerm != null and contractTerm != ''">and contract_term =
-                    #{contractTerm}
-                </if>
-                            <if test="chargeTerm != null and chargeTerm != ''">and charge_term =
-                    #{chargeTerm}
-                </if>
-                            <if test="chargePercent != null and chargePercent != ''">and charge_percent =
-                    #{chargePercent}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="name != null and name != ''">and name =
+                #{name}
+            </if>
+            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+                #{coinTypeId}
+            </if>
+            <if test="principalNum != null and principalNum != ''">and principal_num =
+                #{principalNum}
+            </if>
+            <if test="rewardPercent != null and rewardPercent != ''">and reward_percent =
+                #{rewardPercent}
+            </if>
+            <if test="contractTerm != null and contractTerm != ''">and contract_term =
+                #{contractTerm}
+            </if>
+            <if test="chargeTerm != null and chargeTerm != ''">and charge_term =
+                #{chargeTerm}
+            </if>
+            <if test="chargePercent != null and chargePercent != ''">and charge_percent =
+                #{chargePercent}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="remark != null and remark != ''">and remark =
+                #{remark}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+        </where>
     </select>
 
     <insert id="save" parameterType="com.get.domain.SwPrincipalDO">
@@ -162,35 +164,49 @@
     <update id="update" parameterType="com.get.domain.SwPrincipalDO">
         update t_sw_principal
         <set>
-                                                                            <if test="name != null">`name` = #{name
-                        }, </if>
-                                                                <if test="coinTypeId != null">`coin_type_id` = #{coinTypeId
-                        }, </if>
-                                                                <if test="principalNum != null">`principal_num` = #{principalNum
-                        }, </if>
-                                                                <if test="rewardPercent != null">`reward_percent` = #{rewardPercent
-                        }, </if>
-                                                                <if test="contractTerm != null">`contract_term` = #{contractTerm
-                        }, </if>
-                                                                <if test="chargeTerm != null">`charge_term` = #{chargeTerm
-                        }, </if>
-                                                                <if test="chargePercent != null">`charge_percent` = #{chargePercent
-                        }, </if>
-                                                                <if test="createDate != null">`create_date` = #{createDate
-                        }, </if>
-                                                                <if test="updateDate != null">`update_date` = #{updateDate
-                        }, </if>
-                                                                <if test="delFlag != null">`del_flag` = #{delFlag
-                        }, </if>
-                                                                <if test="remark != null">`remark` = #{remark
-                        }, </if>
-                                                                <if test="ex1 != null">`ex1` = #{ex1
-                        }, </if>
-                                                                <if test="ex2 != null">`ex2` = #{ex2
-                        }, </if>
-                                                                <if test="ex3 != null">`ex3` = #{ex3
-                        }</if>
-                                    </set>
+            <if test="name != null">`name` = #{name
+                        },
+            </if>
+            <if test="coinTypeId != null">`coin_type_id` = #{coinTypeId
+                        },
+            </if>
+            <if test="principalNum != null">`principal_num` = #{principalNum
+                        },
+            </if>
+            <if test="rewardPercent != null">`reward_percent` = #{rewardPercent
+                        },
+            </if>
+            <if test="contractTerm != null">`contract_term` = #{contractTerm
+                        },
+            </if>
+            <if test="chargeTerm != null">`charge_term` = #{chargeTerm
+                        },
+            </if>
+            <if test="chargePercent != null">`charge_percent` = #{chargePercent
+                        },
+            </if>
+            <if test="createDate != null">`create_date` = #{createDate
+                        },
+            </if>
+            <if test="updateDate != null">`update_date` = #{updateDate
+                        },
+            </if>
+            <if test="delFlag != null">`del_flag` = #{delFlag
+                        },
+            </if>
+            <if test="remark != null">`remark` = #{remark
+                        },
+            </if>
+            <if test="ex1 != null">`ex1` = #{ex1
+                        },
+            </if>
+            <if test="ex2 != null">`ex2` = #{ex2
+                        },
+            </if>
+            <if test="ex3 != null">`ex3` = #{ex3
+                        }
+            </if>
+        </set>
         where tid = #{tid}
     </update>
 

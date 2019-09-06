@@ -41,7 +41,7 @@ public class SwReleaseRecordDO implements Serializable {
     private Integer ex1;
             //释放目标用户ID
     private Integer ex2;
-            //ex3
+            //导致释放的项目id
     private String ex3;
 
     public static SwReleaseRecordDO create(String targetId, String causeId, Double amount, Integer causeType, Integer causeUserId, Integer targetUserId, Integer targetType){

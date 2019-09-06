@@ -33,7 +33,7 @@ public class SwPeriodUserServiceImpl implements SwPeriodUserService {
     }
 
     @Override
-    public SwPeriodUserDO getByUserId(Integer userId, Integer status, String delFlag){
+    public List<SwPeriodUserDO> getByUserId(Integer userId, Integer status, String delFlag){
         return swPeriodUserDao.getByUserId(userId,status,delFlag);
     }
 

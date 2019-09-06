@@ -91,7 +91,7 @@ public class releaseTask {
     @Transactional(rollbackFor = Exception.class)
     public void all(){
         try {
-            String formatDateOnMinute = getFormatDateOnMinute(DateUtils.dateAddDays(new Date(),-1));
+            String formatDateOnMinute = DateUtils.getFormatDateOnMinute(DateUtils.dateAddDays(new Date(),-1));
             Date yesterdayThisTime = DateUtils.dateParse(formatDateOnMinute, "yyyy-MM-dd HH:mm:ss");
 
 //            List<SwPrincipalUserDO> waitingResolvePrincipal = swPrincipalUserService.getWaitingResolvePrincipal();
@@ -294,7 +294,11 @@ public class releaseTask {
      * */
     private Boolean releasePrincipal(Integer type,Integer causeUserId, Integer targetUserId, BigDecimal releaseNum, String causeTypeName, String causeId, String sign) throws Exception{
         //获取这个人的固币金
-        SwPrincipalUserDO swPrincipalUserDO = swPrincipalUserService.getByUserId(targetUserId, CommonStatic.NO_RELEASE,CommonStatic.NOTDELETE);
+        List<SwPrincipalUserDO> swPrincipalUserDOList = swPrincipalUserService.getByUserId(targetUserId, CommonStatic.NO_RELEASE,CommonStatic.NOTDELETE);
+        if(swPrincipalUserDOList == null && swPrincipalUserDOList.size() > 1){
+            throw new Exception("固币金数据异常");
+        }
+        SwPrincipalUserDO swPrincipalUserDO = swPrincipalUserDOList.get(0);
         if(swPrincipalUserDO != null){
             SwPrincipalDO swPrincipalDO;
             //将固币金项目放入内存
@@ -514,19 +518,4 @@ public class releaseTask {
         return false;
     }
 
-    private String getFormatDateOnMinute(Date date){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-        return year +
-                "-" + (month < 10 ? "0" + month : month) +
-                "-" + (day < 10 ? "0" + day : day) +
-                " " + (hour < 10 ? "0" + hour : hour) +
-                ":" + (minute < 10 ? "0" + minute : minute) +
-                ":" + "00";
-    }
 }
