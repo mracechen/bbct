@@ -72,11 +72,12 @@ public class WebLogAspect {
             LanguageEnum languageEnum = LanguageEnum.valueOf(language);
             locale = languageEnum.getLocale();
         }catch (Exception e){}
-        if(locale != null){
-            if(result.getMsgCode() != null){
-                String message = languagei18nUtils.getMessage(result.getMsgCode(), locale, result.getMsgParams());
-                result.setMsg(message);
-            }
+        if(locale == null){
+            locale = Locale.getDefault();
+        }
+        if(result.getMsgCode() != null){
+            String message = languagei18nUtils.getMessage(result.getMsgCode(), locale, result.getMsgParams());
+            result.setMsg(message);
         }
         logger.info("耗时 : " + (System.currentTimeMillis() - startTime));
         return result;

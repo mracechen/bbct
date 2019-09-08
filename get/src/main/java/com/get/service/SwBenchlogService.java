@@ -19,7 +19,7 @@ public interface SwBenchlogService {
 
     int count(Map<String, Object> map);
 
-    int save(SwBenchlogDO swBenchlog);
+    int save(SwBenchlogDO swBenchlog) throws Exception;
 
     int update(SwBenchlogDO swBenchlog);
 

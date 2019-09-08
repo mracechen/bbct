@@ -58,9 +58,10 @@ public class Result {
     }
 
     public static Result error(String msg) {
-        return new Result("500", msg, null);
+        return new Result("500", msg, null,null);
     }
-    public static Result error(String msgCode,Object[] msgParams) {
+
+    public static Result error(String msgCode,Object... msgParams) {
         return new Result("500",msgCode,null,msgParams);
     }
 

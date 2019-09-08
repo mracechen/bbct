@@ -24,7 +24,7 @@ public interface SwPeriodUserService {
 
     int count(Map<String, Object> map);
 
-    int save(SwPeriodUserDO swPeriodUser);
+    int save(SwPeriodUserDO swPeriodUser) throws Exception;
 
     int update(SwPeriodUserDO swPeriodUser);
 

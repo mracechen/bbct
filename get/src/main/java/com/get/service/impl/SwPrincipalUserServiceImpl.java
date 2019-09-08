@@ -75,7 +75,7 @@ public class SwPrincipalUserServiceImpl implements SwPrincipalUserService {
         BigDecimal currency = wallet.getCurrency();
         wallet.setCurrency(new BigDecimal("0").subtract(new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum()))));
         wallet.setUpdateDate(new Date());
-        swWalletsService.save(wallet);
+        swWalletsService.update(wallet);
         swAccountRecordService.save(SwAccountRecordDO.create(
                 swPrincipalUser.getUserId(),
                 RecordEnum.purchasing.getType(),

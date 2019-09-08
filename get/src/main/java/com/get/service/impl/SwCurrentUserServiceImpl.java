@@ -68,6 +68,9 @@ public class SwCurrentUserServiceImpl implements SwCurrentUserService {
     @Transactional(rollbackFor = Exception.class)
     public int save(SwCurrentUserDO swCurrentUser) throws Exception {
         SwCurrentDO swCurrentDO = swCurrentService.get(swCurrentUser.getCurrentId());
+        if(swCurrentDO == null){
+            throw new Exception("活币金异常");
+        }
         SwWalletsDO wallet = swWalletsService.getWallet(swCurrentUser.getUserId(), swCurrentDO.getCoinTypeId());
         if(wallet == null){
             throw new Exception("钱包异常");
@@ -75,7 +78,7 @@ public class SwCurrentUserServiceImpl implements SwCurrentUserService {
         BigDecimal currency = wallet.getCurrency();
         wallet.setCurrency(new BigDecimal("0").subtract(new BigDecimal(String.valueOf(swCurrentUser.getEx1()))));
         wallet.setUpdateDate(new Date());
-        swWalletsService.save(wallet);
+        swWalletsService.update(wallet);
         swAccountRecordService.save(SwAccountRecordDO.create(
                 swCurrentUser.getUserId(),
                 RecordEnum.purchasing.getType(),

@@ -70,11 +70,16 @@ public class SwPeriodUserController {
     @PostMapping("/save")
     @RequiresPermissions("get:swPeriodUser:add")
     public R save(SwPeriodUserDO swPeriodUser) {
-        swPeriodUser.setCreateDate(new Date());
-        swPeriodUser.setUpdateDate(new Date());
-        swPeriodUser.setDelFlag(CommonStatic.NOTDELETE);
-        if (swPeriodUserService.save(swPeriodUser) > 0) {
-            return R.ok();
+        try {
+            swPeriodUser.setCreateDate(new Date());
+            swPeriodUser.setUpdateDate(new Date());
+            swPeriodUser.setDelFlag(CommonStatic.NOTDELETE);
+            if (swPeriodUserService.save(swPeriodUser) > 0) {
+                return R.ok();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error();
         }
         return R.error();
     }

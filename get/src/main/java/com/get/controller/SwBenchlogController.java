@@ -70,11 +70,16 @@ public class SwBenchlogController {
     @PostMapping("/save")
     @RequiresPermissions("get:swBenchlog:add")
     public R save(SwBenchlogDO swBenchlog) {
-        swBenchlog.setCreateDate(new Date());
-        swBenchlog.setUpdateDate(new Date());
-        swBenchlog.setDelFlag(CommonStatic.NOTDELETE);
-        if (swBenchlogService.save(swBenchlog) > 0) {
-            return R.ok();
+        try {
+            swBenchlog.setCreateDate(new Date());
+            swBenchlog.setUpdateDate(new Date());
+            swBenchlog.setDelFlag(CommonStatic.NOTDELETE);
+            if (swBenchlogService.save(swBenchlog) > 0) {
+                return R.ok();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error();
         }
         return R.error();
     }

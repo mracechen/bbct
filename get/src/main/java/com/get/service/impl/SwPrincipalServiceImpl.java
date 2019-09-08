@@ -1,5 +1,6 @@
 package com.get.service.impl;
 
+import com.common.utils.IDUtils;
 import com.get.statuc.CommonStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,9 @@ public class SwPrincipalServiceImpl implements SwPrincipalService {
 
     @Override
     public int save(SwPrincipalDO swPrincipal) {
+        if(swPrincipal.getTid() == null){
+            swPrincipal.setTid(IDUtils.randomStr());
+        }
         return swPrincipalDao.save(swPrincipal);
     }
 

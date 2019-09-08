@@ -121,6 +121,7 @@ public class releaseTask {
                 //修改释放时间，释放时间往后推一天（如果查出来的是昨天的数据，往后推一天就是今天了）
                 SwCurrentUserDO swCurrentUserDO = new SwCurrentUserDO();
                 swCurrentUserDO.setTid(e.getTid());
+                swCurrentUserDO.setCreateDate(e.getCreateDate());
                 Date releaseTime = e.getReleaseTime();
                 Date nextReleaseDay = DateUtils.dateAddDays(releaseTime, 1);
                 swCurrentUserDO.setReleaseTime(nextReleaseDay);
@@ -196,8 +197,8 @@ public class releaseTask {
                 BigDecimal releaseNum = new BigDecimal(e.getEx1().toString()).multiply(new BigDecimal(acceleratePercent.toString()));
                 //判断该用户有没有持有固币金（或者优币金，升币金，三者互斥），有的话加速下放自己的固币金（固币金减少，相应的钱放到钱包，添加释放记录，添加资金记录）
                 Integer userId = e.getUserId();
-                //给定币金加速
                 try {
+                    //给固币金加速
                     Boolean aBoolean = releasePrincipal(CommonStatic.PERIOD_CAUSE_RELEASE, userId, userId, releaseNum,"定币金",e.getTid(),sign);
                     //如果没有，则给优币金或升币金加速
                     if(!aBoolean){
@@ -222,7 +223,7 @@ public class releaseTask {
                     Integer key = s.getKey();
                     BigDecimal value = s.getValue();
                     try {
-                        //给定币金加速
+                        //给固币金加速
                         Boolean rBoolean = releasePrincipal(CommonStatic.PERIOD_CAUSE_RELEASE, userId, key, value,"定币金",e.getTid(),sign);
                         //如果没有，则给优币金或升币金加速
                         if(!rBoolean){
@@ -242,6 +243,7 @@ public class releaseTask {
                 //修改释放时间，释放时间往后推一天（如果查出来的是昨天的数据，往后推一天就是今天了）
                 SwPeriodUserDO swPeriodUserDO = new SwPeriodUserDO();
                 swPeriodUserDO.setTid(e.getTid());
+                swPeriodUserDO.setCreateDate(e.getCreateDate());
                 Date releaseTime = e.getReleaseTime();
                 Date nextReleaseDay = DateUtils.dateAddDays(releaseTime, 1);
                 swPeriodUserDO.setReleaseTime(nextReleaseDay);
@@ -295,8 +297,11 @@ public class releaseTask {
     private Boolean releasePrincipal(Integer type,Integer causeUserId, Integer targetUserId, BigDecimal releaseNum, String causeTypeName, String causeId, String sign) throws Exception{
         //获取这个人的固币金
         List<SwPrincipalUserDO> swPrincipalUserDOList = swPrincipalUserService.getByUserId(targetUserId, CommonStatic.NO_RELEASE,CommonStatic.NOTDELETE);
-        if(swPrincipalUserDOList == null && swPrincipalUserDOList.size() > 1){
+        if(swPrincipalUserDOList != null && swPrincipalUserDOList.size() > 1){
             throw new Exception("固币金数据异常");
+        }
+        if(swPrincipalUserDOList == null || swPrincipalUserDOList.size() == 0){
+            return false;
         }
         SwPrincipalUserDO swPrincipalUserDO = swPrincipalUserDOList.get(0);
         if(swPrincipalUserDO != null){
@@ -316,18 +321,19 @@ public class releaseTask {
                 swPrincipalUserDO.setLeftNum(new BigDecimal("0").subtract(releaseNum).doubleValue());
             }else{
                 //固币金全部释放，且状态改为已释放完
-                swPrincipalUserDO.setLeftNum(-swPrincipalUserDO.getLeftNum());
+                swPrincipalUserDO.setLeftNum(new BigDecimal("0").subtract(leftNum).doubleValue());
                 swPrincipalUserDO.setStatus(CommonStatic.RELEASED);
+                swPrincipalUserDO.setLeftTerm(0);
                 //标记此次释放的数量等于固币金剩余的全部数量
-                releaseNum = new BigDecimal(String.valueOf(swPrincipalUserDO.getLeftNum()));
+                releaseNum = leftNum;
             }
-            swPrincipalUserDO.setLeftTerm(-1);
+            Integer leftTerm = swPrincipalUserDO.getLeftTerm();
             SwWalletsDO wallet = swWalletsService.getWallet(targetUserId, swPrincipalDO.getCoinTypeId());
             //没有被加速完成，而是到期了，则全部释放
-            if(swPrincipalUserDO.getLeftTerm() < 0){
+            if(leftTerm <= 0){
                 BigDecimal curcurrency = wallet.getCurrency();
                 if(wallet != null){
-                    wallet.setCurrency(new BigDecimal(String.valueOf(swPrincipalUserDO.getLeftNum())));
+                    wallet.setCurrency(leftNum);
                     wallet.setUpdateDate(new Date());
                     swWalletsService.update(wallet);
                     //记录资金明细
@@ -336,7 +342,7 @@ public class releaseTask {
                             RecordEnum.principal_normal_release.getType(),
                             languagei18nUtils.getMessage(RecordEnum.principal_normal_release.getDesc()),
                             swPrincipalDO.getCoinTypeId(),
-                            swPrincipalUserDO.getLeftNum(),
+                            leftNum.doubleValue(),
                             curcurrency.doubleValue() + swPrincipalUserDO.getLeftNum()));
                     //记录释放记录
                     swReleaseRecordService.save(SwReleaseRecordDO.create(
@@ -348,9 +354,11 @@ public class releaseTask {
                             targetUserId,
                             CommonStatic.RELEASE_TARGET_PRINCIPAL));
                     swPrincipalUserDO.setStatus(CommonStatic.RELEASED);
-                    swPrincipalUserDO.setLeftNum(swPrincipalUserDO.getLeftNum());
+                    swPrincipalUserDO.setLeftNum(leftNum.doubleValue());
                     log.info("sign："+sign+",用户["+targetUserId+"]的--固币金"+swPrincipalUserDO.getTid()+"--到期全部释放");
                 }
+            }else{
+                swPrincipalUserDO.setLeftTerm(-1);
             }
             //更新用户的固币金
             swPrincipalUserDO.setUpdateDate(new Date());
@@ -366,7 +374,8 @@ public class releaseTask {
                         targetUserId,
                         RecordEnum.principal_accelerate.getType(),
                         languagei18nUtils.getMessage(RecordEnum.principal_accelerate.getDesc()),
-                        swPrincipalDO.getCoinTypeId(), releaseNum.doubleValue(),
+                        swPrincipalDO.getCoinTypeId(),
+                        releaseNum.doubleValue(),
                         curcurrency.add(releaseNum).doubleValue()));
                 //记录释放记录
                 swReleaseRecordService.save(SwReleaseRecordDO.create(
@@ -395,7 +404,6 @@ public class releaseTask {
      * @param causeId 导致释放的项目id
      * */
     private Boolean releaseEvangelist(Integer type, Integer causeUserId, Integer targetUserId, BigDecimal releaseNum, String causeTypeName, String causeId, String sign) throws Exception{
-        log.info("释放用户");
         //获取这个人的优币金
         SwEvangelistUserDO swEvangelistUserDO = swEvangelistUserService.getByUserId(targetUserId, CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
         if(swEvangelistUserDO != null){
@@ -415,10 +423,10 @@ public class releaseTask {
                 swEvangelistUserDO.setLeftNum(new BigDecimal("0").subtract(releaseNum).doubleValue());
             }else{
                 //优币金全部释放，且状态改为已释放完
-                swEvangelistUserDO.setLeftNum(-swEvangelistUserDO.getLeftNum());
+                swEvangelistUserDO.setLeftNum(new BigDecimal("0").subtract(leftNum).doubleValue());
                 swEvangelistUserDO.setStatus(CommonStatic.RELEASED);
                 //标记此次释放的数量等于优币金剩余的全部数量
-                releaseNum = new BigDecimal(String.valueOf(swEvangelistUserDO.getLeftNum()));
+                releaseNum = leftNum;
             }
             //更新用户的优币金
             swEvangelistUserService.update(swEvangelistUserDO);
@@ -434,7 +442,8 @@ public class releaseTask {
                         targetUserId,
                         RecordEnum.evangelist_accelerate.getType(),
                         languagei18nUtils.getMessage(RecordEnum.evangelist_accelerate.getDesc()),
-                        swEvangelistDO.getCoinTypeId(), releaseNum.doubleValue(),
+                        swEvangelistDO.getCoinTypeId(),
+                        releaseNum.doubleValue(),
                         curcurrency.add(releaseNum).doubleValue()));
                 //记录优币金释放记录
                 swReleaseRecordService.save(SwReleaseRecordDO.create(
@@ -481,10 +490,10 @@ public class releaseTask {
                 swPartnerUserDO.setLeftNum(new BigDecimal("0").subtract(releaseNum).doubleValue());
             }else{
                 //升币金全部释放，且状态改为已释放完
-                swPartnerUserDO.setLeftNum(-swPartnerUserDO.getLeftNum());
+                swPartnerUserDO.setLeftNum(new BigDecimal("0").subtract(leftNum).doubleValue());
                 swPartnerUserDO.setStatus(CommonStatic.RELEASED);
                 //标记此次释放的数量等于升币金剩余的全部数量
-                releaseNum = new BigDecimal(String.valueOf(swPartnerUserDO.getLeftNum()));
+                releaseNum = leftNum;
             }
             //更新用户的升币金
             swPartnerUserService.update(swPartnerUserDO);

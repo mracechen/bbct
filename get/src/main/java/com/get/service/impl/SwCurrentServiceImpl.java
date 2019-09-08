@@ -1,5 +1,6 @@
 package com.get.service.impl;
 
+import com.common.utils.IDUtils;
 import com.get.statuc.CommonStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,9 @@ public class SwCurrentServiceImpl implements SwCurrentService {
 
     @Override
     public int save(SwCurrentDO swCurrent) {
+        if(swCurrent.getTid() == null){
+            swCurrent.setTid(IDUtils.randomStr());
+        }
         return swCurrentDao.save(swCurrent);
     }
 

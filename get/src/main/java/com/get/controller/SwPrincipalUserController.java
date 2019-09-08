@@ -70,11 +70,16 @@ public class SwPrincipalUserController {
     @PostMapping("/save")
     @RequiresPermissions("get:swPrincipalUser:add")
     public R save(SwPrincipalUserDO swPrincipalUser) {
-        swPrincipalUser.setCreateDate(new Date());
-        swPrincipalUser.setUpdateDate(new Date());
-        swPrincipalUser.setDelFlag(CommonStatic.NOTDELETE);
-        if (swPrincipalUserService.save(swPrincipalUser) > 0) {
-            return R.ok();
+        try {
+            swPrincipalUser.setCreateDate(new Date());
+            swPrincipalUser.setUpdateDate(new Date());
+            swPrincipalUser.setDelFlag(CommonStatic.NOTDELETE);
+            if (swPrincipalUserService.save(swPrincipalUser) > 0) {
+                return R.ok();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error();
         }
         return R.error();
     }

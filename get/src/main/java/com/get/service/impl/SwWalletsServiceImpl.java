@@ -5,6 +5,7 @@ import com.get.statuc.CommonStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,8 @@ public class SwWalletsServiceImpl implements SwWalletsService {
     public SwWalletsDO createWallet(Integer userID, String coinTypeId){
         SwWalletsDO swWalletsDO = new SwWalletsDO();
         swWalletsDO.setTid(IDUtils.randomStr());
+        swWalletsDO.setCurrency(new BigDecimal("0"));
+        swWalletsDO.setFrozenAmount(new BigDecimal("0"));
         swWalletsDO.setCreateDate(new Date());
         swWalletsDO.setUpdateDate(new Date());
         swWalletsDO.setDelFlag(CommonStatic.NOTDELETE);

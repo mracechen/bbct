@@ -145,7 +145,7 @@ public class AppProductAPI {
             return Result.ok(new BigDecimal(String.valueOf(frozenBBCT)).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -163,7 +163,7 @@ public class AppProductAPI {
             }
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
         return Result.ok(null);
     }
@@ -181,12 +181,12 @@ public class AppProductAPI {
                 if(wallet != null){
                     return Result.ok(wallet);
                 }else{
-                    return Result.error("system.failed.operation",null);
+                    return Result.error("system.failed.operation");
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
         return Result.ok(null);
     }
@@ -216,7 +216,7 @@ public class AppProductAPI {
             }
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
         return Result.ok(null);
     }
@@ -258,7 +258,7 @@ public class AppProductAPI {
             map.put("lastMonthAmount",new BigDecimal(String.valueOf(lastMonthAmount)).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
         return Result.ok(null);
     }
@@ -287,7 +287,7 @@ public class AppProductAPI {
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -304,7 +304,7 @@ public class AppProductAPI {
             map.put("status",CommonStatic.NO_RELEASE);
             List<SwPrincipalUserDO> list = swPrincipalUserService.list(map);
             if(list != null && list.size() > 1){
-                return Result.error("system.failed.operation",null);
+                return Result.error("system.failed.operation");
             }
             if(list == null){
                 return Result.ok(0);
@@ -313,7 +313,7 @@ public class AppProductAPI {
             }
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -329,7 +329,7 @@ public class AppProductAPI {
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -338,24 +338,36 @@ public class AppProductAPI {
      * @param principalId 固币金产品id
      * */
     @RequestMapping(value = "purchasing_principal",method = RequestMethod.POST)
-    public Result purchasingPrincipal(HttpServletRequest request, String principalId) {
+    public Result purchasingPrincipal(HttpServletRequest request, String principalId,String transferPassword) {
         SwUserBasicDO user = AppUserUtils.getUser(request);
         try {
             if(StringUtils.isBlank(principalId)){
-                return Result.error("system.params.error",null);
+                return Result.error("system.params.error");
             }
             //布道者和合伙人不能购买固币金
             if(!user.getUserType().equals(CommonStatic.USER_TYPE_COMMON)){
-                return Result.error("system.failed.auth",null);
+                return Result.error("system.failed.auth");
             }
             SwPrincipalDO swPrincipalDO = swPrincipalService.get(principalId);
             if(swPrincipalDO == null){
-                return Result.error("system.failed.operation",null);
+                return Result.error("system.failed.operation");
+            }
+            SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), swPrincipalDO.getCoinTypeId());
+            if(wallet == null){
+                return Result.error("system.wallet.error");
+            }
+            BigDecimal currency = wallet.getCurrency();
+            if(currency.compareTo(new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum()))) < 0){
+                return Result.error("system.balance.not.enough");
             }
             //一次只能持有一个激活的固币金
             List<SwPrincipalUserDO> myPrincipalList = swPrincipalUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
             if(myPrincipalList != null && myPrincipalList.size() > 0){
-                return Result.error("AppProductAPI.purchasingPrincipal.principal.exist",null);
+                return Result.error("AppProductAPI.purchasingPrincipal.principal.exist");
+            }
+            Boolean checkTradingPassword = swUserBasicService.checkTradingPassword(user.getTid(), user.getEmail(), transferPassword);
+            if(!checkTradingPassword){
+                return Result.error("system.password.error");
             }
             SwPrincipalUserDO swPrincipalUserDO = new SwPrincipalUserDO();
             swPrincipalUserDO.setTid(IDUtils.randomStr());
@@ -375,10 +387,9 @@ public class AppProductAPI {
             return Result.ok(swPrincipalUserService.save(swPrincipalUserDO));
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
-
 
     /**
      * 活币金项目信息
@@ -390,12 +401,12 @@ public class AppProductAPI {
             map.put("delFlag",CommonStatic.NOTDELETE);
             List<SwCurrentDO> list = swCurrentService.list(map);
             if(list == null || list.size() != 1){
-                return Result.error("system.data.error",null);
+                return Result.error("system.data.error");
             }
             return Result.ok(list.get(0));
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -405,29 +416,48 @@ public class AppProductAPI {
      * @param currentId 活币金id
      * */
     @RequestMapping(value = "purchasing_current",method = RequestMethod.POST)
-    public Result purchasingCurrent(HttpServletRequest request, Integer rate, String currentId) {
+    public Result purchasingCurrent(HttpServletRequest request, Integer rate, String currentId, String transferPassword) {
         SwUserBasicDO user = AppUserUtils.getUser(request);
         try {
             if(StringUtils.isBlank(currentId) || rate == null || rate <= 0){
-                return Result.error("system.params.error",null);
+                return Result.error("system.params.error");
+            }
+            SwCurrentDO swCurrentDO = swCurrentService.get(currentId);
+            if(swCurrentDO == null || rate > swCurrentDO.getTPercent() || rate < swCurrentDO.getBPercent()){
+                return Result.error("system.params.error");
             }
             //布道者和合伙人不能购买活币金
             if(!user.getUserType().equals(CommonStatic.USER_TYPE_COMMON)){
-                return Result.error("system.failed.auth",null);
+                return Result.error("system.failed.auth");
             }
             //必须拥有且仅有一个固币金，才能购买活币金
             List<SwPrincipalUserDO> myPrincipals = swPrincipalUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
-            if(myPrincipals == null || myPrincipals.size() > 1){
-                return Result.error("AppProductAPI.purchasingCurrent.principal.failed",null);
+            if(myPrincipals == null || myPrincipals.size() > 1 || myPrincipals.size() == 0){
+                return Result.error("AppProductAPI.purchasingCurrent.principal.failed");
             }
-            //一次只能持有一个激活的活币金
+            SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), swCurrentDO.getCoinTypeId());
+            if(wallet == null){
+                return Result.error("system.wallet.error");
+            }
+            BigDecimal currency = wallet.getCurrency();
+            SwPrincipalDO swPrincipalDO = swPrincipalService.get(myPrincipals.get(0).getPrincipalId());
+            if(swPrincipalDO.getPrincipalNum() * rate > currency.doubleValue()){
+                return Result.error("system.balance.not.enough");
+            }
+            //一次只能持有一个激活的活币金或者一个激活的定币金
             List<SwCurrentUserDO> myCurrents = swCurrentUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
             if(myCurrents != null && myCurrents.size() > 0){
-                return Result.error("AppProductAPI.purchasingCurrent.current.exist",null);
+                return Result.error("AppProductAPI.purchasingCurrent.current.exist");
             }
-            SwPrincipalUserDO swPrincipalUserDO = myPrincipals.get(0);
-            Double principalNum = swPrincipalUserDO.getTotalNum();
-            BigDecimal multiply = new BigDecimal(String.valueOf(principalNum))
+            List<SwPeriodUserDO> myPeriods = swPeriodUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(myPeriods != null && myPeriods.size() > 0){
+                return Result.error("AppProductAPI.purchasingPeriod.period.exist");
+            }
+            Boolean checkTradingPassword = swUserBasicService.checkTradingPassword(user.getTid(), user.getEmail(), transferPassword);
+            if(!checkTradingPassword){
+                return Result.error("system.password.error");
+            }
+            BigDecimal multiply = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum()))
                     .multiply(new BigDecimal(String.valueOf(rate)))
                     .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
             SwCurrentUserDO swCurrentUserDO = new SwCurrentUserDO();
@@ -444,7 +474,91 @@ public class AppProductAPI {
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 定币金项目信息
+     * */
+    @RequestMapping(value = "period_list",method = RequestMethod.GET)
+    public Result periodList() {
+        Map<String,Object> map = new HashMap<>();
+        try {
+            map.put("delFlag",CommonStatic.NOTDELETE);
+            List<SwPeriodDO> list = swPeriodService.list(map);
+            return Result.ok(list);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 购买定币金
+     * @param rate 倍率
+     * @param periodId 定币金id
+     * */
+    @RequestMapping(value = "purchasing_period",method = RequestMethod.POST)
+    public Result purchasingPeriod(HttpServletRequest request, Integer rate, String periodId, String transferPassword) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        try {
+            if(StringUtils.isBlank(periodId) || rate == null || rate <= 0){
+                return Result.error("system.params.error");
+            }
+            SwPeriodDO swPeriodDO = swPeriodService.get(periodId);
+            if(swPeriodDO == null || rate > swPeriodDO.getTPercent() || rate < swPeriodDO.getBPercent()){
+                return Result.error("system.params.error");
+            }
+            //布道者和合伙人不能购买定币金
+            if(!user.getUserType().equals(CommonStatic.USER_TYPE_COMMON)){
+                return Result.error("system.failed.auth");
+            }
+            //必须拥有且仅有一个固币金，才能购买定币金
+            List<SwPrincipalUserDO> myPrincipals = swPrincipalUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(myPrincipals == null || myPrincipals.size() > 1 || myPrincipals.size() == 0){
+                return Result.error("AppProductAPI.purchasingPeriod.principal.failed");
+            }
+            SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), swPeriodDO.getCoinTypeId());
+            if(wallet == null){
+                return Result.error("system.wallet.error");
+            }
+            BigDecimal currency = wallet.getCurrency();
+            SwPrincipalDO swPrincipalDO = swPrincipalService.get(myPrincipals.get(0).getPrincipalId());
+            if(swPrincipalDO.getPrincipalNum() * rate > currency.doubleValue()){
+                return Result.error("system.balance.not.enough");
+            }
+            //一次只能持有一个激活的活币金或一个激活的定币金
+            List<SwPeriodUserDO> myPeriods = swPeriodUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(myPeriods != null && myPeriods.size() > 0){
+                return Result.error("AppProductAPI.purchasingPeriod.period.exist");
+            }
+            List<SwCurrentUserDO> myCurrents = swCurrentUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(myCurrents != null && myCurrents.size() > 0){
+                return Result.error("AppProductAPI.purchasingCurrent.current.exist");
+            }
+            Boolean checkTradingPassword = swUserBasicService.checkTradingPassword(user.getTid(), user.getEmail(), transferPassword);
+            if(!checkTradingPassword){
+                return Result.error("system.password.error");
+            }
+            BigDecimal multiply = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum()))
+                    .multiply(new BigDecimal(String.valueOf(rate)))
+                    .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
+            SwPeriodUserDO swPeriodUserDO = new SwPeriodUserDO();
+            swPeriodUserDO.setTid(IDUtils.randomStr());
+            swPeriodUserDO.setCreateDate(new Date());
+            swPeriodUserDO.setUpdateDate(new Date());
+            swPeriodUserDO.setDelFlag(CommonStatic.NOTDELETE);
+            swPeriodUserDO.setPeriodId(periodId);
+            swPeriodUserDO.setEx1(multiply.doubleValue());
+            swPeriodUserDO.setReleaseTime(new Date());
+            swPeriodUserDO.setStatus(CommonStatic.NO_RELEASE);
+            swPeriodUserDO.setUserId(user.getTid());
+            swPeriodUserService.save(swPeriodUserDO);
+            return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
         }
     }
 }

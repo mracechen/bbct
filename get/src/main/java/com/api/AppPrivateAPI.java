@@ -59,7 +59,16 @@ public class AppPrivateAPI {
     private SwAccountRecordService swAccountRecordService;
 
     @Autowired
+    private SwCoinTypeService swCoinTypeService;
+
+    @Autowired
     private SwConsumeLogService swConsumeLogService;
+
+    @Autowired
+    private SwBenchmarkingService swBenchmarkingService;
+
+    @Autowired
+    private SwBenchlogService swBenchlogService;
 
     @Autowired
     private Languagei18nUtils languagei18nUtils;
@@ -83,11 +92,11 @@ public class AppPrivateAPI {
                     || StringUtils.isBlank(swEvangelistInfoDO.getWechat())
                     || StringUtils.isBlank(swEvangelistInfoDO.getRealName())
                     || StringUtils.isBlank(swEvangelistInfoDO.getMobile())){
-                return Result.error("system.params.error",null);
+                return Result.error("system.params.error");
             }
             SwUserBasicDO byEmail = swUserBasicService.getByEmail(swEvangelistInfoDO.getEmail());
             if(byEmail != null){
-                return Result.error("AppPrivateAPI.resetLoginPassword.email.exist",null);
+                return Result.error("AppPrivateAPI.resetLoginPassword.email.exist");
             }
             swEvangelistInfoDO.setTid(IDUtils.randomStr());
             swEvangelistInfoDO.setUpdateDate(new Date());
@@ -97,27 +106,27 @@ public class AppPrivateAPI {
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("AppPrivateAPI.resetLoginPassword.register.failed",null);
+            return Result.error("AppPrivateAPI.resetLoginPassword.register.failed");
         }
     }
 
     /**
      * 充币地址
      * */
-    @RequestMapping("charge_address")
+    @RequestMapping(value = "charge_address",method = RequestMethod.GET)
     public Result chargeAddress() {
         try {
             return Result.ok(chargeAddress);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
     /**
      * 充币记录
      * */
-    @RequestMapping("charge_log")
+    @RequestMapping(value = "charge_log",method = RequestMethod.GET)
     public Result chargeLog(HttpServletRequest request) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
@@ -128,31 +137,31 @@ public class AppPrivateAPI {
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
     /**
      * 充币记录详情
      * */
-    @RequestMapping("charge_log_detail")
+    @RequestMapping(value = "charge_log_detail",method = RequestMethod.GET)
     public Result chargeLogDetail(String tid) {
         try {
             if(StringUtils.isBlank(tid)){
-                return Result.error("system.failed.operation",null);
+                return Result.error("system.failed.operation");
             }
             SwChargelogDO swChargelogDO = swChargelogService.get(tid);
             return Result.ok(swChargelogDO);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
     /**
      * 提币地址列表
      * */
-    @RequestMapping("withdraw_address")
+    @RequestMapping(value = "withdraw_address",method = RequestMethod.GET)
     public Result withdrawAddress(HttpServletRequest request) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
@@ -163,7 +172,7 @@ public class AppPrivateAPI {
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -175,7 +184,7 @@ public class AppPrivateAPI {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             if(StringUtils.isBlank(swWithdrawAddressDO.getAddress())){
-                return Result.error("system.params.error",null);
+                return Result.error("system.params.error");
             }
             swWithdrawAddressDO.setTid(IDUtils.randomStr());
             swWithdrawAddressDO.setCreateDate(new Date());
@@ -186,7 +195,7 @@ public class AppPrivateAPI {
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -197,14 +206,14 @@ public class AppPrivateAPI {
     public Result editWithdrawAddress(@RequestBody SwWithdrawAddressDO swWithdrawAddressDO) {
         try {
             if(StringUtils.isBlank(swWithdrawAddressDO.getTid())){
-                return Result.error("system.params.error",null);
+                return Result.error("system.params.error");
             }
             swWithdrawAddressDO.setUpdateDate(new Date());
             swWithdrawAddressService.update(swWithdrawAddressDO);
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -217,10 +226,10 @@ public class AppPrivateAPI {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             SwWithdrawAddressDO swWithdrawAddressDO = swWithdrawAddressService.get(tid);
             if(!user.getTid().equals(swWithdrawAddressDO.getUserId())){
-                return Result.error("system.reject.operation",null);
+                return Result.error("system.reject.operation");
             }
             if(swWithdrawAddressDO == null){
-                return Result.error("system.failed.operation",null);
+                return Result.error("system.failed.operation");
             }
             swWithdrawAddressDO.setUpdateDate(new Date());
             swWithdrawAddressDO.setDelFlag(CommonStatic.DELETE);
@@ -228,14 +237,14 @@ public class AppPrivateAPI {
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
     /**
      * 提币记录列表
      * */
-    @RequestMapping(value = "withdraw_log")
+    @RequestMapping(value = "withdraw_log",method = RequestMethod.GET)
     public Result withdrawLog(HttpServletRequest request) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
@@ -246,40 +255,40 @@ public class AppPrivateAPI {
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
     /**
      * 提币记录详情
      * */
-    @RequestMapping(value = "withdraw_log_detail")
+    @RequestMapping(value = "withdraw_log_detail",method = RequestMethod.GET)
     public Result withdrawLogDetail(String tid) {
         try {
             SwWithlogDO swWithlogDO = swWithlogService.get(tid);
             return Result.ok(swWithlogDO);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("system.failed.operation",null);
+            return Result.error("system.failed.operation");
         }
     }
 
     /**
      * 转账-校验收款用户
      * */
-    @RequestMapping("check_user")
+    @RequestMapping(value = "check_user",method = RequestMethod.GET)
     @ResponseBody
     public Result checkUser(HttpServletRequest request, String userId) {
         if(StringUtils.isBlank(userId)){
-            return Result.error("AppPrivateAPI.checkUser.receiver.not.exist",null);
+            return Result.error("AppPrivateAPI.checkUser.receiver.not.exist");
         }
         SwUserBasicDO user = swUserBasicService.get(Integer.parseInt(userId));
         if (user == null) {
-            return Result.error("AppPrivateAPI.checkUser.receiver.not.exist",null);
+            return Result.error("AppPrivateAPI.checkUser.receiver.not.exist");
         }
         if(user.getEmail() != null){
             if(user.getEmail().endsWith("canceled")){
-                return Result.error("AppPrivateAPI.checkUser.receiver.written.off",null);
+                return Result.error("AppPrivateAPI.checkUser.receiver.written.off");
             }
         }
         return Result.ok(user);
@@ -288,7 +297,7 @@ public class AppPrivateAPI {
     /**
      * 转账
      * */
-    @RequestMapping("transfer")
+    @RequestMapping(value = "transfer",method = RequestMethod.POST)
     @ResponseBody
     public Result TransferAccount(HttpServletRequest request, @RequestParam String userId, @RequestParam double amount,
                                                   @RequestParam String coinId, @RequestParam String remark, @RequestParam String tradingPassword) {
@@ -298,5 +307,60 @@ public class AppPrivateAPI {
             return Result.error(msg);
         }
         return Result.ok();
+    }
+
+    /**
+     * 对标项目列表
+     * */
+    @RequestMapping(value = "bench_Marking_list",method = RequestMethod.GET)
+    @ResponseBody
+    public Result benchMarking() {
+        try {
+            Map<String,Object> map = new HashMap<>();
+            map.put("delFlag",CommonStatic.NOTDELETE);
+            List<SwBenchmarkingDO> list = swBenchmarkingService.list(map);
+            return Result.ok(list);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 对标
+     * */
+    @RequestMapping(value = "bench",method = RequestMethod.POST)
+    @ResponseBody
+    public Result bench(String benchMarkingId, HttpServletRequest request) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        if(StringUtils.isBlank(benchMarkingId)){
+            return Result.error("system.params.error");
+        }
+        SwBenchmarkingDO swBenchmarkingDO = swBenchmarkingService.get(benchMarkingId);
+        if(swBenchmarkingDO == null){
+            return Result.error("system.failed.operation");
+        }
+        SwWalletsDO sourceAmount = swWalletsService.getWallet(user.getTid(), swBenchmarkingDO.getSourceCoinId());
+        if(sourceAmount.getCurrency().compareTo(new BigDecimal(String.valueOf(swBenchmarkingDO.getSourceNum()))) < 0){
+            SwCoinTypeDO swCoinTypeDO = swCoinTypeService.get(swBenchmarkingDO.getSourceCoinId());
+            return Result.error("AppPrivateAPI.bench.source.coin.not.enough",swCoinTypeDO.getCoinName());
+        }
+        try {
+            SwBenchlogDO swBenchlogDO = new SwBenchlogDO();
+            swBenchlogDO.setTid(IDUtils.randomStr());
+            swBenchlogDO.setCreateDate(new Date());
+            swBenchlogDO.setUpdateDate(new Date());
+            swBenchlogDO.setDelFlag(CommonStatic.NOTDELETE);
+            swBenchlogDO.setSourceCoinId(swBenchmarkingDO.getSourceCoinId());
+            swBenchlogDO.setTargetCoinId(swBenchmarkingDO.getTargetCoinId());
+            swBenchlogDO.setSourceNum(swBenchmarkingDO.getSourceNum());
+            swBenchlogDO.setTargetNum(swBenchmarkingDO.getTargetNum());
+            swBenchlogDO.setUserId(user.getTid());
+            swBenchlogService.save(swBenchlogDO);
+            return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
     }
 }

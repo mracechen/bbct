@@ -84,9 +84,8 @@ public class AppPublicAPI {
     @RequestMapping("get_email_check_code")
     public Object getEmailCheckCode(@RequestParam String email) {
         try {
-            Map<String, Object> queryParam = new HashMap<>();
             if (StringUtils.isBlank(email)) {
-                return Result.error("参数不可为空");
+                return Result.error("system.params.error");
             }
 
             String checkCode = IDUtils.getCheckCode();
@@ -97,7 +96,7 @@ public class AppPublicAPI {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-        return Result.ok(new HashMap<>());
+        return Result.ok();
     }
 
     /*
@@ -114,31 +113,31 @@ public class AppPublicAPI {
             userBasicDO.setRecomId(recomId);
             userBasicDO.setEmail(email);
             if (StringUtils.isBlank(email)) {
-                return Result.error("邮箱不能为空");
+                return Result.error("AppPublicAPI.checkRegister.mail.cannot.be.null");
             }
             Map<String, Object> queryParam = new HashMap<>();
             queryParam.put("email", email);
             List<SwUserBasicDO> exUser = swUserBasicService.list(queryParam);
             if (exUser.size() > 0 && StringUtils.isNotBlank(email)) {
-                return Result.error("邮箱已经被注册");
+                return Result.error("AppPublicAPI.checkRegister.mail.exist");
             }
             //校验邮箱验证码
             boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, email);
             if (!mailRt) {
-                return Result.error("邮箱验证码不正确或已失效");
+                return Result.error("AppPublicAPI.checkRegister.check.code.error");
             }
             if (userBasicDO.getRecomId() == null || userBasicDO.getRecomId() <= 0) {
                 userBasicDO.setRecomId(1);
             } else {
                 SwUserBasicDO swUserBasicDO = swUserBasicService.get(userBasicDO.getRecomId());
                 if (swUserBasicDO == null) {
-                    return Result.error("推荐人不存在");
+                    return Result.error("AppPublicAPI.checkRegister.recommender.not.exist");
                 }
             }
             result = swUserBasicService.userReg(userBasicDO);
         } catch (Exception e) {
             e.printStackTrace();
-            result = Result.error("服务器异常!");
+            result = Result.error("system.error");
         }
         return result;
     }
@@ -159,7 +158,7 @@ public class AppPublicAPI {
             swUserBasicDO.setLoginPass(MyMD5Utils.encodingAdmin(loginPass));
             SwUserBasicDO exSwUserBasicDO = swUserBasicService.get(swUserBasicDO);
             if (exSwUserBasicDO == null || exSwUserBasicDO.getTid() <= 0) {
-                return Result.error("用户名或密码错误");
+                return Result.error("AppPublicAPI.login.username.or.password.error");
             }
 
             String accessKey = IDUtils.getUserIdEncode(prefix, exSwUserBasicDO.getTid() + "");
@@ -183,7 +182,7 @@ public class AppPublicAPI {
             return Result.ok(result);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("登录失败");
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -191,19 +190,19 @@ public class AppPublicAPI {
     public Object resetLoginPassword(String email, String checkCode, String pass, String type) {
         try {
             if(StringUtils.isBlank(email) || StringUtils.isBlank(email) || StringUtils.isBlank(email) || StringUtils.isBlank(email)){
-                return Result.error("参数错误！");
+                return Result.error("system.params.error");
             }
             SwUserBasicDO user = new SwUserBasicDO();
             user.setEmail(email);
             SwUserBasicDO byEmail = swUserBasicService.getByEmail(email);
             if(byEmail == null){
-                return Result.error("未找到该用户！");
+                return Result.error("AppPublicAPI.resetLoginPassword.user.not.exist");
             }
             user.setTid(byEmail.getTid());
             //发送邮箱验证码
             boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, email);
             if (!mailRt) {
-                return Result.error("邮箱验证码不正确或已失效");
+                return Result.error("AppPublicAPI.checkRegister.check.code.error");
             }
             pass = MyMD5Utils.encodingAdmin(pass);
             if (type.equals("1")) {
@@ -215,7 +214,7 @@ public class AppPublicAPI {
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("操作失败");
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -234,7 +233,7 @@ public class AppPublicAPI {
             return Result.ok(informationList);
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("操作失败");
+            return Result.error("system.failed.operation");
         }
     }
 
@@ -246,12 +245,12 @@ public class AppPublicAPI {
     public Object get_information_detail(String tid){
         try {
             if(StringUtils.isBlank(tid)){
-                return Result.error("参数错误");
+                return Result.error("system.params.error");
             }
             return Result.ok(informationService.get(tid));
         }catch (Exception e){
             e.printStackTrace();
-            return Result.error("操作失败");
+            return Result.error("system.failed.operation");
         }
     }
 
