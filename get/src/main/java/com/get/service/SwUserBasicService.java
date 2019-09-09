@@ -40,4 +40,10 @@ public interface SwUserBasicService {
     int remove(Integer tid);
 
     int batchRemove(Integer[] tids);
+
+    Integer getChildrenUserNum(Integer userId);
+
+    Integer getChildrenTreeUserNum(Integer userId);
+
+    Object getUserRecomLike(SwUserBasicDO swUserBasic);
 }

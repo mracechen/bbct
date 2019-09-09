@@ -32,6 +32,11 @@ public class SwReleaseRecordServiceImpl implements SwReleaseRecordService {
     }
 
     @Override
+    public List<SwReleaseRecordDO> getCauseRelease(Integer userId, Integer myRelease) {
+        return swReleaseRecordDao.getCauseRelease(userId,myRelease);
+    }
+
+    @Override
     public int count(Map<String, Object> map) {
         return swReleaseRecordDao.count(map);
     }

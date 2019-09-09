@@ -3,6 +3,7 @@ package com.get.service;
 
 import com.evowallet.common.ServerResponse;
 import com.get.domain.AppInfo;
+import com.yunpian.sdk.model.Result;
 
 import java.util.List;
 import java.util.Map;
@@ -30,5 +31,5 @@ public interface AppInfoService {
 
     int batchRemove(Integer[] ids);
 
-    ServerResponse<List<AppInfo>> getAppInfo();
+    List<AppInfo> getAppInfo();
 }

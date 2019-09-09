@@ -83,7 +83,7 @@ public class SwPeriodUserServiceImpl implements SwPeriodUserService {
         swAccountRecordService.save(SwAccountRecordDO.create(
                 swPeriodUser.getUserId(),
                 RecordEnum.purchasing.getType(),
-                languagei18nUtils.getMessage("SwCurrentUserServiceImpl.save.purchasing.period"),
+                languagei18nUtils.getMessage("SwPeriodUserServiceImpl.save.purchasing.period"),
                 swPeriodDO.getCoinTypeId(),
                 -swPeriodUser.getEx1(),
                 currency.doubleValue() - swPeriodUser.getEx1()

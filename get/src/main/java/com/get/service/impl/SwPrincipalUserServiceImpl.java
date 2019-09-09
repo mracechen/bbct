@@ -8,6 +8,7 @@ import com.get.service.SwAccountRecordService;
 import com.get.service.SwPrincipalService;
 import com.get.service.SwWalletsService;
 import com.get.statuc.CommonStatic;
+import com.get.statuc.NumberStatic;
 import com.get.statuc.RecordEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,6 +90,32 @@ public class SwPrincipalUserServiceImpl implements SwPrincipalUserService {
 
     @Override
     public int update(SwPrincipalUserDO swPrincipalUser) {
+        return swPrincipalUserDao.update(swPrincipalUser);
+    }
+
+    @Override
+    public int cancel(SwPrincipalUserDO swPrincipalUser) throws Exception {
+        SwPrincipalDO swPrincipalDO = swPrincipalService.get(swPrincipalUser.getPrincipalId());
+        SwWalletsDO wallet = swWalletsService.getWallet(swPrincipalUser.getUserId(), swPrincipalDO.getCoinTypeId());
+        if(wallet == null){
+            throw new Exception("钱包异常");
+        }
+        //手续费
+        BigDecimal chargeNum = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum())).multiply(new BigDecimal(String.valueOf(swPrincipalDO.getChargePercent())));
+        //实际返给他的金额
+        BigDecimal subtract = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum())).subtract(chargeNum);
+        BigDecimal currency = wallet.getCurrency();
+        wallet.setCurrency(subtract);
+        wallet.setUpdateDate(new Date());
+        swWalletsService.update(wallet);
+        swAccountRecordService.save(SwAccountRecordDO.create(
+                swPrincipalUser.getUserId(),
+                RecordEnum.purchasing.getType(),
+                languagei18nUtils.getMessage("SwPrincipalUserServiceImpl.save.cancel.principal"),
+                swPrincipalDO.getCoinTypeId(),
+                subtract.doubleValue(),
+                currency.add(subtract).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model).doubleValue()
+        ));
         return swPrincipalUserDao.update(swPrincipalUser);
     }
 

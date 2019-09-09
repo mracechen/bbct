@@ -12,6 +12,7 @@ import com.get.service.SwWalletsService;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.NumberStatic;
 import com.get.statuc.RecordEnum;
+import com.system.sysconfig.configbean.SettlementCommonConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -30,6 +31,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.get.dao.SwUserBasicDao;
 import com.get.domain.SwUserBasicDO;
@@ -191,6 +193,46 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
             count = count + remove(ids);
         }
         return count;
+    }
+
+    @Override
+    public Integer getChildrenUserNum(Integer userId) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("recomId",userId);
+        List<SwUserBasicDO> list = this.list(params);
+        return list.size();
+    }
+
+    @Override
+    public Integer getChildrenTreeUserNum(Integer userId) {
+        Integer totalNum = 1;
+        List<Integer> params = new ArrayList<>();
+        params.add(userId);
+        Boolean run = true;
+        while(run){
+            List<Integer> byIds = swUserBasicDao.getChildrenByIds(params);
+            if(byIds.size() == 0){
+                run = false;
+            }else{
+                totalNum += byIds.size();
+                params.clear();
+                params.addAll(byIds);
+            }
+        }
+        return totalNum;
+    }
+
+    @Override
+    public Object getUserRecomLike(SwUserBasicDO swUserBasic) {
+        Map<String,Object> result = new HashMap();
+        SettlementCommonConfig commonConfig = new SettlementCommonConfig();
+        String fieldValue = commonConfig.getWebsiteURL().getFieldValue() +"/#/pages/invite/share?recomId="+swUserBasic.getTid();
+        try {
+            result.put("userPushURL", fieldValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }

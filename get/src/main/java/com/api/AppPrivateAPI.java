@@ -20,10 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author longge
@@ -71,6 +69,12 @@ public class AppPrivateAPI {
     private SwBenchlogService swBenchlogService;
 
     @Autowired
+    private SwFiatCoinService swFiatCoinService;
+
+    @Autowired
+    private SwReleaseRecordService swReleaseRecordService;
+
+    @Autowired
     private Languagei18nUtils languagei18nUtils;
 
     @Value("${configs.chargeAddress}")
@@ -78,6 +82,50 @@ public class AppPrivateAPI {
 
     @Value("${configs.usercache.prefix}")
     private String prefix;
+
+    /**
+     * 计价方式
+     * */
+    @RequestMapping("get_fiat_type_price")
+    @ResponseBody
+    public Result getOtcFiatCoinTypeAndPrice(){
+        return Result.ok(swFiatCoinService.getCountryOfShow((byte)1));
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param req
+     * @return
+     */
+    @RequestMapping("get_user_info")
+    public Object getUserInfo(HttpServletRequest req) throws Exception{
+        SwUserBasicDO user = AppUserUtils.getUser(req);
+        String userId = null;
+        String accessKey = req.getHeader("accessKey");
+        if(user != null){
+            userId = user.getTid()+"";
+            HashMap<Object, Object> result = new HashMap<>();
+            result.put("accessKey", accessKey);
+            result.put("userId",userId);
+            result.put("areaCode", user.getAreaCode());
+            result.put("mobile",user.getMobile());
+            result.put("username",user.getUsername());
+            result.put("recomId", user.getRecomId());
+            result.put("recomId", user.getRecomId());
+            result.put("userPush",swUserBasicService.getUserRecomLike(user));
+            String highPpassffective = StringUtils.isBlank(user.getHighPass()) ? "1": "2";
+            result.put("highPpassffective",highPpassffective);
+            result.put("email",user.getEmail());
+            result.put("registerDate",DateUtils.dateFormat(user.getCreateDate(),DateUtils.DATE_PATTERN));
+            result.put("userRole",user.getUserType());
+            log.info("获取用户登录信息接口返回值：【"+Result.ok(result).toString()+"】");
+            return Result.ok(result);
+        }else{
+            log.info("获取用户登录信息接口返回值：【"+Result.ok("登录异常").toString()+"】");
+            return Result.error("AppPrivateAPI.getUserInfo.login.error");
+        }
+    }
 
     /**
      * 提交申请成为布道者的资料
@@ -363,4 +411,89 @@ public class AppPrivateAPI {
             return Result.error("system.failed.operation");
         }
     }
+
+    /**
+     * 对标记录
+     * */
+    @RequestMapping(value = "bench_log",method = RequestMethod.GET)
+    @ResponseBody
+    public Result benchLog(HttpServletRequest request) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        try {
+            Map<String,Object> params = new HashMap<>();
+            params.put("delFlag",CommonStatic.NOTDELETE);
+            params.put("userId",user.getTid());
+            return Result.ok(swBenchlogService.list(params));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 修改昵称
+     * */
+    @RequestMapping(value = "change_name",method = RequestMethod.POST)
+    @ResponseBody
+    public Result changeName(HttpServletRequest request, String name) {
+        try {
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            if(StringUtils.isBlank(name)){
+                return Result.error("system.params.error");
+            }
+            user.setUsername(name);
+            swUserBasicService.update(user);
+            return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 退出登录
+     *
+     * @param req
+     * @return
+     */
+    @RequestMapping("logout")
+    public Result logout(HttpServletRequest req) {
+        SwUserBasicDO user = AppUserUtils.getUser(req);
+        if (user != null) {
+            AppUserUtils.removeRedis(IDUtils.getUserIdEncode(prefix,String.valueOf(user.getTid())));
+            return Result.ok();
+        }
+        return Result.error("system.failed.operation");
+    }
+
+    /**
+     * 个人推广信息（邀请页面自己的信息）
+     * */
+    @RequestMapping(value = "my_push_info",method = RequestMethod.GET)
+    @ResponseBody
+    public Result myPushInfo(HttpServletRequest request) {
+        try {
+            Map<String,Object> result = new HashMap<>();
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            List<SwReleaseRecordDO> iRelease = swReleaseRecordService.getCauseRelease(user.getTid(), 1);
+            double iReleaseNum = iRelease.stream().collect(Collectors.summarizingDouble(SwReleaseRecordDO::getAmount)).getSum();
+            List<SwReleaseRecordDO> otherRelease = swReleaseRecordService.getCauseRelease(user.getTid(), 2);
+            double otherReleaseNum = otherRelease.stream().collect(Collectors.summarizingDouble(SwReleaseRecordDO::getAmount)).getSum();
+            BigDecimal i = new BigDecimal(String.valueOf(iReleaseNum));
+            BigDecimal other = new BigDecimal(String.valueOf(otherReleaseNum));
+            result.put("othersReleaseNum",other);
+            BigDecimal total = i.add(other).equals(new BigDecimal("0"))?new BigDecimal("1"):i.add(other);
+            BigDecimal otherPercent = other.divide(total).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
+            result.put("othersReleasePercent",otherPercent);
+            Integer childrenUserNum = swUserBasicService.getChildrenUserNum(user.getTid());
+            result.put("childUserNum",childrenUserNum);
+            Integer childrenTreeUserNum = swUserBasicService.getChildrenTreeUserNum(user.getTid());
+            result.put("teamUserNum",childrenTreeUserNum);
+            return Result.ok(result);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
 }

@@ -96,6 +96,28 @@ public class SwCurrentUserServiceImpl implements SwCurrentUserService {
     }
 
     @Override
+    public int cancel(SwCurrentUserDO swCurrentUser) throws Exception {
+        SwCurrentDO swCurrentDO = swCurrentService.get(swCurrentUser.getCurrentId());
+        SwWalletsDO wallet = swWalletsService.getWallet(swCurrentUser.getUserId(), swCurrentDO.getCoinTypeId());
+        if(wallet == null){
+            throw new Exception("钱包异常");
+        }
+        BigDecimal currency = wallet.getCurrency();
+        wallet.setCurrency(new BigDecimal(String.valueOf(swCurrentUser.getEx1())));
+        wallet.setUpdateDate(new Date());
+        swWalletsService.update(wallet);
+        swAccountRecordService.save(SwAccountRecordDO.create(
+                swCurrentUser.getUserId(),
+                RecordEnum.purchasing.getType(),
+                languagei18nUtils.getMessage("SwPrincipalUserServiceImpl.save.cancel.current"),
+                swCurrentDO.getCoinTypeId(),
+                swCurrentUser.getEx1(),
+                currency.doubleValue() + swCurrentUser.getEx1()
+        ));
+        return swCurrentUserDao.update(swCurrentUser);
+    }
+
+    @Override
     public int remove(String tid) {
         SwCurrentUserDO swCurrentUser = new SwCurrentUserDO();
         swCurrentUser.setDelFlag(CommonStatic.DELETE);

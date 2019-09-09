@@ -23,6 +23,8 @@ public interface SwReleaseRecordDao {
 
     List<SwReleaseRecordDO> list(Map<String, Object> map);
 
+    List<SwReleaseRecordDO> getCauseRelease(@Param("userId") Integer userId, @Param("myRelease") Integer myRelease);
+
     int count(Map<String, Object> map);
 
     int save(SwReleaseRecordDO swReleaseRecord);

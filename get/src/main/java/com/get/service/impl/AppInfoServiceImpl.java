@@ -5,6 +5,7 @@ import com.evowallet.common.ServerResponse;
 import com.get.dao.AppInfoDao;
 import com.get.domain.AppInfo;
 import com.get.service.AppInfoService;
+import com.yunpian.sdk.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,9 +61,9 @@ public class AppInfoServiceImpl implements AppInfoService {
     }
 
     @Override
-    public ServerResponse<List<AppInfo>> getAppInfo() {
+    public List<AppInfo> getAppInfo() {
         List<AppInfo> appInfos = appInfoDao.selectAppInfo();
-        return ServerResponse.createBySuccess(appInfos);
+        return appInfos;
     }
 
 }

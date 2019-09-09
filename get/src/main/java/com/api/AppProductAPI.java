@@ -83,6 +83,9 @@ public class AppProductAPI {
     @Autowired
     private Languagei18nUtils languagei18nUtils;
 
+    @Value("${configs.benchmarketingRate}")
+    private String benchmarketingRate;
+
     /**=====================公共方法begin=========================*/
     /**
      * 获取冻结的bbct金额
@@ -91,6 +94,10 @@ public class AppProductAPI {
         SwCoinTypeDO bbct = swCoinTypeService.getByCoinName("BBCT");
         double resultNum = 0;
         if(bbct != null){
+            SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), bbct.getTid());
+            if(wallet.getFrozenAmount() != null){
+                resultNum += wallet.getFrozenAmount().doubleValue();
+            }
             if(user.getUserType().equals(CommonStatic.USER_TYPE_COMMON)){
                 List<SwPrincipalUserDO> swPrincipalUserDOList = swPrincipalUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
                 if(swPrincipalUserDOList != null && swPrincipalUserDOList.size() != 1){
@@ -134,10 +141,11 @@ public class AppProductAPI {
     }
 
     /**=============================公共方法end==============================*/
+
     /**
      * 获取冻结bbct金额（买的所有产品价值）
      * */
-    @RequestMapping(value = "frozen_bbct_current",method = RequestMethod.GET)
+ /*   @RequestMapping(value = "frozen_bbct_current",method = RequestMethod.GET)
     public Result frozenBbctCurrent(HttpServletRequest request) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
@@ -147,18 +155,18 @@ public class AppProductAPI {
             e.printStackTrace();
             return Result.error("system.failed.operation");
         }
-    }
+    }*/
 
-    /**
+   /**
      * 获取可用bbct金额
      * */
-    @RequestMapping(value = "active_bbct_current",method = RequestMethod.GET)
+ /*   @RequestMapping(value = "active_bbct_current",method = RequestMethod.GET)
     public Result activeBbctCurrent(HttpServletRequest request) {
         try {
-            SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
-            if(eos != null){
+            SwCoinTypeDO bbct = swCoinTypeService.getByCoinName("BBCT");
+            if(bbct != null){
                 SwUserBasicDO user = AppUserUtils.getUser(request);
-                SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
+                SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), bbct.getTid());
                 return Result.ok(wallet.getCurrency().setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
             }
         }catch (Exception e){
@@ -166,18 +174,19 @@ public class AppProductAPI {
             return Result.error("system.failed.operation");
         }
         return Result.ok(null);
-    }
+    }*/
 
     /**
      * 获取可用eos金额
      * */
-    @RequestMapping(value = "eos_current",method = RequestMethod.GET)
+   /* @RequestMapping(value = "eos_current",method = RequestMethod.GET)
     public Result eosCurrent(HttpServletRequest request) {
         try {
-            SwCoinTypeDO bbct = swCoinTypeService.getByCoinName("BBCT");
-            if(bbct != null){
+            SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
+            if(eos != null){
                 SwUserBasicDO user = AppUserUtils.getUser(request);
-                SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), bbct.getTid());
+                SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
+                wallet.setCurrency(wallet.getCurrency().setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
                 if(wallet != null){
                     return Result.ok(wallet);
                 }else{
@@ -189,6 +198,78 @@ public class AppProductAPI {
             return Result.error("system.failed.operation");
         }
         return Result.ok(null);
+    }*/
+   /**
+    * 获取币种信息列表
+    * */
+   @RequestMapping(value = "current_list",method = RequestMethod.GET)
+   public Result eosCurrent(HttpServletRequest request) {
+       try {
+           Map<String,SwWalletsDO> result = new HashMap<>();
+           SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
+           SwCoinTypeDO bbct = swCoinTypeService.getByCoinName("BBCT");
+           if(eos != null && bbct != null){
+               SwUserBasicDO user = AppUserUtils.getUser(request);
+               //eos
+               SwWalletsDO eosWallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
+               result.put("eos",eosWallet);
+               //bbct
+               SwWalletsDO bbctWallet = swWalletsService.getWallet(user.getTid(), bbct.getTid());
+               bbctWallet.setFrozenAmount(new BigDecimal(String.valueOf(getFrozenBBCT(user))));
+               result.put("bbct",bbctWallet);
+               return Result.ok(result);
+           }
+       }catch (Exception e){
+           e.printStackTrace();
+           return Result.error("system.failed.operation");
+       }
+       return Result.ok(null);
+   }
+    /**
+     * 获取所有冻结金额（EOS转换成bbct）
+     * */
+    @RequestMapping(value = "frozen_current",method = RequestMethod.GET)
+    public Result frozenCurrent(HttpServletRequest request) {
+        try {
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            double frozenBBCT = getFrozenBBCT(user);
+            SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
+            if(eos != null){
+                SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
+                if(wallet != null){
+                    //eos换算成bbct
+                    frozenBBCT = wallet.getFrozenAmount()
+                            .multiply(new BigDecimal(benchmarketingRate))
+                            .add(new BigDecimal(String.valueOf(frozenBBCT)))
+                            .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model)
+                            .doubleValue();
+                }else{
+                    return Result.error("system.failed.operation");
+                }
+            }
+            return Result.ok(frozenBBCT);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 获取所有可用金额（EOS转换成bbct）
+     * */
+    @RequestMapping(value = "active_current",method = RequestMethod.GET)
+    public Result activeCurrent(HttpServletRequest request) {
+        try {
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
+            SwCoinTypeDO bbct = swCoinTypeService.getByCoinName("BBCT");
+            SwWalletsDO eosWallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
+            SwWalletsDO bbctWallet = swWalletsService.getWallet(user.getTid(), bbct.getTid());
+            return Result.ok(eosWallet.getCurrency().multiply(new BigDecimal(benchmarketingRate)).add(bbctWallet.getCurrency()));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
     }
 
     /**
@@ -206,9 +287,9 @@ public class AppProductAPI {
                 double frozenBBCT = getFrozenBBCT(user);
                 SwWalletsDO eosWallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
                 //总冻结资金=bbct冻结资金+EOS冻结资金
-                BigDecimal frozenAmount = eosWallet.getFrozenAmount().add(new BigDecimal(String.valueOf(frozenBBCT)));
+                BigDecimal frozenAmount = eosWallet.getFrozenAmount().multiply(new BigDecimal(benchmarketingRate)).add(new BigDecimal(String.valueOf(frozenBBCT)));
                 //总可用资金=bbct可用资金+EOS可用资金
-                BigDecimal activeAmount = bbctWallet.getCurrency().add(eosWallet.getCurrency());
+                BigDecimal activeAmount = eosWallet.getCurrency().multiply(new BigDecimal(benchmarketingRate)).add(bbctWallet.getCurrency());
                 result.put("forzen",frozenAmount.setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
                 result.put("active",activeAmount.setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
                 result.put("total",frozenAmount.add(activeAmount).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
@@ -232,6 +313,13 @@ public class AppProductAPI {
             //总收益
             Double totalAmount = swReleaseRecordService.getSumByUserIdAndDate(user.getTid(), null, null);
             map.put("totalAmount",new BigDecimal(String.valueOf(totalAmount)).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
+            //待返收益
+            Double waitingRelease = 0.0;
+            List<SwPrincipalUserDO> myPrincipals = swPrincipalUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(myPrincipals != null && myPrincipals.size() == 1){
+                waitingRelease = myPrincipals.get(0).getLeftNum();
+            }
+            map.put("releasingAmount",new BigDecimal(String.valueOf(waitingRelease)).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
             //昨日收益
             Date yesterday = DateUtils.dateAddDays(new Date(), -1);
             String yesterdayStr = DateUtils.dateTimeToDateString(yesterday);
@@ -295,22 +383,92 @@ public class AppProductAPI {
      * 我的固币金
      * */
     @RequestMapping(value = "my_principal",method = RequestMethod.GET)
-    public Result profitStatistic1(HttpServletRequest request) {
+    public Result myPrincipal(HttpServletRequest request) {
         SwUserBasicDO user = AppUserUtils.getUser(request);
-        Map<String,Object> map = new HashMap<>();
         try {
-            map.put("userId",user.getTid());
-            map.put("delFlag",CommonStatic.NOTDELETE);
-            map.put("status",CommonStatic.NO_RELEASE);
-            List<SwPrincipalUserDO> list = swPrincipalUserService.list(map);
+            List<SwPrincipalUserDO> list = swPrincipalUserService.getByUserId(user.getTid(),CommonStatic.NO_RELEASE,CommonStatic.NOTDELETE);
             if(list != null && list.size() > 1){
                 return Result.error("system.failed.operation");
             }
             if(list == null){
-                return Result.ok(0);
+                return Result.ok();
             }else{
-                return Result.ok(list.get(0).getLeftNum());
+                return Result.ok(list.get(0));
             }
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 我的活币金
+     * */
+    @RequestMapping(value = "my_current",method = RequestMethod.GET)
+    public Result myCurrent(HttpServletRequest request) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        try {
+            List<SwCurrentUserDO> list = swCurrentUserService.getByUserId(user.getTid(),CommonStatic.NO_RELEASE,CommonStatic.NOTDELETE);
+            if(list != null && list.size() > 1){
+                return Result.error("system.failed.operation");
+            }
+            if(list == null){
+                return Result.ok();
+            }else{
+                return Result.ok(list.get(0));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 我的定币金
+     * */
+    @RequestMapping(value = "my_period",method = RequestMethod.GET)
+    public Result myPeriod(HttpServletRequest request) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        try {
+            List<SwPeriodUserDO> list = swPeriodUserService.getByUserId(user.getTid(),CommonStatic.NO_RELEASE,CommonStatic.NOTDELETE);
+            if(list != null && list.size() > 1){
+                return Result.error("system.failed.operation");
+            }
+            if(list == null){
+                return Result.ok();
+            }else{
+                return Result.ok(list.get(0));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 我的优币金
+     * */
+    @RequestMapping(value = "my_evangelist",method = RequestMethod.GET)
+    public Result myEvangelist(HttpServletRequest request) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        try {
+            SwEvangelistUserDO byUserId = swEvangelistUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            return Result.ok(byUserId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 我的升币金
+     * */
+    @RequestMapping(value = "my_partner",method = RequestMethod.GET)
+    public Result myPartner(HttpServletRequest request) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        try {
+            SwPartnerUserDO byUserId = swPartnerUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            return Result.ok(byUserId);
         }catch (Exception e){
             e.printStackTrace();
             return Result.error("system.failed.operation");
@@ -424,7 +582,7 @@ public class AppProductAPI {
             }
             SwCurrentDO swCurrentDO = swCurrentService.get(currentId);
             if(swCurrentDO == null || rate > swCurrentDO.getTPercent() || rate < swCurrentDO.getBPercent()){
-                return Result.error("system.params.error");
+                return Result.error("system.data.error");
             }
             //布道者和合伙人不能购买活币金
             if(!user.getUserType().equals(CommonStatic.USER_TYPE_COMMON)){
@@ -508,7 +666,7 @@ public class AppProductAPI {
             }
             SwPeriodDO swPeriodDO = swPeriodService.get(periodId);
             if(swPeriodDO == null || rate > swPeriodDO.getTPercent() || rate < swPeriodDO.getBPercent()){
-                return Result.error("system.params.error");
+                return Result.error("system.data.error");
             }
             //布道者和合伙人不能购买定币金
             if(!user.getUserType().equals(CommonStatic.USER_TYPE_COMMON)){
@@ -556,6 +714,154 @@ public class AppProductAPI {
             swPeriodUserDO.setUserId(user.getTid());
             swPeriodUserService.save(swPeriodUserDO);
             return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 优币金项目信息
+     * */
+    @RequestMapping(value = "evangelist_info",method = RequestMethod.GET)
+    public Result evangelistInfo() {
+        Map<String,Object> map = new HashMap<>();
+        try {
+            map.put("delFlag",CommonStatic.NOTDELETE);
+            List<SwEvangelistDO> list = swEvangelistService.list(map);
+            if(list != null && list.size() > 1){
+                return Result.error("system.data.error");
+            }
+            return Result.ok(list.get(0));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 购买优币金
+     * @param evangelistId 优币金id
+     * @param transferPassword 交易密码
+     * */
+    @RequestMapping(value = "purchasing_evangelist",method = RequestMethod.POST)
+    public Result purchasingEvangelist(HttpServletRequest request, String evangelistId, String transferPassword) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        try {
+            if(StringUtils.isBlank(evangelistId) || StringUtils.isBlank(transferPassword) ){
+                return Result.error("system.params.error");
+            }
+            SwEvangelistDO swEvangelistDO = swEvangelistService.get(evangelistId);
+            if(swEvangelistDO == null){
+                return Result.error("system.data.error");
+            }
+            //非布道者不能购买优币金
+            if(!user.getUserType().equals(CommonStatic.USER_TYPE_EVANGELIST)){
+                return Result.error("system.failed.auth");
+            }
+            //上级不是系统用户不能购买优币金
+            if(user.getRecomId() != 1){
+                return Result.error("AppProductAPI.purchasingEvangelist.recommender.not.allow");
+            }
+            //拥有任意定币金，活币金，固币金或升币金，都不能购买优币金
+            List<SwPrincipalUserDO> myPrincipals = swPrincipalUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(myPrincipals != null || myPrincipals.size() != 0){
+                return Result.error("AppProductAPI.purchasingEvangelist.exist.other.product");
+            }
+            List<SwCurrentUserDO> myCurrents = swCurrentUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(myCurrents != null || myCurrents.size() != 0){
+                return Result.error("AppProductAPI.purchasingEvangelist.exist.other.product");
+            }
+            List<SwPeriodUserDO> myPeriods = swPeriodUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(myPeriods != null || myPeriods.size() != 0){
+                return Result.error("AppProductAPI.purchasingEvangelist.exist.other.product");
+            }
+            SwPartnerUserDO myPartners = swPartnerUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(myPartners != null){
+                return Result.error("AppProductAPI.purchasingEvangelist.exist.other.product");
+            }
+            //已经拥有过优币金，无论有没有释放完，都无法再次购买
+            SwEvangelistUserDO myEvangelists = swEvangelistUserService.getByUserId(user.getTid(), null, null);
+            if(myEvangelists != null){
+                return Result.error("AppProductAPI.purchasingEvangelist.evangelist.exist");
+            }
+            SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), swEvangelistDO.getCoinTypeId());
+            if(wallet == null){
+                return Result.error("system.wallet.error");
+            }
+            BigDecimal currency = wallet.getCurrency();
+            if(swEvangelistDO.getEvangelistNum() > currency.doubleValue()){
+                return Result.error("system.balance.not.enough");
+            }
+            Boolean checkTradingPassword = swUserBasicService.checkTradingPassword(user.getTid(), user.getEmail(), transferPassword);
+            if(!checkTradingPassword){
+                return Result.error("system.password.error");
+            }
+            BigDecimal multiply = new BigDecimal(String.valueOf(swEvangelistDO.getEvangelistNum()))
+                    .multiply(new BigDecimal(String.valueOf(swEvangelistDO.getPercent())))
+                    .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
+            SwEvangelistUserDO swEvangelistUserDO = new SwEvangelistUserDO();
+            swEvangelistUserDO.setTid(IDUtils.randomStr());
+            swEvangelistUserDO.setCreateDate(new Date());
+            swEvangelistUserDO.setUpdateDate(new Date());
+            swEvangelistUserDO.setDelFlag(CommonStatic.NOTDELETE);
+            swEvangelistUserDO.setUserId(user.getTid());
+            swEvangelistUserDO.setStatus(CommonStatic.NO_RELEASE);
+            swEvangelistUserDO.setEvangelistId(evangelistId);
+            swEvangelistUserDO.setTotalNum(multiply.doubleValue());
+            swEvangelistUserDO.setLeftNum(multiply.doubleValue());
+            swEvangelistUserService.save(swEvangelistUserDO);
+            return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 取消产品
+     * @param type 产品类型，1-固币金，2-活币金
+     * @param productId 产品id
+     * */
+    @RequestMapping(value = "cancel_product",method = RequestMethod.POST)
+    public Result cancelProduct(HttpServletRequest request, String type, String productId) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        try {
+            if(StringUtils.isBlank(type) || StringUtils.isBlank(productId)){
+                return Result.error("system.params.error");
+            }
+            if("1".equals(type)){
+                SwPrincipalUserDO swPrincipalUserDO = swPrincipalUserService.get(productId);
+                if(swPrincipalUserDO == null){
+                    return Result.error("system.data.error");
+                }
+                if(!swPrincipalUserDO.getUserId().equals(user.getTid())){
+                    return Result.error("system.failed.auth");
+                }
+                SwPrincipalDO swPrincipalDO = swPrincipalService.get(swPrincipalUserDO.getPrincipalId());
+                Date createDate = swPrincipalUserDO.getCreateDate();
+                Integer chargeTerm = swPrincipalDO.getChargeTerm();
+                int allowCancel = DateUtils.dateCompare(new Date(), DateUtils.dateAddHours(createDate, chargeTerm));
+                if(allowCancel >= 0){
+                    return Result.error("AppProductAPI.cancelProduct.not.allow");
+                }
+                swPrincipalUserDO.setUpdateDate(new Date());
+                swPrincipalUserDO.setStatus(CommonStatic.RELEASED);
+                swPrincipalUserService.cancel(swPrincipalUserDO);
+                return Result.ok();
+            }else{
+                SwCurrentUserDO swCurrentUserDO = swCurrentUserService.get(productId);
+                if(swCurrentUserDO == null){
+                    return Result.error("system.data.error");
+                }
+                if(!swCurrentUserDO.getUserId().equals(user.getTid())){
+                    return Result.error("system.failed.auth");
+                }
+                swCurrentUserDO.setUpdateDate(new Date());
+                swCurrentUserDO.setStatus(CommonStatic.RELEASED);
+                swCurrentUserService.cancel(swCurrentUserDO);
+                return Result.ok();
+            }
         }catch (Exception e){
             e.printStackTrace();
             return Result.error("system.failed.operation");

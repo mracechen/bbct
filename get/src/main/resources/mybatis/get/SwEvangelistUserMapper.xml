@@ -11,7 +11,13 @@
         select
         `tid`,`user_id`,`evangelist_id`,`total_num`,`left_num`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`
         from t_sw_evangelist_user
-        where user_id = #{userId} and status = #{status} and del_flag = #{delFlag}
+        where user_id = #{userId}
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+        <if test="delFlag != null and delFlag != null">
+            and del_flag = #{delFlag}
+        </if>
     </select>
 
     <select id="list" resultType="com.get.domain.SwEvangelistUserDO">

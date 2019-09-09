@@ -28,6 +28,8 @@ public interface SwCurrentUserService {
 
     int update(SwCurrentUserDO swCurrentUser);
 
+    int cancel(SwCurrentUserDO swCurrentUser) throws Exception;
+
     int remove(String tid);
 
     int batchRemove(String[] tids);

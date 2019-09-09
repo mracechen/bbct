@@ -41,10 +41,10 @@ public class SecurityFilter implements Filter {
         String method = req.getMethod();
         String requestURI = req.getRequestURI();
         res.setHeader("Access-Control-Allow-Origin", "*");
-        res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS");
+        res.setHeader("Access-Control-Allow-Methods", "*");
         res.setHeader("Access-Control-Max-Age", "3600");
         res.setHeader("Access-Control-Allow-Credentials", "true");
-        res.setHeader("Access-Control-Allow-Headers", "Accept, Origin, X-Requested-With, Content-Type,Last-Modified,accessKey");
+        res.setHeader("Access-Control-Allow-Headers", "*");
         /*if ("OPTIONS".equals(method)) {//检测是options方法则直接返回200
             res.setStatus(HttpStatus.OK.value());
         } else {

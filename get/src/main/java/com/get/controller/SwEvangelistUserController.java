@@ -70,11 +70,15 @@ public class SwEvangelistUserController {
     @PostMapping("/save")
     @RequiresPermissions("get:swEvangelistUser:add")
     public R save(SwEvangelistUserDO swEvangelistUser) {
-        swEvangelistUser.setCreateDate(new Date());
-        swEvangelistUser.setUpdateDate(new Date());
-        swEvangelistUser.setDelFlag(CommonStatic.NOTDELETE);
-        if (swEvangelistUserService.save(swEvangelistUser) > 0) {
-            return R.ok();
+        try {
+            swEvangelistUser.setCreateDate(new Date());
+            swEvangelistUser.setUpdateDate(new Date());
+            swEvangelistUser.setDelFlag(CommonStatic.NOTDELETE);
+            if (swEvangelistUserService.save(swEvangelistUser) > 0) {
+                return R.ok();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return R.error();
     }

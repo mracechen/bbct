@@ -10,10 +10,7 @@ import com.get.domain.AppInfo;
 import com.get.domain.InformationDO;
 import com.get.domain.MailRecordDO;
 import com.get.domain.SwUserBasicDO;
-import com.get.service.AppInfoService;
-import com.get.service.InformationService;
-import com.get.service.MailRecordService;
-import com.get.service.SwUserBasicService;
+import com.get.service.*;
 import com.get.statuc.CommonStatic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +46,9 @@ public class AppPublicAPI {
     private InformationService informationService;
 
     @Autowired
+    private SwTeamInfoService swTeamInfoService;
+
+    @Autowired
     private LogService logService;
 
     @Value("${configs.usercache.prefix}")
@@ -62,9 +62,8 @@ public class AppPublicAPI {
 
     @RequestMapping("get_appinfo")
     @ResponseBody
-    public ServerResponse<List<AppInfo>> getAppInfo() {
-
-        return appInfoService.getAppInfo();
+    public Result getAppInfo() {
+        return Result.ok(appInfoService.getAppInfo());
     }
 /*
 
@@ -82,7 +81,7 @@ public class AppPublicAPI {
      * @return
      */
     @RequestMapping("get_email_check_code")
-    public Object getEmailCheckCode(@RequestParam String email) {
+    public Result getEmailCheckCode(@RequestParam String email) {
         try {
             if (StringUtils.isBlank(email)) {
                 return Result.error("system.params.error");
@@ -148,7 +147,7 @@ public class AppPublicAPI {
      * @return
      */
     @RequestMapping("login")
-    public Object login(String email, String loginPass) {
+    public Result login(String email, String loginPass) {
         try {
             SwUserBasicDO swUserBasicDO = new SwUserBasicDO();
             if (StringUtils.isBlank(email) || StringUtils.isBlank(loginPass)) {
@@ -186,8 +185,11 @@ public class AppPublicAPI {
         }
     }
 
+    /**
+     * 重置密码
+     * */
     @RequestMapping("set_password")
-    public Object resetLoginPassword(String email, String checkCode, String pass, String type) {
+    public Result resetLoginPassword(String email, String checkCode, String pass, String type) {
         try {
             if(StringUtils.isBlank(email) || StringUtils.isBlank(email) || StringUtils.isBlank(email) || StringUtils.isBlank(email)){
                 return Result.error("system.params.error");
@@ -223,7 +225,7 @@ public class AppPublicAPI {
      * */
     @RequestMapping(value = "get_information")
     @ResponseBody
-    public Object get_information(String type){
+    public Result get_information(String type){
         try {
             Map<String,Object> params = new HashMap();
             params.put("delFlag", CommonStatic.NOTDELETE);
@@ -242,7 +244,7 @@ public class AppPublicAPI {
      * */
     @RequestMapping(value = "get_information_detail")
     @ResponseBody
-    public Object get_information_detail(String tid){
+    public Result get_information_detail(String tid){
         try {
             if(StringUtils.isBlank(tid)){
                 return Result.error("system.params.error");
@@ -254,6 +256,19 @@ public class AppPublicAPI {
         }
     }
 
+    /**
+     * 社群列表
+     * */
+    @RequestMapping(value = "get_team_info")
+    @ResponseBody
+    public Result getTeamInfo(){
+        try {
+            return Result.ok(swTeamInfoService.list(new HashMap<>()));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
 
     /**
      * 记录前端日志

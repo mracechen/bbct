@@ -20,6 +20,8 @@ public interface SwReleaseRecordService {
 
     Double getSumByUserIdAndDate(Integer userId, Date beginDate, Date endDate);
 
+    List<SwReleaseRecordDO> getCauseRelease(Integer userId, Integer myRelease);
+
     int count(Map<String, Object> map);
 
     int save(SwReleaseRecordDO swReleaseRecord);

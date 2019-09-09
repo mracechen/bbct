@@ -19,6 +19,8 @@ public interface SwUserBasicDao {
 
     List<Integer> getByIds(@Param("ids") List<Integer> ids);
 
+    List<Integer> getChildrenByIds(@Param("ids") List<Integer> ids);
+
     SwUserBasicDO getByEmail(String email);
 
     SwUserBasicDO getByUserBasic(SwUserBasicDO swUserBasic);

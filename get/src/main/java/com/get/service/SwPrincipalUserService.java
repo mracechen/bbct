@@ -27,6 +27,8 @@ public interface SwPrincipalUserService {
 
     int update(SwPrincipalUserDO swPrincipalUser);
 
+    int cancel(SwPrincipalUserDO swPrincipalUser) throws Exception;
+
     int remove(String tid);
 
     int batchRemove(String[] tids);

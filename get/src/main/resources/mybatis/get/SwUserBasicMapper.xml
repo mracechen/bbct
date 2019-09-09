@@ -15,6 +15,14 @@
         </foreach>
     </select>
 
+    <select id="getChildrenByIds" resultType="java.lang.Integer">
+        select tid
+        from t_sw_user_basic where recom_id in
+        <foreach collection="ids" index="index" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
     <select id="findRecommenders" resultType="com.get.domain.SwUserBasicDO">
         call find_recommenders(#{userId}, #{generate})
     </select>

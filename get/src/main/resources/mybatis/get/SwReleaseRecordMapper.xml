@@ -21,6 +21,20 @@
         and del_flag = 0
     </select>
 
+    <select id="getCauseRelease" resultType="com.get.domain.SwReleaseRecordDO">
+        select
+        *
+        from t_sw_release_record
+        where ex2 = #{userId}
+        <if test="myRelease == 1">
+            and cause_user_id = ex2
+        </if>
+        <if test="myRelease == 2">
+            and cause_user_id != ex2
+        </if>
+        and del_flag = 0
+    </select>
+
     <select id="list" resultType="com.get.domain.SwReleaseRecordDO">
         select
         `tid`,`target_id`,`amount`,`cause_type`,`cause_user_id`,`remark`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`

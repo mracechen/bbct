@@ -19,7 +19,7 @@ public interface SwEvangelistUserService {
 
     int count(Map<String, Object> map);
 
-    int save(SwEvangelistUserDO swEvangelistUser);
+    int save(SwEvangelistUserDO swEvangelistUser) throws Exception;
 
     int update(SwEvangelistUserDO swEvangelistUser);
 
