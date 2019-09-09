@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 06/09/2019 19:35:58
+ Date: 09/09/2019 21:03:33
 */
 
 SET NAMES utf8mb4;
@@ -426,7 +426,7 @@ CREATE TABLE `sys_log`  (
   `gmt_create` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `app` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'settlement' COMMENT '应用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7464349 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7464741 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_log
@@ -1864,6 +1864,398 @@ INSERT INTO `sys_log` VALUES (7464345, 1, 'admin', 'normal', NULL, '/manager/com
 INSERT INTO `sys_log` VALUES (7464346, 1, 'admin', 'normal', NULL, '/manager/common/generator/list', '{}', '127.0.0.1', '2019-09-05 15:48:26', 'sesame');
 INSERT INTO `sys_log` VALUES (7464347, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_benchlog', '{}', '127.0.0.1', '2019-09-05 15:48:53', 'sesame');
 INSERT INTO `sys_log` VALUES (7464348, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_benchmarking', '{}', '127.0.0.1', '2019-09-05 15:56:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464349, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=9b63fc8c-17e9-453b-bb6b-905b49a920b0', '{}', '127.0.0.1', '2019-09-09 14:16:29', 'sesame');
+INSERT INTO `sys_log` VALUES (7464350, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-09 14:16:30', 'sesame');
+INSERT INTO `sys_log` VALUES (7464351, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-09 14:16:30', 'sesame');
+INSERT INTO `sys_log` VALUES (7464352, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 14:16:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464353, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-09 14:16:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464354, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 14:16:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464355, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-09 14:16:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464356, 1, 'admin', 'normal', NULL, '/manager/sys/menu/', '{}', '127.0.0.1', '2019-09-09 14:16:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464357, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 14:16:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464358, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/272', '{}', '127.0.0.1', '2019-09-09 14:17:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464359, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"钱包管理\",\"icon\":\"\",\"orderNum\":\"2\",\"perms\":\"get:swWallets:swWallets\",\"type\":\"1\",\"parentId\":\"272\",\"url\":\"/manager/get/swWallets\"}', '127.0.0.1', '2019-09-09 14:17:26', 'sesame');
+INSERT INTO `sys_log` VALUES (7464360, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 14:17:26', 'sesame');
+INSERT INTO `sys_log` VALUES (7464361, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/292', '{}', '127.0.0.1', '2019-09-09 14:17:41', 'sesame');
+INSERT INTO `sys_log` VALUES (7464362, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"添加\",\"icon\":\"\",\"orderNum\":\"1\",\"perms\":\"get:swWallets:add\",\"type\":\"2\",\"parentId\":\"292\",\"url\":\"\"}', '127.0.0.1', '2019-09-09 14:17:51', 'sesame');
+INSERT INTO `sys_log` VALUES (7464363, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 14:17:51', 'sesame');
+INSERT INTO `sys_log` VALUES (7464364, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/292', '{}', '127.0.0.1', '2019-09-09 14:17:59', 'sesame');
+INSERT INTO `sys_log` VALUES (7464365, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"更新\",\"icon\":\"\",\"orderNum\":\"2\",\"perms\":\"get:swWallets:edit\",\"type\":\"2\",\"parentId\":\"292\",\"url\":\"\"}', '127.0.0.1', '2019-09-09 14:18:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464366, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 14:18:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464367, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/272', '{}', '127.0.0.1', '2019-09-09 14:18:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464368, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"用户流水\\t\",\"icon\":\"\",\"orderNum\":\"3\",\"perms\":\"get:swAccountRecord:swAccountRecord\",\"type\":\"1\",\"parentId\":\"272\",\"url\":\"/manager/get/swAccountRecord\"}', '127.0.0.1', '2019-09-09 14:18:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464369, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 14:18:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464370, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 14:20:10', 'sesame');
+INSERT INTO `sys_log` VALUES (7464371, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/274', '{}', '127.0.0.1', '2019-09-09 14:22:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464372, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"提币审核\",\"icon\":\"\",\"orderNum\":\"2\",\"perms\":\"get:swWithlog:swWithlog\",\"type\":\"1\",\"parentId\":\"274\",\"url\":\"/manager/get/swWithlog\"}', '127.0.0.1', '2019-09-09 14:22:56', 'sesame');
+INSERT INTO `sys_log` VALUES (7464373, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 14:22:56', 'sesame');
+INSERT INTO `sys_log` VALUES (7464374, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pc/get_email_check_code', 'org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter \'email\' is not present', NULL, '2019-09-09 14:22:58', NULL);
+INSERT INTO `sys_log` VALUES (7464375, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{}', '10.235.20.42', '2019-09-09 14:22:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464376, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/296', '{}', '127.0.0.1', '2019-09-09 14:23:15', 'sesame');
+INSERT INTO `sys_log` VALUES (7464377, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"更新\",\"icon\":\"\",\"orderNum\":\"1\",\"perms\":\"get:swWithlog:edit\",\"type\":\"2\",\"parentId\":\"296\",\"url\":\"\"}', '127.0.0.1', '2019-09-09 14:23:20', 'sesame');
+INSERT INTO `sys_log` VALUES (7464378, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 14:23:20', 'sesame');
+INSERT INTO `sys_log` VALUES (7464379, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pc/get_email_check_code', 'org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter \'email\' is not present', NULL, '2019-09-09 14:25:33', NULL);
+INSERT INTO `sys_log` VALUES (7464380, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{}', '10.235.20.42', '2019-09-09 14:25:33', 'sesame');
+INSERT INTO `sys_log` VALUES (7464381, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 14:38:50', 'sesame');
+INSERT INTO `sys_log` VALUES (7464382, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 14:39:51', 'sesame');
+INSERT INTO `sys_log` VALUES (7464383, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=960c73d2-714e-4b36-9e34-d81034946e33', '{}', '127.0.0.1', '2019-09-09 15:35:47', 'sesame');
+INSERT INTO `sys_log` VALUES (7464384, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-09 15:35:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464385, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-09 15:35:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464386, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 15:35:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464387, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-09 15:35:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464388, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 15:35:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464389, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-09 15:35:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464390, 1, 'admin', 'normal', NULL, '/manager/sys/role', '{}', '127.0.0.1', '2019-09-09 15:35:52', 'sesame');
+INSERT INTO `sys_log` VALUES (7464391, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '127.0.0.1', '2019-09-09 15:35:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464392, 1, 'admin', 'normal', NULL, '/manager/sys/role/edit/1', '{}', '127.0.0.1', '2019-09-09 15:35:54', 'sesame');
+INSERT INTO `sys_log` VALUES (7464393, 1, 'admin', 'normal', NULL, '/manager/sys/menu/tree/1', '{}', '127.0.0.1', '2019-09-09 15:35:54', 'sesame');
+INSERT INTO `sys_log` VALUES (7464394, 1, 'admin', 'normal', NULL, '/manager/sys/role/update', '{\"roleId\":\"1\",\"roleName\":\"开发管理员角色\",\"remark\":\"拥有最高权限\",\"menuIds\":\"283,282,281,278,277,273,291,290,289,287,286,285,205,92,57,30,29,28,206,118,48,209,207,203,76,75,74,62,56,55,15,26,25,24,14,13,12,61,22,21,20,83,81,80,79,71,280,279,276,288,284,204,109,27,91,77,202,73,7,6,2,3,78,1,296,297,274,295,292,294,293,272,-1\"}', '127.0.0.1', '2019-09-09 15:36:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464395, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '127.0.0.1', '2019-09-09 15:36:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464396, -1, '获取用户信息为空', 'normal', NULL, '/manager/logout', '{}', '127.0.0.1', '2019-09-09 15:36:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464397, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=17ad6ac4-d450-445c-9072-109b7fa61ea2', '{}', '127.0.0.1', '2019-09-09 15:36:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464398, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-09 15:36:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464399, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-09 15:36:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464400, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 15:36:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464401, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-09 15:36:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464402, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 15:36:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464403, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-09 15:36:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464404, 1, 'admin', 'normal', NULL, '/manager/get/swUserBasic', '{}', '127.0.0.1', '2019-09-09 15:36:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464405, 1, 'admin', 'normal', NULL, '/manager/get/swUserBasic/list', '{}', '127.0.0.1', '2019-09-09 15:36:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464406, 1, 'admin', 'normal', NULL, '/manager/get/swUserBasic/list', '{}', '127.0.0.1', '2019-09-09 15:36:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464407, 1, 'admin', 'normal', NULL, '/manager/get/swWallets', '{}', '127.0.0.1', '2019-09-09 15:36:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464408, 1, 'admin', 'normal', NULL, '/manager/get/swWallets/list', '{}', '127.0.0.1', '2019-09-09 15:36:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464409, 1, 'admin', 'normal', NULL, '/manager/get/swWallets/list', '{}', '127.0.0.1', '2019-09-09 15:36:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464410, 1, 'admin', 'normal', NULL, '/manager/get/swWallets/edit/e057847b2a714fb29a383ff6769d70a8', '{}', '127.0.0.1', '2019-09-09 15:36:11', 'sesame');
+INSERT INTO `sys_log` VALUES (7464411, 1, 'admin', 'normal', NULL, '/manager/get/swWallets/edit/01d7b79de7a046fca67bd10046e0ec91', '{}', '127.0.0.1', '2019-09-09 15:36:24', 'sesame');
+INSERT INTO `sys_log` VALUES (7464412, 1, 'admin', 'normal', NULL, '/manager/get/swWallets/update', '{\"ex4\":\"\",\"ex3\":\"\",\"updateDate\":\"Thu Sep 05 11:53:38 CST 2019\",\"isActive\":\"0\",\"delFlag\":\"0\",\"userId\":\"104405\",\"tid\":\"01d7b79de7a046fca67bd10046e0ec91\",\"frozenAmount\":\"\",\"coinTypeId\":\"737d784555164db2862fd74361a97165\",\"currency\":\"10000\",\"ex2\":\"\",\"createDate\":\"Thu Sep 05 11:53:38 CST 2019\",\"ex1\":\"\"}', '127.0.0.1', '2019-09-09 15:36:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464413, 1, 'admin', 'normal', NULL, '/manager/get/swWallets/list', '{}', '127.0.0.1', '2019-09-09 15:36:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464414, 1, 'admin', 'normal', NULL, '/manager/get/swWallets/edit/e057847b2a714fb29a383ff6769d70a8', '{}', '127.0.0.1', '2019-09-09 15:36:43', 'sesame');
+INSERT INTO `sys_log` VALUES (7464415, 1, 'admin', 'normal', NULL, '/manager/get/swAccountRecord', '{}', '127.0.0.1', '2019-09-09 15:36:46', 'sesame');
+INSERT INTO `sys_log` VALUES (7464416, 1, 'admin', 'normal', NULL, '/manager/get/swAccountRecord/list', '{}', '127.0.0.1', '2019-09-09 15:36:46', 'sesame');
+INSERT INTO `sys_log` VALUES (7464417, 1, 'admin', 'normal', NULL, '/manager/get/swAccountRecord/list', '{}', '127.0.0.1', '2019-09-09 15:36:46', 'sesame');
+INSERT INTO `sys_log` VALUES (7464418, 1, 'admin', 'normal', NULL, '/manager/get/swWithlog', '{}', '127.0.0.1', '2019-09-09 15:36:50', 'sesame');
+INSERT INTO `sys_log` VALUES (7464419, 1, 'admin', 'normal', NULL, '/manager/get/swWithlog/list', '{}', '127.0.0.1', '2019-09-09 15:36:50', 'sesame');
+INSERT INTO `sys_log` VALUES (7464420, 1, 'admin', 'normal', NULL, '/manager/get/swWithlog/list', '{}', '127.0.0.1', '2019-09-09 15:36:50', 'sesame');
+INSERT INTO `sys_log` VALUES (7464421, 1, 'admin', 'normal', NULL, '/manager/get/information', '{}', '127.0.0.1', '2019-09-09 15:36:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464422, 1, 'admin', 'normal', NULL, '/manager/get/information/list', '{}', '127.0.0.1', '2019-09-09 15:36:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464423, 1, 'admin', 'normal', NULL, '/manager/get/information/list', '{}', '127.0.0.1', '2019-09-09 15:36:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464424, 1, 'admin', 'normal', NULL, '/manager/sys/menu/', '{}', '127.0.0.1', '2019-09-09 15:38:15', 'sesame');
+INSERT INTO `sys_log` VALUES (7464425, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 15:38:15', 'sesame');
+INSERT INTO `sys_log` VALUES (7464426, 1, 'admin', 'normal', NULL, '/manager/sys/menu/edit/274', '{}', '127.0.0.1', '2019-09-09 15:38:24', 'sesame');
+INSERT INTO `sys_log` VALUES (7464427, 1, 'admin', 'normal', NULL, '/manager/sys/menu/edit/274', '{}', '127.0.0.1', '2019-09-09 15:38:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464428, 1, 'admin', 'normal', NULL, '/manager/sys/menu/edit/272', '{}', '127.0.0.1', '2019-09-09 15:38:34', 'sesame');
+INSERT INTO `sys_log` VALUES (7464429, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/0', '{}', '127.0.0.1', '2019-09-09 15:38:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464430, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"币种管理\",\"icon\":\"fa fa-anchor\",\"orderNum\":\"11\",\"perms\":\"\",\"type\":\"0\",\"parentId\":\"0\",\"url\":\"\"}', '127.0.0.1', '2019-09-09 15:43:21', 'sesame');
+INSERT INTO `sys_log` VALUES (7464431, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 15:43:21', 'sesame');
+INSERT INTO `sys_log` VALUES (7464432, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/298', '{}', '127.0.0.1', '2019-09-09 15:43:36', 'sesame');
+INSERT INTO `sys_log` VALUES (7464433, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 15:47:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464434, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 15:53:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464435, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 15:56:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464436, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 15:57:20', 'sesame');
+INSERT INTO `sys_log` VALUES (7464437, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=9d336a1c-d385-496b-9ed5-c2ca1a6ad9fe', '{}', '127.0.0.1', '2019-09-09 16:03:47', 'sesame');
+INSERT INTO `sys_log` VALUES (7464438, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '127.0.0.1', '2019-09-09 16:03:47', 'sesame');
+INSERT INTO `sys_log` VALUES (7464439, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-09 16:03:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464440, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-09 16:03:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464441, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 16:03:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464442, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-09 16:03:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464443, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 16:03:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464444, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-09 16:03:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464445, 1, 'admin', 'normal', NULL, '/manager/sys/menu/', '{}', '127.0.0.1', '2019-09-09 16:03:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464446, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 16:03:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464447, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/298', '{}', '127.0.0.1', '2019-09-09 16:03:59', 'sesame');
+INSERT INTO `sys_log` VALUES (7464448, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"法币列表\",\"icon\":\"\",\"orderNum\":\"1\",\"perms\":\"get:swFiatCoin:swFiatCoin\",\"type\":\"1\",\"parentId\":\"298\",\"url\":\"/manager/get/swFiatCoin\"}', '127.0.0.1', '2019-09-09 16:04:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464449, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 16:04:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464450, 1, 'admin', 'normal', NULL, '/manager/sys/role', '{}', '127.0.0.1', '2019-09-09 16:04:54', 'sesame');
+INSERT INTO `sys_log` VALUES (7464451, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '127.0.0.1', '2019-09-09 16:04:54', 'sesame');
+INSERT INTO `sys_log` VALUES (7464452, 1, 'admin', 'normal', NULL, '/manager/sys/role/edit/1', '{}', '127.0.0.1', '2019-09-09 16:04:56', 'sesame');
+INSERT INTO `sys_log` VALUES (7464453, 1, 'admin', 'normal', NULL, '/manager/sys/menu/tree/1', '{}', '127.0.0.1', '2019-09-09 16:04:56', 'sesame');
+INSERT INTO `sys_log` VALUES (7464454, 1, 'admin', 'normal', NULL, '/manager/sys/role/update', '{\"roleId\":\"1\",\"roleName\":\"开发管理员角色\",\"remark\":\"拥有最高权限\",\"menuIds\":\"283,282,281,297,278,277,295,294,293,273,291,290,289,287,286,285,205,92,57,30,29,28,206,118,48,209,207,203,76,75,74,62,56,55,15,26,25,24,14,13,12,61,22,21,20,83,81,80,79,71,280,279,296,276,274,292,272,288,284,204,109,27,91,77,202,73,7,6,2,3,78,1,298,299,-1\"}', '127.0.0.1', '2019-09-09 16:04:59', 'sesame');
+INSERT INTO `sys_log` VALUES (7464455, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '127.0.0.1', '2019-09-09 16:04:59', 'sesame');
+INSERT INTO `sys_log` VALUES (7464456, -1, '获取用户信息为空', 'normal', NULL, '/manager/logout', '{}', '127.0.0.1', '2019-09-09 16:05:02', 'sesame');
+INSERT INTO `sys_log` VALUES (7464457, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=797936f5-300f-4ad0-801d-7903707b2258', '{}', '127.0.0.1', '2019-09-09 16:05:02', 'sesame');
+INSERT INTO `sys_log` VALUES (7464458, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-09 16:05:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464459, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-09 16:05:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464460, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 16:05:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464461, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-09 16:05:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464462, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 16:05:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464463, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-09 16:05:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464464, 1, 'admin', 'normal', NULL, '/manager/get/swFiatCoin', '{}', '127.0.0.1', '2019-09-09 16:05:11', 'sesame');
+INSERT INTO `sys_log` VALUES (7464465, 1, 'admin', 'normal', NULL, '/manager/get/swFiatCoin/list', '{}', '127.0.0.1', '2019-09-09 16:05:11', 'sesame');
+INSERT INTO `sys_log` VALUES (7464466, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-09 16:13:46', 'sesame');
+INSERT INTO `sys_log` VALUES (7464467, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 16:13:46', 'sesame');
+INSERT INTO `sys_log` VALUES (7464468, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-09 16:13:46', 'sesame');
+INSERT INTO `sys_log` VALUES (7464469, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 16:13:46', 'sesame');
+INSERT INTO `sys_log` VALUES (7464470, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-09 16:13:47', 'sesame');
+INSERT INTO `sys_log` VALUES (7464471, 1, 'admin', 'normal', NULL, '/manager/sys/menu/', '{}', '127.0.0.1', '2019-09-09 16:13:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464472, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 16:13:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464473, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/299', '{}', '127.0.0.1', '2019-09-09 16:13:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464474, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"添加\",\"icon\":\"\",\"orderNum\":\"1\",\"perms\":\"get:swFiatCoin:add\",\"type\":\"2\",\"parentId\":\"299\",\"url\":\"\"}', '127.0.0.1', '2019-09-09 16:14:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464475, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 16:14:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464476, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/300', '{}', '127.0.0.1', '2019-09-09 16:17:23', 'sesame');
+INSERT INTO `sys_log` VALUES (7464477, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"更新\",\"icon\":\"\",\"orderNum\":\"2\",\"perms\":\"get:swFiatCoin:edit\",\"type\":\"2\",\"parentId\":\"300\",\"url\":\"\"}', '127.0.0.1', '2019-09-09 16:17:36', 'sesame');
+INSERT INTO `sys_log` VALUES (7464478, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 16:17:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464479, 1, 'admin', 'normal', NULL, '/manager/sys/role', '{}', '127.0.0.1', '2019-09-09 16:21:15', 'sesame');
+INSERT INTO `sys_log` VALUES (7464480, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '127.0.0.1', '2019-09-09 16:21:15', 'sesame');
+INSERT INTO `sys_log` VALUES (7464481, 1, 'admin', 'normal', NULL, '/manager/sys/role/edit/1', '{}', '127.0.0.1', '2019-09-09 16:21:52', 'sesame');
+INSERT INTO `sys_log` VALUES (7464482, 1, 'admin', 'normal', NULL, '/manager/sys/menu/tree/1', '{}', '127.0.0.1', '2019-09-09 16:21:52', 'sesame');
+INSERT INTO `sys_log` VALUES (7464483, 1, 'admin', 'normal', NULL, '/manager/sys/role/update', '{\"roleId\":\"1\",\"roleName\":\"开发管理员角色\",\"remark\":\"拥有最高权限\",\"menuIds\":\"283,282,281,297,278,277,295,294,293,273,291,290,289,287,286,285,205,92,57,30,29,28,206,118,48,209,207,203,76,75,74,62,56,55,15,26,25,24,14,13,12,61,22,21,20,83,81,80,79,71,280,279,296,276,274,292,272,288,284,204,109,27,91,77,202,73,7,6,2,3,78,1,298,301,300,299,-1\"}', '127.0.0.1', '2019-09-09 16:21:55', 'sesame');
+INSERT INTO `sys_log` VALUES (7464484, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '127.0.0.1', '2019-09-09 16:21:55', 'sesame');
+INSERT INTO `sys_log` VALUES (7464485, -1, '获取用户信息为空', 'normal', NULL, '/manager/logout', '{}', '127.0.0.1', '2019-09-09 16:21:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464486, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=1b684b38-dd94-4615-bfcf-d7cc389db6c8', '{}', '127.0.0.1', '2019-09-09 16:21:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464487, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-09 16:21:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464488, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-09 16:21:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464489, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 16:21:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464490, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-09 16:21:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464491, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 16:21:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464492, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-09 16:21:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464493, 1, 'admin', 'normal', NULL, '/manager/get/swFiatCoin', '{}', '127.0.0.1', '2019-09-09 16:22:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464494, 1, 'admin', 'normal', NULL, '/manager/get/swFiatCoin/list', '{}', '127.0.0.1', '2019-09-09 16:22:02', 'sesame');
+INSERT INTO `sys_log` VALUES (7464495, 1, 'admin', 'normal', NULL, '/manager/get/swFiatCoin/edit/1249', '{}', '127.0.0.1', '2019-09-09 16:22:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464496, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 16:49:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464497, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pc/get_email_check_code', 'org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter \'email\' is not present', NULL, '2019-09-09 16:50:31', NULL);
+INSERT INTO `sys_log` VALUES (7464498, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{}', '10.235.20.42', '2019-09-09 16:50:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464499, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pc/get_email_check_code', 'org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter \'email\' is not present', NULL, '2019-09-09 16:52:55', NULL);
+INSERT INTO `sys_log` VALUES (7464500, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{}', '10.235.20.42', '2019-09-09 16:52:55', 'sesame');
+INSERT INTO `sys_log` VALUES (7464501, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pc/get_email_check_code', 'org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter \'email\' is not present', NULL, '2019-09-09 17:03:54', NULL);
+INSERT INTO `sys_log` VALUES (7464502, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{}', '10.235.20.42', '2019-09-09 17:03:54', 'sesame');
+INSERT INTO `sys_log` VALUES (7464503, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{}', '10.235.20.42', '2019-09-09 17:04:51', 'sesame');
+INSERT INTO `sys_log` VALUES (7464504, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{}', '10.235.20.42', '2019-09-09 17:05:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464505, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{}', '10.235.20.42', '2019-09-09 17:06:28', 'sesame');
+INSERT INTO `sys_log` VALUES (7464506, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{}', '10.235.20.42', '2019-09-09 17:08:07', 'sesame');
+INSERT INTO `sys_log` VALUES (7464507, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\",\"recomId\":\"1\",\"checkCode\":\"1111\"}', '10.235.20.42', '2019-09-09 17:09:04', 'sesame');
+INSERT INTO `sys_log` VALUES (7464508, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\",\"recomId\":\"1\",\"checkCode\":\"1111\"}', '10.235.20.42', '2019-09-09 17:10:09', 'sesame');
+INSERT INTO `sys_log` VALUES (7464509, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\",\"recomId\":\"1\",\"checkCode\":\"1235\"}', '10.235.20.42', '2019-09-09 17:14:43', 'sesame');
+INSERT INTO `sys_log` VALUES (7464510, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 17:21:11', 'sesame');
+INSERT INTO `sys_log` VALUES (7464511, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 17:23:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464512, -1, '获取用户信息为空', 'normal', NULL, '/', '{}', '10.235.20.42', '2019-09-09 17:24:24', 'sesame');
+INSERT INTO `sys_log` VALUES (7464513, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=684ee873-5e3c-47ba-ab05-6760d4c094b6', '{}', '10.235.20.42', '2019-09-09 17:24:24', 'sesame');
+INSERT INTO `sys_log` VALUES (7464514, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 17:24:34', 'sesame');
+INSERT INTO `sys_log` VALUES (7464515, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '10.235.20.42', '2019-09-09 17:24:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464516, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '10.235.20.42', '2019-09-09 17:24:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464517, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '10.235.20.42', '2019-09-09 17:24:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464518, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '10.235.20.42', '2019-09-09 17:24:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464519, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '10.235.20.42', '2019-09-09 17:24:40', 'sesame');
+INSERT INTO `sys_log` VALUES (7464520, 1, 'admin', 'normal', NULL, '/', '{}', '10.235.20.42', '2019-09-09 17:24:40', 'sesame');
+INSERT INTO `sys_log` VALUES (7464521, 1, 'admin', 'normal', NULL, '/manager/record/msgRecord', '{}', '10.235.20.42', '2019-09-09 17:24:47', 'sesame');
+INSERT INTO `sys_log` VALUES (7464522, 1, 'admin', 'error', NULL, 'http://10.235.20.47:8081/manager/record/msgRecord/list', 'org.springframework.jdbc.BadSqlGrammarException: \r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\r\n### The error may exist in file [G:\\java_project\\bbct\\bbct\\get\\target\\classes\\mybatis\\system\\record\\MsgRecordMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select `tid`,`mobile`,`msg_content`,`status`,`create_date`,`del_flag` from t_msg_record                                      order by tid desc                                     limit ?, ?\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist', NULL, '2019-09-09 17:24:47', NULL);
+INSERT INTO `sys_log` VALUES (7464523, 1, 'admin', 'error', NULL, 'http://10.235.20.47:8081/manager/record/msgRecord/list', 'org.springframework.jdbc.BadSqlGrammarException: \r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\r\n### The error may exist in file [G:\\java_project\\bbct\\bbct\\get\\target\\classes\\mybatis\\system\\record\\MsgRecordMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select `tid`,`mobile`,`msg_content`,`status`,`create_date`,`del_flag` from t_msg_record                                      order by create_date desc                                     limit ?, ?\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist', NULL, '2019-09-09 17:24:47', NULL);
+INSERT INTO `sys_log` VALUES (7464524, 1, 'admin', 'normal', NULL, '/manager/record/msgRecord/list', '{}', '10.235.20.42', '2019-09-09 17:24:47', 'sesame');
+INSERT INTO `sys_log` VALUES (7464525, 1, 'admin', 'normal', NULL, '/manager/record/msgRecord/list', '{}', '10.235.20.42', '2019-09-09 17:24:47', 'sesame');
+INSERT INTO `sys_log` VALUES (7464526, 1, 'admin', 'normal', NULL, '/manager/sys/menu/', '{}', '10.235.20.42', '2019-09-09 17:24:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464527, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '10.235.20.42', '2019-09-09 17:24:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464528, 1, 'admin', 'normal', NULL, '/manager/sys/user/', '{}', '10.235.20.42', '2019-09-09 17:24:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464529, 1, 'admin', 'normal', NULL, '/manager/system/sysDept/tree', '{}', '10.235.20.42', '2019-09-09 17:24:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464530, 1, 'admin', 'normal', NULL, '/manager/sys/user/list', '{}', '10.235.20.42', '2019-09-09 17:24:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464531, 1, 'admin', 'normal', NULL, '/manager/system/sysDept', '{}', '10.235.20.42', '2019-09-09 17:24:59', 'sesame');
+INSERT INTO `sys_log` VALUES (7464532, 1, 'admin', 'normal', NULL, '/manager/system/sysDept/list', '{}', '10.235.20.42', '2019-09-09 17:24:59', 'sesame');
+INSERT INTO `sys_log` VALUES (7464533, 1, 'admin', 'normal', NULL, '/manager/sys/role', '{}', '10.235.20.42', '2019-09-09 17:25:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464534, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '10.235.20.42', '2019-09-09 17:25:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464535, 1, 'admin', 'normal', NULL, '/manager/base/securityManager', '{}', '10.235.20.42', '2019-09-09 17:25:04', 'sesame');
+INSERT INTO `sys_log` VALUES (7464536, 1, 'admin', 'normal', NULL, '/manager/base/securityManager/list', '{}', '10.235.20.42', '2019-09-09 17:25:04', 'sesame');
+INSERT INTO `sys_log` VALUES (7464537, 1, 'admin', 'normal', NULL, '/manager/base/securityManager/list', '{}', '10.235.20.42', '2019-09-09 17:25:04', 'sesame');
+INSERT INTO `sys_log` VALUES (7464538, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=8c09b1b7-1e27-456e-b361-db92fe106585', '{}', '127.0.0.1', '2019-09-09 17:26:12', 'sesame');
+INSERT INTO `sys_log` VALUES (7464539, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-09 17:26:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464540, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-09 17:26:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464541, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 17:26:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464542, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-09 17:26:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464543, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 17:26:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464544, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-09 17:26:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464545, 1, 'admin', 'normal', NULL, '/manager/sys/menu/', '{}', '127.0.0.1', '2019-09-09 17:26:16', 'sesame');
+INSERT INTO `sys_log` VALUES (7464546, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 17:26:16', 'sesame');
+INSERT INTO `sys_log` VALUES (7464547, 1, 'admin', 'normal', NULL, '/manager/sys/menu/add/3', '{}', '127.0.0.1', '2019-09-09 17:26:44', 'sesame');
+INSERT INTO `sys_log` VALUES (7464548, 1, 'admin', 'normal', NULL, '/manager/sys/menu/save', '{\"name\":\"邮件记录\",\"icon\":\"\",\"orderNum\":\"8\",\"perms\":\"get:mailRecord:mailRecord\",\"type\":\"1\",\"parentId\":\"3\",\"url\":\"/manager/get/mailRecord\"}', '127.0.0.1', '2019-09-09 17:27:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464549, 1, 'admin', 'normal', NULL, '/manager/sys/menu/list', '{\"sort\":\"order_num\"}', '127.0.0.1', '2019-09-09 17:27:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464550, 1, 'admin', 'normal', NULL, '/manager/sys/role', '{}', '127.0.0.1', '2019-09-09 17:27:16', 'sesame');
+INSERT INTO `sys_log` VALUES (7464551, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '127.0.0.1', '2019-09-09 17:27:16', 'sesame');
+INSERT INTO `sys_log` VALUES (7464552, 1, 'admin', 'normal', NULL, '/manager/sys/role/edit/1', '{}', '127.0.0.1', '2019-09-09 17:27:17', 'sesame');
+INSERT INTO `sys_log` VALUES (7464553, 1, 'admin', 'normal', NULL, '/manager/sys/menu/tree/1', '{}', '127.0.0.1', '2019-09-09 17:27:17', 'sesame');
+INSERT INTO `sys_log` VALUES (7464554, 1, 'admin', 'normal', NULL, '/manager/sys/role/update', '{\"roleId\":\"1\",\"roleName\":\"开发管理员角色\",\"remark\":\"拥有最高权限\",\"menuIds\":\"301,283,282,281,297,278,277,295,294,293,273,291,290,289,287,286,285,205,92,57,30,29,28,206,118,48,209,207,203,76,75,74,62,56,55,15,26,25,24,14,13,12,61,22,21,20,83,81,80,79,71,300,299,298,280,279,296,276,274,292,272,288,284,204,109,27,91,77,202,73,7,6,2,78,1,302,3,-1\"}', '127.0.0.1', '2019-09-09 17:27:21', 'sesame');
+INSERT INTO `sys_log` VALUES (7464555, 1, 'admin', 'normal', NULL, '/manager/sys/role/list', '{}', '127.0.0.1', '2019-09-09 17:27:21', 'sesame');
+INSERT INTO `sys_log` VALUES (7464556, -1, '获取用户信息为空', 'normal', NULL, '/manager/logout', '{}', '127.0.0.1', '2019-09-09 17:27:22', 'sesame');
+INSERT INTO `sys_log` VALUES (7464557, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=a06c2dc0-7e17-4381-8215-471a8ecde960', '{}', '127.0.0.1', '2019-09-09 17:27:22', 'sesame');
+INSERT INTO `sys_log` VALUES (7464558, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 17:28:12', 'sesame');
+INSERT INTO `sys_log` VALUES (7464559, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=2fc44c68-46c7-42bb-97e0-fdd88f972f56', '{}', '10.235.20.42', '2019-09-09 17:28:20', 'sesame');
+INSERT INTO `sys_log` VALUES (7464560, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '10.235.20.42', '2019-09-09 17:28:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464561, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '10.235.20.42', '2019-09-09 17:28:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464562, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '10.235.20.42', '2019-09-09 17:28:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464563, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '10.235.20.42', '2019-09-09 17:28:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464564, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '10.235.20.42', '2019-09-09 17:28:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464565, 1, 'admin', 'normal', NULL, '/', '{}', '10.235.20.42', '2019-09-09 17:28:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464566, 1, 'admin', 'normal', NULL, '/manager/record/msgRecord', '{}', '10.235.20.42', '2019-09-09 17:28:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464567, 1, 'admin', 'error', NULL, 'http://10.235.20.47:8081/manager/record/msgRecord/list', 'org.springframework.jdbc.BadSqlGrammarException: \r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\r\n### The error may exist in file [G:\\java_project\\bbct\\bbct\\get\\target\\classes\\mybatis\\system\\record\\MsgRecordMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select `tid`,`mobile`,`msg_content`,`status`,`create_date`,`del_flag` from t_msg_record                                      order by tid desc                                     limit ?, ?\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist', NULL, '2019-09-09 17:28:32', NULL);
+INSERT INTO `sys_log` VALUES (7464568, 1, 'admin', 'normal', NULL, '/manager/record/msgRecord/list', '{}', '10.235.20.42', '2019-09-09 17:28:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464569, 1, 'admin', 'error', NULL, 'http://10.235.20.47:8081/manager/record/msgRecord/list', 'org.springframework.jdbc.BadSqlGrammarException: \r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\r\n### The error may exist in file [G:\\java_project\\bbct\\bbct\\get\\target\\classes\\mybatis\\system\\record\\MsgRecordMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select `tid`,`mobile`,`msg_content`,`status`,`create_date`,`del_flag` from t_msg_record                                      order by create_date desc                                     limit ?, ?\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist', NULL, '2019-09-09 17:28:32', NULL);
+INSERT INTO `sys_log` VALUES (7464570, 1, 'admin', 'normal', NULL, '/manager/record/msgRecord/list', '{}', '10.235.20.42', '2019-09-09 17:28:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464571, 1, 'admin', 'normal', NULL, '/manager/get/mailRecord', '{}', '10.235.20.42', '2019-09-09 17:28:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464572, 1, 'admin', 'normal', NULL, '/manager/get/mailRecord/list', '{}', '10.235.20.42', '2019-09-09 17:28:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464573, 1, 'admin', 'normal', NULL, '/manager/get/mailRecord/list', '{}', '10.235.20.42', '2019-09-09 17:28:32', 'sesame');
+INSERT INTO `sys_log` VALUES (7464574, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\",\"recomId\":\"1\",\"checkCode\":\"2145\"}', '10.235.20.42', '2019-09-09 17:28:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464575, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\",\"recomId\":\"1\",\"checkCode\":\"1234\"}', '10.235.20.42', '2019-09-09 17:33:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464576, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\",\"recomId\":\"1\",\"checkCode\":\"1234\"}', '10.235.20.42', '2019-09-09 17:37:19', 'sesame');
+INSERT INTO `sys_log` VALUES (7464577, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{\"loginPass\":\"111111111\",\"email\":\"1145308642@qq.com\",\"recomId\":\"1\",\"checkCode\":\"1234\"}', '10.235.20.42', '2019-09-09 17:41:01', 'sesame');
+INSERT INTO `sys_log` VALUES (7464578, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{\"loginPass\":\"1234123412\",\"email\":\"1145308642@qq.com\",\"recomId\":\"1\",\"checkCode\":\"1234\"}', '10.235.20.42', '2019-09-09 17:41:54', 'sesame');
+INSERT INTO `sys_log` VALUES (7464579, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_email_check_code', '{\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 17:56:38', 'sesame');
+INSERT INTO `sys_log` VALUES (7464580, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=73842620-7fbb-461e-8015-1ac9041fdd8f', '{}', '10.235.20.42', '2019-09-09 17:56:56', 'sesame');
+INSERT INTO `sys_log` VALUES (7464581, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 17:56:59', 'sesame');
+INSERT INTO `sys_log` VALUES (7464582, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\",\"recomId\":\"1\",\"checkCode\":\"5544\"}', '10.235.20.42', '2019-09-09 17:57:11', 'sesame');
+INSERT INTO `sys_log` VALUES (7464583, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 17:57:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464584, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 17:57:26', 'sesame');
+INSERT INTO `sys_log` VALUES (7464585, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 17:57:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464586, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 17:57:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464587, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 17:57:38', 'sesame');
+INSERT INTO `sys_log` VALUES (7464588, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 17:57:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464589, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 17:57:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464590, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 17:57:40', 'sesame');
+INSERT INTO `sys_log` VALUES (7464591, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '10.235.20.42', '2019-09-09 17:57:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464592, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '10.235.20.42', '2019-09-09 17:57:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464593, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '10.235.20.42', '2019-09-09 17:57:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464594, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '10.235.20.42', '2019-09-09 17:57:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464595, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '10.235.20.42', '2019-09-09 17:57:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464596, 1, 'admin', 'normal', NULL, '/', '{}', '10.235.20.42', '2019-09-09 17:57:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464597, 1, 'admin', 'normal', NULL, '/manager/record/msgRecord', '{}', '10.235.20.42', '2019-09-09 17:57:48', 'sesame');
+INSERT INTO `sys_log` VALUES (7464598, 1, 'admin', 'error', NULL, 'http://10.235.20.47:8081/manager/record/msgRecord/list', 'org.springframework.jdbc.BadSqlGrammarException: \r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\r\n### The error may exist in file [G:\\java_project\\bbct\\bbct\\get\\target\\classes\\mybatis\\system\\record\\MsgRecordMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select `tid`,`mobile`,`msg_content`,`status`,`create_date`,`del_flag` from t_msg_record                                      order by tid desc                                     limit ?, ?\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist', NULL, '2019-09-09 17:57:49', NULL);
+INSERT INTO `sys_log` VALUES (7464599, 1, 'admin', 'error', NULL, 'http://10.235.20.47:8081/manager/record/msgRecord/list', 'org.springframework.jdbc.BadSqlGrammarException: \r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\r\n### The error may exist in file [G:\\java_project\\bbct\\bbct\\get\\target\\classes\\mybatis\\system\\record\\MsgRecordMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select `tid`,`mobile`,`msg_content`,`status`,`create_date`,`del_flag` from t_msg_record                                      order by create_date desc                                     limit ?, ?\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbct.t_msg_record\' doesn\'t exist', NULL, '2019-09-09 17:57:49', NULL);
+INSERT INTO `sys_log` VALUES (7464600, 1, 'admin', 'normal', NULL, '/manager/record/msgRecord/list', '{}', '10.235.20.42', '2019-09-09 17:57:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464601, 1, 'admin', 'normal', NULL, '/manager/record/msgRecord/list', '{}', '10.235.20.42', '2019-09-09 17:57:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464602, 1, 'admin', 'normal', NULL, '/manager/get/mailRecord', '{}', '10.235.20.42', '2019-09-09 17:57:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464603, 1, 'admin', 'normal', NULL, '/manager/get/mailRecord/list', '{}', '10.235.20.42', '2019-09-09 17:57:50', 'sesame');
+INSERT INTO `sys_log` VALUES (7464604, 1, 'admin', 'normal', NULL, '/manager/get/mailRecord/list', '{}', '10.235.20.42', '2019-09-09 17:57:50', 'sesame');
+INSERT INTO `sys_log` VALUES (7464605, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/register', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\",\"recomId\":\"1\",\"checkCode\":\"3595\"}', '10.235.20.42', '2019-09-09 17:58:10', 'sesame');
+INSERT INTO `sys_log` VALUES (7464606, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 18:01:30', 'sesame');
+INSERT INTO `sys_log` VALUES (7464607, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 19:00:11', 'sesame');
+INSERT INTO `sys_log` VALUES (7464608, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 19:08:04', 'sesame');
+INSERT INTO `sys_log` VALUES (7464609, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.41', '2019-09-09 19:09:02', 'sesame');
+INSERT INTO `sys_log` VALUES (7464610, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642\"}', '10.235.20.41', '2019-09-09 19:14:51', 'sesame');
+INSERT INTO `sys_log` VALUES (7464611, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642\"}', '10.235.20.41', '2019-09-09 19:14:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464612, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.41', '2019-09-09 19:15:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464613, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 19:23:15', 'sesame');
+INSERT INTO `sys_log` VALUES (7464614, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 19:23:56', 'sesame');
+INSERT INTO `sys_log` VALUES (7464615, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:27:29', 'sesame');
+INSERT INTO `sys_log` VALUES (7464616, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:27:38', 'sesame');
+INSERT INTO `sys_log` VALUES (7464617, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:28:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464618, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:29:36', 'sesame');
+INSERT INTO `sys_log` VALUES (7464619, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pv/get_user_info', 'java.lang.Exception: 123', NULL, '2019-09-09 19:33:23', NULL);
+INSERT INTO `sys_log` VALUES (7464620, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:33:23', 'sesame');
+INSERT INTO `sys_log` VALUES (7464621, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pv/get_user_info', 'java.lang.Exception: 123', NULL, '2019-09-09 19:34:26', NULL);
+INSERT INTO `sys_log` VALUES (7464622, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:34:26', 'sesame');
+INSERT INTO `sys_log` VALUES (7464623, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pv/get_user_info', 'java.lang.Exception: 123', NULL, '2019-09-09 19:38:23', NULL);
+INSERT INTO `sys_log` VALUES (7464624, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:38:23', 'sesame');
+INSERT INTO `sys_log` VALUES (7464625, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pv/get_user_info', 'java.lang.Exception: 123', NULL, '2019-09-09 19:39:16', NULL);
+INSERT INTO `sys_log` VALUES (7464626, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:39:16', 'sesame');
+INSERT INTO `sys_log` VALUES (7464627, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pv/get_user_info', 'java.lang.Exception: 123', NULL, '2019-09-09 19:40:07', NULL);
+INSERT INTO `sys_log` VALUES (7464628, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:40:07', 'sesame');
+INSERT INTO `sys_log` VALUES (7464629, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pv/get_user_info', 'java.lang.Exception: 123', NULL, '2019-09-09 19:41:17', NULL);
+INSERT INTO `sys_log` VALUES (7464630, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:41:17', 'sesame');
+INSERT INTO `sys_log` VALUES (7464631, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pv/get_user_info', 'java.lang.Exception: 123', NULL, '2019-09-09 19:41:22', NULL);
+INSERT INTO `sys_log` VALUES (7464632, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:41:22', 'sesame');
+INSERT INTO `sys_log` VALUES (7464633, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pv/get_user_info', 'java.lang.Exception: 123', NULL, '2019-09-09 19:41:40', NULL);
+INSERT INTO `sys_log` VALUES (7464634, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:41:40', 'sesame');
+INSERT INTO `sys_log` VALUES (7464635, NULL, NULL, 'error', NULL, 'http://10.235.20.47:8081/api/app/pv/get_user_info', 'java.lang.Exception: 123', NULL, '2019-09-09 19:41:49', NULL);
+INSERT INTO `sys_log` VALUES (7464636, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:41:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464637, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:42:29', 'sesame');
+INSERT INTO `sys_log` VALUES (7464638, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:43:44', 'sesame');
+INSERT INTO `sys_log` VALUES (7464639, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:43:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464640, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:44:09', 'sesame');
+INSERT INTO `sys_log` VALUES (7464641, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:45:24', 'sesame');
+INSERT INTO `sys_log` VALUES (7464642, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:48:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464643, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 19:51:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464644, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:00:14', 'sesame');
+INSERT INTO `sys_log` VALUES (7464645, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 20:05:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464646, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:05:50', 'sesame');
+INSERT INTO `sys_log` VALUES (7464647, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:05:52', 'sesame');
+INSERT INTO `sys_log` VALUES (7464648, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:08:34', 'sesame');
+INSERT INTO `sys_log` VALUES (7464649, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:08:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464650, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:08:39', 'sesame');
+INSERT INTO `sys_log` VALUES (7464651, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 20:09:50', 'sesame');
+INSERT INTO `sys_log` VALUES (7464652, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:09:51', 'sesame');
+INSERT INTO `sys_log` VALUES (7464653, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:09:55', 'sesame');
+INSERT INTO `sys_log` VALUES (7464654, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 20:12:13', 'sesame');
+INSERT INTO `sys_log` VALUES (7464655, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:12:14', 'sesame');
+INSERT INTO `sys_log` VALUES (7464656, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:12:17', 'sesame');
+INSERT INTO `sys_log` VALUES (7464657, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:14:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464658, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:14:46', 'sesame');
+INSERT INTO `sys_log` VALUES (7464659, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.41', '2019-09-09 20:14:48', 'sesame');
+INSERT INTO `sys_log` VALUES (7464660, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:15:12', 'sesame');
+INSERT INTO `sys_log` VALUES (7464661, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:15:14', 'sesame');
+INSERT INTO `sys_log` VALUES (7464662, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:15:15', 'sesame');
+INSERT INTO `sys_log` VALUES (7464663, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.41', '2019-09-09 20:15:18', 'sesame');
+INSERT INTO `sys_log` VALUES (7464664, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:15:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464665, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:16:26', 'sesame');
+INSERT INTO `sys_log` VALUES (7464666, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:18:48', 'sesame');
+INSERT INTO `sys_log` VALUES (7464667, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:19:08', 'sesame');
+INSERT INTO `sys_log` VALUES (7464668, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:19:11', 'sesame');
+INSERT INTO `sys_log` VALUES (7464669, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:19:20', 'sesame');
+INSERT INTO `sys_log` VALUES (7464670, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:20:48', 'sesame');
+INSERT INTO `sys_log` VALUES (7464671, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:20:52', 'sesame');
+INSERT INTO `sys_log` VALUES (7464672, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.41', '2019-09-09 20:20:56', 'sesame');
+INSERT INTO `sys_log` VALUES (7464673, -1, '获取用户信息为空', 'normal', NULL, '/manager/login;JSESSIONID=8840e214-119a-491d-85de-551aa9595198', '{}', '10.235.20.42', '2019-09-09 20:22:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464674, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 20:22:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464675, -1, '获取用户信息为空', 'normal', NULL, '/manager/login', '{}', '10.235.20.42', '2019-09-09 20:22:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464676, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:23:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464677, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:23:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464678, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:23:54', 'sesame');
+INSERT INTO `sys_log` VALUES (7464679, 1, 'admin', 'normal', NULL, '/manager/login', '{\"password\":\"123456\",\"mobileCheckCode\":\"\",\"username\":\"admin\",\"checkCode\":\"\"}', '127.0.0.1', '2019-09-09 20:25:07', 'sesame');
+INSERT INTO `sys_log` VALUES (7464680, 1, 'admin', 'normal', NULL, '/manager/index', '{}', '127.0.0.1', '2019-09-09 20:25:07', 'sesame');
+INSERT INTO `sys_log` VALUES (7464681, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 20:25:07', 'sesame');
+INSERT INTO `sys_log` VALUES (7464682, 1, 'admin', 'normal', NULL, '/manager/oa/notify/message', '{}', '127.0.0.1', '2019-09-09 20:25:07', 'sesame');
+INSERT INTO `sys_log` VALUES (7464683, 1, 'admin', 'normal', NULL, '/manager/main', '{}', '127.0.0.1', '2019-09-09 20:25:07', 'sesame');
+INSERT INTO `sys_log` VALUES (7464684, 1, 'admin', 'normal', NULL, '/', '{}', '127.0.0.1', '2019-09-09 20:25:08', 'sesame');
+INSERT INTO `sys_log` VALUES (7464685, 1, 'admin', 'normal', NULL, '/manager/common/generator', '{}', '127.0.0.1', '2019-09-09 20:25:10', 'sesame');
+INSERT INTO `sys_log` VALUES (7464686, 1, 'admin', 'normal', NULL, '/manager/common/generator/list', '{}', '127.0.0.1', '2019-09-09 20:25:10', 'sesame');
+INSERT INTO `sys_log` VALUES (7464687, 1, 'admin', 'normal', NULL, '/manager/common/generator/code/t_sw_team_info', '{}', '127.0.0.1', '2019-09-09 20:25:16', 'sesame');
+INSERT INTO `sys_log` VALUES (7464688, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 20:25:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464689, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 20:28:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464690, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:28:55', 'sesame');
+INSERT INTO `sys_log` VALUES (7464691, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:28:56', 'sesame');
+INSERT INTO `sys_log` VALUES (7464692, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:29:18', 'sesame');
+INSERT INTO `sys_log` VALUES (7464693, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:29:26', 'sesame');
+INSERT INTO `sys_log` VALUES (7464694, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:29:35', 'sesame');
+INSERT INTO `sys_log` VALUES (7464695, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:29:38', 'sesame');
+INSERT INTO `sys_log` VALUES (7464696, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.41', '2019-09-09 20:29:41', 'sesame');
+INSERT INTO `sys_log` VALUES (7464697, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:30:14', 'sesame');
+INSERT INTO `sys_log` VALUES (7464698, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:30:24', 'sesame');
+INSERT INTO `sys_log` VALUES (7464699, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:30:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464700, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.41', '2019-09-09 20:30:27', 'sesame');
+INSERT INTO `sys_log` VALUES (7464701, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.41', '2019-09-09 20:30:40', 'sesame');
+INSERT INTO `sys_log` VALUES (7464702, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:31:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464703, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.42', '2019-09-09 20:32:26', 'sesame');
+INSERT INTO `sys_log` VALUES (7464704, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:34:43', 'sesame');
+INSERT INTO `sys_log` VALUES (7464705, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.42', '2019-09-09 20:34:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464706, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.42', '2019-09-09 20:34:52', 'sesame');
+INSERT INTO `sys_log` VALUES (7464707, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.42', '2019-09-09 20:36:08', 'sesame');
+INSERT INTO `sys_log` VALUES (7464708, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:38:51', 'sesame');
+INSERT INTO `sys_log` VALUES (7464709, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:44:29', 'sesame');
+INSERT INTO `sys_log` VALUES (7464710, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.42', '2019-09-09 20:44:31', 'sesame');
+INSERT INTO `sys_log` VALUES (7464711, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 20:46:45', 'sesame');
+INSERT INTO `sys_log` VALUES (7464712, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:46:46', 'sesame');
+INSERT INTO `sys_log` VALUES (7464713, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:46:49', 'sesame');
+INSERT INTO `sys_log` VALUES (7464714, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.42', '2019-09-09 20:46:50', 'sesame');
+INSERT INTO `sys_log` VALUES (7464715, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 20:48:02', 'sesame');
+INSERT INTO `sys_log` VALUES (7464716, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:48:03', 'sesame');
+INSERT INTO `sys_log` VALUES (7464717, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:48:06', 'sesame');
+INSERT INTO `sys_log` VALUES (7464718, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.42', '2019-09-09 20:48:08', 'sesame');
+INSERT INTO `sys_log` VALUES (7464719, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.41', '2019-09-09 20:51:04', 'sesame');
+INSERT INTO `sys_log` VALUES (7464720, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:51:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464721, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.41', '2019-09-09 20:51:07', 'sesame');
+INSERT INTO `sys_log` VALUES (7464722, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/logout', '{}', '10.235.20.41', '2019-09-09 20:51:11', 'sesame');
+INSERT INTO `sys_log` VALUES (7464723, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/login', '{\"loginPass\":\"12345678\",\"email\":\"1145308642@qq.com\"}', '10.235.20.42', '2019-09-09 20:51:51', 'sesame');
+INSERT INTO `sys_log` VALUES (7464724, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:51:52', 'sesame');
+INSERT INTO `sys_log` VALUES (7464725, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:51:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464726, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 20:52:00', 'sesame');
+INSERT INTO `sys_log` VALUES (7464727, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 20:52:25', 'sesame');
+INSERT INTO `sys_log` VALUES (7464728, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 20:52:57', 'sesame');
+INSERT INTO `sys_log` VALUES (7464729, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:53:04', 'sesame');
+INSERT INTO `sys_log` VALUES (7464730, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 20:53:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464731, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 20:53:06', 'sesame');
+INSERT INTO `sys_log` VALUES (7464732, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 20:53:52', 'sesame');
+INSERT INTO `sys_log` VALUES (7464733, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 20:55:18', 'sesame');
+INSERT INTO `sys_log` VALUES (7464734, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 20:55:37', 'sesame');
+INSERT INTO `sys_log` VALUES (7464735, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 20:55:40', 'sesame');
+INSERT INTO `sys_log` VALUES (7464736, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 21:01:53', 'sesame');
+INSERT INTO `sys_log` VALUES (7464737, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '10.235.20.42', '2019-09-09 21:01:54', 'sesame');
+INSERT INTO `sys_log` VALUES (7464738, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 21:01:58', 'sesame');
+INSERT INTO `sys_log` VALUES (7464739, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 21:02:05', 'sesame');
+INSERT INTO `sys_log` VALUES (7464740, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_fiat_type_price', '{}', '10.235.20.42', '2019-09-09 21:02:53', 'sesame');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1881,7 +2273,7 @@ CREATE TABLE `sys_menu`  (
   `gmt_create` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `gmt_modified` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 292 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单管理' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 303 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单管理' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -1952,6 +2344,17 @@ INSERT INTO `sys_menu` VALUES (288, 109, '规则详情', '/manager/get/swRuleDet
 INSERT INTO `sys_menu` VALUES (289, 288, '添加', '', 'get:swRuleDetail:add', 2, '', 1, NULL, NULL);
 INSERT INTO `sys_menu` VALUES (290, 288, '更新', '', 'get:swRuleDetail:edit', 2, '', 2, NULL, NULL);
 INSERT INTO `sys_menu` VALUES (291, 288, '删除', '', 'get:swRuleDetail:remove', 2, '', 3, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (292, 272, '钱包管理', '/manager/get/swWallets', 'get:swWallets:swWallets', 1, '', 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (293, 292, '添加', '', 'get:swWallets:add', 2, '', 1, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (294, 292, '更新', '', 'get:swWallets:edit', 2, '', 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (295, 272, '用户流水	', '/manager/get/swAccountRecord', 'get:swAccountRecord:swAccountRecord', 1, '', 3, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (296, 274, '提币审核', '/manager/get/swWithlog', 'get:swWithlog:swWithlog', 1, '', 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (297, 296, '更新', '', 'get:swWithlog:edit', 2, '', 1, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (298, 0, '币种管理', '', '', 0, 'fa fa-anchor', 11, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (299, 298, '法币列表', '/manager/get/swFiatCoin', 'get:swFiatCoin:swFiatCoin', 1, '', 1, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (300, 299, '添加', '', 'get:swFiatCoin:add', 2, '', 1, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (301, 300, '更新', '', 'get:swFiatCoin:edit', 2, '', 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (302, 3, '邮件记录', '/manager/get/mailRecord', 'get:mailRecord:mailRecord', 1, '', 8, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -1984,7 +2387,7 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) NULL DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7942 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8245 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -2106,73 +2509,84 @@ INSERT INTO `sys_role_menu` VALUES (7654, 6, 270);
 INSERT INTO `sys_role_menu` VALUES (7655, 6, 255);
 INSERT INTO `sys_role_menu` VALUES (7656, 6, -1);
 INSERT INTO `sys_role_menu` VALUES (7657, 6, 109);
-INSERT INTO `sys_role_menu` VALUES (7875, 1, 283);
-INSERT INTO `sys_role_menu` VALUES (7876, 1, 282);
-INSERT INTO `sys_role_menu` VALUES (7877, 1, 281);
-INSERT INTO `sys_role_menu` VALUES (7878, 1, 278);
-INSERT INTO `sys_role_menu` VALUES (7879, 1, 277);
-INSERT INTO `sys_role_menu` VALUES (7880, 1, 273);
-INSERT INTO `sys_role_menu` VALUES (7881, 1, 205);
-INSERT INTO `sys_role_menu` VALUES (7882, 1, 92);
-INSERT INTO `sys_role_menu` VALUES (7883, 1, 57);
-INSERT INTO `sys_role_menu` VALUES (7884, 1, 30);
-INSERT INTO `sys_role_menu` VALUES (7885, 1, 29);
-INSERT INTO `sys_role_menu` VALUES (7886, 1, 28);
-INSERT INTO `sys_role_menu` VALUES (7887, 1, 206);
-INSERT INTO `sys_role_menu` VALUES (7888, 1, 118);
-INSERT INTO `sys_role_menu` VALUES (7889, 1, 48);
-INSERT INTO `sys_role_menu` VALUES (7890, 1, 209);
-INSERT INTO `sys_role_menu` VALUES (7891, 1, 207);
-INSERT INTO `sys_role_menu` VALUES (7892, 1, 203);
-INSERT INTO `sys_role_menu` VALUES (7893, 1, 76);
-INSERT INTO `sys_role_menu` VALUES (7894, 1, 75);
-INSERT INTO `sys_role_menu` VALUES (7895, 1, 74);
-INSERT INTO `sys_role_menu` VALUES (7896, 1, 62);
-INSERT INTO `sys_role_menu` VALUES (7897, 1, 56);
-INSERT INTO `sys_role_menu` VALUES (7898, 1, 55);
-INSERT INTO `sys_role_menu` VALUES (7899, 1, 15);
-INSERT INTO `sys_role_menu` VALUES (7900, 1, 26);
-INSERT INTO `sys_role_menu` VALUES (7901, 1, 25);
-INSERT INTO `sys_role_menu` VALUES (7902, 1, 24);
-INSERT INTO `sys_role_menu` VALUES (7903, 1, 14);
-INSERT INTO `sys_role_menu` VALUES (7904, 1, 13);
-INSERT INTO `sys_role_menu` VALUES (7905, 1, 12);
-INSERT INTO `sys_role_menu` VALUES (7906, 1, 61);
-INSERT INTO `sys_role_menu` VALUES (7907, 1, 22);
-INSERT INTO `sys_role_menu` VALUES (7908, 1, 21);
-INSERT INTO `sys_role_menu` VALUES (7909, 1, 20);
-INSERT INTO `sys_role_menu` VALUES (7910, 1, 83);
-INSERT INTO `sys_role_menu` VALUES (7911, 1, 81);
-INSERT INTO `sys_role_menu` VALUES (7912, 1, 80);
-INSERT INTO `sys_role_menu` VALUES (7913, 1, 79);
-INSERT INTO `sys_role_menu` VALUES (7914, 1, 71);
-INSERT INTO `sys_role_menu` VALUES (7915, 1, 280);
-INSERT INTO `sys_role_menu` VALUES (7916, 1, 279);
-INSERT INTO `sys_role_menu` VALUES (7917, 1, 276);
-INSERT INTO `sys_role_menu` VALUES (7918, 1, 274);
-INSERT INTO `sys_role_menu` VALUES (7919, 1, 272);
-INSERT INTO `sys_role_menu` VALUES (7920, 1, 204);
-INSERT INTO `sys_role_menu` VALUES (7921, 1, 27);
-INSERT INTO `sys_role_menu` VALUES (7922, 1, 91);
-INSERT INTO `sys_role_menu` VALUES (7923, 1, 77);
-INSERT INTO `sys_role_menu` VALUES (7924, 1, 202);
-INSERT INTO `sys_role_menu` VALUES (7925, 1, 73);
-INSERT INTO `sys_role_menu` VALUES (7926, 1, 7);
-INSERT INTO `sys_role_menu` VALUES (7927, 1, 6);
-INSERT INTO `sys_role_menu` VALUES (7928, 1, 2);
-INSERT INTO `sys_role_menu` VALUES (7929, 1, 3);
-INSERT INTO `sys_role_menu` VALUES (7930, 1, 78);
-INSERT INTO `sys_role_menu` VALUES (7931, 1, 1);
-INSERT INTO `sys_role_menu` VALUES (7932, 1, 288);
-INSERT INTO `sys_role_menu` VALUES (7933, 1, 291);
-INSERT INTO `sys_role_menu` VALUES (7934, 1, 290);
-INSERT INTO `sys_role_menu` VALUES (7935, 1, 289);
-INSERT INTO `sys_role_menu` VALUES (7936, 1, 284);
-INSERT INTO `sys_role_menu` VALUES (7937, 1, 287);
-INSERT INTO `sys_role_menu` VALUES (7938, 1, 286);
-INSERT INTO `sys_role_menu` VALUES (7939, 1, 285);
-INSERT INTO `sys_role_menu` VALUES (7940, 1, 109);
-INSERT INTO `sys_role_menu` VALUES (7941, 1, -1);
+INSERT INTO `sys_role_menu` VALUES (8167, 1, 301);
+INSERT INTO `sys_role_menu` VALUES (8168, 1, 283);
+INSERT INTO `sys_role_menu` VALUES (8169, 1, 282);
+INSERT INTO `sys_role_menu` VALUES (8170, 1, 281);
+INSERT INTO `sys_role_menu` VALUES (8171, 1, 297);
+INSERT INTO `sys_role_menu` VALUES (8172, 1, 278);
+INSERT INTO `sys_role_menu` VALUES (8173, 1, 277);
+INSERT INTO `sys_role_menu` VALUES (8174, 1, 295);
+INSERT INTO `sys_role_menu` VALUES (8175, 1, 294);
+INSERT INTO `sys_role_menu` VALUES (8176, 1, 293);
+INSERT INTO `sys_role_menu` VALUES (8177, 1, 273);
+INSERT INTO `sys_role_menu` VALUES (8178, 1, 291);
+INSERT INTO `sys_role_menu` VALUES (8179, 1, 290);
+INSERT INTO `sys_role_menu` VALUES (8180, 1, 289);
+INSERT INTO `sys_role_menu` VALUES (8181, 1, 287);
+INSERT INTO `sys_role_menu` VALUES (8182, 1, 286);
+INSERT INTO `sys_role_menu` VALUES (8183, 1, 285);
+INSERT INTO `sys_role_menu` VALUES (8184, 1, 205);
+INSERT INTO `sys_role_menu` VALUES (8185, 1, 92);
+INSERT INTO `sys_role_menu` VALUES (8186, 1, 57);
+INSERT INTO `sys_role_menu` VALUES (8187, 1, 30);
+INSERT INTO `sys_role_menu` VALUES (8188, 1, 29);
+INSERT INTO `sys_role_menu` VALUES (8189, 1, 28);
+INSERT INTO `sys_role_menu` VALUES (8190, 1, 206);
+INSERT INTO `sys_role_menu` VALUES (8191, 1, 118);
+INSERT INTO `sys_role_menu` VALUES (8192, 1, 48);
+INSERT INTO `sys_role_menu` VALUES (8193, 1, 209);
+INSERT INTO `sys_role_menu` VALUES (8194, 1, 207);
+INSERT INTO `sys_role_menu` VALUES (8195, 1, 203);
+INSERT INTO `sys_role_menu` VALUES (8196, 1, 76);
+INSERT INTO `sys_role_menu` VALUES (8197, 1, 75);
+INSERT INTO `sys_role_menu` VALUES (8198, 1, 74);
+INSERT INTO `sys_role_menu` VALUES (8199, 1, 62);
+INSERT INTO `sys_role_menu` VALUES (8200, 1, 56);
+INSERT INTO `sys_role_menu` VALUES (8201, 1, 55);
+INSERT INTO `sys_role_menu` VALUES (8202, 1, 15);
+INSERT INTO `sys_role_menu` VALUES (8203, 1, 26);
+INSERT INTO `sys_role_menu` VALUES (8204, 1, 25);
+INSERT INTO `sys_role_menu` VALUES (8205, 1, 24);
+INSERT INTO `sys_role_menu` VALUES (8206, 1, 14);
+INSERT INTO `sys_role_menu` VALUES (8207, 1, 13);
+INSERT INTO `sys_role_menu` VALUES (8208, 1, 12);
+INSERT INTO `sys_role_menu` VALUES (8209, 1, 61);
+INSERT INTO `sys_role_menu` VALUES (8210, 1, 22);
+INSERT INTO `sys_role_menu` VALUES (8211, 1, 21);
+INSERT INTO `sys_role_menu` VALUES (8212, 1, 20);
+INSERT INTO `sys_role_menu` VALUES (8213, 1, 83);
+INSERT INTO `sys_role_menu` VALUES (8214, 1, 81);
+INSERT INTO `sys_role_menu` VALUES (8215, 1, 80);
+INSERT INTO `sys_role_menu` VALUES (8216, 1, 79);
+INSERT INTO `sys_role_menu` VALUES (8217, 1, 71);
+INSERT INTO `sys_role_menu` VALUES (8218, 1, 300);
+INSERT INTO `sys_role_menu` VALUES (8219, 1, 299);
+INSERT INTO `sys_role_menu` VALUES (8220, 1, 298);
+INSERT INTO `sys_role_menu` VALUES (8221, 1, 280);
+INSERT INTO `sys_role_menu` VALUES (8222, 1, 279);
+INSERT INTO `sys_role_menu` VALUES (8223, 1, 296);
+INSERT INTO `sys_role_menu` VALUES (8224, 1, 276);
+INSERT INTO `sys_role_menu` VALUES (8225, 1, 274);
+INSERT INTO `sys_role_menu` VALUES (8226, 1, 292);
+INSERT INTO `sys_role_menu` VALUES (8227, 1, 272);
+INSERT INTO `sys_role_menu` VALUES (8228, 1, 288);
+INSERT INTO `sys_role_menu` VALUES (8229, 1, 284);
+INSERT INTO `sys_role_menu` VALUES (8230, 1, 204);
+INSERT INTO `sys_role_menu` VALUES (8231, 1, 109);
+INSERT INTO `sys_role_menu` VALUES (8232, 1, 27);
+INSERT INTO `sys_role_menu` VALUES (8233, 1, 91);
+INSERT INTO `sys_role_menu` VALUES (8234, 1, 77);
+INSERT INTO `sys_role_menu` VALUES (8235, 1, 202);
+INSERT INTO `sys_role_menu` VALUES (8236, 1, 73);
+INSERT INTO `sys_role_menu` VALUES (8237, 1, 7);
+INSERT INTO `sys_role_menu` VALUES (8238, 1, 6);
+INSERT INTO `sys_role_menu` VALUES (8239, 1, 2);
+INSERT INTO `sys_role_menu` VALUES (8240, 1, 78);
+INSERT INTO `sys_role_menu` VALUES (8241, 1, 1);
+INSERT INTO `sys_role_menu` VALUES (8242, 1, 302);
+INSERT INTO `sys_role_menu` VALUES (8243, 1, 3);
+INSERT INTO `sys_role_menu` VALUES (8244, 1, -1);
 
 -- ----------------------------
 -- Table structure for sys_task
@@ -2336,15 +2750,27 @@ CREATE TABLE `t_mail_record`  (
 -- Records of t_mail_record
 -- ----------------------------
 INSERT INTO `t_mail_record` VALUES ('07d6c05219864c318d35703cc27521da', '1143178854@qq.com', '0001', 0, '2019-08-26 19:05:11', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('1cc15591f1fc460b963c6340e0592309', '1145308642@qq.com', '7380', 0, '2019-09-09 14:38:49', NULL, '0');
 INSERT INTO `t_mail_record` VALUES ('1d31ad4cce4b44e282bd8ef45d8638e0', '27592285@ssq.com', '3116', 1, '2019-09-05 11:44:57', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('20f3bd853b554fbd9bfc05bdc9b32ff9', '1145308642@qq.com', '5544', 0, '2019-09-09 17:28:12', NULL, '0');
 INSERT INTO `t_mail_record` VALUES ('2425899b873b4e83b2ba93b5610b5d64', '27592285@ssg.com', '3394', 1, '2019-09-05 11:40:10', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('32a2d272a62c4d29bf7dc1675221f14c', '1145308642@qq.com', '5860', 0, '2019-09-09 15:47:00', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('545a4634c8b4485391ef3a65ad2aeb3f', '1145308642@qq.com', '4840', 0, '2019-09-09 15:57:20', NULL, '0');
 INSERT INTO `t_mail_record` VALUES ('55ba54f062264000896a75db35243d40', '27592285@sse.com', '1726', 1, '2019-09-05 11:25:11', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('621d3c518f594724b1e1da6ee6c9fbf5', '1145308642@qq.com', '3595', 1, '2019-09-09 17:56:37', NULL, '0');
 INSERT INTO `t_mail_record` VALUES ('7f7a727eb9a14694a4d3d7e7c177e6bb', '27592285@ssw.com', '8144', 1, '2019-09-05 11:47:37', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('8513d5a3292d43fb8e9ab561b02fb246', '1145308642@qq.com', '3130', 0, '2019-09-09 17:21:10', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('94493333bb454973a1b982fa084b2442', '1145308642@qq.com', '6494', 0, '2019-09-09 14:39:50', NULL, '0');
 INSERT INTO `t_mail_record` VALUES ('a084b1cc38a844a7b78eebd856aea07a', '27592285@qq.com', '8282', 1, '2019-08-26 19:40:10', NULL, '0');
 INSERT INTO `t_mail_record` VALUES ('ae4cb8b1ec1c4ae99392e9e580c7474a', '27592285@ssa.com', '4686', 1, '2019-09-05 11:43:37', NULL, '0');
 INSERT INTO `t_mail_record` VALUES ('b075b01732d045eabb44a5dde99b6181', '27592285@qq.com', '2360', 1, '2019-08-26 19:07:48', NULL, '0');
 INSERT INTO `t_mail_record` VALUES ('b53ccbc9fe734b2cb74a3da57dec27f6', '27592285@ssf.com', '6912', 1, '2019-09-05 11:31:43', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('b9bbb7c3c68d4d3b8a353656eb2ce37b', '1145308642@qq.com', '4562', 0, '2019-09-09 15:53:49', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('bbadb9cdde3c4dde95e48a428cfceaf9', '1145308642@qq.com', '8286', 0, '2019-09-09 15:56:49', NULL, '0');
 INSERT INTO `t_mail_record` VALUES ('bed7b785e14f416893faad8066ee5f51', '27592285@ssr.com', '1068', 1, '2019-09-05 11:53:14', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('e5a8609f47994daa9cd10586ce8ab132', '1145308642@qq.com', '4930', 0, '2019-09-09 16:49:00', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('e9aac04782f64245b062dd76540f4f5d', '1145308642@qq.com', '2401', 0, '2019-09-09 14:20:09', NULL, '0');
+INSERT INTO `t_mail_record` VALUES ('ec168f2fee3e41e58456819d554906af', '1145308642@qq.com', '9297', 0, '2019-09-09 17:23:25', NULL, '0');
 
 -- ----------------------------
 -- Table structure for t_security_manager
@@ -2523,7 +2949,7 @@ CREATE TABLE `t_sw_current`  (
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_date` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '0为可用,1为不可用',
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '说明',
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '说明',
   PRIMARY KEY (`tid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '活币金表' ROW_FORMAT = Dynamic;
 
@@ -2564,7 +2990,7 @@ CREATE TABLE `t_sw_evangelist`  (
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_date` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '0为可用,1为不可用',
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '说明',
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '说明',
   PRIMARY KEY (`tid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优币金表' ROW_FORMAT = Dynamic;
 
@@ -2894,7 +3320,7 @@ CREATE TABLE `t_sw_partner`  (
   `coin_type_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '币种id',
   `partner_num` double(20, 4) NULL DEFAULT NULL COMMENT '升币金额度',
   `percent` double(20, 4) NULL DEFAULT NULL COMMENT '倍率',
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '说明',
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '说明',
   `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
   `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
   `ex3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex3',
@@ -2943,7 +3369,7 @@ CREATE TABLE `t_sw_period`  (
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_date` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '0为可用,1为不可用',
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '说明',
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '说明',
   PRIMARY KEY (`tid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '定币金表' ROW_FORMAT = Dynamic;
 
@@ -2983,7 +3409,7 @@ CREATE TABLE `t_sw_principal`  (
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_date` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '0为可用,1为不可用',
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '说明',
+  `remark` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '说明',
   `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
   `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
   `ex3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex3',
@@ -3081,6 +3507,24 @@ INSERT INTO `t_sw_rule_detail` VALUES ('3ac5183837d843628bb9e28205ce5c17', '9a5d
 INSERT INTO `t_sw_rule_detail` VALUES ('43000d6b18d841cdb0a4f64a78531e99', '9a5da7e1e7554b7dbffefed7e49eaad3', 3, NULL, 0.15000000, NULL, NULL, NULL, '2019-09-03 17:01:37', '2019-09-03 17:01:37', '0');
 
 -- ----------------------------
+-- Table structure for t_sw_team_info
+-- ----------------------------
+DROP TABLE IF EXISTS `t_sw_team_info`;
+CREATE TABLE `t_sw_team_info`  (
+  `tid` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '社群名称',
+  `pic` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '社群图标',
+  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '内容',
+  `ex1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex1',
+  `ex2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex2',
+  `ex3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex3',
+  `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`tid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '社群表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for t_sw_transfer_record
 -- ----------------------------
 DROP TABLE IF EXISTS `t_sw_transfer_record`;
@@ -3124,7 +3568,7 @@ CREATE TABLE `t_sw_user_basic`  (
   `ex5` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex5',
   PRIMARY KEY (`tid`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 104406 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户基本表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 104407 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户基本表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_sw_user_basic
@@ -3139,6 +3583,7 @@ INSERT INTO `t_sw_user_basic` VALUES (104402, 'sz104402', 104398, NULL, '2759228
 INSERT INTO `t_sw_user_basic` VALUES (104403, 'sz104403', 104398, NULL, '27592285@ssq.com', '2cea958616ebafce8f5a3a92aef5873c', NULL, NULL, 0, '2019-09-05 11:45:09', '2019-09-05 11:45:13', '0', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_user_basic` VALUES (104404, 'sz104404', 104398, NULL, '27592285@ssw.com', '2cea958616ebafce8f5a3a92aef5873c', NULL, NULL, 0, '2019-09-05 11:47:50', '2019-09-05 11:47:51', '0', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_user_basic` VALUES (104405, 'sz104405', 104398, NULL, '27592285@ssr.com', '2cea958616ebafce8f5a3a92aef5873c', NULL, NULL, 0, '2019-09-05 11:53:32', '2019-09-05 11:53:36', '0', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `t_sw_user_basic` VALUES (104406, 'sz104406', 1, NULL, '1145308642@qq.com', '97facb2520dae6c25575a9c3de474ef5', NULL, NULL, 0, '2019-09-09 17:58:10', '2019-09-09 17:58:10', '0', NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_sw_wallets
@@ -3166,7 +3611,7 @@ CREATE TABLE `t_sw_wallets`  (
 -- ----------------------------
 -- Records of t_sw_wallets
 -- ----------------------------
-INSERT INTO `t_sw_wallets` VALUES ('01d7b79de7a046fca67bd10046e0ec91', 104405, '737d784555164db2862fd74361a97165', NULL, '0', NULL, '2019-09-05 11:53:38', '2019-09-05 11:53:38', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `t_sw_wallets` VALUES ('01d7b79de7a046fca67bd10046e0ec91', 104405, '737d784555164db2862fd74361a97165', NULL, '0', NULL, '2019-09-05 11:53:38', '2019-09-09 15:36:31', '0', '', NULL, '', '');
 INSERT INTO `t_sw_wallets` VALUES ('0c0c16f6e4e241428eb1ea5c9534cc31', 104400, '737d784555164db2862fd74361a97165', NULL, '0', NULL, '2019-09-05 11:32:36', '2019-09-05 11:32:36', '0', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_wallets` VALUES ('105b6749fc2c4e4d975815acf87e2f68', 104397, '737d784555164db2862fd74361a97165', NULL, '0', NULL, '2019-08-24 14:10:51', '2019-08-24 14:10:51', '0', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_wallets` VALUES ('15a9ebf8a9fd4474bcf4c932f39916ba', 104399, '737d784555164db2862fd74361a97165', NULL, '0', NULL, '2019-09-05 11:28:00', '2019-09-05 11:28:00', '0', NULL, NULL, NULL, NULL);
@@ -3180,7 +3625,9 @@ INSERT INTO `t_sw_wallets` VALUES ('5e20e83ddd9d4fd08bd925ab70a98aff', 104404, '
 INSERT INTO `t_sw_wallets` VALUES ('89ded44039184e7c857f3f9e96f2c646', 104404, '737d784555164db2862fd74361a97165', NULL, '0', NULL, '2019-09-05 11:48:16', '2019-09-05 11:48:16', '0', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_wallets` VALUES ('8ebeb3e2c2804c52a18f8fc08d1ad3c3', 104401, 'cb7f09bdb0ef4174abd446d6c1e7745b', NULL, '0', NULL, '2019-09-05 11:43:04', '2019-09-05 11:43:04', '0', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_wallets` VALUES ('afdf1c8a3c9e4fefafccf90a4dabbc6d', 104398, '737d784555164db2862fd74361a97165', NULL, '0', NULL, '2019-08-26 19:08:55', '2019-08-26 19:08:55', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `t_sw_wallets` VALUES ('bc1ab1f3876e41d3aa622e204b46c286', 104406, '737d784555164db2862fd74361a97165', 0.0000, '0', 0.0000, '2019-09-09 17:58:10', '2019-09-09 17:58:10', '0', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_wallets` VALUES ('c78a41125bbc4c86a454b397a31244a5', 104402, '737d784555164db2862fd74361a97165', NULL, '0', NULL, '2019-09-05 11:44:33', '2019-09-05 11:44:33', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `t_sw_wallets` VALUES ('d20e9f83547c472291c00b74eed3f525', 104406, 'cb7f09bdb0ef4174abd446d6c1e7745b', 0.0000, '0', 0.0000, '2019-09-09 17:58:10', '2019-09-09 17:58:10', '0', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_wallets` VALUES ('d32d39e9f709488494aae12fb6af2066', 104403, '737d784555164db2862fd74361a97165', NULL, '0', NULL, '2019-09-05 11:46:05', '2019-09-05 11:46:05', '0', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_wallets` VALUES ('e057847b2a714fb29a383ff6769d70a8', 104405, 'cb7f09bdb0ef4174abd446d6c1e7745b', NULL, '0', NULL, '2019-09-05 11:53:38', '2019-09-05 11:53:38', '0', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sw_wallets` VALUES ('e4e754799a3745bbb4d834bc2a2dcdc4', 104399, 'cb7f09bdb0ef4174abd446d6c1e7745b', NULL, '0', NULL, '2019-09-05 11:27:06', '2019-09-05 11:27:06', '0', NULL, NULL, NULL, NULL);
