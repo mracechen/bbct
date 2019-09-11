@@ -86,8 +86,12 @@ public class SwWithlogController {
     @RequestMapping("/update")
     @RequiresPermissions("get:swWithlog:edit")
     public R update(SwWithlogDO swWithlog) {
-        swWithlog.setUpdateDate(new Date());
-            swWithlogService.update(swWithlog);
+        try {
+            swWithlog.setUpdateDate(new Date());
+            swWithlogService.check(swWithlog);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return R.ok();
     }
 

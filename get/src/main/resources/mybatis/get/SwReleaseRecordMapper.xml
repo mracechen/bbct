@@ -13,10 +13,10 @@
         from t_sw_release_record
         where ex2 = #{userId}
         <if test="beginDate != null">
-            and create_date &gt;= beginDate
+            and create_date &gt;= #{beginDate}
         </if>
         <if test="endDate != null">
-            and create_date &lt;= endDate
+            and create_date &lt;= #{endDate}
         </if>
         and del_flag = 0
     </select>

@@ -4,34 +4,25 @@ import com.alibaba.fastjson.JSON;
 import com.common.utils.MyMD5Utils;
 import com.common.utils.Result;
 import com.common.utils.blockChain.BaseParamEntity;
-import com.common.utils.blockChain.ParanEntity;
+import com.common.utils.blockChain.RegisterParanEntity;
 import com.get.domain.SwCoinTypeDO;
 import com.get.domain.SwWalletsDO;
 import com.get.service.SwCoinTypeService;
 import com.get.service.SwWalletsService;
 import com.get.statuc.CommonStatic;
-import com.get.statuc.NumberStatic;
-import com.get.statuc.RecordEnum;
 import com.system.sysconfig.configbean.SettlementCommonConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import com.get.dao.SwUserBasicDao;
 import com.get.domain.SwUserBasicDO;
@@ -57,7 +48,7 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
     @Value("${configs.blockChain.method.insertMemo}")
     private String insertMemoMethod;
 
-    Log log = LogFactory.getLog(SwUserBasicServiceImpl.class);
+    private Log log = LogFactory.getLog(SwUserBasicServiceImpl.class);
 
     @Override
     public SwUserBasicDO get(Integer tid) {
@@ -108,7 +99,7 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
         userBasicDO.setDelFlag(CommonStatic.NOTDELETE);
         save(userBasicDO);
         HttpPost post = new HttpPost(blockChainUrl);
-        ParanEntity params = new ParanEntity();
+        RegisterParanEntity params = new RegisterParanEntity();
         params.setUserId(userBasicDO.getTid());
         BaseParamEntity baseParamEntity = new BaseParamEntity(insertMemoMethod,params);
         StringEntity entity = new StringEntity(JSON.toJSONString(baseParamEntity));
@@ -226,7 +217,7 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
     public Object getUserRecomLike(SwUserBasicDO swUserBasic) {
         Map<String,Object> result = new HashMap();
         SettlementCommonConfig commonConfig = new SettlementCommonConfig();
-        String fieldValue = commonConfig.getWebsiteURL().getFieldValue() +"/#/pages/invite/share?recomId="+swUserBasic.getTid();
+        String fieldValue = commonConfig.getWebsiteURL().getFieldValue() +"/#/pages/login/register?recomId="+swUserBasic.getTid();
         try {
             result.put("userPushURL", fieldValue);
         } catch (Exception e) {

@@ -68,7 +68,7 @@ function load() {
                             title: '用户id',
                                                     },
                                             {
-                            field: 'coinId',
+                            field: 'coinTypeId',
                             title: '币种id',
                                                     },
                                             {
@@ -76,8 +76,8 @@ function load() {
                             title: '数量',
                                                     },
                                             {
-                            field: 'addressId',
-                            title: '提币地址id',
+                            field: 'address',
+                            title: '提币地址',
                                                     },
                                             {
                             field: 'status',

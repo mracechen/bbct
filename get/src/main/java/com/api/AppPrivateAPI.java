@@ -23,6 +23,8 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.apache.shiro.web.filter.mgt.DefaultFilter.user;
+
 /**
  * @author longge
  * @desc app需要登录的接口
@@ -83,6 +85,9 @@ public class AppPrivateAPI {
     @Value("${configs.usercache.prefix}")
     private String prefix;
 
+    @Value("${configs.withdrawFee}")
+    private Double withdrawFee;
+
     /**
      * 计价方式
      * */
@@ -90,6 +95,15 @@ public class AppPrivateAPI {
     @ResponseBody
     public Result getOtcFiatCoinTypeAndPrice(){
         return Result.ok(swFiatCoinService.getCountryOfShow((byte)1));
+    }
+
+    /**
+     * 提币手续费
+     * */
+    @RequestMapping("withdraw_fee")
+    @ResponseBody
+    public Result withdrawFee(){
+        return Result.ok(withdrawFee);
     }
 
     /**
@@ -114,6 +128,7 @@ public class AppPrivateAPI {
             result.put("recomId", user.getRecomId());
             result.put("recomId", user.getRecomId());
             result.put("userPush",swUserBasicService.getUserRecomLike(user));
+            result.put("teamUserNum",swUserBasicService.getChildrenTreeUserNum(user.getTid()));
             String highPpassffective = StringUtils.isBlank(user.getHighPass()) ? "1": "2";
             result.put("highPpassffective",highPpassffective);
             result.put("email",user.getEmail());
@@ -482,7 +497,7 @@ public class AppPrivateAPI {
             BigDecimal i = new BigDecimal(String.valueOf(iReleaseNum));
             BigDecimal other = new BigDecimal(String.valueOf(otherReleaseNum));
             result.put("othersReleaseNum",other);
-            BigDecimal total = i.add(other).equals(new BigDecimal("0"))?new BigDecimal("1"):i.add(other);
+            BigDecimal total = i.add(other).doubleValue() == 0?new BigDecimal("1"):i.add(other);
             BigDecimal otherPercent = other.divide(total).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
             result.put("othersReleasePercent",otherPercent);
             Integer childrenUserNum = swUserBasicService.getChildrenUserNum(user.getTid());
@@ -496,4 +511,36 @@ public class AppPrivateAPI {
         }
     }
 
+    /**
+     * 提币
+     * @param address 提币地址
+     * @param amount 数量
+     * @param coinId 币种id
+     * */
+    @RequestMapping(value = "withdraw",method = RequestMethod.POST)
+    @ResponseBody
+    public Result withdraw(HttpServletRequest request, String address, Double amount, String coinId) {
+        try {
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            if(StringUtils.isBlank(coinId) || amount == null || amount <=0 || StringUtils.isBlank(coinId)){
+                return Result.error("system.params.error");
+            }
+            SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), coinId);
+            if(wallet == null){
+                return Result.error("system.wallet.error");
+            }
+            if(wallet.getCurrency().compareTo(new BigDecimal(String.valueOf(amount))) < 0){
+                return Result.error("system.balance.not.enough");
+            }
+            SwCoinTypeDO swCoinTypeDO = swCoinTypeService.get(coinId);
+            if(swCoinTypeDO == null){
+                return Result.error("system.coin.error");
+            }
+            swWithlogService.withdraw(user.getTid(),address,amount,swCoinTypeDO.getCoinName());
+            return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
 }

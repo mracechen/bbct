@@ -3,6 +3,6 @@ package com.common.utils.blockChain;
 import lombok.Data;
 
 @Data
-public class ParanEntity {
+public class RegisterParanEntity {
     public Integer userId;
 }

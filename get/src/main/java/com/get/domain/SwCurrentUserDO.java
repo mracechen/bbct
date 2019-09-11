@@ -44,4 +44,6 @@ public class SwCurrentUserDO implements Serializable {
             //说明
     private String remark;
 
+    private Double causeReleaseNum;
+
     }

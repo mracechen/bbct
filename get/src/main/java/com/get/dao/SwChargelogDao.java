@@ -16,6 +16,8 @@ public interface SwChargelogDao {
 
     SwChargelogDO get(String tid);
 
+    SwChargelogDO getByTxid(String txid);
+
     List<SwChargelogDO> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);

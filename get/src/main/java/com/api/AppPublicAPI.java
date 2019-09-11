@@ -6,10 +6,7 @@ import com.common.utils.*;
 import com.common.utils.i18n.Languagei18nUtils;
 import com.evowallet.common.ServerResponse;
 import com.evowallet.utils.MailUtil;
-import com.get.domain.AppInfo;
-import com.get.domain.InformationDO;
-import com.get.domain.MailRecordDO;
-import com.get.domain.SwUserBasicDO;
+import com.get.domain.*;
 import com.get.service.*;
 import com.get.statuc.CommonStatic;
 import org.slf4j.Logger;
@@ -19,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -49,10 +47,22 @@ public class AppPublicAPI {
     private SwTeamInfoService swTeamInfoService;
 
     @Autowired
+    private SwCoinTypeService swCoinTypeService;
+
+    @Autowired
+    private SwChargelogService swChargelogService;
+
+    @Autowired
+    private SwWithlogService swWithlogService;
+
+    @Autowired
     private LogService logService;
 
     @Value("${configs.usercache.prefix}")
     private String prefix;
+
+    @Value("${configs.chargeAddress}")
+    private String chargeAddress;
 
 /*    @RequestMapping(value = "chenjieSelect")
     @ResponseBody
@@ -264,6 +274,111 @@ public class AppPublicAPI {
     public Result getTeamInfo(){
         try {
             return Result.ok(swTeamInfoService.list(new HashMap<>()));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+
+    /**
+     * 充值
+     * @param memo 用户id
+     * @param amount 金额
+     * @param symbol 币种名称（EOS和BBCT）
+     * @param txid 区块链交易id
+     * */
+    @RequestMapping(value = "charge",method = RequestMethod.POST)
+    @ResponseBody
+    public Result charge(Integer memo, Double amount, String symbol, String txid) {
+        try {
+            if(memo == null || StringUtils.isBlank(symbol) || StringUtils.isBlank(txid) || amount == null){
+                log.error("区块链充值回调，参数错误！");
+            }
+            SwUserBasicDO swUserBasicDO = swUserBasicService.get(memo);
+            if(swUserBasicDO == null){
+                log.error("区块链转账用户【"+memo+"】不存在！");
+            }
+            SwCoinTypeDO coinTypeDO = swCoinTypeService.getByCoinName(symbol);
+            if(coinTypeDO == null){
+                log.error("区块链转账币种【"+symbol+"】不存在！");
+            }
+            SwChargelogDO swChargelogDO = new SwChargelogDO();
+            swChargelogDO.setTid(IDUtils.randomStr());
+            swChargelogDO.setCreateDate(new Date());
+            swChargelogDO.setUpdateDate(new Date());
+            swChargelogDO.setDelFlag(CommonStatic.NOTDELETE);
+            swChargelogDO.setUserId(memo);
+            swChargelogDO.setAddress(chargeAddress);
+            swChargelogDO.setAmount(new BigDecimal(String.valueOf(amount)));
+            swChargelogDO.setCoinId(coinTypeDO.getTid());
+            swChargelogDO.setTxid(txid);
+            swChargelogDO.setStatus(CommonStatic.TRANSFER_WAITING);
+            swChargelogService.save(swChargelogDO);
+            return Result.ok();
+        }catch (Exception e){
+            log.error("区块链充值待确认，但本地充值失败！");
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 确认充值
+     * @param status 交易状态
+     * @param txid 区块链交易id
+     * */
+    @RequestMapping(value = "confirm_charge",method = RequestMethod.POST)
+    @ResponseBody
+    public Result confirmCharge(Integer status, String txid) {
+        try {
+            if(status == null || StringUtils.isBlank(txid)){
+                log.error("区块链充值确认，参数错误！");
+            }
+            SwChargelogDO chargelogDO = swChargelogService.getByTxid(txid);
+            if(chargelogDO == null){
+                log.error("区块链充值确认【"+txid+"】，但本地未找到该记录！");
+            }
+            if(status == 1){
+                chargelogDO.setStatus(CommonStatic.TRANSFER_SUCCESS);
+            }else{
+                chargelogDO.setStatus(CommonStatic.TRANSFER_FAILED);
+            }
+            chargelogDO.setUpdateDate(new Date());
+            swChargelogService.confirmCharge(chargelogDO);
+            return Result.ok();
+        }catch (Exception e){
+            log.error("区块链充值待确认，但本地充值失败！");
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 确认提币
+     * @param status 区块链交易状态，1-成功，2-失败
+     * @param txid 区块链交易id
+     * */
+    @RequestMapping(value = "confirm_withdraw",method = RequestMethod.POST)
+    @ResponseBody
+    public Result confirmWithdraw(Integer status, String txid) {
+        try {
+            if(StringUtils.isBlank(txid)){
+                throw new Exception("确认提币参数错误！");
+            }
+            SwWithlogDO byTxid = swWithlogService.getByTxid(txid);
+            if(byTxid != null){
+                if(status == 1){
+                    byTxid.setStatus(CommonStatic.TRANSFER_SUCCESS);
+                }else{
+                    byTxid.setStatus(CommonStatic.TRANSFER_FAILED);
+                }
+                byTxid.setUpdateDate(new Date());
+                swWithlogService.withlogCompleted(byTxid);
+                return Result.ok();
+            }else{
+                return Result.error("system.failed.operation");
+            }
         }catch (Exception e){
             e.printStackTrace();
             return Result.error("system.failed.operation");

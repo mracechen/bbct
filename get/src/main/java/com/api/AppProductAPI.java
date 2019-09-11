@@ -19,6 +19,7 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author longge
@@ -100,7 +101,7 @@ public class AppProductAPI {
             }
             if(user.getUserType().equals(CommonStatic.USER_TYPE_COMMON)){
                 List<SwPrincipalUserDO> swPrincipalUserDOList = swPrincipalUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
-                if(swPrincipalUserDOList != null && swPrincipalUserDOList.size() != 1){
+                if(swPrincipalUserDOList != null && swPrincipalUserDOList.size() > 1){
                     throw new Exception("固币金数据异常");
                 }else if(swPrincipalUserDOList != null && swPrincipalUserDOList.size() == 1){
                     SwPrincipalUserDO swPrincipalUserDO = swPrincipalUserDOList.get(0);
@@ -200,9 +201,9 @@ public class AppProductAPI {
         return Result.ok(null);
     }*/
    /**
-    * 获取币种信息列表
+    * 获取钱包信息列表
     * */
-   @RequestMapping(value = "current_list",method = RequestMethod.GET)
+   @RequestMapping(value = "currency_list",method = RequestMethod.GET)
    public Result eosCurrent(HttpServletRequest request) {
        try {
            Map<String,SwWalletsDO> result = new HashMap<>();
@@ -228,11 +229,11 @@ public class AppProductAPI {
     /**
      * 获取所有冻结金额（EOS转换成bbct）
      * */
-    @RequestMapping(value = "frozen_current",method = RequestMethod.GET)
+    @RequestMapping(value = "frozen_currency",method = RequestMethod.GET)
     public Result frozenCurrent(HttpServletRequest request) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
-            double frozenBBCT = getFrozenBBCT(user);
+            Double frozenBBCT = getFrozenBBCT(user);
             SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
             if(eos != null){
                 SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
@@ -257,7 +258,7 @@ public class AppProductAPI {
     /**
      * 获取所有可用金额（EOS转换成bbct）
      * */
-    @RequestMapping(value = "active_current",method = RequestMethod.GET)
+    @RequestMapping(value = "active_currency",method = RequestMethod.GET)
     public Result activeCurrent(HttpServletRequest request) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
@@ -275,7 +276,7 @@ public class AppProductAPI {
     /**
      * 获取总资产
      * */
-    @RequestMapping(value = "total_current",method = RequestMethod.GET)
+    @RequestMapping(value = "total_currency",method = RequestMethod.GET)
     public Result totalCurrent(HttpServletRequest request) {
         try {
             Map<String,BigDecimal> result = new HashMap<>();
@@ -284,7 +285,7 @@ public class AppProductAPI {
             if(bbct != null && eos != null){
                 SwUserBasicDO user = AppUserUtils.getUser(request);
                 SwWalletsDO bbctWallet = swWalletsService.getWallet(user.getTid(), bbct.getTid());
-                double frozenBBCT = getFrozenBBCT(user);
+                Double frozenBBCT = getFrozenBBCT(user);
                 SwWalletsDO eosWallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
                 //总冻结资金=bbct冻结资金+EOS冻结资金
                 BigDecimal frozenAmount = eosWallet.getFrozenAmount().multiply(new BigDecimal(benchmarketingRate)).add(new BigDecimal(String.valueOf(frozenBBCT)));
@@ -312,7 +313,7 @@ public class AppProductAPI {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             //总收益
             Double totalAmount = swReleaseRecordService.getSumByUserIdAndDate(user.getTid(), null, null);
-            map.put("totalAmount",new BigDecimal(String.valueOf(totalAmount)).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
+            map.put("totalAmount",new BigDecimal(String.valueOf((totalAmount == null?0.0:totalAmount))).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
             //待返收益
             Double waitingRelease = 0.0;
             List<SwPrincipalUserDO> myPrincipals = swPrincipalUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
@@ -326,7 +327,7 @@ public class AppProductAPI {
             String ybegin = yesterdayStr + " 00:00:00";
             String yend = yesterdayStr + " 23:59:59";
             Double yesterdayAmount = swReleaseRecordService.getSumByUserIdAndDate(user.getTid(), DateUtils.dateParse(ybegin, DateUtils.DATE_TIME_PATTERN), DateUtils.dateParse(yend, DateUtils.DATE_TIME_PATTERN));
-            map.put("yesterdayAmount",new BigDecimal(String.valueOf(yesterdayAmount)).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
+            map.put("yesterdayAmount",new BigDecimal(String.valueOf((yesterdayAmount == null?0.0:yesterdayAmount))).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
             //上周总收益
             Date lastSunday = DateUtils.getLastSunday(new Date());
             String s = DateUtils.dateTimeToDateString(lastSunday);
@@ -334,7 +335,7 @@ public class AppProductAPI {
             Date lastMondayBegin = DateUtils.dateAddDays(date, -6);
             Date lastSundayEnd = DateUtils.dateParse(s + " 23:59:59", DateUtils.DATE_TIME_PATTERN);
             Double lastWeekAmount = swReleaseRecordService.getSumByUserIdAndDate(user.getTid(), lastMondayBegin, lastSundayEnd);
-            map.put("lastWeekAmount",new BigDecimal(String.valueOf(lastWeekAmount)).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
+            map.put("lastWeekAmount",new BigDecimal(String.valueOf((lastWeekAmount == null?0.0:lastWeekAmount))).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
             //上月总收益
             Date lastMonth = DateUtils.dateAddMonths(new Date(), -1);
             int year = DateUtils.getYear(lastMonth);
@@ -343,12 +344,12 @@ public class AppProductAPI {
             int daysOfMonth = DateUtils.getDaysOfMonth(lastMonth);
             String lmEndStr = year + "-" + month + "-" + daysOfMonth +" 00:00:00";
             Double lastMonthAmount = swReleaseRecordService.getSumByUserIdAndDate(user.getTid(), DateUtils.dateParse(lmBeginStr, DateUtils.DATE_TIME_PATTERN), DateUtils.dateParse(lmEndStr, DateUtils.DATE_TIME_PATTERN));
-            map.put("lastMonthAmount",new BigDecimal(String.valueOf(lastMonthAmount)).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
+            map.put("lastMonthAmount",new BigDecimal(String.valueOf((lastMonthAmount == null?0.0:lastMonthAmount))).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
+            return Result.ok(map);
         }catch (Exception e){
             e.printStackTrace();
             return Result.error("system.failed.operation");
         }
-        return Result.ok(null);
     }
 
     /**
@@ -390,10 +391,21 @@ public class AppProductAPI {
             if(list != null && list.size() > 1){
                 return Result.error("system.failed.operation");
             }
-            if(list == null){
+            if(list == null || list.size() == 0){
                 return Result.ok();
             }else{
-                return Result.ok(list.get(0));
+                SwPrincipalUserDO swPrincipalUserDO = list.get(0);
+                swPrincipalUserDO.setCancelAuth(1);
+                Date createDate = swPrincipalUserDO.getCreateDate();
+                SwPrincipalDO swPrincipalDO = swPrincipalService.get(swPrincipalUserDO.getPrincipalId());
+                if(swPrincipalDO != null){
+                    Integer chargeTerm = swPrincipalDO.getChargeTerm();
+                    Date date = DateUtils.dateAddHours(createDate, chargeTerm);
+                    if(DateUtils.dateCompare(new Date(),date) <= 0){
+                        swPrincipalUserDO.setCancelAuth(0);
+                    }
+                }
+                return Result.ok(swPrincipalUserDO);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -412,10 +424,18 @@ public class AppProductAPI {
             if(list != null && list.size() > 1){
                 return Result.error("system.failed.operation");
             }
-            if(list == null){
+            if(list == null || list.size() == 0){
                 return Result.ok();
             }else{
-                return Result.ok(list.get(0));
+                SwCurrentUserDO swCurrentUserDO = list.get(0);
+                Map<String,Object> params = new HashMap<>();
+                params.put("causeType",CommonStatic.CURRENT_CAUSE_RELEASE);
+                params.put("causeUserId",user.getTid());
+                params.put("delFlag",CommonStatic.NOTDELETE);
+                List<SwReleaseRecordDO> list1 = swReleaseRecordService.list(params);
+                double sum = list1.stream().collect(Collectors.summarizingDouble(SwReleaseRecordDO::getAmount)).getSum();
+                swCurrentUserDO.setCauseReleaseNum(sum);
+                return Result.ok(swCurrentUserDO);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -434,7 +454,7 @@ public class AppProductAPI {
             if(list != null && list.size() > 1){
                 return Result.error("system.failed.operation");
             }
-            if(list == null){
+            if(list == null || list.size() == 0){
                 return Result.ok();
             }else{
                 return Result.ok(list.get(0));
@@ -835,7 +855,7 @@ public class AppProductAPI {
                 if(swPrincipalUserDO == null){
                     return Result.error("system.data.error");
                 }
-                if(!swPrincipalUserDO.getUserId().equals(user.getTid())){
+                if(!swPrincipalUserDO.getUserId().equals(user.getTid()) || !swPrincipalUserDO.getStatus().equals(CommonStatic.NO_RELEASE)){
                     return Result.error("system.failed.auth");
                 }
                 SwPrincipalDO swPrincipalDO = swPrincipalService.get(swPrincipalUserDO.getPrincipalId());
@@ -854,7 +874,7 @@ public class AppProductAPI {
                 if(swCurrentUserDO == null){
                     return Result.error("system.data.error");
                 }
-                if(!swCurrentUserDO.getUserId().equals(user.getTid())){
+                if(!swCurrentUserDO.getUserId().equals(user.getTid()) || !swCurrentUserDO.getStatus().equals(CommonStatic.NO_RELEASE)){
                     return Result.error("system.failed.auth");
                 }
                 swCurrentUserDO.setUpdateDate(new Date());

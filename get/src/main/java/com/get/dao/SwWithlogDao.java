@@ -16,6 +16,8 @@ public interface SwWithlogDao {
 
     SwWithlogDO get(String tid);
 
+    SwWithlogDO getByTxid(String txid);
+
     List<SwWithlogDO> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);

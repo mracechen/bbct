@@ -15,6 +15,10 @@ public interface SwChargelogService {
 
     SwChargelogDO get(String tid);
 
+    SwChargelogDO getByTxid(String txid);
+
+    void confirmCharge(SwChargelogDO swChargelogDO) throws Exception;
+
     List<SwChargelogDO> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);

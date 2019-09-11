@@ -165,19 +165,19 @@ public class CommonStatic {
 
 
     /**
-     * 提币状态-提币中
+     * 区块链转账状态-转账中
      * */
-    public static String IS_WITHING = "0";
+    public static String TRANSFER_WAITING = "0";
 
     /**
-     * 提币状态-提币成功
+     * 区块链转账状态-转账成功
      * */
-    public static Integer WITH_SUCCESS = 1;
+    public static String TRANSFER_SUCCESS = "1";
 
     /**
-     * 提币状态-提币失败
+     * 区块链转账状态-转账失败
      * */
-    public static Integer WITH_FAILED = 2;
+    public static String TRANSFER_FAILED = "2";
 
     /**
      * 释放状态，0-未释放
@@ -229,4 +229,18 @@ public class CommonStatic {
      * 释放目标类型，3-升币金
      * */
     public static Integer RELEASE_TARGET_PARTNER = 3;
+
+    /**
+     * 审核状态，0-待审核
+     * */
+    public static String CHECK_WAITING = "0";
+    /**
+     * 审核状态，1-审核通过
+     * */
+    public static String CHECK_SUCCESS = "1";
+    /**
+     * 审核状态，2-审核拒绝
+     * */
+    public static String CHECK_FAILED = "2";
+
 }
