@@ -109,7 +109,7 @@ public class SwWithlogController {
                     e.printStackTrace();
                 }
             }
-        });
+        }).start();
         return R.ok();
     }
 
