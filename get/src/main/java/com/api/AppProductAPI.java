@@ -435,6 +435,8 @@ public class AppProductAPI {
                 List<SwReleaseRecordDO> list1 = swReleaseRecordService.list(params);
                 double sum = list1.stream().collect(Collectors.summarizingDouble(SwReleaseRecordDO::getAmount)).getSum();
                 swCurrentUserDO.setCauseReleaseNum(sum);
+                int days = DateUtils.dateBetween(swCurrentUserDO.getCreateDate(), new Date());
+                swCurrentUserDO.setExistDays(days);
                 return Result.ok(swCurrentUserDO);
             }
         }catch (Exception e){
@@ -457,7 +459,20 @@ public class AppProductAPI {
             if(list == null || list.size() == 0){
                 return Result.ok();
             }else{
-                return Result.ok(list.get(0));
+                SwPeriodUserDO swPeriodUserDO = list.get(0);
+                Map<String,Object> params = new HashMap<>();
+                params.put("causeType",CommonStatic.PERIOD_CAUSE_RELEASE);
+                params.put("causeUserId",user.getTid());
+                params.put("delFlag",CommonStatic.NOTDELETE);
+                List<SwReleaseRecordDO> list1 = swReleaseRecordService.list(params);
+                double sum = list1.stream().collect(Collectors.summarizingDouble(SwReleaseRecordDO::getAmount)).getSum();
+                swPeriodUserDO.setCauseReleaseNum(sum);
+                SwPeriodDO swPeriodDO = swPeriodService.get(swPeriodUserDO.getPeriodId());
+                if(swPeriodDO != null){
+                    Date expireDate = DateUtils.dateAddDays(swPeriodUserDO.getCreateDate(), swPeriodDO.getPeriodTerm());
+                    swPeriodUserDO.setExpireDate(expireDate);
+                }
+                return Result.ok(swPeriodUserDO);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -785,15 +800,15 @@ public class AppProductAPI {
             }
             //拥有任意定币金，活币金，固币金或升币金，都不能购买优币金
             List<SwPrincipalUserDO> myPrincipals = swPrincipalUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
-            if(myPrincipals != null || myPrincipals.size() != 0){
+            if(myPrincipals != null && myPrincipals.size() != 0){
                 return Result.error("AppProductAPI.purchasingEvangelist.exist.other.product");
             }
             List<SwCurrentUserDO> myCurrents = swCurrentUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
-            if(myCurrents != null || myCurrents.size() != 0){
+            if(myCurrents != null && myCurrents.size() != 0){
                 return Result.error("AppProductAPI.purchasingEvangelist.exist.other.product");
             }
             List<SwPeriodUserDO> myPeriods = swPeriodUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
-            if(myPeriods != null || myPeriods.size() != 0){
+            if(myPeriods != null && myPeriods.size() != 0){
                 return Result.error("AppProductAPI.purchasingEvangelist.exist.other.product");
             }
             SwPartnerUserDO myPartners = swPartnerUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);

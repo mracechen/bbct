@@ -61,8 +61,11 @@ public class AppPublicAPI {
     @Value("${configs.usercache.prefix}")
     private String prefix;
 
-    @Value("${configs.chargeAddress}")
-    private String chargeAddress;
+    @Value("${configs.bbctChargeAddress}")
+    private String bbctChargeAddress;
+
+    @Value("${configs.eosChargeAddress}")
+    private String eosChargeAddress;
 
 /*    @RequestMapping(value = "chenjieSelect")
     @ResponseBody
@@ -110,20 +113,20 @@ public class AppPublicAPI {
 
     /*
      *
-     * 注册并校验       1-邮箱注册，2-手机号注册
+     * 注册并校验
      */
     @RequestMapping("register")
     public Object checkRegister(String email, String checkCode, String loginPass, Integer recomId) {
         Object result = null;
         try {
+            if (StringUtils.isBlank(email)) {
+                return Result.error("AppPublicAPI.checkRegister.mail.cannot.be.null");
+            }
             SwUserBasicDO userBasicDO = new SwUserBasicDO();
             userBasicDO.setUserType(CommonStatic.USER_TYPE_COMMON);
             userBasicDO.setLoginPass(loginPass);
             userBasicDO.setRecomId(recomId);
             userBasicDO.setEmail(email);
-            if (StringUtils.isBlank(email)) {
-                return Result.error("AppPublicAPI.checkRegister.mail.cannot.be.null");
-            }
             Map<String, Object> queryParam = new HashMap<>();
             queryParam.put("email", email);
             List<SwUserBasicDO> exUser = swUserBasicService.list(queryParam);
@@ -309,7 +312,11 @@ public class AppPublicAPI {
             swChargelogDO.setUpdateDate(new Date());
             swChargelogDO.setDelFlag(CommonStatic.NOTDELETE);
             swChargelogDO.setUserId(memo);
-            swChargelogDO.setAddress(chargeAddress);
+            if(coinTypeDO.getCoinName().equals("BBCT")){
+                swChargelogDO.setAddress(bbctChargeAddress);
+            }else if(coinTypeDO.getCoinName().equals("EOS")){
+                swChargelogDO.setAddress(eosChargeAddress);
+            }
             swChargelogDO.setAmount(new BigDecimal(String.valueOf(amount)));
             swChargelogDO.setCoinId(coinTypeDO.getTid());
             swChargelogDO.setTxid(txid);

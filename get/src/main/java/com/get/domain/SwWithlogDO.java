@@ -48,5 +48,7 @@ public class SwWithlogDO implements Serializable {
     private String ex4;
             //ex5
     private String ex5;
+
+    private String coinName;
     
     }

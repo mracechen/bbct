@@ -349,7 +349,7 @@ public class releaseTask {
                             swPrincipalUserDO.getTid(),
                             causeId,
                             releaseNum.doubleValue(),
-                            CommonStatic.CURRENT_CAUSE_RELEASE,
+                            type,
                             causeUserId,
                             targetUserId,
                             CommonStatic.RELEASE_TARGET_PRINCIPAL));
@@ -382,7 +382,7 @@ public class releaseTask {
                         swPrincipalUserDO.getTid(),
                         causeId,
                         releaseNum.doubleValue(),
-                        CommonStatic.CURRENT_CAUSE_RELEASE,
+                        type,
                         causeUserId,
                         targetUserId,
                         CommonStatic.RELEASE_TARGET_PRINCIPAL));
@@ -450,7 +450,7 @@ public class releaseTask {
                         swEvangelistUserDO.getTid(),
                         causeId,
                         releaseNum.doubleValue(),
-                        CommonStatic.CURRENT_CAUSE_RELEASE,
+                        type,
                         causeUserId,
                         targetUserId,
                         CommonStatic.RELEASE_TARGET_EVANGELIST));

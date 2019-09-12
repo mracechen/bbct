@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwWithlogDO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 提币记录表
@@ -29,4 +30,6 @@ public interface SwWithlogDao {
     int remove(String tid);
 
     int batchRemove(String[] tids);
+
+    List<SwWithlogDO> getByIds(@Param("ids") List<String> ids);
 }

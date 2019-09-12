@@ -79,8 +79,11 @@ public class AppPrivateAPI {
     @Autowired
     private Languagei18nUtils languagei18nUtils;
 
-    @Value("${configs.chargeAddress}")
-    private String chargeAddress;
+    @Value("${configs.bbctChargeAddress}")
+    private String bbctChargeAddress;
+
+    @Value("${configs.eosChargeAddress}")
+    private String eosChargeAddress;
 
     @Value("${configs.usercache.prefix}")
     private String prefix;
@@ -147,14 +150,14 @@ public class AppPrivateAPI {
      * */
     @RequestMapping(value = "apply_for_evangelist",method = RequestMethod.POST)
     public Result resetLoginPassword(@RequestBody SwEvangelistInfoDO swEvangelistInfoDO) {
-        //TODO 如果审核通过，系统用申请资料中提供的邮箱自动创建一个布道者账号
         try {
             if(swEvangelistInfoDO.getUserId() == null
                     || StringUtils.isBlank(swEvangelistInfoDO.getEmail())
                     || StringUtils.isBlank(swEvangelistInfoDO.getWeibo())
                     || StringUtils.isBlank(swEvangelistInfoDO.getWechat())
                     || StringUtils.isBlank(swEvangelistInfoDO.getRealName())
-                    || StringUtils.isBlank(swEvangelistInfoDO.getMobile())){
+                    || StringUtils.isBlank(swEvangelistInfoDO.getMobile())
+                    || StringUtils.isBlank(swEvangelistInfoDO.getAddress())){
                 return Result.error("system.params.error");
             }
             SwUserBasicDO byEmail = swUserBasicService.getByEmail(swEvangelistInfoDO.getEmail());
@@ -164,6 +167,7 @@ public class AppPrivateAPI {
             swEvangelistInfoDO.setTid(IDUtils.randomStr());
             swEvangelistInfoDO.setUpdateDate(new Date());
             swEvangelistInfoDO.setCreateDate(new Date());
+            swEvangelistInfoDO.setEx1(CommonStatic.CHECK_WAITING);
             swEvangelistInfoDO.setDelFlag(CommonStatic.NOTDELETE);
             swEvangelistInfoService.save(swEvangelistInfoDO);
             return Result.ok();
@@ -177,9 +181,13 @@ public class AppPrivateAPI {
      * 充币地址
      * */
     @RequestMapping(value = "charge_address",method = RequestMethod.GET)
-    public Result chargeAddress() {
+    public Result chargeAddress(Integer type) {
         try {
-            return Result.ok(chargeAddress);
+            if(type == 1){
+                return Result.ok(bbctChargeAddress);
+            }else{
+                return Result.ok(eosChargeAddress);
+            }
         }catch (Exception e){
             e.printStackTrace();
             return Result.error("system.failed.operation");

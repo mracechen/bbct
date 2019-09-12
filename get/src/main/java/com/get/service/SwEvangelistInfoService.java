@@ -23,6 +23,8 @@ public interface SwEvangelistInfoService {
 
     int update(SwEvangelistInfoDO swEvangelistInfo);
 
+    String check(SwEvangelistInfoDO swEvangelistInfo) throws Exception;
+
     int remove(String tid);
 
     int batchRemove(String[] tids);

@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.StringUtils;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.PageUtils;
 import com.get.statuc.Query;
@@ -86,8 +87,16 @@ public class SwEvangelistInfoController {
     @RequestMapping("/update")
     @RequiresPermissions("get:swEvangelistInfo:edit")
     public R update(SwEvangelistInfoDO swEvangelistInfo) {
-        swEvangelistInfo.setUpdateDate(new Date());
-            swEvangelistInfoService.update(swEvangelistInfo);
+        try {
+            swEvangelistInfo.setUpdateDate(new Date());
+            String check = swEvangelistInfoService.check(swEvangelistInfo);
+            if(StringUtils.isNotBlank(check)){
+                return R.error(check);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("审核失败，系统异常！");
+        }
         return R.ok();
     }
 

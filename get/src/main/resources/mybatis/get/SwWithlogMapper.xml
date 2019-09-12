@@ -12,54 +12,65 @@
         from t_sw_withlog where txid = #{txid}
     </select>
 
+    <select id="getByIds" resultType="com.get.domain.SwWithlogDO">
+        select `tid`,`user_id`,`coin_type_id`,`amount`,`address`,`status`,`remark`,`txid`,`fee`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`
+        from t_sw_withlog
+        where tid IN
+        <foreach collection="ids" item="id" index="index"
+                 open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
     <select id="list" resultType="com.get.domain.SwWithlogDO">
         select
-        `tid`,`user_id`,`coin_type_id`,`amount`,`address`,`status`,`remark`,`txid`,`fee`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`
-        from t_sw_withlog
+        withlog.*, coinType.coin_name as coinName
+        from t_sw_withlog withlog
+        left join t_sw_coin_type coinType on coinType.tid = withlog.coin_type_id
         <where>
-            <if test="tid != null and tid != ''">and tid =
+            <if test="tid != null and tid != ''">and withlog.tid =
                 #{tid}
             </if>
-            <if test="userId != null and userId != ''">and user_id =
+            <if test="userId != null and userId != ''">and withlog.user_id =
                 #{userId}
             </if>
-            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+            <if test="coinTypeId != null and coinTypeId != ''">and withlog.coin_type_id =
                 #{coinTypeId}
             </if>
-            <if test="amount != null and amount != ''">and amount =
+            <if test="amount != null and amount != ''">and withlog.amount =
                 #{amount}
             </if>
-            <if test="address != null and address != ''">and address =
+            <if test="address != null and address != ''">and withlog.address =
                 #{address}
             </if>
-            <if test="status != null and status != ''">and status =
+            <if test="status != null and status != ''">and withlog.status =
                 #{status}
             </if>
-            <if test="remark != null and remark != ''">and remark =
+            <if test="remark != null and remark != ''">and withlog.remark =
                 #{remark}
             </if>
-            <if test="txid != null and txid != ''">and txid =
+            <if test="txid != null and txid != ''">and withlog.txid =
                 #{txid}
             </if>
-            <if test="fee != null and fee != ''">and fee =
+            <if test="fee != null and fee != ''">and withlog.fee =
                 #{fee}
             </if>
-            <if test="createDate != null and createDate != ''">and create_date =
+            <if test="createDate != null and createDate != ''">and withlog.create_date =
                 #{createDate}
             </if>
-            <if test="updateDate != null and updateDate != ''">and update_date =
+            <if test="updateDate != null and updateDate != ''">and withlog.update_date =
                 #{updateDate}
             </if>
-            <if test="delFlag != null and delFlag != ''">and del_flag =
+            <if test="delFlag != null and delFlag != ''">and withlog.del_flag =
                 #{delFlag}
             </if>
-            <if test="ex2 != null and ex2 != ''">and ex2 =
+            <if test="ex2 != null and ex2 != ''">and withlog.ex2 =
                 #{ex2}
             </if>
-            <if test="ex4 != null and ex4 != ''">and ex4 =
+            <if test="ex4 != null and ex4 != ''">and withlog.ex4 =
                 #{ex4}
             </if>
-            <if test="ex5 != null and ex5 != ''">and ex5 =
+            <if test="ex5 != null and ex5 != ''">and withlog.ex5 =
                 #{ex5}
             </if>
         </where>
@@ -68,7 +79,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by withlog.tid desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

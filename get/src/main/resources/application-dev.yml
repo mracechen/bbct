@@ -104,7 +104,8 @@ configs:
       masterSecret: eVBAK1QUXN8TruLkadQLC9
       host: http://sdk.open.api.igexin.com/apiex.htm
 
-  chargeAddress: asdfg
+  bbctChargeAddress: asdfg
+  eosChargeAddress: 123sdf654
   withdrawFee: 5
   # 上面多少代可以获得加速
   generateReleaseCode: 859ND9

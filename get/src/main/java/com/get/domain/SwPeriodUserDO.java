@@ -41,4 +41,8 @@ public class SwPeriodUserDO implements Serializable {
     private String delFlag;
             //说明
     private String remark;
+
+    private Double causeReleaseNum;
+
+    private Date expireDate;
     }

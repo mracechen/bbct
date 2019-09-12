@@ -1,5 +1,6 @@
 var prefix = "/manager/get/swEvangelistInfo"
 $(function () {
+
     load();
 });
 
@@ -18,33 +19,24 @@ function load() {
                 striped: true, // 设置为true会有隔行变色效果
                 dataType: "json", // 服务器返回的数据类型
                 pagination: true, // 设置为true会在底部显示分页条
-                paginationDetailHAlign:'left',
+                paginationDetailHAlign: 'left',
                 // queryParamsType : "limit",
                 // //设置为limit则会发送符合RESTFull格式的参数
                 singleSelect: false, // 设置为true将禁止多选
                 // contentType : "application/x-www-form-urlencoded",
                 // //发送到服务器的数据编码类型
-                pageSize: 20,pageList: [ 20, 40, 60, 80, 100], // 如果设置了分页，每页数据条数
+                pageSize: 20, pageList: [20, 40, 60, 80, 100], // 如果设置了分页，每页数据条数
                 pageNumber: 1, // 如果设置了分布，首页页码
                 search: false, // 是否显示搜索框
                 showColumns: true, // 是否显示内容下拉框（选择显示的列）
                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
-                showJumpto:"true", //设置是否显示跳转页面功能
+                showJumpto: "true", //设置是否显示跳转页面功能
                 queryParams: function (params) {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
                         offset: params.offset,
-                        userId: $('#userId').val(),
-                        tid: $('#tid').val(),
-                        parentWalletId: $('#parentWalletId').val(),
-                        accountId: $('#accountId').val(),
-                        currency: $('#currency').val(),
-                        isProfit: $('#isProfit').val(),
-                        isBigWallet: $('#isBigWallet').val(),
-                        isActive: $('#isActive').val(),
-                        createStartDate: $('#createStartDate').val(),
-                        createEndDate: $('#createEndDate').val(),
+                        ex1: $('#ex1').val(),
                         order: params.order,
                         sort: Lower(params.sort),
                     };
@@ -59,69 +51,49 @@ function load() {
                     {
                         checkbox: true
                     },
-                                            {
-                            field: 'tid',
-                            title: '主键',
-                                                    },
-                                            {
-                            field: 'userId',
-                            title: '用户ID',
-                                                    },
-                                            {
-                            field: 'realName',
-                            title: '真实姓名',
-                                                    },
-                                            {
-                            field: 'mobile',
-                            title: '手机号',
-                                                    },
-                                            {
-                            field: 'email',
-                            title: '布道者邮箱',
-                                                    },
-                                            {
-                            field: 'wechat',
-                            title: '微信',
-                                                    },
-                                            {
-                            field: 'weibo',
-                            title: '微博',
-                                                    },
-                                            {
-                            field: 'address',
-                            title: '所在地区',
-                                                    },
-                                            {
-                            field: 'createDate',
-                            title: '创建时间',
-                                                            sortable: true,
-                                order: 'asc',
-                                                    },
-                                            {
-                            field: 'updateDate',
-                            title: '更新时间',
-                                                    },
-                                            {
-                            field: 'delFlag',
-                            title: '0为可用,1为不可用',
-                                                    },
-                                            {
-                            field: 'ex1',
-                            title: 'ex1',
-                                                    },
-                                            {
-                            field: 'ex2',
-                            title: 'ex2',
-                                                    },
-                                            {
-                            field: 'ex3',
-                            title: 'ex3',
-                                                    },
-                                            {
-                            field: 'ex4',
-                            title: 'ex4',
-                                                    },
-                                        {
+                    {
+                        field: 'userId',
+                        title: '用户ID',
+                    },
+                    {
+                        field: 'realName',
+                        title: '真实姓名',
+                    },
+                    {
+                        field: 'mobile',
+                        title: '手机号',
+                    },
+                    {
+                        field: 'email',
+                        title: '布道者邮箱',
+                    },
+                    {
+                        field: 'wechat',
+                        title: '微信',
+                    },
+                    {
+                        field: 'weibo',
+                        title: '微博',
+                    },
+                    {
+                        field: 'address',
+                        title: '所在地区',
+                    },
+                    {
+                        field: 'ex1',
+                        title: '审核状态',
+                        formatter: function (value) {
+                            var str={0:"待审核",1:"审核通过",2:"审核拒绝"}
+                            if (str[value]) return str[value]
+                        },
+                    },
+                    {
+                        field: 'createDate',
+                        title: '创建时间',
+                        sortable: true,
+                        order: 'asc',
+                    },
+                    {
                         title: '操作',
                         field: 'id',
                         align: 'center',

@@ -23,6 +23,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -123,57 +124,61 @@ public class SwWithlogServiceImpl implements SwWithlogService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int check(SwWithlogDO swWithlog) throws Exception{
-        SwWithlogDO swWithlogDO = this.get(swWithlog.getTid());
-        if(swWithlog.getEx2() != null && swWithlog.getEx2().equals("1")){
-            swWithlogDO.setEx2(CommonStatic.CHECK_SUCCESS);
-            SwCoinTypeDO swCoinTypeDO = swCoinTypeService.get(swWithlogDO.getCoinTypeId());
-            HttpPost post = new HttpPost(blockChainUrl);
-            WithdrawParanEntity params = new WithdrawParanEntity();
-            params.setUserId(String.valueOf(swWithlogDO.getUserId()));
-            params.setAddress(swWithlogDO.getAddress());
-            StringBuilder stringBuilder = new StringBuilder(new BigDecimal(String.valueOf(swWithlogDO.getAmount()))
-                    .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model)
-                    .toString());
-            stringBuilder.append(" ");
-            stringBuilder.append(swCoinTypeDO.getCoinName());
-            params.setTargetCoin(stringBuilder.toString());
-            BaseParamEntity baseParamEntity = new BaseParamEntity(withdraw,params);
-            StringEntity entity = new StringEntity(JSON.toJSONString(baseParamEntity));
-            post.setHeader("Content-Type", "application/json;charset=utf8");
-            post.setEntity(entity);
-            log.info("用户【"+swWithlogDO.getUserId()+"】发起"+swCoinTypeDO.getCoinName()+"提现，金额:"+swWithlogDO.getAmount());
-            CloseableHttpResponse response = HttpClientBuilder.create().build().execute(post);
-            Boolean resultStatus = false;
-            if(response.getStatusLine() != null){
-                int statusCode = response.getStatusLine().getStatusCode();
-                if(statusCode == 200){
-                    String s = EntityUtils.toString(response.getEntity());
-                    JSONObject body = JSON.parseObject(s);
-                    Object errorInfo = body.get("error");
-                    if(errorInfo == null || errorInfo == "null"){
-                        Object result1 = body.get("result");
-                        if(result1 != null){
-                            JSONObject result = JSON.parseObject(result1.toString());
-                            Object txidObj = result.get("txid");
-                            if(txidObj != null){
-                                String txid = txidObj.toString();
-                                swWithlogDO.setTxid(txid);
-                                resultStatus = true;
-                            }else{
-                                throw new Exception("提现失败！");
+        synchronized (this){
+            SwWithlogDO swWithlogDO = this.get(swWithlog.getTid());
+            if(swWithlog.getEx2() != null){
+                if(swWithlog.getEx2().equals("1")){
+                    swWithlogDO.setEx2(CommonStatic.CHECK_SUCCESS);
+                    SwCoinTypeDO swCoinTypeDO = swCoinTypeService.get(swWithlogDO.getCoinTypeId());
+                    HttpPost post = new HttpPost(blockChainUrl);
+                    WithdrawParanEntity params = new WithdrawParanEntity();
+                    params.setUserId(String.valueOf(swWithlogDO.getUserId()));
+                    params.setAddress(swWithlogDO.getAddress());
+                    StringBuilder stringBuilder = new StringBuilder(new BigDecimal(String.valueOf(swWithlogDO.getAmount()))
+                            .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model)
+                            .toString());
+                    stringBuilder.append(" ");
+                    stringBuilder.append(swCoinTypeDO.getCoinName());
+                    params.setTargetCoin(stringBuilder.toString());
+                    BaseParamEntity baseParamEntity = new BaseParamEntity(withdraw,params);
+                    StringEntity entity = new StringEntity(JSON.toJSONString(baseParamEntity));
+                    post.setHeader("Content-Type", "application/json;charset=utf8");
+                    post.setEntity(entity);
+                    log.info("用户【"+swWithlogDO.getUserId()+"】发起"+swCoinTypeDO.getCoinName()+"提现，金额:"+swWithlogDO.getAmount());
+                    CloseableHttpResponse response = HttpClientBuilder.create().build().execute(post);
+                    Boolean resultStatus = false;
+                    if(response.getStatusLine() != null){
+                        int statusCode = response.getStatusLine().getStatusCode();
+                        if(statusCode == 200){
+                            String s = EntityUtils.toString(response.getEntity());
+                            JSONObject body = JSON.parseObject(s);
+                            Object errorInfo = body.get("error");
+                            if(errorInfo == null || errorInfo == "null"){
+                                Object result1 = body.get("result");
+                                if(result1 != null){
+                                    JSONObject result = JSON.parseObject(result1.toString());
+                                    Object txidObj = result.get("txid");
+                                    if(txidObj != null){
+                                        String txid = txidObj.toString();
+                                        swWithlogDO.setTxid(txid);
+                                        resultStatus = true;
+                                    }else{
+                                        throw new Exception("提币失败！");
+                                    }
+                                }
                             }
                         }
                     }
+                    if(!resultStatus){
+                        throw new Exception("提币失败！");
+                    }
+                }else{
+                    swWithlogDO.setEx2(CommonStatic.CHECK_FAILED);
+                    swWithlogDO.setStatus(CommonStatic.TRANSFER_FAILED);
                 }
             }
-            if(!resultStatus){
-                throw new Exception("提现失败！");
-            }
-        }else{
-            swWithlogDO.setEx2(CommonStatic.CHECK_FAILED);
-            swWithlogDO.setStatus(CommonStatic.TRANSFER_FAILED);
+            return swWithlogDao.update(swWithlogDO);
         }
-        return swWithlogDao.update(swWithlogDO);
     }
 
     @Override
@@ -210,6 +215,11 @@ public class SwWithlogServiceImpl implements SwWithlogService {
             count = count + remove(ids);
         }
         return count;
+    }
+
+    @Override
+    public List<SwWithlogDO> getByIds(List<String> ids) {
+        return swWithlogDao.getByIds(ids);
     }
 
 }

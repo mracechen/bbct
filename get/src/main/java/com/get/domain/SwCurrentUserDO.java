@@ -46,4 +46,6 @@ public class SwCurrentUserDO implements Serializable {
 
     private Double causeReleaseNum;
 
+    private Integer existDays;
+
     }

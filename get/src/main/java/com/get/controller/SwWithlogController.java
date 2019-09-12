@@ -1,5 +1,7 @@
 package com.get.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.PageUtils;
 import com.get.statuc.Query;
@@ -77,6 +79,38 @@ public class SwWithlogController {
             return R.ok();
         }
         return R.error();
+    }
+
+    /**
+     * 批量审核
+     */
+    @ResponseBody
+    @RequestMapping("/batchAuth")
+    @RequiresPermissions("get:swWithlog:edit")
+    public R batchAuth(@RequestParam("ids") String ids,Integer status){
+        JSONArray jsonArray = JSON.parseArray(ids);
+        List<SwWithlogDO> byIds = swWithlogService.getByIds(jsonArray.toJavaList(String.class));
+        for(SwWithlogDO withLogDO:byIds){
+            if(!withLogDO.getEx2().equals(CommonStatic.CHECK_WAITING)){
+                return R.error("选择的记录中存在无法审核的数据");
+            }
+        }
+        new Thread(() -> {
+            System.out.println("进入另一个线程！！！！！！！");
+            for(SwWithlogDO withLogDO:byIds){
+                try {
+                    if(status == 1){
+                        withLogDO.setEx2("1");
+                    }else{
+                        withLogDO.setEx2("2");
+                    }
+                    swWithlogService.check(withLogDO);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return R.ok();
     }
 
     /**

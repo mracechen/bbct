@@ -19,6 +19,15 @@
             </div>
             <div class="fixed-table-toolbar" style="clear: both">
                 <div class="columns pull-left" style="margin-left: 15px">
+                    <button type="button"
+                            class="btn  btn-primary" onclick="batchPass()">
+                        <i class="fa fa-plus"></i>批量通过
+                    </button>
+                    <button type="button"
+                            class="btn  btn-danger"
+                            onclick="batchReject()">
+                        <i class="fa fa-trash"></i>批量拒绝
+                    </button>
                     <button shiro:hasPermission="get:swWithlog:add" type="button"
                             class="btn  btn-primary" onclick="add()">
                         <i class="fa fa-plus" aria-hidden="true"></i>添加

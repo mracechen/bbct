@@ -3,6 +3,77 @@ $(function () {
     load();
 });
 
+function batchPass() {
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    if (rows.length == 0) {
+        layer.msg("请选择要审核的数据");
+        return;
+    }
+    layer.confirm("确认要通过审核选中的'" + rows.length + "'条数据吗?", {
+        btn: ['确定', '取消']
+        // 按钮
+    }, function () {
+        var ids = [];
+        // 遍历所有选择的行数据，取每条数据对应的ID
+        $.each(rows, function (i, row) {
+            ids.push(row['tid']);
+        });
+        $.ajax({
+            type: 'POST',
+            data: {
+                "ids": JSON.stringify(ids),
+                "status":1
+            },
+            url: prefix + '/batchAuth',
+            success: function (r) {
+                if (r.code == 200) {
+                    layer.msg(r.msg);
+                    reLoad();
+                } else {
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    }, function () {
+
+    });
+}
+function batchReject() {
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    if (rows.length == 0) {
+        layer.msg("请选择要审核的数据");
+        return;
+    }
+    layer.confirm("确认要通过审核选中的'" + rows.length + "'条数据吗?", {
+        btn: ['确定', '取消']
+        // 按钮
+    }, function () {
+        var ids = [];
+        // 遍历所有选择的行数据，取每条数据对应的ID
+        $.each(rows, function (i, row) {
+            ids.push(row['tid']);
+        });
+        $.ajax({
+            type: 'POST',
+            data: {
+                "ids": JSON.stringify(ids),
+                "status":2
+            },
+            url: prefix + '/batchAuth',
+            success: function (r) {
+                if (r.code == 200) {
+                    layer.msg(r.msg);
+                    reLoad();
+                } else {
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    }, function () {
+
+    });
+}
+
 function load() {
     $('#exampleTable')
         .bootstrapTable(
@@ -18,33 +89,24 @@ function load() {
                 striped: true, // 设置为true会有隔行变色效果
                 dataType: "json", // 服务器返回的数据类型
                 pagination: true, // 设置为true会在底部显示分页条
-                paginationDetailHAlign:'left',
+                paginationDetailHAlign: 'left',
                 // queryParamsType : "limit",
                 // //设置为limit则会发送符合RESTFull格式的参数
                 singleSelect: false, // 设置为true将禁止多选
                 // contentType : "application/x-www-form-urlencoded",
                 // //发送到服务器的数据编码类型
-                pageSize: 20,pageList: [ 20, 40, 60, 80, 100], // 如果设置了分页，每页数据条数
+                pageSize: 20, pageList: [20, 40, 60, 80, 100], // 如果设置了分页，每页数据条数
                 pageNumber: 1, // 如果设置了分布，首页页码
                 search: false, // 是否显示搜索框
                 showColumns: true, // 是否显示内容下拉框（选择显示的列）
                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
-                showJumpto:"true", //设置是否显示跳转页面功能
+                showJumpto: "true", //设置是否显示跳转页面功能
                 queryParams: function (params) {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
                         offset: params.offset,
-                        userId: $('#userId').val(),
-                        tid: $('#tid').val(),
-                        parentWalletId: $('#parentWalletId').val(),
-                        accountId: $('#accountId').val(),
-                        currency: $('#currency').val(),
-                        isProfit: $('#isProfit').val(),
-                        isBigWallet: $('#isBigWallet').val(),
-                        isActive: $('#isActive').val(),
-                        createStartDate: $('#createStartDate').val(),
-                        createEndDate: $('#createEndDate').val(),
+                        ex2: $('#ex2').val(),
                         order: params.order,
                         sort: Lower(params.sort),
                     };
@@ -59,69 +121,53 @@ function load() {
                     {
                         checkbox: true
                     },
-                                            {
-                            field: 'tid',
-                            title: '主键',
-                                                    },
-                                            {
-                            field: 'userId',
-                            title: '用户id',
-                                                    },
-                                            {
-                            field: 'coinTypeId',
-                            title: '币种id',
-                                                    },
-                                            {
-                            field: 'amount',
-                            title: '数量',
-                                                    },
-                                            {
-                            field: 'address',
-                            title: '提币地址',
-                                                    },
-                                            {
-                            field: 'status',
-                            title: '状态 0-审核中 1-已完成 2-提币失败',
-                                                    },
-                                            {
-                            field: 'remark',
-                            title: '审核信息',
-                                                    },
-                                            {
-                            field: 'txid',
-                            title: '区块链交易id',
-                                                    },
-                                            {
-                            field: 'fee',
-                            title: '提币手续费',
-                                                    },
-                                            {
-                            field: 'createDate',
-                            title: '创建时间',
-                                                            sortable: true,
-                                order: 'asc',
-                                                    },
-                                            {
-                            field: 'updateDate',
-                            title: '更新时间',
-                                                    },
-                                            {
-                            field: 'delFlag',
-                            title: '删除标记',
-                                                    },
-                                            {
-                            field: 'ex2',
-                            title: 'ex2',
-                                                    },
-                                            {
-                            field: 'ex4',
-                            title: 'ex4',
-                                                    },
-                                            {
-                            field: 'ex5',
-                            title: 'ex5',
-                                                    },
-                                        {
+                    {
+                        field: 'userId',
+                        title: '用户id',
+                    },
+                    {
+                        field: 'coinName',
+                        title: '币种',
+                    },
+                    {
+                        field: 'amount',
+                        title: '数量',
+                    },
+                    {
+                        field: 'address',
+                        title: '提币地址',
+                    },
+                    {
+                        field: 'status',
+                        title: '状态',
+                        formatter: function (value) {
+                            var str={0:"确认中",1:"已完成",2:"提币失败"}
+                            if (str[value]) return str[value]
+                        },
+                    },
+                    {
+                        field: 'remark',
+                        title: '审核信息',
+                    },
+                    {
+                        field: 'txid',
+                        title: '区块链交易id',
+                    },
+                    {
+                        field: 'fee',
+                        title: '提币手续费',
+                    },
+                    {
+                        field: 'createDate',
+                        title: '创建时间',
+                        sortable: true,
+                        order: 'asc',
+                    },
+                    {
+                        field: 'updateDate',
+                        title: '更新时间',
+                    },
+                    {
                         title: '操作',
                         field: 'id',
                         align: 'center',
