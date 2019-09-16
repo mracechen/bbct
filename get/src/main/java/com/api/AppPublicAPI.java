@@ -172,18 +172,13 @@ public class AppPublicAPI {
             if (exSwUserBasicDO == null || exSwUserBasicDO.getTid() <= 0) {
                 return Result.error("AppPublicAPI.login.username.or.password.error");
             }
-
             String accessKey = IDUtils.getUserIdEncode(prefix, exSwUserBasicDO.getTid() + "");
-//        String accessKey = "s"+exSwUserBasicDO.getTid();
             AppUserUtils.pushUser(accessKey, exSwUserBasicDO.getTid() + "");
-            // 返回值
             HashMap<Object, Object> result = new HashMap<>();
             result.put("accessKey", accessKey);
             result.put("userId", exSwUserBasicDO.getTid());
             result.put("mobile", exSwUserBasicDO.getMobile());
             result.put("username", exSwUserBasicDO.getUsername());
-//        result.put("userPush",swUserBasicService.getUserRecomLike(exSwUserBasicDO));
-//        result.put("userAuth",exSwUserBasicDO.getCheckStatus());
             result.put("recomId", exSwUserBasicDO.getRecomId());
             String highPpassffective = StringUtils.isBlank(exSwUserBasicDO.getHighPass()) ? "1" : "2";
             result.put("highPpassffective", highPpassffective);

@@ -18,18 +18,18 @@ function load() {
                 striped: true, // 设置为true会有隔行变色效果
                 dataType: "json", // 服务器返回的数据类型
                 pagination: true, // 设置为true会在底部显示分页条
-                paginationDetailHAlign:'left',
+                paginationDetailHAlign: 'left',
                 // queryParamsType : "limit",
                 // //设置为limit则会发送符合RESTFull格式的参数
                 singleSelect: false, // 设置为true将禁止多选
                 // contentType : "application/x-www-form-urlencoded",
                 // //发送到服务器的数据编码类型
-                pageSize: 20,pageList: [ 20, 40, 60, 80, 100], // 如果设置了分页，每页数据条数
+                pageSize: 20, pageList: [20, 40, 60, 80, 100], // 如果设置了分页，每页数据条数
                 pageNumber: 1, // 如果设置了分布，首页页码
                 search: false, // 是否显示搜索框
                 showColumns: true, // 是否显示内容下拉框（选择显示的列）
                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
-                showJumpto:"true", //设置是否显示跳转页面功能
+                showJumpto: "true", //设置是否显示跳转页面功能
                 queryParams: function (params) {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
@@ -57,106 +57,116 @@ function load() {
                     {
                         checkbox: true
                     },
-                            {
-                                title: '序号',
-                                formatter: function (value, row, index) {
-                                    var pageSize = $('#exampleTable').bootstrapTable('getOptions').pageSize;
-                                    var pageNumber = $('#exampleTable').bootstrapTable('getOptions').pageNumber;
-                                    return pageSize * (pageNumber - 1) + index + 1;
-                                }
-                            },
-                                            {
-                            field: 'userId',
-                            title: '用户ID',
-                                                    },
-                                            {
-                            field: 'num',
-                            title: '流水号',
-                                                    },
-                                            {
-                            field: 'type',
-                            title: '交易类型',
-                            formatter: function (value, row, index) {
-                                if (value == 1) {
-                                    return '推广赠送';
-                                }else if (value == 2) {
-                                    return '利润分成';
-                                }else if (value == 3) {
-                                    return '提币';
-                                }else if (value == 4) {
-                                    return '后台操作';
-                                }else if (value == 5) {
-                                    return '消费';
-                                }else if (value == 6) {
-                                    return '转账';
-                                }else if (value == 7) {
-                                    return '收款';
-                                }else{
-                                    return '礼包';
-                                }
-                            }
-                                                    },
-                                            {
-                            field: 'coinTypeId',
-                            title: '币种类型id',
-                                                    },
-                                            {
-                            field: 'currency',
-                            title: '金额',
-                                                    },
-                                            {
-                            field: 'remark',
-                            title: '备注',
-                                                    },
-                                            {
-                            field: 'currentAmount',
-                            title: '当前账户金额',
-                                                    },
-                                            /*{
-                            field: 'ex2',
-                            title: 'ex2',
-                                                    },
-                                            {
-                            field: 'ex3',
-                            title: 'ex3',
-                                                    },*/
-                                            {
-                            field: 'createDate',
-                            title: '创建时间',
-                                                            sortable: true,
-                                order: 'asc',
-                                                    },
-                                            {
-                            field: 'updateDate',
-                            title: '更新时间',
-                                                    },
-                                            /*{
-                            field: 'delFlag',
-                            title: '删除标识',
-                                                    },*/
-                                        /*{
-                        title: '操作',
-                        field: 'id',
-                        align: 'center',
+                    {
+                        title: '序号',
                         formatter: function (value, row, index) {
-                            var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                                + row.tid
-                                + '\')"><i class="fa fa-edit"></i></a> ';
-                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                                + row.tid
-                                + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-                                + row.tid
-                                + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d;
+                            var pageSize = $('#exampleTable').bootstrapTable('getOptions').pageSize;
+                            var pageNumber = $('#exampleTable').bootstrapTable('getOptions').pageNumber;
+                            return pageSize * (pageNumber - 1) + index + 1;
                         }
-                    }*/
-                                        ]
+                    },
+                    {
+                        field: 'userId',
+                        title: '用户ID',
+                    },
+                    {
+                        field: 'num',
+                        title: '流水号',
+                    },
+                    {
+                        field: 'type',
+                        title: '交易类型',
+                        formatter: function (value, row, index) {
+                            if (value == 1) {
+                                return '固币金到期释放';
+                            } else if (value == 2) {
+                                return '固币金加速释放';
+                            } else if (value == 3) {
+                                return '优币金加速释放';
+                            } else if (value == 4) {
+                                return '升币金加速释放';
+                            } else if (value == 5) {
+                                return '转账';
+                            } else if (value == 6) {
+                                return '收款';
+                            } else if (value == 7) {
+                                return '定币金到期释放';
+                            } else if (value == 8) {
+                                return '购买产品';
+                            }else if (value == 9) {
+                                return '对标';
+                            }else if (value == 10) {
+                                return '充值';
+                            }else if (value == 11) {
+                                return '提现';
+                            }else{
+                                return '其他';
+                            }
+                        }
+                    },
+                    {
+                        field: 'coinTypeId',
+                        title: '币种类型id',
+                    },
+                    {
+                        field: 'currency',
+                        title: '金额',
+                    },
+                    {
+                        field: 'remark',
+                        title: '备注',
+                    },
+                    {
+                        field: 'currentAmount',
+                        title: '当前账户金额',
+                    },
+                    /*{
+    field: 'ex2',
+    title: 'ex2',
+                            },
+                    {
+    field: 'ex3',
+    title: 'ex3',
+                            },*/
+                    {
+                        field: 'createDate',
+                        title: '创建时间',
+                        sortable: true,
+                        order: 'asc',
+                    },
+                    {
+                        field: 'updateDate',
+                        title: '更新时间',
+                    },
+                    /*{
+    field: 'delFlag',
+    title: '删除标识',
+                            },*/
+                    /*{
+    title: '操作',
+    field: 'id',
+    align: 'center',
+    formatter: function (value, row, index) {
+        var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+            + row.tid
+            + '\')"><i class="fa fa-edit"></i></a> ';
+        var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
+            + row.tid
+            + '\')"><i class="fa fa-remove"></i></a> ';
+        var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+            + row.tid
+            + '\')"><i class="fa fa-key"></i></a> ';
+        return e + d;
+    }
+}*/
+                ]
             });
 }
+
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
 }
+
 function add() {
     layer.open({
         type: 2,
@@ -167,6 +177,7 @@ function add() {
         content: prefix + '/add' // iframe的url
     });
 }
+
 function edit(id) {
     layer.open({
         type: 2,
@@ -177,6 +188,7 @@ function edit(id) {
         content: prefix + '/edit/' + id // iframe的url
     });
 }
+
 function remove(id) {
     layer.confirm('确定要删除选中的记录？', {
         btn: ['确定', '取消']
@@ -201,6 +213,7 @@ function remove(id) {
 
 function resetPwd(id) {
 }
+
 function batchRemove() {
     var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     if (rows.length == 0) {

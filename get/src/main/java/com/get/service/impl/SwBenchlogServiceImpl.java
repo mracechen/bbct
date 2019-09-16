@@ -71,9 +71,9 @@ public class SwBenchlogServiceImpl implements SwBenchlogService {
         //充值目标币种
         SwWalletsDO targetCoinWallet = swWalletsService.getWallet(swBenchlog.getUserId(), swBenchlog.getTargetCoinId());
         BigDecimal targetCoinCurrenty = targetCoinWallet.getCurrency();
-        sourceCoinWallet.setCurrency(new BigDecimal(String.valueOf(swBenchlog.getTargetNum())));
-        sourceCoinWallet.setUpdateDate(new Date());
-        swWalletsService.update(sourceCoinWallet);
+        targetCoinWallet.setCurrency(new BigDecimal(String.valueOf(swBenchlog.getTargetNum())));
+        targetCoinWallet.setUpdateDate(new Date());
+        swWalletsService.update(targetCoinWallet);
         //记录充值记录
         swAccountRecordService.save(SwAccountRecordDO.create(
                 swBenchlog.getUserId(),

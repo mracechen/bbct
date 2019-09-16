@@ -3,6 +3,7 @@ package com.api;
 import com.common.basicskills.domain.LogDO;
 import com.common.basicskills.service.LogService;
 import com.common.utils.*;
+import com.common.utils.i18n.LanguageEnum;
 import com.common.utils.i18n.Languagei18nUtils;
 import com.evowallet.common.ServerResponse;
 import com.evowallet.utils.MailUtil;
@@ -11,6 +12,9 @@ import com.get.service.*;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.NumberStatic;
 import com.get.statuc.RecordEnum;
+import com.gexin.fastjson.JSON;
+import com.gexin.fastjson.JSONArray;
+import com.gexin.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static org.apache.shiro.web.filter.mgt.DefaultFilter.user;
@@ -118,10 +123,10 @@ public class AppPrivateAPI {
     @RequestMapping("get_user_info")
     public Object getUserInfo(HttpServletRequest req) throws Exception{
         SwUserBasicDO user = AppUserUtils.getUser(req);
-        String userId = null;
+        Integer userId = null;
         String accessKey = req.getHeader("accessKey");
         if(user != null){
-            userId = user.getTid()+"";
+            userId = user.getTid();
             HashMap<Object, Object> result = new HashMap<>();
             result.put("accessKey", accessKey);
             result.put("userId",userId);
@@ -198,13 +203,14 @@ public class AppPrivateAPI {
      * 充币记录
      * */
     @RequestMapping(value = "charge_log",method = RequestMethod.GET)
-    public Result chargeLog(HttpServletRequest request) {
+    public Result chargeLog(HttpServletRequest request,String coinTypeId, Integer page, Integer pageSize) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             Map<String,Object> params = new HashMap<>();
             params.put("userId",user.getTid());
             params.put("delFlag",CommonStatic.NOTDELETE);
-            List<SwChargelogDO> list = swChargelogService.list(params);
+            params.put("coinId",coinTypeId);
+            List<SwChargelogDO> list = swChargelogService.list(params).stream().skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
@@ -316,13 +322,14 @@ public class AppPrivateAPI {
      * 提币记录列表
      * */
     @RequestMapping(value = "withdraw_log",method = RequestMethod.GET)
-    public Result withdrawLog(HttpServletRequest request) {
+    public Result withdrawLog(HttpServletRequest request, String coinTypeId, Integer page, Integer pageSize) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             Map<String,Object> params = new HashMap<>();
             params.put("userId",user.getTid());
             params.put("delFlag",CommonStatic.NOTDELETE);
-            List<SwWithlogDO> list = swWithlogService.list(params);
+            params.put("coinTypeId",coinTypeId);
+            List<SwWithlogDO> list = swWithlogService.list(params).stream().skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
             return Result.ok(list);
         }catch (Exception e){
             e.printStackTrace();
@@ -349,11 +356,11 @@ public class AppPrivateAPI {
      * */
     @RequestMapping(value = "check_user",method = RequestMethod.GET)
     @ResponseBody
-    public Result checkUser(HttpServletRequest request, String userId) {
+    public Result checkUser(Integer userId) {
         if(StringUtils.isBlank(userId)){
             return Result.error("AppPrivateAPI.checkUser.receiver.not.exist");
         }
-        SwUserBasicDO user = swUserBasicService.get(Integer.parseInt(userId));
+        SwUserBasicDO user = swUserBasicService.get(userId);
         if (user == null) {
             return Result.error("AppPrivateAPI.checkUser.receiver.not.exist");
         }
@@ -381,9 +388,49 @@ public class AppPrivateAPI {
     }
 
     /**
+     * 转账记录
+     * */
+    @RequestMapping(value = "transfer_log",method = RequestMethod.GET)
+    @ResponseBody
+    public Result TransferLog(HttpServletRequest request, Integer page, Integer pageSize, @RequestParam(required = false) String beginDate, @RequestParam(required = false) String endDate) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        String language = request.getHeader("language");
+        Map<String,Object> params = new HashMap<>();
+        params.put("userId",user.getTid());
+        params.put("type",RecordEnum.transfer.getType());
+        params.put("delFlag",CommonStatic.NOTDELETE);
+        if(StringUtils.isNotBlank(beginDate)){
+            params.put("beginDate",beginDate + " 00:00:00");
+        }
+        if(StringUtils.isNotBlank(endDate)){
+            params.put("endDate",endDate + " 23:59:59");
+        }
+        List<SwAccountRecordDO> list = swAccountRecordService.list(params);
+        for (SwAccountRecordDO swAccountRecordDO : list) {
+            String remark = swAccountRecordDO.getRemark();
+            String rm = null;
+            if(StringUtils.isNotBlank(remark)){
+                try {
+                    JSONObject jsonObject = JSON.parseObject(remark);
+                    Object o = jsonObject.get(language);
+                    if(o != null){
+                        swAccountRecordDO.setRemark(o.toString());
+                    }else{
+                        swAccountRecordDO.setRemark("");
+                    }
+                }catch (Exception e){
+                    swAccountRecordDO.setRemark("");
+                }
+            }
+        }
+        List<SwAccountRecordDO> res = list.stream().skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
+        return Result.ok(res);
+    }
+
+    /**
      * 对标项目列表
      * */
-    @RequestMapping(value = "bench_Marking_list",method = RequestMethod.GET)
+    @RequestMapping(value = "bench_marking_list",method = RequestMethod.GET)
     @ResponseBody
     public Result benchMarking() {
         try {
@@ -440,13 +487,13 @@ public class AppPrivateAPI {
      * */
     @RequestMapping(value = "bench_log",method = RequestMethod.GET)
     @ResponseBody
-    public Result benchLog(HttpServletRequest request) {
+    public Result benchLog(HttpServletRequest request, Integer page, Integer pageSize) {
         SwUserBasicDO user = AppUserUtils.getUser(request);
         try {
             Map<String,Object> params = new HashMap<>();
             params.put("delFlag",CommonStatic.NOTDELETE);
             params.put("userId",user.getTid());
-            return Result.ok(swBenchlogService.list(params));
+            return Result.ok(swBenchlogService.list(params).stream().skip(page * pageSize).limit(pageSize).collect(Collectors.toList()));
         }catch (Exception e){
             e.printStackTrace();
             return Result.error("system.failed.operation");
@@ -527,7 +574,7 @@ public class AppPrivateAPI {
      * */
     @RequestMapping(value = "withdraw",method = RequestMethod.POST)
     @ResponseBody
-    public Result withdraw(HttpServletRequest request, String address, Double amount, String coinId) {
+    public Result withdraw(HttpServletRequest request, String address, Double amount, String coinId, String transferPassword, String checkCode) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             if(StringUtils.isBlank(coinId) || amount == null || amount <=0 || StringUtils.isBlank(coinId)){
@@ -543,6 +590,15 @@ public class AppPrivateAPI {
             SwCoinTypeDO swCoinTypeDO = swCoinTypeService.get(coinId);
             if(swCoinTypeDO == null){
                 return Result.error("system.coin.error");
+            }
+            Boolean checkTradingPassword = swUserBasicService.checkTradingPassword(user.getTid(), user.getEmail(), transferPassword);
+            if(!checkTradingPassword){
+                return Result.error("system.password.error");
+            }
+            //校验邮箱验证码
+            boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, user.getEmail());
+            if (!mailRt) {
+                return Result.error("AppPublicAPI.checkRegister.check.code.error");
             }
             swWithlogService.withdraw(user.getTid(),address,amount,swCoinTypeDO.getCoinName());
             return Result.ok();
