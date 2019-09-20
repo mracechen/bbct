@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.get.dao.SwFiatCoinDao">
-    <resultMap id="BaseResultMap" type="com.get.domain.SwFiatCoinDO" >
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="country_name" property="countryName" jdbcType="VARCHAR" />
-        <result column="is_show" property="isShow" jdbcType="TINYINT" />
-        <result column="curr_symbol" property="currSymbol" jdbcType="VARCHAR" />
-        <result column="curr_icon" property="currIcon" jdbcType="VARCHAR" />
-        <result column="price" property="price" jdbcType="DECIMAL" />
-        <result column="coin_id" property="coinId" jdbcType="VARCHAR" />
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-        <result column="code" property="code" jdbcType="INTEGER" />
-        <result column="sell_price" property="sellPrice" jdbcType="DECIMAL" />
+    <resultMap id="BaseResultMap" type="com.get.domain.SwFiatCoinDO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="country_name" property="countryName" jdbcType="VARCHAR"/>
+        <result column="is_show" property="isShow" jdbcType="TINYINT"/>
+        <result column="curr_symbol" property="currSymbol" jdbcType="VARCHAR"/>
+        <result column="curr_icon" property="currIcon" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="coin_id" property="coinId" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="code" property="code" jdbcType="INTEGER"/>
+        <result column="sell_price" property="sellPrice" jdbcType="DECIMAL"/>
     </resultMap>
-    <sql id="Base_Column_List" >
+    <sql id="Base_Column_List">
     id, country_name, is_show, curr_symbol, curr_icon, price, coin_id, create_time, update_time,
     code,sell_price
   </sql>
@@ -26,13 +26,13 @@
 
     <select id="selectAll" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from t_sw_fiat_coin where is_show = 2
     </select>
 
     <select id="selectByCoinId" resultType="com.get.domain.SwFiatCoinDO">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from t_sw_fiat_coin
         where coin_id = #{coin_id,jdbcType=VARCHAR}
         and is_show = #{isShow,jdbcType=TINYINT}
@@ -40,60 +40,62 @@
 
     <select id="selectByShow" resultType="com.get.domain.SwFiatCoinDO">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from t_sw_fiat_coin
         where is_show = #{isShow,jdbcType=TINYINT}
     </select>
 
     <select id="list" resultType="com.get.domain.SwFiatCoinDO">
-        select `id`,`country_name`,`is_show`,`curr_symbol`,`curr_icon`,`price`,`coin_id`,`create_time`,`update_time`,`code`,`sell_price`,`ex1`,`ex2`        from t_sw_fiat_coin
+        select
+        `id`,`country_name`,`is_show`,`curr_symbol`,`curr_icon`,`price`,`coin_id`,`create_time`,`update_time`,`code`,`sell_price`,`ex1`,`ex2`
+        from t_sw_fiat_coin
         <where>
-                            <if test="id != null and id != ''">and id =
-                    #{id}
-                </if>
-                            <if test="countryName != null and countryName != ''">and country_name =
-                    #{countryName}
-                </if>
-                            <if test="isShow != null and isShow != ''">and is_show =
-                    #{isShow}
-                </if>
-                            <if test="currSymbol != null and currSymbol != ''">and curr_symbol =
-                    #{currSymbol}
-                </if>
-                            <if test="currIcon != null and currIcon != ''">and curr_icon =
-                    #{currIcon}
-                </if>
-                            <if test="price != null and price != ''">and price =
-                    #{price}
-                </if>
-                            <if test="coinId != null and coinId != ''">and coin_id =
-                    #{coinId}
-                </if>
-                            <if test="createTime != null and createTime != ''">and create_time =
-                    #{createTime}
-                </if>
-                            <if test="updateTime != null and updateTime != ''">and update_time =
-                    #{updateTime}
-                </if>
-                            <if test="code != null and code != ''">and code =
-                    #{code}
-                </if>
-                            <if test="sellPrice != null and sellPrice != ''">and sell_price =
-                    #{sellPrice}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                    </where>
+            <if test="id != null and id != ''">and id =
+                #{id}
+            </if>
+            <if test="countryName != null and countryName != ''">and country_name =
+                #{countryName}
+            </if>
+            <if test="isShow != null and isShow != ''">and is_show =
+                #{isShow}
+            </if>
+            <if test="currSymbol != null and currSymbol != ''">and curr_symbol =
+                #{currSymbol}
+            </if>
+            <if test="currIcon != null and currIcon != ''">and curr_icon =
+                #{currIcon}
+            </if>
+            <if test="price != null and price != ''">and price =
+                #{price}
+            </if>
+            <if test="coinId != null and coinId != ''">and coin_id =
+                #{coinId}
+            </if>
+            <if test="createTime != null and createTime != ''">and create_time =
+                #{createTime}
+            </if>
+            <if test="updateTime != null and updateTime != ''">and update_time =
+                #{updateTime}
+            </if>
+            <if test="code != null and code != ''">and code =
+                #{code}
+            </if>
+            <if test="sellPrice != null and sellPrice != ''">and sell_price =
+                #{sellPrice}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by id desc
+                order by is_show asc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -104,49 +106,49 @@
     <select id="count" resultType="int">
         select count(*) from t_sw_fiat_coin
         <where>
-                            <if test="id != null and id != ''">and id =
-                    #{id}
-                </if>
-                            <if test="countryName != null and countryName != ''">and country_name =
-                    #{countryName}
-                </if>
-                            <if test="isShow != null and isShow != ''">and is_show =
-                    #{isShow}
-                </if>
-                            <if test="currSymbol != null and currSymbol != ''">and curr_symbol =
-                    #{currSymbol}
-                </if>
-                            <if test="currIcon != null and currIcon != ''">and curr_icon =
-                    #{currIcon}
-                </if>
-                            <if test="price != null and price != ''">and price =
-                    #{price}
-                </if>
-                            <if test="coinId != null and coinId != ''">and coin_id =
-                    #{coinId}
-                </if>
-                            <if test="createTime != null and createTime != ''">and create_time =
-                    #{createTime}
-                </if>
-                            <if test="updateTime != null and updateTime != ''">and update_time =
-                    #{updateTime}
-                </if>
-                            <if test="code != null and code != ''">and code =
-                    #{code}
-                </if>
-                            <if test="sellPrice != null and sellPrice != ''">and sell_price =
-                    #{sellPrice}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                    </where>
+            <if test="id != null and id != ''">and id =
+                #{id}
+            </if>
+            <if test="countryName != null and countryName != ''">and country_name =
+                #{countryName}
+            </if>
+            <if test="isShow != null and isShow != ''">and is_show =
+                #{isShow}
+            </if>
+            <if test="currSymbol != null and currSymbol != ''">and curr_symbol =
+                #{currSymbol}
+            </if>
+            <if test="currIcon != null and currIcon != ''">and curr_icon =
+                #{currIcon}
+            </if>
+            <if test="price != null and price != ''">and price =
+                #{price}
+            </if>
+            <if test="coinId != null and coinId != ''">and coin_id =
+                #{coinId}
+            </if>
+            <if test="createTime != null and createTime != ''">and create_time =
+                #{createTime}
+            </if>
+            <if test="updateTime != null and updateTime != ''">and update_time =
+                #{updateTime}
+            </if>
+            <if test="code != null and code != ''">and code =
+                #{code}
+            </if>
+            <if test="sellPrice != null and sellPrice != ''">and sell_price =
+                #{sellPrice}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+        </where>
     </select>
 
-    <insert id="save" parameterType="com.get.domain.SwFiatCoinDO"            useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="com.get.domain.SwFiatCoinDO" useGeneratedKeys="true" keyProperty="id">
         insert into t_sw_fiat_coin
         (
                                                         `country_name`, 
@@ -182,31 +184,43 @@
     <update id="update" parameterType="com.get.domain.SwFiatCoinDO">
         update t_sw_fiat_coin
         <set>
-                                                                            <if test="countryName != null">`country_name` = #{countryName
-                        }, </if>
-                                                                <if test="isShow != null">`is_show` = #{isShow
-                        }, </if>
-                                                                <if test="currSymbol != null">`curr_symbol` = #{currSymbol
-                        }, </if>
-                                                                <if test="currIcon != null">`curr_icon` = #{currIcon
-                        }, </if>
-                                                                <if test="price != null">`price` = #{price
-                        }, </if>
-                                                                <if test="coinId != null">`coin_id` = #{coinId
-                        }, </if>
-                                                                <if test="createTime != null">`create_time` = #{createTime
-                        }, </if>
-                                                                <if test="updateTime != null">`update_time` = #{updateTime
-                        }, </if>
-                                                                <if test="code != null">`code` = #{code
-                        }, </if>
-                                                                <if test="sellPrice != null">`sell_price` = #{sellPrice
-                        }, </if>
-                                                                <if test="ex1 != null">`ex1` = #{ex1
-                        }, </if>
-                                                                <if test="ex2 != null">`ex2` = #{ex2
-                        }</if>
-                                    </set>
+            <if test="countryName != null">`country_name` = #{countryName
+                        },
+            </if>
+            <if test="isShow != null">`is_show` = #{isShow
+                        },
+            </if>
+            <if test="currSymbol != null">`curr_symbol` = #{currSymbol
+                        },
+            </if>
+            <if test="currIcon != null">`curr_icon` = #{currIcon
+                        },
+            </if>
+            <if test="price != null">`price` = #{price
+                        },
+            </if>
+            <if test="coinId != null">`coin_id` = #{coinId
+                        },
+            </if>
+            <if test="createTime != null">`create_time` = #{createTime
+                        },
+            </if>
+            <if test="updateTime != null">`update_time` = #{updateTime
+                        },
+            </if>
+            <if test="code != null">`code` = #{code
+                        },
+            </if>
+            <if test="sellPrice != null">`sell_price` = #{sellPrice
+                        },
+            </if>
+            <if test="ex1 != null">`ex1` = #{ex1
+                        },
+            </if>
+            <if test="ex2 != null">`ex2` = #{ex2
+                        }
+            </if>
+        </set>
         where id = #{id}
     </update>
 

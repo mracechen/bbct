@@ -17,6 +17,8 @@ public interface SwTransferRecordService {
 
     List<SwTransferRecordDO> list(Map<String, Object> map);
 
+    List<SwTransferRecordDO> transferRecord(Integer userId, String beginDate, String endDate);
+
     int count(Map<String, Object> map);
 
     int save(SwTransferRecordDO swTransferRecord);

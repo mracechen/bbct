@@ -51,8 +51,8 @@ public class SwPrincipalUserServiceImpl implements SwPrincipalUserService {
     }
 
     @Override
-    public List<SwPrincipalUserDO> getWaitingResolvePrincipal() {
-        return swPrincipalUserDao.getWaitingResolvePrincipal();
+    public List<SwPrincipalUserDO> getWaitingResolvePrincipal(Date beginDate, Date endDate) {
+        return swPrincipalUserDao.getWaitingResolvePrincipal(beginDate,endDate);
     }
 
     @Override

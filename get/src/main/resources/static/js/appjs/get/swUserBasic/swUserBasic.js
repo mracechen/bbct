@@ -35,14 +35,10 @@ function load() {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
                         offset: params.offset,
-                        userId: $('#userId').val(),
                         tid: $('#tid').val(),
-                        parentWalletId: $('#parentWalletId').val(),
-                        accountId: $('#accountId').val(),
-                        currency: $('#currency').val(),
-                        isProfit: $('#isProfit').val(),
-                        isBigWallet: $('#isBigWallet').val(),
-                        isActive: $('#isActive').val(),
+                        userType: $('#userType').val(),
+                        recomId: $('#recomId').val(),
+                        email: $('#email').val(),
                         createStartDate: $('#createStartDate').val(),
                         createEndDate: $('#createEndDate').val(),
                         order: params.order,
@@ -93,7 +89,11 @@ function load() {
                     },
                     {
                         field: 'userType',
-                        title: '用户类型 0-普通用户，1-布道者，2-合伙人',
+                        title: '用户类型',
+                        formatter: function (value) {
+                            var str={0:"普通用户",1:"布道者",2:"合伙人"};
+                            if (str[value]) return str[value]
+                        }
                     },
                     {
                         field: 'createDate',
@@ -104,30 +104,6 @@ function load() {
                     {
                         field: 'updateDate',
                         title: '更新时间',
-                    },
-                    {
-                        field: 'delFlag',
-                        title: '删除标识',
-                    },
-                    {
-                        field: 'ex1',
-                        title: 'ex1',
-                    },
-                    {
-                        field: 'ex2',
-                        title: 'ex2',
-                    },
-                    {
-                        field: 'ex3',
-                        title: 'ex3',
-                    },
-                    {
-                        field: 'ex4',
-                        title: 'ex4',
-                    },
-                    {
-                        field: 'ex5',
-                        title: 'ex5',
                     },
                     {
                         title: '操作',

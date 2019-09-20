@@ -64,8 +64,8 @@ function load() {
                         title: '名称',
                     },
                     {
-                        field: 'coinTypeId',
-                        title: '币种id',
+                        field: 'coinName',
+                        title: '币种',
                     },
                     {
                         field: 'evangelistNum',
@@ -76,18 +76,6 @@ function load() {
                         title: '倍率',
                     },
                     {
-                        field: 'ex1',
-                        title: 'ex1',
-                    },
-                    {
-                        field: 'ex2',
-                        title: 'ex2',
-                    },
-                    {
-                        field: 'ex3',
-                        title: 'ex3',
-                    },
-                    {
                         field: 'createDate',
                         title: '创建时间',
                         sortable: true,
@@ -96,10 +84,6 @@ function load() {
                     {
                         field: 'updateDate',
                         title: '更新时间',
-                    },
-                    {
-                        field: 'delFlag',
-                        title: '0为可用,1为不可用',
                     },
                     {
                         field: 'remark',

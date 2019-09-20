@@ -243,4 +243,13 @@ public class CommonStatic {
      * */
     public static String CHECK_FAILED = "2";
 
+    /**
+     * 转账
+     * */
+    public static Integer TRANSFER = 1;
+    /**
+     * 收款
+     * */
+    public static Integer RECEIVE = 2;
+
 }

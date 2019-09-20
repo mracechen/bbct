@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.IDUtils;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.PageUtils;
 import com.get.statuc.Query;
@@ -70,6 +71,7 @@ public class SwPartnerController {
     @PostMapping("/save")
     @RequiresPermissions("get:swPartner:add")
     public R save(SwPartnerDO swPartner) {
+        swPartner.setTid(IDUtils.randomStr());
         swPartner.setCreateDate(new Date());
         swPartner.setUpdateDate(new Date());
         swPartner.setDelFlag(CommonStatic.NOTDELETE);

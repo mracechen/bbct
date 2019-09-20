@@ -27,6 +27,11 @@ public class SwTransferRecordServiceImpl implements SwTransferRecordService {
     }
 
     @Override
+    public List<SwTransferRecordDO> transferRecord(Integer userId, String beginDate, String endDate) {
+        return swTransferRecordDao.transferRecord(userId,beginDate,endDate);
+    }
+
+    @Override
     public int count(Map<String, Object> map) {
         return swTransferRecordDao.count(map);
     }

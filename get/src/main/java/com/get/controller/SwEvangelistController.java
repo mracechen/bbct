@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.IDUtils;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.PageUtils;
 import com.get.statuc.Query;
@@ -70,6 +71,7 @@ public class SwEvangelistController {
     @PostMapping("/save")
     @RequiresPermissions("get:swEvangelist:add")
     public R save(SwEvangelistDO swEvangelist) {
+        swEvangelist.setTid(IDUtils.randomStr());
         swEvangelist.setCreateDate(new Date());
         swEvangelist.setUpdateDate(new Date());
         swEvangelist.setDelFlag(CommonStatic.NOTDELETE);

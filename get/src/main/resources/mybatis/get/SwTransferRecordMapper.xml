@@ -7,6 +7,25 @@
         select `tid`,`payer`,`receiver`,`coin_type_id`,`amount`,`remark`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`        from t_sw_transfer_record where tid = #{value}
     </select>
 
+    <select id="transferRecord" resultType="com.get.domain.SwTransferRecordDO">
+        select `tid`,`payer`,`receiver`,`coin_type_id`,`amount`,`remark`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`
+        from t_sw_transfer_record
+        <where>
+            <if test="userId != null and userId != ''">
+                and
+                ((payer = #{userId} and ex1 = 1) or (receiver = #{userId} and ex1 = 2))
+            </if>
+            <if test="beginDate != null and beginDate != ''">and create_date &gt;=
+                #{beginDate}
+            </if>
+            <if test="endDate != null and endDate != ''">and create_date &lt;=
+                #{endDate}
+            </if>
+            and del_flag = 0
+        </where>
+        order by create_date desc
+    </select>
+
     <select id="list" resultType="com.get.domain.SwTransferRecordDO">
         select `tid`,`payer`,`receiver`,`coin_type_id`,`amount`,`remark`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`        from t_sw_transfer_record
         <where>

@@ -54,14 +54,19 @@ public class SwChargelogServiceImpl implements SwChargelogService {
             if(wallet == null){
                 throw new Exception("钱包异常");
             }
+            if(wallet.getFrozenAmount().compareTo(amount) < 0){
+                throw new Exception("冻结金额不足！");
+            }
             BigDecimal currency = wallet.getCurrency();
+           // wallet.setCurrency(amount);
+            wallet.setFrozenAmount(new BigDecimal("0").subtract(amount));
             wallet.setCurrency(amount);
             wallet.setUpdateDate(new Date());
             swWalletsService.update(wallet);
             swAccountRecordService.save(SwAccountRecordDO.create(
                     swChargelogDO.getUserId(),
                     RecordEnum.charge.getType(),
-                    RecordEnum.charge.getDesc(),
+                    languagei18nUtils.getMessage(RecordEnum.charge.getDesc()),
                     coinId,
                     amount.doubleValue(),
                     currency.add(amount).doubleValue()

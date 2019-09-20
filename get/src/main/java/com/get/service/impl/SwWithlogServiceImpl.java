@@ -7,6 +7,7 @@ import com.common.utils.StringUtils;
 import com.common.utils.blockChain.BaseParamEntity;
 import com.common.utils.blockChain.RegisterParanEntity;
 import com.common.utils.blockChain.WithdrawParanEntity;
+import com.common.utils.i18n.Languagei18nUtils;
 import com.get.domain.SwAccountRecordDO;
 import com.get.domain.SwCoinTypeDO;
 import com.get.domain.SwWalletsDO;
@@ -26,6 +27,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -54,6 +56,9 @@ public class SwWithlogServiceImpl implements SwWithlogService {
 
     @Autowired
     private SwCoinTypeService swCoinTypeService;
+
+    @Autowired
+    private Languagei18nUtils languagei18nUtils;
 
     @Value("${configs.blockChain.url}")
     private String blockChainUrl;
@@ -106,13 +111,19 @@ public class SwWithlogServiceImpl implements SwWithlogService {
                 throw new Exception("钱包异常");
             }
             BigDecimal currency = wallet.getCurrency();
-            wallet.setCurrency(new BigDecimal("0").subtract(swWithlog.getAmount()));
+            BigDecimal frozenAmount = wallet.getFrozenAmount();
+            if(frozenAmount.compareTo(swWithlog.getAmount()) < 0){
+                log.error("冻结金额不足,当前冻结金额："+frozenAmount+",提现金额："+swWithlog.getAmount());
+                throw new Exception("冻结金额不足");
+            }
+            wallet.setCurrency(new BigDecimal("0"));
+            wallet.setFrozenAmount(new BigDecimal("0").subtract(swWithlog.getAmount()));
             wallet.setUpdateDate(new Date());
             swWalletsService.update(wallet);
             swAccountRecordService.save(SwAccountRecordDO.create(
                     swWithlog.getUserId(),
                     RecordEnum.withdraw.getType(),
-                    RecordEnum.withdraw.getDesc(),
+                    languagei18nUtils.getMessage(RecordEnum.withdraw.getDesc()),
                     swWithlog.getCoinTypeId(),
                     new BigDecimal("0").subtract(swWithlog.getAmount()).doubleValue(),
                     currency.subtract(swWithlog.getAmount()).doubleValue()
@@ -126,26 +137,33 @@ public class SwWithlogServiceImpl implements SwWithlogService {
     public int check(SwWithlogDO swWithlog) throws Exception{
         synchronized (this){
             SwWithlogDO swWithlogDO = this.get(swWithlog.getTid());
-            if(withdrawFee > swWithlog.getAmount().doubleValue()){
+            SwWalletsDO wallet = swWalletsService.getWallet(swWithlogDO.getUserId(), swWithlogDO.getCoinTypeId());
+            if(withdrawFee > swWithlogDO.getAmount().doubleValue()){
                 swWithlogDO.setEx2(CommonStatic.CHECK_FAILED);
                 swWithlogDO.setStatus(CommonStatic.TRANSFER_FAILED);
-                log.error("提现余额不足！");
+                swWithlogDO.setRemark("提现金额小于手续费！");
+                log.error("提现金额小于手续费！");
+                wallet.setCurrency(swWithlogDO.getAmount());
+                wallet.setFrozenAmount(new BigDecimal("0").subtract(swWithlogDO.getAmount()));
+                wallet.setUpdateDate(new Date());
+                swWalletsService.update(wallet);
             }else{
                 if(swWithlog.getEx2() != null){
                     if(swWithlog.getEx2().equals("1")){
-
                         swWithlogDO.setEx2(CommonStatic.CHECK_SUCCESS);
                         SwCoinTypeDO swCoinTypeDO = swCoinTypeService.get(swWithlogDO.getCoinTypeId());
                         HttpPost post = new HttpPost(blockChainUrl);
                         WithdrawParanEntity params = new WithdrawParanEntity();
-                        params.setUserId(String.valueOf(swWithlogDO.getUserId()));
+                        params.setMemo(swWithlogDO.getEx4());
                         params.setAddress(swWithlogDO.getAddress());
                         StringBuilder stringBuilder = new StringBuilder(new BigDecimal(String.valueOf(swWithlogDO.getAmount()))
+                                .subtract(new BigDecimal(String.valueOf(withdrawFee)))
                                 .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model)
                                 .toString());
                         stringBuilder.append(" ");
                         stringBuilder.append(swCoinTypeDO.getCoinName());
                         params.setTargetCoin(stringBuilder.toString());
+                        log.info("提现向区块链发起请求，参数："+params.toString());
                         BaseParamEntity baseParamEntity = new BaseParamEntity(withdraw,params);
                         StringEntity entity = new StringEntity(JSON.toJSONString(baseParamEntity));
                         post.setHeader("Content-Type", "application/json;charset=utf8");
@@ -153,6 +171,7 @@ public class SwWithlogServiceImpl implements SwWithlogService {
                         log.info("用户【"+swWithlogDO.getUserId()+"】发起"+swCoinTypeDO.getCoinName()+"提现，金额:"+swWithlogDO.getAmount());
                         CloseableHttpResponse response = HttpClientBuilder.create().build().execute(post);
                         Boolean resultStatus = false;
+                        Object resInfo = null;
                         if(response.getStatusLine() != null){
                             int statusCode = response.getStatusLine().getStatusCode();
                             if(statusCode == 200){
@@ -163,24 +182,43 @@ public class SwWithlogServiceImpl implements SwWithlogService {
                                     Object result1 = body.get("result");
                                     if(result1 != null){
                                         JSONObject result = JSON.parseObject(result1.toString());
+                                        log.info("区块链返回结果：【"+result+"】");
+                                        resInfo = result;
                                         Object txidObj = result.get("txid");
                                         if(txidObj != null){
                                             String txid = txidObj.toString();
                                             swWithlogDO.setTxid(txid);
                                             resultStatus = true;
                                         }else{
-                                            throw new Exception("提币失败！");
+                                            log.error("提币失败！");
                                         }
                                     }
+                                }else{
+                                    log.info("区块链返回结果：【"+errorInfo+"】");
+                                    resInfo = errorInfo;
                                 }
+                            }else{
+                                log.info("区块链返回结果：【"+statusCode+"】");
+                                resInfo = statusCode;
                             }
                         }
                         if(!resultStatus){
-                            throw new Exception("提币失败！");
+                            log.error("提币失败！");
+                            swWithlogDO.setStatus(CommonStatic.TRANSFER_FAILED);
+                            swWithlogDO.setRemark(resInfo != null?resInfo.toString():"");
+                            //钱还给他
+                            wallet.setCurrency(swWithlogDO.getAmount());
+                            wallet.setFrozenAmount(new BigDecimal("0").subtract(swWithlogDO.getAmount()));
+                            wallet.setUpdateDate(new Date());
+                            swWalletsService.update(wallet);
                         }
                     }else{
-                        swWithlogDO.setEx2(CommonStatic.CHECK_FAILED);
+                        wallet.setCurrency(swWithlogDO.getAmount());
+                        wallet.setFrozenAmount(new BigDecimal("0").subtract(swWithlogDO.getAmount()));
+                        wallet.setUpdateDate(new Date());
+                        swWalletsService.update(wallet);
                         swWithlogDO.setStatus(CommonStatic.TRANSFER_FAILED);
+                        swWithlogDO.setEx2(swWithlog.getEx2());
                     }
                 }
             }
@@ -198,14 +236,20 @@ public class SwWithlogServiceImpl implements SwWithlogService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void withdraw(Integer userId, String address, Double amount, String coinName) throws Exception{
+    public void withdraw(Integer userId, String address, Double amount, String coinName, String memo) throws Exception{
         SwCoinTypeDO byCoinName = swCoinTypeService.getByCoinName(coinName);
+        SwWalletsDO wallet = swWalletsService.getWallet(userId, byCoinName.getTid());
+        //冻结资金
+        wallet.setCurrency(new BigDecimal("0").subtract(new BigDecimal(String.valueOf(amount))));
+        wallet.setFrozenAmount(new BigDecimal(String.valueOf(amount)));
+        swWalletsService.update(wallet);
         SwWithlogDO swWithlogDO = new SwWithlogDO();
         swWithlogDO.setTid(IDUtils.randomStr());
         swWithlogDO.setCreateDate(new Date());
         swWithlogDO.setUpdateDate(new Date());
         swWithlogDO.setDelFlag(CommonStatic.NOTDELETE);
         swWithlogDO.setEx2(CommonStatic.CHECK_WAITING);
+        swWithlogDO.setEx4(memo);
         swWithlogDO.setStatus(CommonStatic.TRANSFER_WAITING);
         swWithlogDO.setCoinTypeId(byCoinName.getTid());
         swWithlogDO.setFee(new BigDecimal(String.valueOf(withdrawFee)));

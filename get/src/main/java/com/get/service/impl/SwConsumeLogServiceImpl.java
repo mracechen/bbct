@@ -5,10 +5,7 @@ import com.common.utils.i18n.Languagei18nUtils;
 import com.get.dao.SwConsumeLogDao;
 import com.get.dao.SwUserBasicDao;
 import com.get.dao.SwWalletsDao;
-import com.get.domain.SwAccountRecordDO;
-import com.get.domain.SwConsumeLogDO;
-import com.get.domain.SwUserBasicDO;
-import com.get.domain.SwWalletsDO;
+import com.get.domain.*;
 import com.get.service.*;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.NumberStatic;
@@ -49,6 +46,9 @@ public class SwConsumeLogServiceImpl implements SwConsumeLogService {
 
     @Autowired
     private SwUserBasicService swUserBasicService;
+
+    @Autowired
+    private SwTransferRecordService swTransferRecordService;
 
     @Override
     public SwConsumeLogDO get(String tid) {
@@ -103,7 +103,7 @@ public class SwConsumeLogServiceImpl implements SwConsumeLogService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public String transfer(SwUserBasicDO user, String userId, double amount, String coinId, String remark, String tradingPassword) {
+    public String transfer(SwUserBasicDO user, Integer userId, double amount, String coinId, String remark, String tradingPassword) {
 
         if(StringUtils.isBlank(userId) || StringUtils.isBlank(amount) || StringUtils.isBlank(coinId)){
             return "system.failed.operation";
@@ -120,11 +120,16 @@ public class SwConsumeLogServiceImpl implements SwConsumeLogService {
         if (walletsDO.getCurrency() == null || walletsDO.getCurrency().doubleValue() < amount) {
             return "system.balance.not.enough";
         }
-        SwUserBasicDO swUserBasicDOReceive = swUserBasicService.get(Integer.parseInt(userId));
+        SwUserBasicDO swUserBasicDOReceive = swUserBasicService.get(userId);
         SwWalletsDO walletsDOReceive = swWalletsService.getWallet(swUserBasicDOReceive.getTid(), coinId);
         if (walletsDOReceive == null) {
             return "system.wallet.error";
         }
+        //转账记录
+        swTransferRecordService.save(SwTransferRecordDO.create(user.getTid(),userId,coinId,amount,StringUtils.isBlank(remark)?"transfer to - "+userId:remark,CommonStatic.TRANSFER));
+        //收款记录
+        swTransferRecordService.save(SwTransferRecordDO.create(user.getTid(),userId,coinId,amount,StringUtils.isBlank(remark)?"receive from - "+user.getTid():remark,CommonStatic.RECEIVE));
+
         //记录转账账户流水
         remark = languagei18nUtils.getMessage("system.transfer",swUserBasicDOReceive.getUsername());
         SwAccountRecordDO accountRecordTransfer = SwAccountRecordDO.create(
@@ -148,7 +153,6 @@ public class SwConsumeLogServiceImpl implements SwConsumeLogService {
                 walletsDOReceive.getCurrency().doubleValue() + amount
         );
         swAccountRecordService.save(accountRecordReceive);
-
         walletsDO.setCurrency(new BigDecimal( -amount).setScale(NumberStatic.BigDecimal_Scale_Num, NumberStatic.BigDecimal_Scale_Model));
         int updateTransfer = swWalletsService.update(walletsDO);
         walletsDOReceive.setCurrency(new BigDecimal(amount).setScale(NumberStatic.BigDecimal_Scale_Num, NumberStatic.BigDecimal_Scale_Model));

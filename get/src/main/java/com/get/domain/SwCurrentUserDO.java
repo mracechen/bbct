@@ -48,4 +48,6 @@ public class SwCurrentUserDO implements Serializable {
 
     private Integer existDays;
 
+    private String currentName;
+
     }

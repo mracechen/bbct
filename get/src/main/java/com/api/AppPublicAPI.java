@@ -56,6 +56,9 @@ public class AppPublicAPI {
     private SwWithlogService swWithlogService;
 
     @Autowired
+    private SwWalletsService swWalletsService;
+
+    @Autowired
     private LogService logService;
 
     @Value("${configs.usercache.prefix}")
@@ -316,6 +319,10 @@ public class AppPublicAPI {
             swChargelogDO.setCoinId(coinTypeDO.getTid());
             swChargelogDO.setTxid(txid);
             swChargelogDO.setStatus(CommonStatic.TRANSFER_WAITING);
+            SwWalletsDO wallet = swWalletsService.getWallet(memo, coinTypeDO.getTid());
+            wallet.setFrozenAmount(new BigDecimal(String.valueOf(amount)));
+            wallet.setUpdateDate(new Date());
+            swWalletsService.update(wallet);
             swChargelogService.save(swChargelogDO);
             return Result.ok();
         }catch (Exception e){
@@ -364,11 +371,11 @@ public class AppPublicAPI {
     @RequestMapping(value = "confirm_withdraw",method = RequestMethod.POST)
     @ResponseBody
     public Result confirmWithdraw(Integer status, String txid) {
+        if(StringUtils.isBlank(txid)){
+            return Result.error("system.params.error");
+        }
+        SwWithlogDO byTxid = swWithlogService.getByTxid(txid);
         try {
-            if(StringUtils.isBlank(txid)){
-                throw new Exception("确认提币参数错误！");
-            }
-            SwWithlogDO byTxid = swWithlogService.getByTxid(txid);
             if(byTxid != null){
                 if(status == 1){
                     byTxid.setStatus(CommonStatic.TRANSFER_SUCCESS);
@@ -382,6 +389,13 @@ public class AppPublicAPI {
                 return Result.error("system.failed.operation");
             }
         }catch (Exception e){
+            SwWalletsDO wallet = swWalletsService.getWallet(byTxid.getUserId(), byTxid.getCoinTypeId());
+            wallet.setCurrency(byTxid.getAmount());
+            wallet.setFrozenAmount(new BigDecimal("0").subtract(byTxid.getAmount()));
+            wallet.setUpdateDate(new Date());
+            swWalletsService.update(wallet);
+            byTxid.setStatus(CommonStatic.TRANSFER_FAILED);
+            swWithlogService.update(byTxid);
             e.printStackTrace();
             return Result.error("system.failed.operation");
         }

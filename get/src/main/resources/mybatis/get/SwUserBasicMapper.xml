@@ -132,6 +132,12 @@
             <if test="updateDate != null and updateDate != ''">and update_date =
                 #{updateDate}
             </if>
+            <if test="createStartDate != null and createStartDate != ''">and create_date &gt;=
+                #{createStartDate}
+            </if>
+            <if test="createEndDate != null and createEndDate != ''">and create_date &lt;=
+                #{createEndDate}
+            </if>
             <if test="delFlag != null and delFlag != ''">and del_flag =
                 #{delFlag}
             </if>

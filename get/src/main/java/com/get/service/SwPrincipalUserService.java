@@ -1,5 +1,6 @@
 package com.get.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwPrincipalUserDO;
@@ -17,7 +18,7 @@ public interface SwPrincipalUserService {
 
     List<SwPrincipalUserDO> getByUserId(Integer userId, Integer status, String delFlag);
 
-    List<SwPrincipalUserDO> getWaitingResolvePrincipal();
+    List<SwPrincipalUserDO> getWaitingResolvePrincipal(Date beginDate, Date endDate);
 
     List<SwPrincipalUserDO> list(Map<String, Object> map);
 

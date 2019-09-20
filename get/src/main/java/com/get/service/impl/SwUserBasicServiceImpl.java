@@ -1,14 +1,13 @@
 package com.get.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.common.utils.IDUtils;
 import com.common.utils.MyMD5Utils;
 import com.common.utils.Result;
 import com.common.utils.blockChain.BaseParamEntity;
 import com.common.utils.blockChain.RegisterParanEntity;
-import com.get.domain.SwCoinTypeDO;
-import com.get.domain.SwWalletsDO;
-import com.get.service.SwCoinTypeService;
-import com.get.service.SwWalletsService;
+import com.get.domain.*;
+import com.get.service.*;
 import com.get.statuc.CommonStatic;
 import com.system.sysconfig.configbean.SettlementCommonConfig;
 import org.apache.commons.logging.Log;
@@ -22,11 +21,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import com.get.dao.SwUserBasicDao;
-import com.get.domain.SwUserBasicDO;
-import com.get.service.SwUserBasicService;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -41,6 +39,24 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
 
     @Autowired
     private SwCoinTypeService swCoinTypeService;
+
+    @Autowired
+    private SwPrincipalUserService swPrincipalUserService;
+
+    @Autowired
+    private SwCurrentUserService swCurrentUserService;
+
+    @Autowired
+    private SwPeriodUserService swPeriodUserService;
+
+    @Autowired
+    private SwEvangelistUserService swEvangelistUserService;
+
+    @Autowired
+    private SwPartnerUserService swPartnerUserService;
+
+    @Autowired
+    private SwPartnerService swPartnerService;
 
     @Value("${configs.blockChain.url}")
     private String blockChainUrl;
@@ -170,6 +186,69 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int adminUpdate(SwUserBasicDO swUserBasic) {
+        SwUserBasicDO swUserBasicDO = this.get(swUserBasic.getTid());
+        if(swUserBasic.getUserType() != null && !swUserBasic.getUserType().equals(swUserBasicDO.getUserType())){
+            if(swUserBasic.getUserType().equals(CommonStatic.USER_TYPE_PARTNER)){
+                Boolean allow = true;
+                if(swUserBasicDO.getRecomId() != 1){
+                    allow = false;
+                }
+                List<SwPrincipalUserDO> swPrincipalUserDOS = swPrincipalUserService.getByUserId(swUserBasic.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+                if(swPrincipalUserDOS != null && swPrincipalUserDOS.size() > 0){
+                    allow = false;
+                }
+                List<SwCurrentUserDO> swCurrentUserDOS = swCurrentUserService.getByUserId(swUserBasic.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+                if(swCurrentUserDOS != null && swCurrentUserDOS.size() > 0){
+                    allow = false;
+                }
+                List<SwPeriodUserDO> swPeriodUserDOS = swPeriodUserService.getByUserId(swUserBasic.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+                if(swPeriodUserDOS != null && swPeriodUserDOS.size() > 0){
+                    allow = false;
+                }
+                SwEvangelistUserDO swEvangelistUserDO = swEvangelistUserService.getByUserId(swUserBasic.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+                if(swEvangelistUserDO != null){
+                    allow = false;
+                }
+                SwPartnerUserDO swPartnerUserDO = swPartnerUserService.getByUserId(swUserBasic.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+                if(swPartnerUserDO != null){
+                    allow = false;
+                }
+                if(allow){
+                    Map<String,Object> param = new HashMap<>();
+                    param.put("delFlag",CommonStatic.NOTDELETE);
+                    List<SwPartnerDO> list = swPartnerService.list(param);
+                    if(list != null && list.size() == 1){
+                        SwPartnerDO swPartnerDO = list.get(0);
+                        SwPartnerUserDO swPartnerUser = new SwPartnerUserDO();
+                        swPartnerUser.setTid(IDUtils.randomStr());
+                        swPartnerUser.setCreateDate(new Date());
+                        swPartnerUser.setUpdateDate(new Date());
+                        swPartnerUser.setDelFlag(CommonStatic.NOTDELETE);
+                        swPartnerUser.setUserId(swUserBasic.getTid());
+                        swPartnerUser.setPartnerId(swPartnerDO.getTid());
+                        swPartnerUser.setStatus(CommonStatic.NO_RELEASE);
+                        double userTotal = new BigDecimal(
+                                String.valueOf(swPartnerDO.getPartnerNum() == null ? 0 : swPartnerDO.getPartnerNum())
+                        ).multiply(
+                                new BigDecimal(String.valueOf(swPartnerDO.getPercent() == null ? 0 : swPartnerDO.getPercent()))
+                        ).doubleValue();
+                        swPartnerUser.setTotalNum(userTotal);
+                        swPartnerUser.setLeftNum(userTotal);
+                        swPartnerUserService.save(swPartnerUser);
+                    }
+                }else{
+                    return -1;
+                }
+            }else if(swUserBasic.getUserType().equals(CommonStatic.USER_TYPE_EVANGELIST)){
+                return -1;
+            }
+        }
+        return swUserBasicDao.update(swUserBasic);
+    }
+
+    @Override
     public int remove(Integer tid) {
         SwUserBasicDO swUserBasic = new SwUserBasicDO();
         swUserBasic.setDelFlag(CommonStatic.DELETE);
@@ -196,7 +275,7 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
 
     @Override
     public Integer getChildrenTreeUserNum(Integer userId) {
-        Integer totalNum = 1;
+        Integer totalNum = 0;
         List<Integer> params = new ArrayList<>();
         params.add(userId);
         Boolean run = true;

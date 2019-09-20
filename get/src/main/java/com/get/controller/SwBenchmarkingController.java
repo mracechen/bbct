@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.IDUtils;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.PageUtils;
 import com.get.statuc.Query;
@@ -70,6 +71,7 @@ public class SwBenchmarkingController {
     @PostMapping("/save")
     @RequiresPermissions("get:swBenchmarking:add")
     public R save(SwBenchmarkingDO swBenchmarking) {
+        swBenchmarking.setTid(IDUtils.randomStr());
         swBenchmarking.setCreateDate(new Date());
         swBenchmarking.setUpdateDate(new Date());
         swBenchmarking.setDelFlag(CommonStatic.NOTDELETE);

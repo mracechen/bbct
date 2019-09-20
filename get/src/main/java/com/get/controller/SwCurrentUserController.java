@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.StringUtils;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.PageUtils;
 import com.get.statuc.Query;
@@ -41,6 +42,15 @@ public class SwCurrentUserController {
     @RequiresPermissions("get:swCurrentUser:swCurrentUser")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         params.put("delFlag", CommonStatic.NOTDELETE);
+        if(params.get("createStartDate") != null && StringUtils.isNotBlank(params.get("createStartDate").toString())){
+            String createStartDate = params.get("createStartDate").toString();
+
+            params.put("beginDate",createStartDate + " 00:00:00");
+        }
+        if(params.get("createEndDate") != null && StringUtils.isNotBlank(params.get("createEndDate").toString())){
+            String createEndDate = params.get("createEndDate").toString();
+            params.put("endDate",createEndDate + " 23:59:59");
+        }
         //查询列表数据
         Query query = new Query(params);
         List<SwCurrentUserDO> swCurrentUserList = swCurrentUserService.list(query);

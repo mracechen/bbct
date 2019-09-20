@@ -3,58 +3,69 @@
 
 <mapper namespace="com.get.dao.SwPrincipalDao">
 
+    <sql id="baseColumn">
+        `tid`,`name`,`coin_type_id`,`principal_num`,`reward_percent`,`contract_term`,`charge_term`,`charge_percent`,`create_date`,`update_date`,`del_flag`,`remark`,`ex1`,`ex2`,`ex3`
+    </sql>
+
+    <sql id="baseColumnAlias">
+        principal.`tid`,principal.`name`,principal.`coin_type_id`,principal.`principal_num`,principal.`reward_percent`,principal.`contract_term`,principal.`charge_term`,principal.`charge_percent`,principal.`create_date`,principal.`update_date`,principal.`del_flag`,principal.`remark`,principal.`ex1`,principal.`ex2`,principal.`ex3`
+    </sql>
+
     <select id="get" resultType="com.get.domain.SwPrincipalDO">
-        select `tid`,`name`,`coin_type_id`,`principal_num`,`reward_percent`,`contract_term`,`charge_term`,`charge_percent`,`create_date`,`update_date`,`del_flag`,`remark`,`ex1`,`ex2`,`ex3`        from t_sw_principal where tid = #{value}
+        select
+        <include refid="baseColumn"/>
+        from t_sw_principal where tid = #{value}
     </select>
 
     <select id="list" resultType="com.get.domain.SwPrincipalDO">
         select
-        `tid`,`name`,`coin_type_id`,`principal_num`,`reward_percent`,`contract_term`,`charge_term`,`charge_percent`,`create_date`,`update_date`,`del_flag`,`remark`,`ex1`,`ex2`,`ex3`
-        from t_sw_principal
+        <include refid="baseColumnAlias"/>,coin.coin_name as coinName
+        from t_sw_principal principal
+        left join t_sw_coin_type coin on coin.tid = principal.coin_type_id
         <where>
-            <if test="tid != null and tid != ''">and tid =
+            <if test="tid != null and tid != ''">and principal.tid =
                 #{tid}
             </if>
-            <if test="name != null and name != ''">and name =
+            <if test="name != null and name != ''">and principal.name =
                 #{name}
             </if>
-            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+            <if test="coinTypeId != null and coinTypeId != ''">and principal.coin_type_id =
                 #{coinTypeId}
             </if>
-            <if test="principalNum != null and principalNum != ''">and principal_num =
+            <if test="principalNum != null and principalNum != ''">and principal.principal_num =
                 #{principalNum}
             </if>
-            <if test="rewardPercent != null and rewardPercent != ''">and reward_percent =
+            <if test="rewardPercent != null and rewardPercent != ''">and principal.reward_percent =
                 #{rewardPercent}
             </if>
-            <if test="contractTerm != null and contractTerm != ''">and contract_term =
+            <if test="contractTerm != null and contractTerm != ''">and principal.contract_term =
                 #{contractTerm}
             </if>
-            <if test="chargeTerm != null and chargeTerm != ''">and charge_term =
+            <if test="chargeTerm != null and chargeTerm != ''">and principal.charge_term =
                 #{chargeTerm}
             </if>
-            <if test="chargePercent != null and chargePercent != ''">and charge_percent =
+            <if test="chargePercent != null and chargePercent != ''">and principal.charge_percent =
                 #{chargePercent}
             </if>
-            <if test="createDate != null and createDate != ''">and create_date =
+            <if test="createDate != null and createDate != ''">and principal.create_date =
                 #{createDate}
             </if>
-            <if test="updateDate != null and updateDate != ''">and update_date =
+            <if test="updateDate != null and updateDate != ''">and principal.update_date =
                 #{updateDate}
             </if>
-            <if test="delFlag != null and delFlag != ''">and del_flag =
+            <if test="delFlag != null and delFlag != ''">and principal.del_flag =
                 #{delFlag}
             </if>
-            <if test="remark != null and remark != ''">and remark =
+            <if test="remark != null and remark != ''">and principal.remark =
                 #{remark}
             </if>
-            <if test="ex1 != null and ex1 != ''">and ex1 =
+            <if test="ex1 != null and ex1 != ''">and principal.ex1 =
                 #{ex1}
             </if>
-            <if test="ex2 != null and ex2 != ''">and ex2 =
+            <if test="ex2 != null and ex2 != ''">and principal.ex2 =
                 #{ex2}
             </if>
-            <if test="ex3 != null and ex3 != ''">and ex3 =
+            <if test="ex3 != null and ex3 != ''">and principal.ex3 =
                 #{ex3}
             </if>
         </where>
@@ -63,7 +74,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by principal_num asc
+                order by principal.principal_num asc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

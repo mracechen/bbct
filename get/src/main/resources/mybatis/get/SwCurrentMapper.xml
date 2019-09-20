@@ -2,63 +2,74 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.get.dao.SwCurrentDao">
+    <sql id="baseColumn">
+        `tid`,`name`,`coin_type_id`,`t_percent`,`b_percent`,`accelerate_percent`,`ex1`,`ex2`,`ex3`,`ex4`,`create_date`,`update_date`,`del_flag`,`remark`
+    </sql>
+    <sql id="baseColumnAlias">
+        current.`tid`,current.`name`,current.`coin_type_id`,current.`t_percent`,current.`b_percent`,current.`accelerate_percent`,current.`ex1`,current.`ex2`,current.`ex3`,current.`ex4`,current.`create_date`,current.`update_date`,current.`del_flag`,current.`remark`
+    </sql>
 
     <select id="get" resultType="com.get.domain.SwCurrentDO">
-        select `tid`,`name`,`coin_type_id`,`t_percent`,`b_percent`,`accelerate_percent`,`ex1`,`ex2`,`ex3`,`ex4`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_current where tid = #{value}
+        select
+        <include refid="baseColumn"/>
+        from t_sw_current where tid = #{value}
     </select>
 
     <select id="list" resultType="com.get.domain.SwCurrentDO">
-        select `tid`,`name`,`coin_type_id`,`t_percent`,`b_percent`,`accelerate_percent`,`ex1`,`ex2`,`ex3`,`ex4`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_current
+        select
+        <include refid="baseColumnAlias"/>,coin.coin_name as coinName
+        from t_sw_current current
+        left join t_sw_coin_type coin on coin.tid = current.coin_type_id
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="name != null and name != ''">and name =
-                    #{name}
-                </if>
-                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
-                    #{coinTypeId}
-                </if>
-                            <if test="tPercent != null and tPercent != ''">and t_percent =
-                    #{tPercent}
-                </if>
-                            <if test="bPercent != null and bPercent != ''">and b_percent =
-                    #{bPercent}
-                </if>
-                            <if test="acceleratePercent != null and acceleratePercent != ''">and accelerate_percent =
-                    #{acceleratePercent}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                            <if test="ex4 != null and ex4 != ''">and ex4 =
-                    #{ex4}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and current.tid =
+                #{tid}
+            </if>
+            <if test="name != null and name != ''">and current.name =
+                #{name}
+            </if>
+            <if test="coinTypeId != null and coinTypeId != ''">and current.coin_type_id =
+                #{coinTypeId}
+            </if>
+            <if test="tPercent != null and tPercent != ''">and current.t_percent =
+                #{tPercent}
+            </if>
+            <if test="bPercent != null and bPercent != ''">and current.b_percent =
+                #{bPercent}
+            </if>
+            <if test="acceleratePercent != null and acceleratePercent != ''">and current.accelerate_percent =
+                #{acceleratePercent}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and current.ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and current.ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and current.ex3 =
+                #{ex3}
+            </if>
+            <if test="ex4 != null and ex4 != ''">and current.ex4 =
+                #{ex4}
+            </if>
+            <if test="createDate != null and createDate != ''">and current.create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and current.update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and current.del_flag =
+                #{delFlag}
+            </if>
+            <if test="remark != null and remark != ''">and current.remark =
+                #{remark}
+            </if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by current.create_date desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -69,49 +80,49 @@
     <select id="count" resultType="int">
         select count(*) from t_sw_current
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="name != null and name != ''">and name =
-                    #{name}
-                </if>
-                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
-                    #{coinTypeId}
-                </if>
-                            <if test="tPercent != null and tPercent != ''">and t_percent =
-                    #{tPercent}
-                </if>
-                            <if test="bPercent != null and bPercent != ''">and b_percent =
-                    #{bPercent}
-                </if>
-                            <if test="acceleratePercent != null and acceleratePercent != ''">and accelerate_percent =
-                    #{acceleratePercent}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                            <if test="ex4 != null and ex4 != ''">and ex4 =
-                    #{ex4}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="name != null and name != ''">and name =
+                #{name}
+            </if>
+            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+                #{coinTypeId}
+            </if>
+            <if test="tPercent != null and tPercent != ''">and t_percent =
+                #{tPercent}
+            </if>
+            <if test="bPercent != null and bPercent != ''">and b_percent =
+                #{bPercent}
+            </if>
+            <if test="acceleratePercent != null and acceleratePercent != ''">and accelerate_percent =
+                #{acceleratePercent}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+            <if test="ex4 != null and ex4 != ''">and ex4 =
+                #{ex4}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="remark != null and remark != ''">and remark =
+                #{remark}
+            </if>
+        </where>
     </select>
 
     <insert id="save" parameterType="com.get.domain.SwCurrentDO">
@@ -154,33 +165,46 @@
     <update id="update" parameterType="com.get.domain.SwCurrentDO">
         update t_sw_current
         <set>
-                                                                            <if test="name != null">`name` = #{name
-                        }, </if>
-                                                                <if test="coinTypeId != null">`coin_type_id` = #{coinTypeId
-                        }, </if>
-                                                                <if test="tPercent != null">`t_percent` = #{tPercent
-                        }, </if>
-                                                                <if test="bPercent != null">`b_percent` = #{bPercent
-                        }, </if>
-                                                                <if test="acceleratePercent != null">`accelerate_percent` = #{acceleratePercent
-                        }, </if>
-                                                                <if test="ex1 != null">`ex1` = #{ex1
-                        }, </if>
-                                                                <if test="ex2 != null">`ex2` = #{ex2
-                        }, </if>
-                                                                <if test="ex3 != null">`ex3` = #{ex3
-                        }, </if>
-                                                                <if test="ex4 != null">`ex4` = #{ex4
-                        }, </if>
-                                                                <if test="createDate != null">`create_date` = #{createDate
-                        }, </if>
-                                                                <if test="updateDate != null">`update_date` = #{updateDate
-                        }, </if>
-                                                                <if test="delFlag != null">`del_flag` = #{delFlag
-                        }, </if>
-                                                                <if test="remark != null">`remark` = #{remark
-                        }</if>
-                                    </set>
+            <if test="name != null">`name` = #{name
+                        },
+            </if>
+            <if test="coinTypeId != null">`coin_type_id` = #{coinTypeId
+                        },
+            </if>
+            <if test="tPercent != null">`t_percent` = #{tPercent
+                        },
+            </if>
+            <if test="bPercent != null">`b_percent` = #{bPercent
+                        },
+            </if>
+            <if test="acceleratePercent != null">`accelerate_percent` = #{acceleratePercent
+                        },
+            </if>
+            <if test="ex1 != null">`ex1` = #{ex1
+                        },
+            </if>
+            <if test="ex2 != null">`ex2` = #{ex2
+                        },
+            </if>
+            <if test="ex3 != null">`ex3` = #{ex3
+                        },
+            </if>
+            <if test="ex4 != null">`ex4` = #{ex4
+                        },
+            </if>
+            <if test="createDate != null">`create_date` = #{createDate
+                        },
+            </if>
+            <if test="updateDate != null">`update_date` = #{updateDate
+                        },
+            </if>
+            <if test="delFlag != null">`del_flag` = #{delFlag
+                        },
+            </if>
+            <if test="remark != null">`remark` = #{remark
+                        }
+            </if>
+        </set>
         where tid = #{tid}
     </update>
 

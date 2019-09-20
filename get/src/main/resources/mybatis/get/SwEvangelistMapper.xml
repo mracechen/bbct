@@ -3,56 +3,67 @@
 
 <mapper namespace="com.get.dao.SwEvangelistDao">
 
+    <sql id="baseColumn">
+        `tid`,`name`,`coin_type_id`,`evangelist_num`,`percent`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`
+    </sql>
+
+    <sql id="baseColumnAlias">
+        evangelist.`tid`,evangelist.`name`,evangelist.`coin_type_id`,evangelist.`evangelist_num`,evangelist.`percent`,evangelist.`ex1`,evangelist.`ex2`,evangelist.`ex3`,evangelist.`create_date`,evangelist.`update_date`,evangelist.`del_flag`,evangelist.`remark`
+    </sql>
+
     <select id="get" resultType="com.get.domain.SwEvangelistDO">
         select `tid`,`name`,`coin_type_id`,`evangelist_num`,`percent`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_evangelist where tid = #{value}
     </select>
 
     <select id="list" resultType="com.get.domain.SwEvangelistDO">
-        select `tid`,`name`,`coin_type_id`,`evangelist_num`,`percent`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_evangelist
+        select
+        <include refid="baseColumnAlias"/>, coin.coin_name as coinName
+        from t_sw_evangelist evangelist
+        left join t_sw_coin_type coin on coin.tid = evangelist.coin_type_id
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="name != null and name != ''">and name =
-                    #{name}
-                </if>
-                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
-                    #{coinTypeId}
-                </if>
-                            <if test="evangelistNum != null and evangelistNum != ''">and evangelist_num =
-                    #{evangelistNum}
-                </if>
-                            <if test="percent != null and percent != ''">and percent =
-                    #{percent}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and evangelist.tid =
+                #{tid}
+            </if>
+            <if test="name != null and name != ''">and evangelist.name =
+                #{name}
+            </if>
+            <if test="coinTypeId != null and coinTypeId != ''">and evangelist.coin_type_id =
+                #{coinTypeId}
+            </if>
+            <if test="evangelistNum != null and evangelistNum != ''">and evangelist.evangelist_num =
+                #{evangelistNum}
+            </if>
+            <if test="percent != null and percent != ''">and evangelist.percent =
+                #{percent}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and evangelist.ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and evangelist.ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and evangelist.ex3 =
+                #{ex3}
+            </if>
+            <if test="createDate != null and createDate != ''">and evangelist.create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and evangelist.update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and evangelist.del_flag =
+                #{delFlag}
+            </if>
+            <if test="remark != null and remark != ''">and evangelist.remark =
+                #{remark}
+            </if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by evangelist.create_date desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -63,43 +74,43 @@
     <select id="count" resultType="int">
         select count(*) from t_sw_evangelist
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="name != null and name != ''">and name =
-                    #{name}
-                </if>
-                            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
-                    #{coinTypeId}
-                </if>
-                            <if test="evangelistNum != null and evangelistNum != ''">and evangelist_num =
-                    #{evangelistNum}
-                </if>
-                            <if test="percent != null and percent != ''">and percent =
-                    #{percent}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="name != null and name != ''">and name =
+                #{name}
+            </if>
+            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+                #{coinTypeId}
+            </if>
+            <if test="evangelistNum != null and evangelistNum != ''">and evangelist_num =
+                #{evangelistNum}
+            </if>
+            <if test="percent != null and percent != ''">and percent =
+                #{percent}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="remark != null and remark != ''">and remark =
+                #{remark}
+            </if>
+        </where>
     </select>
 
     <insert id="save" parameterType="com.get.domain.SwEvangelistDO">
@@ -138,29 +149,40 @@
     <update id="update" parameterType="com.get.domain.SwEvangelistDO">
         update t_sw_evangelist
         <set>
-                                                                            <if test="name != null">`name` = #{name
-                        }, </if>
-                                                                <if test="coinTypeId != null">`coin_type_id` = #{coinTypeId
-                        }, </if>
-                                                                <if test="evangelistNum != null">`evangelist_num` = #{evangelistNum
-                        }, </if>
-                                                                <if test="percent != null">`percent` = #{percent
-                        }, </if>
-                                                                <if test="ex1 != null">`ex1` = #{ex1
-                        }, </if>
-                                                                <if test="ex2 != null">`ex2` = #{ex2
-                        }, </if>
-                                                                <if test="ex3 != null">`ex3` = #{ex3
-                        }, </if>
-                                                                <if test="createDate != null">`create_date` = #{createDate
-                        }, </if>
-                                                                <if test="updateDate != null">`update_date` = #{updateDate
-                        }, </if>
-                                                                <if test="delFlag != null">`del_flag` = #{delFlag
-                        }, </if>
-                                                                <if test="remark != null">`remark` = #{remark
-                        }</if>
-                                    </set>
+            <if test="name != null">`name` = #{name
+                        },
+            </if>
+            <if test="coinTypeId != null">`coin_type_id` = #{coinTypeId
+                        },
+            </if>
+            <if test="evangelistNum != null">`evangelist_num` = #{evangelistNum
+                        },
+            </if>
+            <if test="percent != null">`percent` = #{percent
+                        },
+            </if>
+            <if test="ex1 != null">`ex1` = #{ex1
+                        },
+            </if>
+            <if test="ex2 != null">`ex2` = #{ex2
+                        },
+            </if>
+            <if test="ex3 != null">`ex3` = #{ex3
+                        },
+            </if>
+            <if test="createDate != null">`create_date` = #{createDate
+                        },
+            </if>
+            <if test="updateDate != null">`update_date` = #{updateDate
+                        },
+            </if>
+            <if test="delFlag != null">`del_flag` = #{delFlag
+                        },
+            </if>
+            <if test="remark != null">`remark` = #{remark
+                        }
+            </if>
+        </set>
         where tid = #{tid}
     </update>
 

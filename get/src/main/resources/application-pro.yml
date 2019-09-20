@@ -33,21 +33,21 @@ spring:
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
   redis:
-      host: 10.222.12.222
-      port: 6379
-      password:
-      # 连接超时时间（毫秒）
-      timeout: 10000
-      jedis:
-        pool:
-          # 连接池中的最大空闲连接
-          max-idle: 50
-          # 连接池中的最小空闲连接
-          min-idle: 40
-          # 连接池最大连接数（使用负值表示没有限制）
-          max-active: 40
-          # 连接池最大阻塞等待时间（使用负值表示没有限制）
-          max-wait: -1
+    host: 10.222.12.222
+    port: 6379
+    password:
+    # 连接超时时间（毫秒）
+    timeout: 10000
+    jedis:
+      pool:
+        # 连接池中的最大空闲连接
+        max-idle: 50
+        # 连接池中的最小空闲连接
+        min-idle: 40
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 40
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
     
   messages:
     encoding: UTF-8
@@ -96,11 +96,11 @@ configs:
       masterSecret: eVBAK1QUXN8TruLkadQLC9
       host: http://sdk.open.api.igexin.com/apiex.htm
 
-  bbctChargeAddress: asdfg
-  eosChargeAddress: 123sdf654
+  bbctChargeAddress: deposit
+  eosChargeAddress: deposit
   withdrawFee: 5
   # 上面多少代可以获得加速
-  generateReleaseCode: 859ND9
+  generateReleaseCode: IVDMX6
   generateNum: 3
   benchmarketingRate: 500
 

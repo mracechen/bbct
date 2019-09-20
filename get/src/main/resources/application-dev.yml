@@ -7,12 +7,12 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://10.236.10.1:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+#    username: bbctdb
+#    password: Bbctdb.190620
     url: jdbc:mysql://localhost:3306/bbct?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
     username: root
     password: aaa000000
-#    url: jdbc:mysql://localhost:3306/settlement?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-#    username: root
-#    password: root
     initialSize: 1
     minIdle: 3
     maxActive: 20
@@ -36,9 +36,12 @@ spring:
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
   redis:
+#    host: 10.236.10.1
+#    port: 6379
+#    password:
     host: 127.0.0.1
     port: 6379
-    password:
+    password: aaa000000
     # 连接超时时间（毫秒）
     timeout: 10000
     jedis:
@@ -51,6 +54,7 @@ spring:
         max-active: 100
         # 连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1
+    database: 4
   messages:
     encoding: UTF-8
     basename: i18n/messages
@@ -65,7 +69,7 @@ configs:
     appid: 93485094305
     secretKey: adfadfdaf34523432
   file:
-    #uploadPath: /data/ftps/styftp01/ayw/
+#    uploadPath: /data/ftps/styftp01/ayw/
     uploadPath: E:/upload_file/
     # 作废
     serverIp: afjsdofdsiaofjds
@@ -104,11 +108,11 @@ configs:
       masterSecret: eVBAK1QUXN8TruLkadQLC9
       host: http://sdk.open.api.igexin.com/apiex.htm
 
-  bbctChargeAddress: asdfg
-  eosChargeAddress: 123sdf654
+  bbctChargeAddress: deposit
+  eosChargeAddress: deposit
   withdrawFee: 5
   # 上面多少代可以获得加速
-  generateReleaseCode: 859ND9
+  generateReleaseCode: IVDMX6
   generateNum: 3
   benchmarketingRate: 500
 

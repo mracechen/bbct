@@ -44,4 +44,8 @@ public class SwBenchlogDO implements Serializable {
     private String ex3;
             //ex4
     private String ex4;
+
+    private String sourceCoinName;
+
+    private String targetCoinName;
     }

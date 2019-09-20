@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.StringUtils;
 import com.get.domain.SwAccountRecordDO;
 import com.get.service.SwAccountRecordService;
 import com.get.service.SwCoinTypeService;
@@ -46,6 +47,15 @@ public class SwAccountRecordController {
     @RequiresPermissions("get:swAccountRecord:swAccountRecord")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         params.put("delFlag", CommonStatic.NOTDELETE);
+        if(params.get("createStartDate") != null && StringUtils.isNotBlank(params.get("createStartDate").toString())){
+            String createStartDate = params.get("createStartDate").toString();
+
+            params.put("beginDate",createStartDate + " 00:00:00");
+        }
+        if(params.get("createEndDate") != null && StringUtils.isNotBlank(params.get("createEndDate").toString())){
+            String createEndDate = params.get("createEndDate").toString();
+            params.put("endDate",createEndDate + " 23:59:59");
+        }
         //查询列表数据
         Query query = new Query(params);
         List<SwAccountRecordDO> swAccountRecordList = swAccountRecordService.list(query);

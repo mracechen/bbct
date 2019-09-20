@@ -39,13 +39,14 @@ public class SwPrincipalUserDO implements Serializable {
     private String delFlag;
             //说明
     private String remark;
-            //ex1
-    private String ex1;
+            //计时时间
+    private Date ex1;
             //ex2
     private String ex2;
             //ex3
     private String ex3;
 
     private Integer cancelAuth;
-    
+
+    private String principalName;
     }

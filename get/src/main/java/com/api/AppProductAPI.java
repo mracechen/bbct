@@ -381,6 +381,33 @@ public class AppProductAPI {
     }
 
     /**
+     * 我的固币金状态
+     * */
+    @RequestMapping(value = "my_principal_status",method = RequestMethod.GET)
+    public Result myPrincipalStatus(HttpServletRequest request) {
+        SwUserBasicDO user = AppUserUtils.getUser(request);
+        try {
+            List<SwPrincipalUserDO> notRelease = swPrincipalUserService.getByUserId(user.getTid(),CommonStatic.NO_RELEASE,CommonStatic.NOTDELETE);
+            if(notRelease != null && notRelease.size() > 0){
+                //固币金释放中
+                return Result.ok(1);
+            }else{
+                List<SwPrincipalUserDO> released = swPrincipalUserService.getByUserId(user.getTid(),CommonStatic.RELEASED,CommonStatic.NOTDELETE);
+                if(released != null && released.size() > 0){
+                    //固币金已释放完
+                    return Result.ok(2);
+                }else{
+                    //未购买过固币金
+                    return Result.ok(0);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
      * 我的固币金
      * */
     @RequestMapping(value = "my_principal",method = RequestMethod.GET)
@@ -576,6 +603,7 @@ public class AppProductAPI {
             swPrincipalUserDO.setUserId(user.getTid());
             swPrincipalUserDO.setCreateDate(new Date());
             swPrincipalUserDO.setUpdateDate(new Date());
+            swPrincipalUserDO.setEx1(new Date());
             swPrincipalUserDO.setDelFlag(CommonStatic.NOTDELETE);
             return Result.ok(swPrincipalUserService.save(swPrincipalUserDO));
         }catch (Exception e){
@@ -881,6 +909,8 @@ public class AppProductAPI {
                     return Result.error("AppProductAPI.cancelProduct.not.allow");
                 }
                 swPrincipalUserDO.setUpdateDate(new Date());
+                swPrincipalUserDO.setLeftNum(0.0);
+                swPrincipalUserDO.setLeftTerm(0);
                 swPrincipalUserDO.setStatus(CommonStatic.RELEASED);
                 swPrincipalUserService.cancel(swPrincipalUserDO);
                 return Result.ok();

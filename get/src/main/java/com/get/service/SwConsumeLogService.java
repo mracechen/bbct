@@ -35,7 +35,7 @@ public interface SwConsumeLogService {
 
     int batchRemove(String[] tids);
 
-    String transfer(SwUserBasicDO user, String userId, double amount, String coinId, String remark, String tradingPassword);
+    String transfer(SwUserBasicDO user, Integer userId, double amount, String coinId, String remark, String tradingPassword);
 
     List<SwConsumeLogDO> getConsumeRecord(Map<String, Object> map);
 

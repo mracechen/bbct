@@ -45,4 +45,6 @@ public class SwWalletsDO implements Serializable {
     //ex4
     private String ex4;
 
+    private String coinName;
+
 }

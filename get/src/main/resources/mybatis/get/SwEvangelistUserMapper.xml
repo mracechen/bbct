@@ -3,6 +3,14 @@
 
 <mapper namespace="com.get.dao.SwEvangelistUserDao">
 
+    <sql id="baseColumn">
+        `tid`,`user_id`,`evangelist_id`,`total_num`,`left_num`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`
+    </sql>
+
+    <sql id="baseColumnAlias">
+        evangelistUser.`tid`,evangelistUser.`user_id`,evangelistUser.`evangelist_id`,evangelistUser.`total_num`,evangelistUser.`left_num`,evangelistUser.`status`,evangelistUser.`ex1`,evangelistUser.`ex2`,evangelistUser.`ex3`,evangelistUser.`create_date`,evangelistUser.`update_date`,evangelistUser.`del_flag`,evangelistUser.`remark`
+    </sql>
+
     <select id="get" resultType="com.get.domain.SwEvangelistUserDO">
         select `tid`,`user_id`,`evangelist_id`,`total_num`,`left_num`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`        from t_sw_evangelist_user where tid = #{value}
     </select>
@@ -19,49 +27,55 @@
             and del_flag = #{delFlag}
         </if>
     </select>
-
     <select id="list" resultType="com.get.domain.SwEvangelistUserDO">
         select
-        `tid`,`user_id`,`evangelist_id`,`total_num`,`left_num`,`status`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`,`remark`
-        from t_sw_evangelist_user
+        <include refid="baseColumnAlias"/>, evangelist.name as evangelistName
+        from t_sw_evangelist_user evangelistUser
+        left join t_sw_evangelist evangelist on evangelist.tid = evangelistUser.evangelist_id
         <where>
-            <if test="tid != null and tid != ''">and tid =
+            <if test="tid != null and tid != ''">and evangelistUser.tid =
                 #{tid}
             </if>
-            <if test="userId != null and userId != ''">and user_id =
+            <if test="userId != null and userId != ''">and evangelistUser.user_id =
                 #{userId}
             </if>
-            <if test="evangelistId != null and evangelistId != ''">and evangelist_id =
+            <if test="evangelistId != null and evangelistId != ''">and evangelistUser.evangelist_id =
                 #{evangelistId}
             </if>
-            <if test="totalNum != null and totalNum != ''">and total_num =
+            <if test="totalNum != null and totalNum != ''">and evangelistUser.total_num =
                 #{totalNum}
             </if>
-            <if test="leftNum != null and leftNum != ''">and left_num =
+            <if test="leftNum != null and leftNum != ''">and evangelistUser.left_num =
                 #{leftNum}
             </if>
-            <if test="status != null and status != ''">and status =
+            <if test="status != null and status != ''">and evangelistUser.status =
                 #{status}
             </if>
-            <if test="ex1 != null and ex1 != ''">and ex1 =
+            <if test="ex1 != null and ex1 != ''">and evangelistUser.ex1 =
                 #{ex1}
             </if>
-            <if test="ex2 != null and ex2 != ''">and ex2 =
+            <if test="ex2 != null and ex2 != ''">and evangelistUser.ex2 =
                 #{ex2}
             </if>
-            <if test="ex3 != null and ex3 != ''">and ex3 =
+            <if test="ex3 != null and ex3 != ''">and evangelistUser.ex3 =
                 #{ex3}
             </if>
-            <if test="createDate != null and createDate != ''">and create_date =
+            <if test="createDate != null and createDate != ''">and evangelistUser.create_date =
                 #{createDate}
             </if>
-            <if test="updateDate != null and updateDate != ''">and update_date =
+            <if test="updateDate != null and updateDate != ''">and evangelistUser.update_date =
                 #{updateDate}
             </if>
-            <if test="delFlag != null and delFlag != ''">and del_flag =
+            <if test="beginDate != null and beginDate != ''">and evangelistUser.create_date &gt;=
+                #{beginDate}
+            </if>
+            <if test="endDate != null and endDate != ''">and evangelistUser.create_date &lt;=
+                #{endDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and evangelistUser.del_flag =
                 #{delFlag}
             </if>
-            <if test="remark != null and remark != ''">and remark =
+            <if test="remark != null and remark != ''">and evangelistUser.remark =
                 #{remark}
             </if>
         </where>
@@ -70,7 +84,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by evangelistUser.create_date desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

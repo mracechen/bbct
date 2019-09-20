@@ -82,6 +82,9 @@ public class AppPrivateAPI {
     private SwReleaseRecordService swReleaseRecordService;
 
     @Autowired
+    private SwTransferRecordService swTransferRecordService;
+
+    @Autowired
     private Languagei18nUtils languagei18nUtils;
 
     @Value("${configs.bbctChargeAddress}")
@@ -96,6 +99,9 @@ public class AppPrivateAPI {
     @Value("${configs.withdrawFee}")
     private Double withdrawFee;
 
+    @Value("${configs.benchmarketingRate}")
+    private Double benchmarketingRate;
+
     /**
      * 计价方式
      * */
@@ -103,6 +109,15 @@ public class AppPrivateAPI {
     @ResponseBody
     public Result getOtcFiatCoinTypeAndPrice(){
         return Result.ok(swFiatCoinService.getCountryOfShow((byte)1));
+    }
+
+    /**
+     * 对标倍率
+     * */
+    @RequestMapping("benchmarking_rate")
+    @ResponseBody
+    public Result benchmarkingRate(){
+        return Result.ok(benchmarketingRate);
     }
 
     /**
@@ -377,7 +392,7 @@ public class AppPrivateAPI {
      * */
     @RequestMapping(value = "transfer",method = RequestMethod.POST)
     @ResponseBody
-    public Result TransferAccount(HttpServletRequest request, @RequestParam String userId, @RequestParam double amount,
+    public Result TransferAccount(HttpServletRequest request, @RequestParam Integer userId, @RequestParam double amount,
                                                   @RequestParam String coinId, @RequestParam String remark, @RequestParam String tradingPassword) {
         SwUserBasicDO user = AppUserUtils.getUser(request);
         String msg = swConsumeLogService.transfer(user, userId, amount, coinId, remark, tradingPassword);
@@ -394,36 +409,14 @@ public class AppPrivateAPI {
     @ResponseBody
     public Result TransferLog(HttpServletRequest request, Integer page, Integer pageSize, @RequestParam(required = false) String beginDate, @RequestParam(required = false) String endDate) {
         SwUserBasicDO user = AppUserUtils.getUser(request);
-        String language = request.getHeader("language");
-        Map<String,Object> params = new HashMap<>();
-        params.put("userId",user.getTid());
-        params.put("type",RecordEnum.transfer.getType());
-        params.put("delFlag",CommonStatic.NOTDELETE);
         if(StringUtils.isNotBlank(beginDate)){
-            params.put("beginDate",beginDate + " 00:00:00");
+            beginDate = beginDate + " 00:00:00";
         }
-        if(StringUtils.isNotBlank(endDate)){
-            params.put("endDate",endDate + " 23:59:59");
+        if(StringUtils.isNotBlank(beginDate)){
+            endDate = endDate + " 23:59:59";
         }
-        List<SwAccountRecordDO> list = swAccountRecordService.list(params);
-        for (SwAccountRecordDO swAccountRecordDO : list) {
-            String remark = swAccountRecordDO.getRemark();
-            String rm = null;
-            if(StringUtils.isNotBlank(remark)){
-                try {
-                    JSONObject jsonObject = JSON.parseObject(remark);
-                    Object o = jsonObject.get(language);
-                    if(o != null){
-                        swAccountRecordDO.setRemark(o.toString());
-                    }else{
-                        swAccountRecordDO.setRemark("");
-                    }
-                }catch (Exception e){
-                    swAccountRecordDO.setRemark("");
-                }
-            }
-        }
-        List<SwAccountRecordDO> res = list.stream().skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
+        List<SwTransferRecordDO> list = swTransferRecordService.transferRecord(user.getTid(),beginDate,endDate);
+        List<SwTransferRecordDO> res = list.stream().skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
         return Result.ok(res);
     }
 
@@ -574,11 +567,14 @@ public class AppPrivateAPI {
      * */
     @RequestMapping(value = "withdraw",method = RequestMethod.POST)
     @ResponseBody
-    public Result withdraw(HttpServletRequest request, String address, Double amount, String coinId, String transferPassword, String checkCode) {
+    public Result withdraw(HttpServletRequest request, String address, Double amount, String coinId, String transferPassword, String checkCode, String memo) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             if(StringUtils.isBlank(coinId) || amount == null || amount <=0 || StringUtils.isBlank(coinId)){
                 return Result.error("system.params.error");
+            }
+            if(address.equals(bbctChargeAddress) || address.equals(eosChargeAddress)){
+                return Result.error("AppPrivateAPI.withdraw.address.equals.charge.address");
             }
             SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), coinId);
             if(wallet == null){
@@ -600,7 +596,7 @@ public class AppPrivateAPI {
             if (!mailRt) {
                 return Result.error("AppPublicAPI.checkRegister.check.code.error");
             }
-            swWithlogService.withdraw(user.getTid(),address,amount,swCoinTypeDO.getCoinName());
+            swWithlogService.withdraw(user.getTid(),address,amount,swCoinTypeDO.getCoinName(),memo);
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();

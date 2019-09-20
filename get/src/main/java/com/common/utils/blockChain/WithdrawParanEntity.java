@@ -6,5 +6,5 @@ import lombok.Data;
 public class WithdrawParanEntity {
     public String address;
     public String targetCoin;
-    public String userId;
+    public String memo;
 }

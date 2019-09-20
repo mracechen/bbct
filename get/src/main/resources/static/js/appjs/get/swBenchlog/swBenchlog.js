@@ -18,18 +18,18 @@ function load() {
                 striped: true, // 设置为true会有隔行变色效果
                 dataType: "json", // 服务器返回的数据类型
                 pagination: true, // 设置为true会在底部显示分页条
-                paginationDetailHAlign:'left',
+                paginationDetailHAlign: 'left',
                 // queryParamsType : "limit",
                 // //设置为limit则会发送符合RESTFull格式的参数
                 singleSelect: false, // 设置为true将禁止多选
                 // contentType : "application/x-www-form-urlencoded",
                 // //发送到服务器的数据编码类型
-                pageSize: 20,pageList: [ 20, 40, 60, 80, 100], // 如果设置了分页，每页数据条数
+                pageSize: 20, pageList: [20, 40, 60, 80, 100], // 如果设置了分页，每页数据条数
                 pageNumber: 1, // 如果设置了分布，首页页码
                 search: false, // 是否显示搜索框
                 showColumns: true, // 是否显示内容下拉框（选择显示的列）
                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
-                showJumpto:"true", //设置是否显示跳转页面功能
+                showJumpto: "true", //设置是否显示跳转页面功能
                 queryParams: function (params) {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
@@ -59,61 +59,37 @@ function load() {
                     {
                         checkbox: true
                     },
-                                            {
-                            field: 'tid',
-                            title: '主键',
-                                                    },
-                                            {
-                            field: 'userId',
-                            title: '用户ID',
-                                                    },
-                                            {
-                            field: 'sourceCoinId',
-                            title: '源币种',
-                                                    },
-                                            {
-                            field: 'targetCoinId',
-                            title: '目标币种',
-                                                    },
-                                            {
-                            field: 'sourceNum',
-                            title: '源币种数量',
-                                                    },
-                                            {
-                            field: 'targetNum',
-                            title: '目标币种数量',
-                                                    },
-                                            {
-                            field: 'createDate',
-                            title: '创建时间',
-                                                            sortable: true,
-                                order: 'asc',
-                                                    },
-                                            {
-                            field: 'updateDate',
-                            title: '更新时间',
-                                                    },
-                                            {
-                            field: 'delFlag',
-                            title: '删除标记',
-                                                    },
-                                            {
-                            field: 'ex1',
-                            title: 'ex1',
-                                                    },
-                                            {
-                            field: 'ex2',
-                            title: 'ex2',
-                                                    },
-                                            {
-                            field: 'ex3',
-                            title: 'ex3',
-                                                    },
-                                            {
-                            field: 'ex4',
-                            title: 'ex4',
-                                                    },
-                                        {
+                    {
+                        field: 'userId',
+                        title: '用户ID',
+                    },
+                    {
+                        field: 'sourceCoinName',
+                        title: '源币种',
+                    },
+                    {
+                        field: 'targetCoinName',
+                        title: '目标币种',
+                    },
+                    {
+                        field: 'sourceNum',
+                        title: '源币种数量',
+                    },
+                    {
+                        field: 'targetNum',
+                        title: '目标币种数量',
+                    },
+                    {
+                        field: 'createDate',
+                        title: '创建时间',
+                        sortable: true,
+                        order: 'asc',
+                    },
+                    {
+                        field: 'updateDate',
+                        title: '更新时间',
+                    },
+                    {
                         title: '操作',
                         field: 'id',
                         align: 'center',

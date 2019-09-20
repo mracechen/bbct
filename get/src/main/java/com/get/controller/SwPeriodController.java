@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.IDUtils;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.PageUtils;
 import com.get.statuc.Query;
@@ -70,6 +71,7 @@ public class SwPeriodController {
     @PostMapping("/save")
     @RequiresPermissions("get:swPeriod:add")
     public R save(SwPeriodDO swPeriod) {
+        swPeriod.setTid(IDUtils.randomStr());
         swPeriod.setCreateDate(new Date());
         swPeriod.setUpdateDate(new Date());
         swPeriod.setDelFlag(CommonStatic.NOTDELETE);

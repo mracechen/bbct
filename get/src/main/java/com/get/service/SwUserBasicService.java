@@ -37,6 +37,8 @@ public interface SwUserBasicService {
 
     int update(SwUserBasicDO swUserBasic);
 
+    int adminUpdate(SwUserBasicDO swUserBasic);
+
     int remove(Integer tid);
 
     int batchRemove(Integer[] tids);

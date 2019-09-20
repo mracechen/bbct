@@ -3,8 +3,19 @@
 
 <mapper namespace="com.get.dao.SwChargelogDao">
 
+    <sql id="baseColumn">
+        `tid`,`user_id`,`coin_id`,`amount`,`address`,`txid`,`status`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`
+    </sql>
+
+    <sql id="baseColumnAlias">
+        chargelog.`tid`,chargelog.`user_id`,chargelog.`coin_id`,chargelog.`amount`,chargelog.`address`,chargelog.`txid`,chargelog.`status`,chargelog.`create_date`,chargelog.`update_date`,chargelog.`del_flag`,chargelog.`ex2`,chargelog.`ex4`,chargelog.`ex5`
+    </sql>
+
     <select id="get" resultType="com.get.domain.SwChargelogDO">
-        select `tid`,`user_id`,`coin_id`,`amount`,`address`,`txid`,`status`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`        from t_sw_chargelog where tid = #{value}
+        select <include refid="baseColumnAlias"/>, coinType.coin_name as coinName
+        from t_sw_chargelog chargelog
+        left join t_sw_coin_type coinType on coinType.tid = chargelog.coin_id
+        where chargelog.tid = #{value}
     </select>
 
     <select id="getByTxid" resultType="com.get.domain.SwChargelogDO">
@@ -14,47 +25,53 @@
     </select>
 
     <select id="list" resultType="com.get.domain.SwChargelogDO">
-        select
-        `tid`,`user_id`,`coin_id`,`amount`,`address`,`txid`,`status`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`
-        from t_sw_chargelog
+        select <include refid="baseColumnAlias"/>, coinType.coin_name as coinName
+        from t_sw_chargelog chargelog
+        left join t_sw_coin_type coinType on coinType.tid = chargelog.coin_id
         <where>
-            <if test="tid != null and tid != ''">and tid =
+            <if test="tid != null and tid != ''">and chargelog.tid =
                 #{tid}
             </if>
-            <if test="userId != null and userId != ''">and user_id =
+            <if test="userId != null and userId != ''">and chargelog.user_id =
                 #{userId}
             </if>
-            <if test="coinId != null and coinId != ''">and coin_id =
+            <if test="coinId != null and coinId != ''">and chargelog.chargelog.coin_id =
                 #{coinId}
             </if>
-            <if test="amount != null and amount != ''">and amount =
+            <if test="amount != null and amount != ''">and chargelog.amount =
                 #{amount}
             </if>
-            <if test="address != null and address != ''">and address =
+            <if test="address != null and address != ''">and chargelog.address =
                 #{address}
             </if>
-            <if test="txid != null and txid != ''">and txid =
+            <if test="txid != null and txid != ''">and chargelog.txid =
                 #{txid}
             </if>
-            <if test="status != null and status != ''">and status =
+            <if test="status != null and status != ''">and chargelog.status =
                 #{status}
             </if>
-            <if test="createDate != null and createDate != ''">and create_date =
+            <if test="createDate != null and createDate != ''">and chargelog.create_date =
                 #{createDate}
             </if>
-            <if test="updateDate != null and updateDate != ''">and update_date =
+            <if test="updateDate != null and updateDate != ''">and chargelog.update_date =
                 #{updateDate}
             </if>
-            <if test="delFlag != null and delFlag != ''">and del_flag =
+            <if test="beginDate != null and beginDate != ''">and chargelog.create_date &gt;=
+                #{beginDate}
+            </if>
+            <if test="endDate != null and endDate != ''">and chargelog.create_date &lt;=
+                #{endDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and chargelog.del_flag =
                 #{delFlag}
             </if>
-            <if test="ex2 != null and ex2 != ''">and ex2 =
+            <if test="ex2 != null and ex2 != ''">and chargelog.ex2 =
                 #{ex2}
             </if>
-            <if test="ex4 != null and ex4 != ''">and ex4 =
+            <if test="ex4 != null and ex4 != ''">and chargelog.ex4 =
                 #{ex4}
             </if>
-            <if test="ex5 != null and ex5 != ''">and ex5 =
+            <if test="ex5 != null and ex5 != ''">and chargelog.ex5 =
                 #{ex5}
             </if>
         </where>
@@ -63,7 +80,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by chargelog.create_date desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

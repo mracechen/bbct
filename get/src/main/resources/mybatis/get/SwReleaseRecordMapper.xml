@@ -33,6 +33,7 @@
             and cause_user_id != ex2
         </if>
         and del_flag = 0
+        order by create_date desc;
     </select>
 
     <select id="list" resultType="com.get.domain.SwReleaseRecordDO">
@@ -82,7 +83,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by create_date desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

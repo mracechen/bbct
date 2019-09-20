@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwTransferRecordDO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 转账记录表
@@ -17,6 +18,8 @@ public interface SwTransferRecordDao {
     SwTransferRecordDO get(String tid);
 
     List<SwTransferRecordDO> list(Map<String, Object> map);
+
+    List<SwTransferRecordDO> transferRecord(@Param("userId") Integer userId,@Param("beginDate") String beginDate,@Param("endDate") String endDate);
 
     int count(Map<String, Object> map);
 

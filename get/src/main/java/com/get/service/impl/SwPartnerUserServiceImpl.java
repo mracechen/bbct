@@ -1,14 +1,24 @@
 package com.get.service.impl;
 
+import com.get.domain.SwAccountRecordDO;
+import com.get.domain.SwPartnerDO;
+import com.get.domain.SwWalletsDO;
+import com.get.service.SwAccountRecordService;
+import com.get.service.SwPartnerService;
+import com.get.service.SwWalletsService;
 import com.get.statuc.CommonStatic;
+import com.get.statuc.RecordEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.dao.SwPartnerUserDao;
 import com.get.domain.SwPartnerUserDO;
 import com.get.service.SwPartnerUserService;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -36,7 +46,8 @@ public class SwPartnerUserServiceImpl implements SwPartnerUserService {
     }
 
     @Override
-    public int save(SwPartnerUserDO swPartnerUser) {
+    @Transactional(rollbackFor = Exception.class)
+    public int save(SwPartnerUserDO swPartnerUser){
         return swPartnerUserDao.save(swPartnerUser);
     }
 

@@ -3,6 +3,14 @@
 
 <mapper namespace="com.get.dao.SwWalletsDao">
 
+    <sql id="baseColumn">
+        `tid`,`user_id`,`coin_type_id`,`currency`,`is_active`,`frozen_amount`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`
+    </sql>
+
+    <sql id="baseColumnAlias">
+        wallet.`tid`,wallet.`user_id`,wallet.`coin_type_id`,wallet.`currency`,wallet.`is_active`,wallet.`frozen_amount`,wallet.`create_date`,wallet.`update_date`,wallet.`del_flag`,wallet.`ex1`,wallet.`ex2`,wallet.`ex3`,wallet.`ex4`
+    </sql>
+
     <select id="get" resultType="com.get.domain.SwWalletsDO">
         select `tid`,`user_id`,`coin_type_id`,`currency`,`is_active`,`frozen_amount`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`        from t_sw_wallets where tid = #{value}
     </select>
@@ -14,46 +22,47 @@
 
     <select id="list" resultType="com.get.domain.SwWalletsDO">
         select
-        `tid`,`user_id`,`coin_type_id`,`currency`,`is_active`,`frozen_amount`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`
-        from t_sw_wallets
+        <include refid="baseColumnAlias"/>, coin.coin_name as coinName
+        from t_sw_wallets wallet
+        left join t_sw_coin_type coin on coin.tid = wallet.coin_type_id
         <where>
-            <if test="tid != null and tid != ''">and tid =
+            <if test="tid != null and tid != ''">and wallet.tid =
                 #{tid}
             </if>
-            <if test="userId != null and userId != ''">and user_id =
+            <if test="userId != null and userId != ''">and wallet.user_id =
                 #{userId}
             </if>
-            <if test="coinTypeId != null and coinTypeId != ''">and coin_type_id =
+            <if test="coinTypeId != null and coinTypeId != ''">and wallet.coin_type_id =
                 #{coinTypeId}
             </if>
-            <if test="currency != null and currency != ''">and currency =
+            <if test="currency != null and currency != ''">and wallet.currency =
                 #{currency}
             </if>
-            <if test="isActive != null and isActive != ''">and is_active =
+            <if test="isActive != null and isActive != ''">and wallet.is_active =
                 #{isActive}
             </if>
-            <if test="frozenAmount != null and frozenAmount != ''">and frozen_amount =
+            <if test="frozenAmount != null and frozenAmount != ''">and wallet.frozen_amount =
                 #{frozenAmount}
             </if>
-            <if test="createDate != null and createDate != ''">and create_date =
+            <if test="createDate != null and createDate != ''">and wallet.create_date =
                 #{createDate}
             </if>
-            <if test="updateDate != null and updateDate != ''">and update_date =
+            <if test="updateDate != null and updateDate != ''">and wallet.update_date =
                 #{updateDate}
             </if>
-            <if test="delFlag != null and delFlag != ''">and del_flag =
+            <if test="delFlag != null and delFlag != ''">and wallet.del_flag =
                 #{delFlag}
             </if>
-            <if test="ex1 != null and ex1 != ''">and ex1 =
+            <if test="ex1 != null and ex1 != ''">and wallet.ex1 =
                 #{ex1}
             </if>
-            <if test="ex2 != null and ex2 != ''">and ex2 =
+            <if test="ex2 != null and ex2 != ''">and wallet.ex2 =
                 #{ex2}
             </if>
-            <if test="ex3 != null and ex3 != ''">and ex3 =
+            <if test="ex3 != null and ex3 != ''">and wallet.ex3 =
                 #{ex3}
             </if>
-            <if test="ex4 != null and ex4 != ''">and ex4 =
+            <if test="ex4 != null and ex4 != ''">and wallet.ex4 =
                 #{ex4}
             </if>
         </where>
@@ -62,7 +71,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by wallet.create_date desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -164,7 +173,7 @@
             <if test="isActive != null">`is_active` = #{isActive
                         },
             </if>
-            <if test="frozenAmount != null">`frozen_amount` = #{frozenAmount
+            <if test="frozenAmount != null">`frozen_amount` = `frozen_amount` + #{frozenAmount
                         },
             </if>
             <if test="createDate != null">`create_date` = #{createDate

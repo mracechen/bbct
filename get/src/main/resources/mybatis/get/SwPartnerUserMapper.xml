@@ -3,6 +3,14 @@
 
 <mapper namespace="com.get.dao.SwPartnerUserDao">
 
+    <sql id="baseColumn">
+        `tid`,`user_id`,`partner_id`,`total_num`,`left_num`,`status`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`
+    </sql>
+
+    <sql id="baseColumnAlias">
+        partnerUser.`tid`,partnerUser.`user_id`,partnerUser.`partner_id`,partnerUser.`total_num`,partnerUser.`left_num`,partnerUser.`status`,partnerUser.`remark`,partnerUser.`ex1`,partnerUser.`ex2`,partnerUser.`ex3`,partnerUser.`create_date`,partnerUser.`update_date`,partnerUser.`del_flag`
+    </sql>
+
     <select id="get" resultType="com.get.domain.SwPartnerUserDO">
         select `tid`,`user_id`,`partner_id`,`total_num`,`left_num`,`status`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`        from t_sw_partner_user where tid = #{value}
     </select>
@@ -15,54 +23,63 @@
     </select>
 
     <select id="list" resultType="com.get.domain.SwPartnerUserDO">
-        select `tid`,`user_id`,`partner_id`,`total_num`,`left_num`,`status`,`remark`,`ex1`,`ex2`,`ex3`,`create_date`,`update_date`,`del_flag`        from t_sw_partner_user
+        select
+        <include refid="baseColumnAlias"/>, partner.name as partnerName
+        from t_sw_partner_user partnerUser
+        left join t_sw_partner partner on partner.tid = partnerUser.partner_id
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="userId != null and userId != ''">and user_id =
-                    #{userId}
-                </if>
-                            <if test="partnerId != null and partnerId != ''">and partner_id =
-                    #{partnerId}
-                </if>
-                            <if test="totalNum != null and totalNum != ''">and total_num =
-                    #{totalNum}
-                </if>
-                            <if test="leftNum != null and leftNum != ''">and left_num =
-                    #{leftNum}
-                </if>
-                            <if test="status != null and status != ''">and status =
-                    #{status}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and partnerUser.tid =
+                #{tid}
+            </if>
+            <if test="userId != null and userId != ''">and partnerUser.user_id =
+                #{userId}
+            </if>
+            <if test="partnerId != null and partnerId != ''">and partnerUser.partner_id =
+                #{partnerId}
+            </if>
+            <if test="totalNum != null and totalNum != ''">and partnerUser.total_num =
+                #{totalNum}
+            </if>
+            <if test="leftNum != null and leftNum != ''">and partnerUser.left_num =
+                #{leftNum}
+            </if>
+            <if test="status != null and status != ''">and partnerUser.status =
+                #{status}
+            </if>
+            <if test="remark != null and remark != ''">and partnerUser.remark =
+                #{remark}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and partnerUser.ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and partnerUser.ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and partnerUser.ex3 =
+                #{ex3}
+            </if>
+            <if test="createDate != null and createDate != ''">and partnerUser.create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and partnerUser.update_date =
+                #{updateDate}
+            </if>
+            <if test="beginDate != null and beginDate != ''">and partnerUser.create_date &gt;=
+                #{beginDate}
+            </if>
+            <if test="endDate != null and endDate != ''">and partnerUser.create_date &lt;=
+                #{endDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and partnerUser.del_flag =
+                #{delFlag}
+            </if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by partnerUser.create_date desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -73,46 +90,46 @@
     <select id="count" resultType="int">
         select count(*) from t_sw_partner_user
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="userId != null and userId != ''">and user_id =
-                    #{userId}
-                </if>
-                            <if test="partnerId != null and partnerId != ''">and partner_id =
-                    #{partnerId}
-                </if>
-                            <if test="totalNum != null and totalNum != ''">and total_num =
-                    #{totalNum}
-                </if>
-                            <if test="leftNum != null and leftNum != ''">and left_num =
-                    #{leftNum}
-                </if>
-                            <if test="status != null and status != ''">and status =
-                    #{status}
-                </if>
-                            <if test="remark != null and remark != ''">and remark =
-                    #{remark}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="userId != null and userId != ''">and user_id =
+                #{userId}
+            </if>
+            <if test="partnerId != null and partnerId != ''">and partner_id =
+                #{partnerId}
+            </if>
+            <if test="totalNum != null and totalNum != ''">and total_num =
+                #{totalNum}
+            </if>
+            <if test="leftNum != null and leftNum != ''">and left_num =
+                #{leftNum}
+            </if>
+            <if test="status != null and status != ''">and status =
+                #{status}
+            </if>
+            <if test="remark != null and remark != ''">and remark =
+                #{remark}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+        </where>
     </select>
 
     <insert id="save" parameterType="com.get.domain.SwPartnerUserDO">
@@ -153,31 +170,43 @@
     <update id="update" parameterType="com.get.domain.SwPartnerUserDO">
         update t_sw_partner_user
         <set>
-                                                                            <if test="userId != null">`user_id` = #{userId
-                        }, </if>
-                                                                <if test="partnerId != null">`partner_id` = #{partnerId
-                        }, </if>
-                                                                <if test="totalNum != null">`total_num` = #{totalNum
-                        }, </if>
-                                                                <if test="leftNum != null">`left_num` = #{leftNum
-                        }, </if>
-                                                                <if test="status != null">`status` = #{status
-                        }, </if>
-                                                                <if test="remark != null">`remark` = #{remark
-                        }, </if>
-                                                                <if test="ex1 != null">`ex1` = #{ex1
-                        }, </if>
-                                                                <if test="ex2 != null">`ex2` = #{ex2
-                        }, </if>
-                                                                <if test="ex3 != null">`ex3` = #{ex3
-                        }, </if>
-                                                                <if test="createDate != null">`create_date` = #{createDate
-                        }, </if>
-                                                                <if test="updateDate != null">`update_date` = #{updateDate
-                        }, </if>
-                                                                <if test="delFlag != null">`del_flag` = #{delFlag
-                        }</if>
-                                    </set>
+            <if test="userId != null">`user_id` = #{userId
+                        },
+            </if>
+            <if test="partnerId != null">`partner_id` = #{partnerId
+                        },
+            </if>
+            <if test="totalNum != null">`total_num` = #{totalNum
+                        },
+            </if>
+            <if test="leftNum != null">`left_num` = #{leftNum
+                        },
+            </if>
+            <if test="status != null">`status` = #{status
+                        },
+            </if>
+            <if test="remark != null">`remark` = #{remark
+                        },
+            </if>
+            <if test="ex1 != null">`ex1` = #{ex1
+                        },
+            </if>
+            <if test="ex2 != null">`ex2` = #{ex2
+                        },
+            </if>
+            <if test="ex3 != null">`ex3` = #{ex3
+                        },
+            </if>
+            <if test="createDate != null">`create_date` = #{createDate
+                        },
+            </if>
+            <if test="updateDate != null">`update_date` = #{updateDate
+                        },
+            </if>
+            <if test="delFlag != null">`del_flag` = #{delFlag
+                        }
+            </if>
+        </set>
         where tid = #{tid}
     </update>
 

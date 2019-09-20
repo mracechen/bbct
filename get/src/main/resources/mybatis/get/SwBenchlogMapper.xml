@@ -3,59 +3,77 @@
 
 <mapper namespace="com.get.dao.SwBenchlogDao">
 
+    <sql id="baseColumn">
+        `tid`,`user_id`,`source_coin_id`,`target_coin_id`,`source_num`,`target_num`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`
+    </sql>
+
+    <sql id="baseColumnAlias">
+        benchlog.`tid`,benchlog.`user_id`,benchlog.`source_coin_id`,benchlog.`target_coin_id`,benchlog.`source_num`,benchlog.`target_num`,benchlog.`create_date`,benchlog.`update_date`,benchlog.`del_flag`,benchlog.`ex1`,benchlog.`ex2`,benchlog.`ex3`,benchlog.`ex4`
+    </sql>
+
     <select id="get" resultType="com.get.domain.SwBenchlogDO">
         select `tid`,`user_id`,`source_coin_id`,`target_coin_id`,`source_num`,`target_num`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`        from t_sw_benchlog where tid = #{value}
     </select>
 
     <select id="list" resultType="com.get.domain.SwBenchlogDO">
-        select `tid`,`user_id`,`source_coin_id`,`target_coin_id`,`source_num`,`target_num`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`        from t_sw_benchlog
+        select
+        <include refid="baseColumnAlias"/>, sourceCoin.coin_name as sourceCoinName, targetCoin.coin_name as targetCoinName
+        from t_sw_benchlog benchlog
+        left join t_sw_coin_type sourceCoin on sourceCoin.tid = benchlog.source_coin_id
+        left join t_sw_coin_type targetCoin on targetCoin.tid = benchlog.target_coin_id
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="userId != null and userId != ''">and user_id =
-                    #{userId}
-                </if>
-                            <if test="sourceCoinId != null and sourceCoinId != ''">and source_coin_id =
-                    #{sourceCoinId}
-                </if>
-                            <if test="targetCoinId != null and targetCoinId != ''">and target_coin_id =
-                    #{targetCoinId}
-                </if>
-                            <if test="sourceNum != null and sourceNum != ''">and source_num =
-                    #{sourceNum}
-                </if>
-                            <if test="targetNum != null and targetNum != ''">and target_num =
-                    #{targetNum}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                            <if test="ex4 != null and ex4 != ''">and ex4 =
-                    #{ex4}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and benchlog.tid =
+                #{tid}
+            </if>
+            <if test="userId != null and userId != ''">and benchlog.user_id =
+                #{userId}
+            </if>
+            <if test="sourceCoinId != null and sourceCoinId != ''">and benchlog.source_coin_id =
+                #{sourceCoinId}
+            </if>
+            <if test="targetCoinId != null and targetCoinId != ''">and benchlog.target_coin_id =
+                #{targetCoinId}
+            </if>
+            <if test="sourceNum != null and sourceNum != ''">and benchlog.source_num =
+                #{sourceNum}
+            </if>
+            <if test="targetNum != null and targetNum != ''">and benchlog.target_num =
+                #{targetNum}
+            </if>
+            <if test="createDate != null and createDate != ''">and benchlog.create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and benchlog.update_date =
+                #{updateDate}
+            </if>
+            <if test="beginDate != null and beginDate != ''">and benchlog.create_date &gt;=
+                #{beginDate}
+            </if>
+            <if test="endDate != null and endDate != ''">and benchlog.create_date &lt;=
+                #{endDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and benchlog.del_flag =
+                #{delFlag}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and benchlog.ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and benchlog.ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and benchlog.ex3 =
+                #{ex3}
+            </if>
+            <if test="ex4 != null and ex4 != ''">and benchlog.ex4 =
+                #{ex4}
+            </if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by benchlog.create_date desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -66,46 +84,46 @@
     <select id="count" resultType="int">
         select count(*) from t_sw_benchlog
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="userId != null and userId != ''">and user_id =
-                    #{userId}
-                </if>
-                            <if test="sourceCoinId != null and sourceCoinId != ''">and source_coin_id =
-                    #{sourceCoinId}
-                </if>
-                            <if test="targetCoinId != null and targetCoinId != ''">and target_coin_id =
-                    #{targetCoinId}
-                </if>
-                            <if test="sourceNum != null and sourceNum != ''">and source_num =
-                    #{sourceNum}
-                </if>
-                            <if test="targetNum != null and targetNum != ''">and target_num =
-                    #{targetNum}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                            <if test="ex4 != null and ex4 != ''">and ex4 =
-                    #{ex4}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="userId != null and userId != ''">and user_id =
+                #{userId}
+            </if>
+            <if test="sourceCoinId != null and sourceCoinId != ''">and source_coin_id =
+                #{sourceCoinId}
+            </if>
+            <if test="targetCoinId != null and targetCoinId != ''">and target_coin_id =
+                #{targetCoinId}
+            </if>
+            <if test="sourceNum != null and sourceNum != ''">and source_num =
+                #{sourceNum}
+            </if>
+            <if test="targetNum != null and targetNum != ''">and target_num =
+                #{targetNum}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+            <if test="ex4 != null and ex4 != ''">and ex4 =
+                #{ex4}
+            </if>
+        </where>
     </select>
 
     <insert id="save" parameterType="com.get.domain.SwBenchlogDO">
@@ -146,31 +164,43 @@
     <update id="update" parameterType="com.get.domain.SwBenchlogDO">
         update t_sw_benchlog
         <set>
-                                                                            <if test="userId != null">`user_id` = #{userId
-                        }, </if>
-                                                                <if test="sourceCoinId != null">`source_coin_id` = #{sourceCoinId
-                        }, </if>
-                                                                <if test="targetCoinId != null">`target_coin_id` = #{targetCoinId
-                        }, </if>
-                                                                <if test="sourceNum != null">`source_num` = #{sourceNum
-                        }, </if>
-                                                                <if test="targetNum != null">`target_num` = #{targetNum
-                        }, </if>
-                                                                <if test="createDate != null">`create_date` = #{createDate
-                        }, </if>
-                                                                <if test="updateDate != null">`update_date` = #{updateDate
-                        }, </if>
-                                                                <if test="delFlag != null">`del_flag` = #{delFlag
-                        }, </if>
-                                                                <if test="ex1 != null">`ex1` = #{ex1
-                        }, </if>
-                                                                <if test="ex2 != null">`ex2` = #{ex2
-                        }, </if>
-                                                                <if test="ex3 != null">`ex3` = #{ex3
-                        }, </if>
-                                                                <if test="ex4 != null">`ex4` = #{ex4
-                        }</if>
-                                    </set>
+            <if test="userId != null">`user_id` = #{userId
+                        },
+            </if>
+            <if test="sourceCoinId != null">`source_coin_id` = #{sourceCoinId
+                        },
+            </if>
+            <if test="targetCoinId != null">`target_coin_id` = #{targetCoinId
+                        },
+            </if>
+            <if test="sourceNum != null">`source_num` = #{sourceNum
+                        },
+            </if>
+            <if test="targetNum != null">`target_num` = #{targetNum
+                        },
+            </if>
+            <if test="createDate != null">`create_date` = #{createDate
+                        },
+            </if>
+            <if test="updateDate != null">`update_date` = #{updateDate
+                        },
+            </if>
+            <if test="delFlag != null">`del_flag` = #{delFlag
+                        },
+            </if>
+            <if test="ex1 != null">`ex1` = #{ex1
+                        },
+            </if>
+            <if test="ex2 != null">`ex2` = #{ex2
+                        },
+            </if>
+            <if test="ex3 != null">`ex3` = #{ex3
+                        },
+            </if>
+            <if test="ex4 != null">`ex4` = #{ex4
+                        }
+            </if>
+        </set>
         where tid = #{tid}
     </update>
 

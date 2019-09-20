@@ -32,6 +32,7 @@ function batchPass() {
                 } else {
                     layer.msg(r.msg);
                 }
+                reLoad();
             }
         });
     }, function () {
@@ -63,10 +64,10 @@ function batchReject() {
             success: function (r) {
                 if (r.code == 200) {
                     layer.msg(r.msg);
-                    reLoad();
                 } else {
                     layer.msg(r.msg);
                 }
+                reLoad();
             }
         });
     }, function () {
@@ -139,9 +140,9 @@ function load() {
                     },
                     {
                         field: 'status',
-                        title: '状态',
+                        title: '提币状态',
                         formatter: function (value) {
-                            var str={0:"确认中",1:"已完成",2:"提币失败"}
+                            var str={"0":"确认中","1":"已完成","2":"提币失败"}
                             if (str[value]) return str[value]
                         },
                     },
@@ -152,6 +153,14 @@ function load() {
                     {
                         field: 'txid',
                         title: '区块链交易id',
+                    },
+                    {
+                        field: 'ex2',
+                        title: '审核状态',
+                        formatter: function (value) {
+                            var str={"0":"待审核","1":"审核通过","2":"审核拒绝"}
+                            if (str[value]) return str[value]
+                        },
                     },
                     {
                         field: 'fee',
@@ -166,6 +175,10 @@ function load() {
                     {
                         field: 'updateDate',
                         title: '更新时间',
+                    },
+                    {
+                        field: 'remark',
+                        title: '区块链确认信息',
                     },
                     {
                         title: '操作',

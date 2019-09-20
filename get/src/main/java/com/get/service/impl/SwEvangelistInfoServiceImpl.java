@@ -77,9 +77,10 @@ public class SwEvangelistInfoServiceImpl implements SwEvangelistInfoService {
                         "\t初始密码为：12345678\n" +
                         "\t请您及时登录并修改密码，防止账号被盗。\n" +
                         "\n" +
-                        "Dear user "+swEvangelistInfoDO.getUserId()+"!\n" +
-                        "\tThe email "+swEvangelistInfoDO.getEmail()+" you applied has been approved.\n" +
-                        "\tplease login the account by password 12345678, and then change password as soon as posible.";
+                        "Dear user "+swEvangelistInfoDO.getUserId()+",\n" +
+                        "\tThe preacher's mailbox "+swEvangelistInfoDO.getEmail()+" you applied for has been approved and can now login to the mailbox account through APP.\n" +
+                        "\tThe initial password is 12345678\n" +
+                        "\tPlease log in and change your password in time to prevent the account from being stolen.";
                 swUserBasicService.userReg(userBasicDO);
                 MailUtil.commonSend(swEvangelistInfoDO.getEmail(),success);
             }else{
@@ -88,9 +89,9 @@ public class SwEvangelistInfoServiceImpl implements SwEvangelistInfoService {
                         "\t非常抱歉，您的申请未通过。\n" +
                         "\t请提供更加详细的资料并重新提交，来获取布道者资格。\n" +
                         "\n" +
-                        "Dear user "+swEvangelistInfoDO.getUserId()+"!\n" +
-                        "\tWe are sorry for that your application is not pass.\n" +
-                        "\tPlease provide more detail data for the next try.";
+                        "Dear user "+swEvangelistInfoDO.getUserId()+",\n" +
+                        "\tWe are sorry but your application has not been approved\n" +
+                        "\tPlease provide more detail information for the next try.";
                 MailUtil.commonSend(swEvangelistInfoDO.getEmail(),failed);
             }
             swEvangelistInfoDao.update(swEvangelistInfoDO);

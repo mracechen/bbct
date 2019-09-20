@@ -1,6 +1,8 @@
 package com.get.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.domain.SwPrincipalUserDO;
@@ -19,7 +21,7 @@ public interface SwPrincipalUserDao {
 
     List<SwPrincipalUserDO> list(Map<String, Object> map);
 
-    List<SwPrincipalUserDO> getWaitingResolvePrincipal();
+    List<SwPrincipalUserDO> getWaitingResolvePrincipal(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate);
 
     List<SwPrincipalUserDO> getByUserId(@Param("userId") Integer userId, @Param("status") Integer status, @Param("delFlag") String delFlag);
 

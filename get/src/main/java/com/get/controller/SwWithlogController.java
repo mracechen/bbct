@@ -8,6 +8,7 @@ import com.get.statuc.Query;
 import com.get.statuc.R;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -95,22 +96,29 @@ public class SwWithlogController {
                 return R.error("选择的记录中存在无法审核的数据");
             }
         }
-        new Thread(() -> {
-            System.out.println("进入另一个线程！！！！！！！");
-            for(SwWithlogDO withLogDO:byIds){
+        for(SwWithlogDO withLogDO:byIds){
+            try {
+                if(status == 1){
+                    withLogDO.setEx2("1");
+                }else{
+                    withLogDO.setEx2("2");
+                }
                 try {
-                    if(status == 1){
-                        withLogDO.setEx2("1");
-                    }else{
-                        withLogDO.setEx2("2");
-                    }
-                    swWithlogService.check(withLogDO);
+                    check(withLogDO);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return R.error("审核失败！");
             }
-        }).start();
+        }
         return R.ok();
+    }
+
+    @Async("taskExecutor")
+    public void check(SwWithlogDO withLogDO) throws Exception{
+        swWithlogService.check(withLogDO);
     }
 
     /**

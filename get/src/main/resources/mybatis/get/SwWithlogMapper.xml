@@ -4,7 +4,10 @@
 <mapper namespace="com.get.dao.SwWithlogDao">
 
     <select id="get" resultType="com.get.domain.SwWithlogDO">
-        select `tid`,`user_id`,`coin_type_id`,`amount`,`address`,`status`,`remark`,`txid`,`fee`,`create_date`,`update_date`,`del_flag`,`ex2`,`ex4`,`ex5`        from t_sw_withlog where tid = #{value}
+        select withlog.*, coinType.coin_name as coinName
+        from t_sw_withlog withlog
+        left join t_sw_coin_type coinType on coinType.tid = withlog.coin_type_id
+        where withlog.tid = #{value}
     </select>
 
     <select id="getByTxid" resultType="com.get.domain.SwWithlogDO">

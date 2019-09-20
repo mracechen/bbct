@@ -9,105 +9,75 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <form class="form-horizontal m-t" id="signupForm">
-                                                                                                                                        <div class="form-group">
-                                    <label class="col-sm-3 control-label">名称：</label>
-                                    <div class="col-sm-8">
-                                        <input id="name" name="name" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">币种id：</label>
-                                    <div class="col-sm-8">
-                                        <input id="coinTypeId" name="coinTypeId" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">固本金额度：</label>
-                                    <div class="col-sm-8">
-                                        <input id="principalNum" name="principalNum" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">收益倍率：</label>
-                                    <div class="col-sm-8">
-                                        <input id="rewardPercent" name="rewardPercent" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">合约期限（天）：</label>
-                                    <div class="col-sm-8">
-                                        <input id="contractTerm" name="contractTerm" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">收取手续费期限（小时）：</label>
-                                    <div class="col-sm-8">
-                                        <input id="chargeTerm" name="chargeTerm" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">手续费比例：</label>
-                                    <div class="col-sm-8">
-                                        <input id="chargePercent" name="chargePercent" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">创建时间：</label>
-                                    <div class="col-sm-8">
-                                        <input id="createDate" name="createDate" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">更新时间：</label>
-                                    <div class="col-sm-8">
-                                        <input id="updateDate" name="updateDate" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">0为可用,1为不可用：</label>
-                                    <div class="col-sm-8">
-                                        <input id="delFlag" name="delFlag" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">说明：</label>
-                                    <div class="col-sm-8">
-                                        <input id="remark" name="remark" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">ex1：</label>
-                                    <div class="col-sm-8">
-                                        <input id="ex1" name="ex1" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">ex2：</label>
-                                    <div class="col-sm-8">
-                                        <input id="ex2" name="ex2" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                                                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">ex3：</label>
-                                    <div class="col-sm-8">
-                                        <input id="ex3" name="ex3" class="form-control"
-                                               type="text">
-                                    </div>
-                                </div>
-                                                                            <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">名称：</label>
+                            <div class="col-sm-8">
+                                <input id="name" name="name" class="form-control" required
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">币种：</label>
+                            <div class="col-sm-8">
+                                <select id="coinTypeId" name="coinTypeId" class="form-control">
+                                </select>
+                                <input id="coinTypeIdTemp" name="coinTypeIdTemp"
+                                       class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">固本金额度：</label>
+                            <div class="col-sm-8">
+                                <input id="principalNum" name="principalNum" class="form-control" required
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">收益倍率：</label>
+                            <div class="col-sm-8">
+                                <input id="rewardPercent" name="rewardPercent" class="form-control" required
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">合约期限（天）：</label>
+                            <div class="col-sm-8">
+                                <input id="contractTerm" name="contractTerm" class="form-control" required
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">收取手续费期限（小时）：</label>
+                            <div class="col-sm-8">
+                                <input id="chargeTerm" name="chargeTerm" class="form-control" required
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">手续费比例：</label>
+                            <div class="col-sm-8">
+                                <input id="chargePercent" name="chargePercent" class="form-control" required
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否删除：</label>
+                            <div class="col-sm-8">
+                                <select id="delFlag" name="delFlag" lay-verify="" class="form-control">
+                                    <option selected value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">说明：</label>
+                            <div class="col-sm-8">
+                                <input id="remark" name="remark" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <button type="submit" class="btn btn-primary">提交</button>
                             </div>

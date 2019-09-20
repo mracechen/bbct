@@ -45,4 +45,6 @@ public class SwPeriodUserDO implements Serializable {
     private Double causeReleaseNum;
 
     private Date expireDate;
+
+    private String periodName;
     }

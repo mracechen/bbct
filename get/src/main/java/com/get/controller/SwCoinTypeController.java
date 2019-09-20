@@ -50,6 +50,15 @@ public class SwCoinTypeController {
         return pageUtils;
     }
 
+    @ResponseBody
+    @GetMapping("/query_all")
+    public List queryAll(@RequestParam Map<String, Object> params) {
+        params.put("delFlag", CommonStatic.NOTDELETE);
+        params.put("enable", CommonStatic.ACTIVE);
+        //查询列表数据
+        return swCoinTypeService.list(params);
+    }
+
     @GetMapping("/add")
     @RequiresPermissions("get:swCoinType:add")
     String add() {

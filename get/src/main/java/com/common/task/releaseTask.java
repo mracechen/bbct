@@ -11,6 +11,7 @@ import com.get.statuc.CommonStatic;
 import com.get.statuc.RecordEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -94,13 +95,6 @@ public class releaseTask {
             String formatDateOnMinute = DateUtils.getFormatDateOnMinute(DateUtils.dateAddDays(new Date(),-1));
             Date yesterdayThisTime = DateUtils.dateParse(formatDateOnMinute, "yyyy-MM-dd HH:mm:ss");
 
-//            List<SwPrincipalUserDO> waitingResolvePrincipal = swPrincipalUserService.getWaitingResolvePrincipal();
-//            waitingResolvePrincipal.forEach(e->{
-//                String now = getFormatDateOnMinute(new Date());
-//                String createDate = getFormatDateOnMinute(DateUtils.dateAddDays(e.getCreateDate(),e.getLeftTerm()));
-//
-//            });
-
             //活币金加速
             //获取昨天这个点之前未释放的用户的活币金
             List<SwCurrentUserDO> waitingResolveCurrent = swCurrentUserService.getWaitingResolveCurrent(null, yesterdayThisTime);
@@ -129,7 +123,7 @@ public class releaseTask {
                 swCurrentUserService.update(swCurrentUserDO);
                 //判断该用户有没有持有固币金（或者优币金，升币金，三者互斥），有的话加速下放自己的固币金（固币金减少，相应的钱放到钱包，添加释放记录，添加资金记录）
                 Integer userId = e.getUserId();
-                //给定币金加速
+                //给固币金加速
                 try {
                     Boolean aBoolean = releasePrincipal(CommonStatic.CURRENT_CAUSE_RELEASE, userId, userId, releaseNum,"活币金",e.getTid(),sign);
                     //如果没有，则给优币金或升币金加速
@@ -139,39 +133,41 @@ public class releaseTask {
                     if(!aBoolean){
                         aBoolean = releasePartner(CommonStatic.CURRENT_CAUSE_RELEASE, userId, userId, releaseNum,"活币金",e.getTid(),sign);
                     }
+                    //如果用户没有给自己的任何产品加速，那么也不会给上级加速
                     if(!aBoolean){
                         log.info("用户["+userId+"]的活币金"+e.getTid()+"没有给自己任何产品加速");
+                    }else{
+                        //获取该用户加速范围内的上级用户（包括有固币金，优币金，升币金的用户），重复上面操作
+                        List<SwRuleDetailDO> byRuleCode = swRuleDetailService.getByRuleCode(generateReleaseCode);
+                        List<SwUserBasicDO> recommenders = swUserBasicService.findRecommenders(userId, generateNum);
+                        List<UserListHelper> list = UserUtils.getList(recommenders, swUserBasicService.get(userId),generateNum);
+                        Map<Integer, BigDecimal> integerDoubleMap = UserUtils.rewardCommenders(list, byRuleCode, releaseNum.doubleValue());
+                        integerDoubleMap.entrySet().forEach(s->{
+                            Integer key = s.getKey();
+                            BigDecimal value = s.getValue();
+                            try {
+                                //给定币金加速
+                                Boolean rBoolean = releasePrincipal(CommonStatic.CURRENT_CAUSE_RELEASE, userId, key, value,"活币金",e.getTid(),sign);
+                                //如果没有，则给优币金或升币金加速
+                                if(!rBoolean){
+                                    rBoolean = releaseEvangelist(CommonStatic.CURRENT_CAUSE_RELEASE, userId, key,value,"活币金",e.getTid(),sign);
+                                }
+                                if(!rBoolean){
+                                    rBoolean = releasePartner(CommonStatic.CURRENT_CAUSE_RELEASE, userId, key,value,"活币金",e.getTid(),sign);
+                                }
+                                if(!rBoolean){
+                                    log.info("用户["+userId+"]的活币金"+e.getTid()+"没有给用户["+key+"]的任何产品加速");
+                                }
+                            }catch (Exception e2){
+                                log.error("用户["+userId+"]的活币金"+e.getTid()+"给用户["+key+"]加速的时候出现异常");
+                                e2.printStackTrace();
+                            }
+                        });
                     }
                 }catch (Exception e1){
                     log.error("用户["+userId+"]的活币金"+e.getTid()+"给自己加速的时候出现异常！！！");
                     e1.printStackTrace();
                 }
-                //获取该用户加速范围内的上级用户（包括有固币金，优币金，升币金的用户），重复上面操作
-                List<SwRuleDetailDO> byRuleCode = swRuleDetailService.getByRuleCode(generateReleaseCode);
-                List<SwUserBasicDO> recommenders = swUserBasicService.findRecommenders(userId, generateNum);
-                List<UserListHelper> list = UserUtils.getList(recommenders, swUserBasicService.get(userId));
-                Map<Integer, BigDecimal> integerDoubleMap = UserUtils.rewardCommenders(list, byRuleCode, releaseNum.doubleValue());
-                integerDoubleMap.entrySet().forEach(s->{
-                    Integer key = s.getKey();
-                    BigDecimal value = s.getValue();
-                    try {
-                        //给定币金加速
-                        Boolean rBoolean = releasePrincipal(CommonStatic.CURRENT_CAUSE_RELEASE, userId, key, value,"活币金",e.getTid(),sign);
-                        //如果没有，则给优币金或升币金加速
-                        if(!rBoolean){
-                            rBoolean = releaseEvangelist(CommonStatic.CURRENT_CAUSE_RELEASE, userId, key,value,"活币金",e.getTid(),sign);
-                        }
-                        if(!rBoolean){
-                            rBoolean = releasePartner(CommonStatic.CURRENT_CAUSE_RELEASE, userId, key,value,"活币金",e.getTid(),sign);
-                        }
-                        if(!rBoolean){
-                            log.info("用户["+userId+"]的活币金"+e.getTid()+"没有给用户["+key+"]的任何产品加速");
-                        }
-                    }catch (Exception e2){
-                        log.error("用户["+userId+"]的活币金"+e.getTid()+"给用户["+key+"]加速的时候出现异常");
-                        e2.printStackTrace();
-                    }
-                });
             });
 
             //定币金加速
@@ -207,50 +203,52 @@ public class releaseTask {
                     if(!aBoolean){
                         aBoolean = releasePartner(CommonStatic.PERIOD_CAUSE_RELEASE, userId, userId, releaseNum,"定币金",e.getTid(),sign);
                     }
+                    //如果用户没有给自己的任何产品加速，那么也不会给上级加速
                     if(!aBoolean){
                         log.info("用户["+userId+"]的活币金没有给自己任何产品加速");
+                    }else{
+                        //获取该用户加速范围内的上级用户（包括有固币金，优币金，升币金的用户），重复上面操作
+                        List<SwRuleDetailDO> byRuleCode = swRuleDetailService.getByRuleCode(generateReleaseCode);
+                        List<SwUserBasicDO> recommenders = swUserBasicService.findRecommenders(userId, generateNum);
+                        List<UserListHelper> list = UserUtils.getList(recommenders, swUserBasicService.get(userId),generateNum);
+                        Map<Integer, BigDecimal> integerDoubleMap = UserUtils.rewardCommenders(list, byRuleCode, releaseNum.doubleValue());
+                        integerDoubleMap.entrySet().forEach(s->{
+                            Integer key = s.getKey();
+                            BigDecimal value = s.getValue();
+                            try {
+                                //给固币金加速
+                                Boolean rBoolean = releasePrincipal(CommonStatic.PERIOD_CAUSE_RELEASE, userId, key, value,"定币金",e.getTid(),sign);
+                                //如果没有，则给优币金或升币金加速
+                                if(!rBoolean){
+                                    rBoolean = releaseEvangelist(CommonStatic.PERIOD_CAUSE_RELEASE, userId, key,value,"定币金",e.getTid(),sign);
+                                }
+                                if(!rBoolean){
+                                    rBoolean = releasePartner(CommonStatic.PERIOD_CAUSE_RELEASE, userId, key,value,"定币金",e.getTid(),sign);
+                                }
+                                if(!rBoolean){
+                                    log.info("用户["+userId+"]的定币金没有给用户["+key+"]的任何产品加速");
+                                }
+                            }catch (Exception e2){
+                                log.error("用户["+userId+"]的定币金给用户["+key+"]加速的时候出现异常");
+                                e2.printStackTrace();
+                            }
+                        });
                     }
                 }catch (Exception e1){
                     log.error("用户["+userId+"]的活币金给自己加速的时候出现异常！！！");
                     e1.printStackTrace();
                 }
-                //获取该用户加速范围内的上级用户（包括有固币金，优币金，升币金的用户），重复上面操作
-                List<SwRuleDetailDO> byRuleCode = swRuleDetailService.getByRuleCode(generateReleaseCode);
-                List<SwUserBasicDO> recommenders = swUserBasicService.findRecommenders(userId, generateNum);
-                List<UserListHelper> list = UserUtils.getList(recommenders, swUserBasicService.get(userId));
-                Map<Integer, BigDecimal> integerDoubleMap = UserUtils.rewardCommenders(list, byRuleCode, releaseNum.doubleValue());
-                integerDoubleMap.entrySet().forEach(s->{
-                    Integer key = s.getKey();
-                    BigDecimal value = s.getValue();
-                    try {
-                        //给固币金加速
-                        Boolean rBoolean = releasePrincipal(CommonStatic.PERIOD_CAUSE_RELEASE, userId, key, value,"定币金",e.getTid(),sign);
-                        //如果没有，则给优币金或升币金加速
-                        if(!rBoolean){
-                            rBoolean = releaseEvangelist(CommonStatic.PERIOD_CAUSE_RELEASE, userId, key,value,"定币金",e.getTid(),sign);
-                        }
-                        if(!rBoolean){
-                            rBoolean = releasePartner(CommonStatic.PERIOD_CAUSE_RELEASE, userId, key,value,"定币金",e.getTid(),sign);
-                        }
-                        if(!rBoolean){
-                            log.info("用户["+userId+"]的定币金没有给用户["+key+"]的任何产品加速");
-                        }
-                    }catch (Exception e2){
-                        log.error("用户["+userId+"]的定币金给用户["+key+"]加速的时候出现异常");
-                        e2.printStackTrace();
-                    }
-                });
+
                 //修改释放时间，释放时间往后推一天（如果查出来的是昨天的数据，往后推一天就是今天了）
                 SwPeriodUserDO swPeriodUserDO = new SwPeriodUserDO();
-                swPeriodUserDO.setTid(e.getTid());
-                swPeriodUserDO.setCreateDate(e.getCreateDate());
+                BeanUtils.copyProperties(e,swPeriodUserDO);
                 Date releaseTime = e.getReleaseTime();
                 Date nextReleaseDay = DateUtils.dateAddDays(releaseTime, 1);
                 swPeriodUserDO.setReleaseTime(nextReleaseDay);
                 swPeriodUserDO.setUpdateDate(new Date());
                 try {
                     //计算总共释放的天数是否达到或者超过了该定币金项目的周期，是的话就将该项目到期，且将钱放回钱包
-                    int days = DateUtils.dateBetween(swPeriodUserDO.getReleaseTime(), swPeriodUserDO.getCreateDate());
+                    int days = DateUtils.dateBetween(swPeriodUserDO.getCreateDate(), swPeriodUserDO.getReleaseTime());
                     if(days >= swPeriodDO.getPeriodTerm()){
                         //改为释放完成
                         swPeriodUserDO.setStatus(CommonStatic.RELEASED);
@@ -272,12 +270,56 @@ public class releaseTask {
                     log.error("计算定币金是否到期时出错！");
                     e1.printStackTrace();
                 }
-                Date date = DateUtils.dateAddDays(e.getCreateDate(), swPeriodDO.getPeriodTerm());
+//                Date date = DateUtils.dateAddDays(e.getCreateDate(), swPeriodDO.getPeriodTerm());
                 //定币金到期
-                if(DateUtils.dateCompare(new Date(),date) > 0){
-                    swPeriodUserDO.setStatus(CommonStatic.RELEASED);
-                }
+//                if(DateUtils.dateCompare(new Date(),date) > 0){
+//                    swPeriodUserDO.setStatus(CommonStatic.RELEASED);
+//                }
                 swPeriodUserService.update(swPeriodUserDO);
+            });
+            List<SwPrincipalUserDO> waitingResolvePrincipal = swPrincipalUserService.getWaitingResolvePrincipal(null, yesterdayThisTime);
+            waitingResolvePrincipal.forEach(e->{
+                SwPrincipalUserDO swPrincipalUserDO = new SwPrincipalUserDO();
+                BeanUtils.copyProperties(e,swPrincipalUserDO);
+                Integer leftTerm = e.getLeftTerm();
+                if(leftTerm > 0){
+                    swPrincipalUserDO.setLeftTerm(-1);
+                    swPrincipalUserDO.setLeftNum(0.0);
+                    swPrincipalUserDO.setUpdateDate(new Date());
+                    Date nextReleaseDay = DateUtils.dateAddDays(swPrincipalUserDO.getEx1(), 1);
+                    swPrincipalUserDO.setEx1(nextReleaseDay);
+                }else{
+                    SwPrincipalDO swPrincipalDO = swPrincipalService.get(e.getPrincipalId());
+                    SwWalletsDO wallet = swWalletsService.getWallet(e.getUserId(), swPrincipalDO.getCoinTypeId());
+                    BigDecimal curcurrency = wallet.getCurrency();
+                    if(wallet != null){
+                        Double leftNum = e.getLeftNum();
+                        wallet.setCurrency(new BigDecimal(String.valueOf(leftNum)));
+                        wallet.setUpdateDate(new Date());
+                        swWalletsService.update(wallet);
+                        //记录资金明细
+                        swAccountRecordService.save(SwAccountRecordDO.create(
+                                e.getUserId(),
+                                RecordEnum.principal_normal_release.getType(),
+                                languagei18nUtils.getMessage(RecordEnum.principal_normal_release.getDesc()),
+                                swPrincipalDO.getCoinTypeId(),
+                                leftNum.doubleValue(),
+                                curcurrency.doubleValue() + leftNum.doubleValue()));
+                        //记录释放记录
+                        swReleaseRecordService.save(SwReleaseRecordDO.create(
+                                swPrincipalUserDO.getTid(),
+                                e.getTid(),
+                                leftNum,
+                                CommonStatic.NORMAL_RELEASE,
+                                e.getUserId(),
+                                e.getUserId(),
+                                CommonStatic.RELEASE_TARGET_PRINCIPAL));
+                        swPrincipalUserDO.setStatus(CommonStatic.RELEASED);
+                        swPrincipalUserDO.setLeftNum(-leftNum);
+                        log.info("用户["+e.getUserId()+"]的--固币金"+swPrincipalUserDO.getTid()+"--到期全部释放");
+                    }
+                }
+                swPrincipalUserService.update(swPrincipalUserDO);
             });
         }catch (Exception e){
             log.error("定时任务异常！！！");
@@ -323,7 +365,6 @@ public class releaseTask {
                 //固币金全部释放，且状态改为已释放完
                 swPrincipalUserDO.setLeftNum(new BigDecimal("0").subtract(leftNum).doubleValue());
                 swPrincipalUserDO.setStatus(CommonStatic.RELEASED);
-                swPrincipalUserDO.setLeftTerm(0);
                 //标记此次释放的数量等于固币金剩余的全部数量
                 releaseNum = leftNum;
             }
@@ -331,19 +372,22 @@ public class releaseTask {
             SwWalletsDO wallet = swWalletsService.getWallet(targetUserId, swPrincipalDO.getCoinTypeId());
             //没有被加速完成，而是到期了，则全部释放
             if(leftTerm <= 0){
+
+            }else{
+                //把固币金释放的金额放入钱包
                 BigDecimal curcurrency = wallet.getCurrency();
                 if(wallet != null){
-                    wallet.setCurrency(leftNum);
+                    wallet.setCurrency(releaseNum);
                     wallet.setUpdateDate(new Date());
                     swWalletsService.update(wallet);
                     //记录资金明细
                     swAccountRecordService.save(SwAccountRecordDO.create(
                             targetUserId,
-                            RecordEnum.principal_normal_release.getType(),
-                            languagei18nUtils.getMessage(RecordEnum.principal_normal_release.getDesc()),
+                            RecordEnum.principal_accelerate.getType(),
+                            languagei18nUtils.getMessage(RecordEnum.principal_accelerate.getDesc()),
                             swPrincipalDO.getCoinTypeId(),
-                            leftNum.doubleValue(),
-                            curcurrency.doubleValue() + swPrincipalUserDO.getLeftNum()));
+                            releaseNum.doubleValue(),
+                            curcurrency.add(releaseNum).doubleValue()));
                     //记录释放记录
                     swReleaseRecordService.save(SwReleaseRecordDO.create(
                             swPrincipalUserDO.getTid(),
@@ -353,43 +397,14 @@ public class releaseTask {
                             causeUserId,
                             targetUserId,
                             CommonStatic.RELEASE_TARGET_PRINCIPAL));
-                    swPrincipalUserDO.setStatus(CommonStatic.RELEASED);
-                    swPrincipalUserDO.setLeftNum(leftNum.doubleValue());
-                    log.info("sign："+sign+",用户["+targetUserId+"]的--固币金"+swPrincipalUserDO.getTid()+"--到期全部释放");
+                    log.info("sign："+sign+",用户["+causeUserId+"]的--"+causeTypeName+"["+causeId+"]--给用户["+targetUserId+"]的--固币金"+swPrincipalUserDO.getTid()+"--加速释放："+releaseNum.doubleValue());
                 }
-            }else{
-                swPrincipalUserDO.setLeftTerm(-1);
             }
             //更新用户的固币金
             swPrincipalUserDO.setUpdateDate(new Date());
+            swPrincipalUserDO.setLeftTerm(0);
             swPrincipalUserService.update(swPrincipalUserDO);
-            //把固币金释放的金额放入钱包
-            BigDecimal curcurrency = wallet.getCurrency();
-            if(wallet != null){
-                wallet.setCurrency(releaseNum);
-                wallet.setUpdateDate(new Date());
-                swWalletsService.update(wallet);
-                //记录资金明细
-                swAccountRecordService.save(SwAccountRecordDO.create(
-                        targetUserId,
-                        RecordEnum.principal_accelerate.getType(),
-                        languagei18nUtils.getMessage(RecordEnum.principal_accelerate.getDesc()),
-                        swPrincipalDO.getCoinTypeId(),
-                        releaseNum.doubleValue(),
-                        curcurrency.add(releaseNum).doubleValue()));
-                //记录释放记录
-                swReleaseRecordService.save(SwReleaseRecordDO.create(
-                        swPrincipalUserDO.getTid(),
-                        causeId,
-                        releaseNum.doubleValue(),
-                        type,
-                        causeUserId,
-                        targetUserId,
-                        CommonStatic.RELEASE_TARGET_PRINCIPAL));
-                log.info("sign："+sign+",用户["+causeUserId+"]的--"+causeTypeName+"["+causeId+"]--给用户["+targetUserId+"]的--固币金"+swPrincipalUserDO.getTid()+"--加速释放："+releaseNum.doubleValue());
-                return true;
-            }
-            log.error("用户钱包异常");
+            return true;
         }
         return false;
     }

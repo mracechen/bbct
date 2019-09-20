@@ -1,4 +1,20 @@
 $().ready(function () {
+    $.ajax({
+        url:"/manager/get/swCoinType/query_all",
+        type:"GET",
+        success:function (res) {
+            let coinTypeIdTemp = $("#coinTypeIdTemp").val();
+            $("#coinTypeId").empty();
+            for(let i=0;i<res.length;i++){
+                let temp = res[i];
+                if(temp != null && temp.tid == coinTypeIdTemp){
+                    $("#coinTypeId").append("<option selected value='"+temp.tid+"'>"+temp.coinName+"</option>")
+                }else{
+                    $("#coinTypeId").append("<option value='"+temp.tid+"'>"+temp.coinName+"</option>")
+                }
+            }
+        }
+    });
     validateRule();
 });
 

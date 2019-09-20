@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.StringUtils;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.PageUtils;
 import com.get.statuc.Query;
@@ -42,6 +43,15 @@ public class SwUserBasicController {
     public PageUtils list(@RequestParam Map<String, Object> params) {
         params.put("delFlag", CommonStatic.NOTDELETE);
         //查询列表数据
+        if(params.get("createStartDate") != null && StringUtils.isNotBlank(params.get("createStartDate").toString())){
+            String createStartDate = params.get("createStartDate").toString();
+
+            params.put("createStartDate",createStartDate + " 00:00:00");
+        }
+        if(params.get("createEndDate") != null && StringUtils.isNotBlank(params.get("createEndDate").toString())){
+            String createEndDate = params.get("createEndDate").toString();
+            params.put("createEndDate",createEndDate + " 23:59:59");
+        }
         Query query = new Query(params);
         List<SwUserBasicDO> swUserBasicList = swUserBasicService.list(query);
         int total = swUserBasicService.count(query);
@@ -87,8 +97,11 @@ public class SwUserBasicController {
     @RequiresPermissions("get:swUserBasic:edit")
     public R update(SwUserBasicDO swUserBasic) {
         swUserBasic.setUpdateDate(new Date());
-            swUserBasicService.update(swUserBasic);
-        return R.ok();
+        int i = swUserBasicService.adminUpdate(swUserBasic);
+        if(i > 0){
+            return R.ok();
+        }
+        return R.error("操作拒绝");
     }
 
     /**
