@@ -7,9 +7,11 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
+#-------------------
     url: jdbc:mysql://10.222.12.222:3306/kplus?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
     username: kplus
     password: Kplus.20190306
+#-------------------
     initialSize: 20
     minIdle: 30
     maxActive: 100
@@ -33,9 +35,11 @@ spring:
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
   redis:
+  #-------------------
     host: 10.222.12.222
     port: 6379
     password:
+  #-------------------
     # 连接超时时间（毫秒）
     timeout: 10000
     jedis:
@@ -57,7 +61,6 @@ spring:
 configs:
   # 配置百度翻译接口,需要重新申请
   translate:
-
     url: afsdfsadfas
     appid: sdafsdfsdaf
     secretKey: asdfsdfsdf
@@ -65,7 +68,10 @@ configs:
     url: sfsafdsf
   file:
     uploadPath: /data/ftps/styftp01/ayw/
-    serverIp: sdfasdfsdf
+    #这个上线要改
+    #-------------------
+    serverIp: http://10.235.20.47:9980
+    #-------------------
   msg:
     # 是否开启结算系统后台验证码
     checkCheckCode: true
@@ -95,7 +101,7 @@ configs:
       appKey: TQsqbFQJKW7XQvHhqKEwx
       masterSecret: eVBAK1QUXN8TruLkadQLC9
       host: http://sdk.open.api.igexin.com/apiex.htm
-
+#-------------------
   bbctChargeAddress: deposit
   eosChargeAddress: deposit
   withdrawFee: 5
@@ -113,3 +119,4 @@ configs:
       withdraw: balance.withdraw
       #删除userID
       deleteMemo: contract.erase_memo
+#-------------------

@@ -18,18 +18,18 @@ function load() {
                 striped: true, // 设置为true会有隔行变色效果
                 dataType: "json", // 服务器返回的数据类型
                 pagination: true, // 设置为true会在底部显示分页条
-                paginationDetailHAlign:'left',
+                paginationDetailHAlign: 'left',
                 // queryParamsType : "limit",
                 // //设置为limit则会发送符合RESTFull格式的参数
                 singleSelect: false, // 设置为true将禁止多选
                 // contentType : "application/x-www-form-urlencoded",
                 // //发送到服务器的数据编码类型
-                pageSize: 20,pageList: [ 20, 40, 60, 80, 100], // 如果设置了分页，每页数据条数
+                pageSize: 20, pageList: [20, 40, 60, 80, 100], // 如果设置了分页，每页数据条数
                 pageNumber: 1, // 如果设置了分布，首页页码
                 search: false, // 是否显示搜索框
                 showColumns: true, // 是否显示内容下拉框（选择显示的列）
                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
-                showJumpto:"true", //设置是否显示跳转页面功能
+                showJumpto: "true", //设置是否显示跳转页面功能
                 queryParams: function (params) {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
@@ -59,53 +59,58 @@ function load() {
                     {
                         checkbox: true
                     },
-                                            {
-                            field: 'tid',
-                            title: '主键',
-                                                    },
-                                            {
-                            field: 'title',
-                            title: '标题',
-                                                    },
-                                            {
-                            field: 'content',
-                            title: '内容',
-                                                    },
-                                            {
-                            field: 'type',
-                            title: '类型，1-新闻，2-公告',
-                                                    },
-                                            {
-                            field: 'status',
-                            title: '状态，0-可用，1-不可用',
-                                                    },
-                                            {
-                            field: 'createDate',
-                            title: '创建时间',
-                                                            sortable: true,
-                                order: 'asc',
-                                                    },
-                                            {
-                            field: 'updateDate',
-                            title: '更新时间',
-                                                    },
-                                            {
-                            field: 'delFlag',
-                            title: '删除标记',
-                                                    },
-                                            {
-                            field: 'ex1',
-                            title: 'ex1',
-                                                    },
-                                            {
-                            field: 'ex2',
-                            title: 'ex2',
-                                                    },
-                                            {
-                            field: 'ex3',
-                            title: 'ex3',
-                                                    },
-                                        {
+                    {
+                        field: 'title',
+                        title: '标题',
+                    },
+                    /*{
+                        field: 'content',
+                        title: '内容',
+                        formatter: function (value, row, index) {
+                            if(value == null || value == 'null'){
+                                return '<label style="width:150px;white-space:nowrap; overflow:hidden;text-overflow:ellipsis;"></label>';
+                            }else{
+                                return '<label style="width:150px;white-space:nowrap; overflow:hidden;text-overflow:ellipsis;">'+value+'</label>';
+                            }
+                        }
+                    },*/
+                    {
+                        field: 'type',
+                        title: '类型',
+                        formatter: function (value) {
+                            var str={1:"轮播图",2:"轮播图下菜单",3:"推荐菜单",4:"table"};
+                            if (str[value]) return str[value]
+                        },
+                        sortable: true,
+                        order: 'asc',
+                    },
+                    {
+                        field: 'level',
+                        title: '层级',
+                    },
+                    {
+                        field: 'status',
+                        title: '状态',
+                        formatter: function (value) {
+                            var str={0:"可用",1:"不可用"};
+                            if (str[value]) return str[value]
+                        },
+                    },
+                    {
+                        field: 'link',
+                        title: '链接',
+                    },
+                    {
+                        field: 'createDate',
+                        title: '创建时间',
+                        sortable: true,
+                        order: 'asc',
+                    },
+                    {
+                        field: 'updateDate',
+                        title: '更新时间',
+                    },
+                    {
                         title: '操作',
                         field: 'id',
                         align: 'center',
@@ -148,7 +153,7 @@ function edit(id) {
     });
 }
 function remove(id) {
-    layer.confirm('确定要删除选中的记录？', {
+    layer.confirm('如果有下级目录，则下级所有目录会一并删除，确定要删除吗？', {
         btn: ['确定', '取消']
     }, function () {
         $.ajax({
@@ -177,7 +182,7 @@ function batchRemove() {
         layer.msg("请选择要删除的数据");
         return;
     }
-    layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+    layer.confirm("如果有下级目录，则下级所有目录会一并删除，确认要删除选中的'" + rows.length + "'条数据吗?", {
         btn: ['确定', '取消']
         // 按钮
     }, function () {

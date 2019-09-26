@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author longge
@@ -236,14 +237,25 @@ public class AppPublicAPI {
      * */
     @RequestMapping(value = "get_information")
     @ResponseBody
-    public Result get_information(String type){
+    public Result get_information(
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String level,
+            @RequestParam(required = false) String fatherId,
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer pageSize){
         try {
             Map<String,Object> params = new HashMap();
             params.put("delFlag", CommonStatic.NOTDELETE);
             params.put("type", type);
+            params.put("level", level);
+            params.put("ex1", fatherId);
             params.put("status", CommonStatic.ACTIVE);
-            List<InformationDO> informationList = informationService.list(params);
-            return Result.ok(informationList);
+            if(page == null || pageSize == null){
+                return Result.ok(informationService.list(params));
+            }else{
+                return Result.ok(informationService.list(params).stream().skip(page * pageSize).limit(pageSize).collect(Collectors.toList()));
+            }
+
         }catch (Exception e){
             e.printStackTrace();
             return Result.error("system.failed.operation");

@@ -2,6 +2,55 @@ $().ready(function () {
     validateRule();
 });
 
+function levelChange() {
+    let level = $('#level option:selected').val();
+    let type = $('#type option:selected').val();
+    let ex1Temp = $("#ex1Temp").val();
+    if(level == 2 && type != null && type != ''){
+        $("#ex1").empty();
+        $("#ex1").append("<option value=''>请选择</option>");
+        $.ajax({
+            url:"/manager/get/information/queryByProperties",
+            type:"GET",
+            data:{"level":1,"type":type},
+            success:function (res) {
+                for(let i=0;i<res.length;i++){
+                    let r = res[i];
+                    if(ex1Temp == r.tid){
+                        $("#ex1").append("<option selected value='"+r.tid+"'>"+r.title+"</option>")
+                    }else{
+                        $("#ex1").append("<option value='"+r.tid+"'>"+r.title+"</option>")
+                    }
+                }
+            }
+        })
+    }
+}
+function typeChange() {
+    let level = $('#level option:selected').val();
+    let type = $('#type option:selected').val();
+    let ex1Temp = $("#ex1Temp").val();
+    if(level == 2 && type != null && type != ''){
+        $("#ex1").empty();
+        $("#ex1").append("<option value=''>请选择</option>");
+        $.ajax({
+            url:"/manager/get/information/queryByProperties",
+            type:"GET",
+            data:{"level":1,"type":type},
+            success:function (res) {
+                for(let i=0;i<res.length;i++){
+                    let r = res[i];
+                    if(ex1Temp == r.tid){
+                        $("#ex1").append("<option selected value='"+r.tid+"'>"+r.title+"</option>")
+                    }else{
+                        $("#ex1").append("<option value='"+r.tid+"'>"+r.title+"</option>")
+                    }
+                }
+            }
+        })
+    }
+}
+
 $.validator.setDefaults({
     submitHandler: function () {
         update();

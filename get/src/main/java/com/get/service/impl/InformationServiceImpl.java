@@ -1,14 +1,17 @@
 package com.get.service.impl;
 
 import com.get.statuc.CommonStatic;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.get.dao.InformationDao;
 import com.get.domain.InformationDO;
 import com.get.service.InformationService;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -42,7 +45,19 @@ public class InformationServiceImpl implements InformationService {
     }
 
     @Override
-    public int remove(String tid) {
+    @Transactional(rollbackFor = Exception.class)
+    public int remove(String tid) throws Exception{
+        Map<String,Object> params = new HashMap<>();
+        params.put("delFlag",CommonStatic.NOTDELETE);
+        params.put("ex1",tid);
+        List<InformationDO> list = this.list(params);
+        for (InformationDO informationDO : list) {
+            informationDO.setDelFlag(CommonStatic.DELETE);
+            int update = informationDao.update(informationDO);
+            if(update <= 0){
+                throw new Exception();
+            }
+        }
         InformationDO information = new InformationDO();
         information.setDelFlag(CommonStatic.DELETE);
         information.setTid(tid);
@@ -50,7 +65,7 @@ public class InformationServiceImpl implements InformationService {
     }
 
     @Override
-    public int batchRemove(String[]tids) {
+    public int batchRemove(String[]tids)  throws Exception{
         int count = 0;
         for(String ids : tids){
             count = count + remove(ids);

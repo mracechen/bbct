@@ -27,7 +27,7 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) throws Exception {
-        saveLog(request,response,o,e);
+        //saveLog(request,response,o,e);
     }
 
     //请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）

@@ -7,12 +7,15 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://10.236.10.1:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-#    username: bbctdb
-#    password: Bbctdb.190620
-    url: jdbc:mysql://localhost:3306/bbct?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-    username: root
-    password: aaa000000
+
+    #-------------------
+    url: jdbc:mysql://10.236.10.1:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    username: bbctdb
+    password: Bbctdb.190620
+#    url: jdbc:mysql://localhost:3306/bbct?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+#    username: root
+#    password: aaa000000
+    #-------------------
     initialSize: 1
     minIdle: 3
     maxActive: 20
@@ -36,12 +39,14 @@ spring:
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
   redis:
-#    host: 10.236.10.1
-#    port: 6379
-#    password:
-    host: 127.0.0.1
+  #-------------------
+    host: 10.236.10.1
     port: 6379
-    password: aaa000000
+    password:
+#    host: 127.0.0.1
+#    port: 6379
+#    password: aaa000000
+  #-------------------
     # 连接超时时间（毫秒）
     timeout: 10000
     jedis:
@@ -69,14 +74,16 @@ configs:
     appid: 93485094305
     secretKey: adfadfdaf34523432
   file:
-#    uploadPath: /data/ftps/styftp01/ayw/
-    uploadPath: E:/upload_file/
-    # 作废
-    serverIp: afjsdofdsiaofjds
-  # 作废
+  #-------------------
+    uploadPath: /data/ftps/styftp01/ayw/
+#    uploadPath: E:/upload_file/
+  #-------------------
+  #-------------------
+    # 上线要改
+    serverIp: http://10.236.10.1:9980
+  #-------------------
   trading:
-    url:  safdsfads
-    serverIp: safdsfds
+    url: sfsafdsf
   msg:
     # 是否开启结算系统后台验证码
     checkCheckCode: false
@@ -107,7 +114,7 @@ configs:
       appKey: TQsqbFQJKW7XQvHhqKEwx
       masterSecret: eVBAK1QUXN8TruLkadQLC9
       host: http://sdk.open.api.igexin.com/apiex.htm
-
+#-------------------
   bbctChargeAddress: deposit
   eosChargeAddress: deposit
   withdrawFee: 5
@@ -125,3 +132,4 @@ configs:
       withdraw: balance.withdraw
       #删除userID
       deleteMemo: contract.erase_memo
+#-------------------

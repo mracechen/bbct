@@ -277,11 +277,13 @@ public class releaseTask {
 //                }
                 swPeriodUserService.update(swPeriodUserDO);
             });
+            //固币金剩余天数监测
             List<SwPrincipalUserDO> waitingResolvePrincipal = swPrincipalUserService.getWaitingResolvePrincipal(null, yesterdayThisTime);
             waitingResolvePrincipal.forEach(e->{
                 SwPrincipalUserDO swPrincipalUserDO = new SwPrincipalUserDO();
                 BeanUtils.copyProperties(e,swPrincipalUserDO);
                 Integer leftTerm = e.getLeftTerm();
+                //剩余天数>0，则正常减算天数，如果<=0，说明固币金期限到了，应当把固币金全部下放给用户
                 if(leftTerm > 0){
                     swPrincipalUserDO.setLeftTerm(-1);
                     swPrincipalUserDO.setLeftNum(0.0);
@@ -368,37 +370,31 @@ public class releaseTask {
                 //标记此次释放的数量等于固币金剩余的全部数量
                 releaseNum = leftNum;
             }
-            Integer leftTerm = swPrincipalUserDO.getLeftTerm();
             SwWalletsDO wallet = swWalletsService.getWallet(targetUserId, swPrincipalDO.getCoinTypeId());
-            //没有被加速完成，而是到期了，则全部释放
-            if(leftTerm <= 0){
-
-            }else{
-                //把固币金释放的金额放入钱包
-                BigDecimal curcurrency = wallet.getCurrency();
-                if(wallet != null){
-                    wallet.setCurrency(releaseNum);
-                    wallet.setUpdateDate(new Date());
-                    swWalletsService.update(wallet);
-                    //记录资金明细
-                    swAccountRecordService.save(SwAccountRecordDO.create(
-                            targetUserId,
-                            RecordEnum.principal_accelerate.getType(),
-                            languagei18nUtils.getMessage(RecordEnum.principal_accelerate.getDesc()),
-                            swPrincipalDO.getCoinTypeId(),
-                            releaseNum.doubleValue(),
-                            curcurrency.add(releaseNum).doubleValue()));
-                    //记录释放记录
-                    swReleaseRecordService.save(SwReleaseRecordDO.create(
-                            swPrincipalUserDO.getTid(),
-                            causeId,
-                            releaseNum.doubleValue(),
-                            type,
-                            causeUserId,
-                            targetUserId,
-                            CommonStatic.RELEASE_TARGET_PRINCIPAL));
-                    log.info("sign："+sign+",用户["+causeUserId+"]的--"+causeTypeName+"["+causeId+"]--给用户["+targetUserId+"]的--固币金"+swPrincipalUserDO.getTid()+"--加速释放："+releaseNum.doubleValue());
-                }
+            //把固币金释放的金额放入钱包
+            BigDecimal curcurrency = wallet.getCurrency();
+            if(wallet != null){
+                wallet.setCurrency(releaseNum);
+                wallet.setUpdateDate(new Date());
+                swWalletsService.update(wallet);
+                //记录资金明细
+                swAccountRecordService.save(SwAccountRecordDO.create(
+                        targetUserId,
+                        RecordEnum.principal_accelerate.getType(),
+                        languagei18nUtils.getMessage(RecordEnum.principal_accelerate.getDesc()),
+                        swPrincipalDO.getCoinTypeId(),
+                        releaseNum.doubleValue(),
+                        curcurrency.add(releaseNum).doubleValue()));
+                //记录释放记录
+                swReleaseRecordService.save(SwReleaseRecordDO.create(
+                        swPrincipalUserDO.getTid(),
+                        causeId,
+                        releaseNum.doubleValue(),
+                        type,
+                        causeUserId,
+                        targetUserId,
+                        CommonStatic.RELEASE_TARGET_PRINCIPAL));
+                log.info("sign："+sign+",用户["+causeUserId+"]的--"+causeTypeName+"["+causeId+"]--给用户["+targetUserId+"]的--固币金"+swPrincipalUserDO.getTid()+"--加速释放："+releaseNum.doubleValue());
             }
             //更新用户的固币金
             swPrincipalUserDO.setUpdateDate(new Date());

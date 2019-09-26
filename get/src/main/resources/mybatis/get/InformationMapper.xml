@@ -4,52 +4,66 @@
 <mapper namespace="com.get.dao.InformationDao">
 
     <select id="get" resultType="com.get.domain.InformationDO">
-        select `tid`,`title`,`content`,`type`,`status`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`        from t_sys_information where tid = #{value}
+        select `tid`,`title`,`content`,`type`,`level`,`status`,`link`,`create_date`,`update_date`,`del_flag`,`pic`,`ex1`,`ex2`,`ex3`,`ex4`        from t_sys_information where tid = #{value}
     </select>
 
     <select id="list" resultType="com.get.domain.InformationDO">
-        select `tid`,`title`,`content`,`type`,`status`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`        from t_sys_information
+        select
+        `tid`,`title`,`content`,`type`,`level`,`status`,`link`,`create_date`,`update_date`,`del_flag`,`pic`,`ex1`,`ex2`,`ex3`,`ex4`
+        from t_sys_information
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="title != null and title != ''">and title =
-                    #{title}
-                </if>
-                            <if test="content != null and content != ''">and content =
-                    #{content}
-                </if>
-                            <if test="type != null and type != ''">and type =
-                    #{type}
-                </if>
-                            <if test="status != null and status != ''">and status =
-                    #{status}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="title != null and title != ''">and title =
+                #{title}
+            </if>
+            <if test="content != null and content != ''">and content =
+                #{content}
+            </if>
+            <if test="type != null and type != ''">and type =
+                #{type}
+            </if>
+            <if test="level != null and level != ''">and level =
+                #{level}
+            </if>
+            <if test="status != null and status != ''">and status =
+                #{status}
+            </if>
+            <if test="link != null and link != ''">and link =
+                #{link}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="pic != null and pic != ''">and pic =
+                #{pic}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+            <if test="ex4 != null and ex4 != ''">and ex4 =
+                #{ex4}
+            </if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by tid desc
+                order by create_date asc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -60,40 +74,52 @@
     <select id="count" resultType="int">
         select count(*) from t_sys_information
         <where>
-                            <if test="tid != null and tid != ''">and tid =
-                    #{tid}
-                </if>
-                            <if test="title != null and title != ''">and title =
-                    #{title}
-                </if>
-                            <if test="content != null and content != ''">and content =
-                    #{content}
-                </if>
-                            <if test="type != null and type != ''">and type =
-                    #{type}
-                </if>
-                            <if test="status != null and status != ''">and status =
-                    #{status}
-                </if>
-                            <if test="createDate != null and createDate != ''">and create_date =
-                    #{createDate}
-                </if>
-                            <if test="updateDate != null and updateDate != ''">and update_date =
-                    #{updateDate}
-                </if>
-                            <if test="delFlag != null and delFlag != ''">and del_flag =
-                    #{delFlag}
-                </if>
-                            <if test="ex1 != null and ex1 != ''">and ex1 =
-                    #{ex1}
-                </if>
-                            <if test="ex2 != null and ex2 != ''">and ex2 =
-                    #{ex2}
-                </if>
-                            <if test="ex3 != null and ex3 != ''">and ex3 =
-                    #{ex3}
-                </if>
-                    </where>
+            <if test="tid != null and tid != ''">and tid =
+                #{tid}
+            </if>
+            <if test="title != null and title != ''">and title =
+                #{title}
+            </if>
+            <if test="content != null and content != ''">and content =
+                #{content}
+            </if>
+            <if test="type != null and type != ''">and type =
+                #{type}
+            </if>
+            <if test="level != null and level != ''">and level =
+                #{level}
+            </if>
+            <if test="status != null and status != ''">and status =
+                #{status}
+            </if>
+            <if test="link != null and link != ''">and link =
+                #{link}
+            </if>
+            <if test="createDate != null and createDate != ''">and create_date =
+                #{createDate}
+            </if>
+            <if test="updateDate != null and updateDate != ''">and update_date =
+                #{updateDate}
+            </if>
+            <if test="delFlag != null and delFlag != ''">and del_flag =
+                #{delFlag}
+            </if>
+            <if test="pic != null and pic != ''">and pic =
+                #{pic}
+            </if>
+            <if test="ex1 != null and ex1 != ''">and ex1 =
+                #{ex1}
+            </if>
+            <if test="ex2 != null and ex2 != ''">and ex2 =
+                #{ex2}
+            </if>
+            <if test="ex3 != null and ex3 != ''">and ex3 =
+                #{ex3}
+            </if>
+            <if test="ex4 != null and ex4 != ''">and ex4 =
+                #{ex4}
+            </if>
+        </where>
     </select>
 
     <insert id="save" parameterType="com.get.domain.InformationDO">
@@ -103,13 +129,17 @@
                                                 `title`, 
                                                 `content`, 
                                                 `type`, 
+                                                `level`, 
                                                 `status`, 
+                                                `link`, 
                                                 `create_date`, 
                                                 `update_date`, 
                                                 `del_flag`, 
+                                                `pic`, 
                                                 `ex1`, 
                                                 `ex2`, 
-                                                `ex3`
+                                                `ex3`, 
+                                                `ex4`
                             )
         values
         (
@@ -117,40 +147,66 @@
                                                 #{title}, 
                                                 #{content}, 
                                                 #{type}, 
+                                                #{level}, 
                                                 #{status}, 
+                                                #{link}, 
                                                 #{createDate}, 
                                                 #{updateDate}, 
                                                 #{delFlag}, 
+                                                #{pic}, 
                                                 #{ex1}, 
                                                 #{ex2}, 
-                                                #{ex3}
+                                                #{ex3}, 
+                                                #{ex4}
                             )
     </insert>
 
     <update id="update" parameterType="com.get.domain.InformationDO">
         update t_sys_information
         <set>
-                                                                            <if test="title != null">`title` = #{title
-                        }, </if>
-                                                                <if test="content != null">`content` = #{content
-                        }, </if>
-                                                                <if test="type != null">`type` = #{type
-                        }, </if>
-                                                                <if test="status != null">`status` = #{status
-                        }, </if>
-                                                                <if test="createDate != null">`create_date` = #{createDate
-                        }, </if>
-                                                                <if test="updateDate != null">`update_date` = #{updateDate
-                        }, </if>
-                                                                <if test="delFlag != null">`del_flag` = #{delFlag
-                        }, </if>
-                                                                <if test="ex1 != null">`ex1` = #{ex1
-                        }, </if>
-                                                                <if test="ex2 != null">`ex2` = #{ex2
-                        }, </if>
-                                                                <if test="ex3 != null">`ex3` = #{ex3
-                        }</if>
-                                    </set>
+            <if test="title != null">`title` = #{title
+                        },
+            </if>
+            <if test="content != null">`content` = #{content
+                        },
+            </if>
+            <if test="type != null">`type` = #{type
+                        },
+            </if>
+            <if test="level != null">`level` = #{level
+                        },
+            </if>
+            <if test="status != null">`status` = #{status
+                        },
+            </if>
+            <if test="link != null">`link` = #{link
+                        },
+            </if>
+            <if test="createDate != null">`create_date` = #{createDate
+                        },
+            </if>
+            <if test="updateDate != null">`update_date` = #{updateDate
+                        },
+            </if>
+            <if test="delFlag != null">`del_flag` = #{delFlag
+                        },
+            </if>
+            <if test="pic != null">`pic` = #{pic
+                        },
+            </if>
+            <if test="ex1 != null">`ex1` = #{ex1
+                        },
+            </if>
+            <if test="ex2 != null">`ex2` = #{ex2
+                        },
+            </if>
+            <if test="ex3 != null">`ex3` = #{ex3
+                        },
+            </if>
+            <if test="ex4 != null">`ex4` = #{ex4
+                        }
+            </if>
+        </set>
         where tid = #{tid}
     </update>
 

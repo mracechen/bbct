@@ -9,7 +9,7 @@ import com.get.domain.InformationDO;
  *
  * @author chglee
  * @email sun1920185681@163.com
- * @date 2019-08-28 19:10:02
+ * @date 2019-09-23 19:56:59
  */
 public interface InformationService {
 
@@ -23,7 +23,7 @@ public interface InformationService {
 
     int update(InformationDO information);
 
-    int remove(String tid);
+    int remove(String tid) throws Exception;
 
-    int batchRemove(String[] tids);
+    int batchRemove(String[] tids) throws Exception;
 }

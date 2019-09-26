@@ -1,12 +1,8 @@
 package com.get.service.impl;
 
 import com.common.utils.i18n.Languagei18nUtils;
-import com.get.domain.SwAccountRecordDO;
-import com.get.domain.SwPrincipalDO;
-import com.get.domain.SwWalletsDO;
-import com.get.service.SwAccountRecordService;
-import com.get.service.SwPrincipalService;
-import com.get.service.SwWalletsService;
+import com.get.domain.*;
+import com.get.service.*;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.NumberStatic;
 import com.get.statuc.RecordEnum;
@@ -18,8 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.dao.SwPrincipalUserDao;
-import com.get.domain.SwPrincipalUserDO;
-import com.get.service.SwPrincipalUserService;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -32,7 +26,16 @@ public class SwPrincipalUserServiceImpl implements SwPrincipalUserService {
     private SwWalletsService swWalletsService;
 
     @Autowired
+    private SwCurrentUserService swCurrentUserService;
+
+    @Autowired
+    private SwPeriodUserService swPeriodUserService;
+
+    @Autowired
     private SwPrincipalService swPrincipalService;
+
+    @Autowired
+    private SwUserBasicService swUserBasicService;
 
     @Autowired
     private SwAccountRecordService swAccountRecordService;
@@ -85,6 +88,26 @@ public class SwPrincipalUserServiceImpl implements SwPrincipalUserService {
                 -swPrincipalDO.getPrincipalNum(),
                 currency.doubleValue() -swPrincipalDO.getPrincipalNum()
         ));
+        SwUserBasicDO swUserBasicDO = swUserBasicService.get(swPrincipalUser.getUserId());
+        //如果他之前已经购买过活币金或者是定币金，那么要将他们的释放时间重置，适配新购买的固币金
+        List<SwCurrentUserDO> myCurrent = swCurrentUserService.getByUserId(swUserBasicDO.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+        if(myCurrent != null && myCurrent.size() > 1){
+            throw new Exception("用户活币金数据异常，用户ID："+swUserBasicDO.getTid());
+        }
+        if(myCurrent != null && myCurrent.size() == 1){
+            SwCurrentUserDO swCurrentUserDO = myCurrent.get(0);
+            swCurrentUserDO.setReleaseTime(swPrincipalUser.getCreateDate());
+            swCurrentUserService.update(swCurrentUserDO);
+        }
+        List<SwPeriodUserDO> myPeriod = swPeriodUserService.getByUserId(swUserBasicDO.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+        if(myPeriod != null && myPeriod.size() > 1){
+            throw new Exception("用户固币金数据异常，用户ID："+swUserBasicDO.getTid());
+        }
+        if(myPeriod != null && myPeriod.size() == 1){
+            SwPeriodUserDO swPeriodUserDO = myPeriod.get(0);
+            swPeriodUserDO.setReleaseTime(swPrincipalUser.getCreateDate());
+            swPeriodUserService.update(swPeriodUserDO);
+        }
         return swPrincipalUserDao.save(swPrincipalUser);
     }
 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 
 /**
  * @author: hqs
@@ -36,9 +37,10 @@ public class UeditorController {
     public String ueditor(@RequestParam("action") String action, String nocache, HttpServletRequest request, HttpServletResponse response) {
         try {
             response.setContentType("application/json;charset=utf-8");
-            Resource resource = new ClassPathResource("config.json");
-            File file = resource.getFile();
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            //Resource resource = new ClassPathResource("config.json");
+            ClassPathResource classPathResource = new ClassPathResource("config.json");
+            InputStreamReader reader = new InputStreamReader(classPathResource.getInputStream(), "UTF-8");
+            BufferedReader br = new BufferedReader(reader);
             StringBuilder stringBuilder = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
