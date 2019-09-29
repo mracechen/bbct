@@ -61,9 +61,6 @@ public class AppPrivateAPI {
     private SwWalletsService swWalletsService;
 
     @Autowired
-    private SwAccountRecordService swAccountRecordService;
-
-    @Autowired
     private SwCoinTypeService swCoinTypeService;
 
     @Autowired
@@ -71,6 +68,15 @@ public class AppPrivateAPI {
 
     @Autowired
     private SwBenchmarkingService swBenchmarkingService;
+
+    @Autowired
+    private SwPrincipalUserService swPrincipalUserService;
+
+    @Autowired
+    private SwCurrentUserService swCurrentUserService;
+
+    @Autowired
+    private SwPeriodUserService swPeriodUserService;
 
     @Autowired
     private SwBenchlogService swBenchlogService;
@@ -154,6 +160,23 @@ public class AppPrivateAPI {
             result.put("teamUserNum",swUserBasicService.getChildrenTreeUserNum(user.getTid()));
             String highPpassffective = StringUtils.isBlank(user.getHighPass()) ? "1": "2";
             result.put("highPpassffective",highPpassffective);
+
+            List<SwPrincipalUserDO> myPrincipal = swPrincipalUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            List<SwCurrentUserDO> myCurrent = swCurrentUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            List<SwPeriodUserDO> myPeriod = swPeriodUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            //未拥有固币金，就可以购买固币金
+            if(myPrincipal == null || myPrincipal.size() == 0){
+                result.put("buyPrincipal",true);
+                result.put("buyAccelerate",false);
+            }else{
+                result.put("buyPrincipal",false);
+                //拥有活币金或定币金之一，就不能购买任意加速产品
+                if((myCurrent != null && myCurrent.size() > 0) || (myPeriod != null && myPeriod.size() > 0)){
+                    result.put("buyAccelerate",false);
+                }else{
+                    result.put("buyAccelerate",true);
+                }
+            }
             result.put("email",user.getEmail());
             result.put("registerDate",DateUtils.dateFormat(user.getCreateDate(),DateUtils.DATE_PATTERN));
             result.put("userRole",user.getUserType());

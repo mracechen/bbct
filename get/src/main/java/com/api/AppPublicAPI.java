@@ -153,7 +153,7 @@ public class AppPublicAPI {
             result = swUserBasicService.userReg(userBasicDO);
         } catch (Exception e) {
             e.printStackTrace();
-            result = Result.error("system.error");
+            result = Result.error("AppPrivateAPI.register.block.error");
         }
         return result;
     }

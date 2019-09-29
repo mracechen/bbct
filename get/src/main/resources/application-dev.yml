@@ -80,7 +80,8 @@ configs:
   #-------------------
   #-------------------
     # 上线要改
-    serverIp: http://10.236.10.1:9980
+    serverIp: http://bbct.kkg222.com
+#    serverIp: http://10.235.20.47:9980
   #-------------------
   trading:
     url: sfsafdsf
@@ -124,7 +125,7 @@ configs:
   benchmarketingRate: 500
 
   blockChain:
-    url: http://10.235.20.211:8082
+    url: http://10.235.20.85:8082
     method:
       #插入userID
       insertMemo: contract.insert_memo
