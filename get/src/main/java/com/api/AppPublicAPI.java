@@ -234,6 +234,11 @@ public class AppPublicAPI {
 
     /**
      * 获取资讯列表
+     * @param type 类型，1-轮播图，2-轮播图下菜单，3-推荐菜单，4-table
+     * @param level 菜单层级，1-一级菜单，2-二级菜单
+     * @param fatherId 父菜单id
+     * @param page 分页页数，从第0页开始
+     * @param pageSize 分页每页显示数量
      * */
     @RequestMapping(value = "get_information")
     @ResponseBody

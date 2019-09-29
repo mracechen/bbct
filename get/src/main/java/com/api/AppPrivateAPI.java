@@ -207,6 +207,13 @@ public class AppPrivateAPI {
             if(byEmail != null){
                 return Result.error("AppPrivateAPI.resetLoginPassword.email.exist");
             }
+            Map<String,Object> params = new HashMap<>();
+            params.put("delFlag",CommonStatic.NOTDELETE);
+            params.put("ex1",CommonStatic.CHECK_WAITING);
+            List<SwEvangelistInfoDO> list = swEvangelistInfoService.list(params);
+            if(list != null && list.size() > 1){
+                return Result.error("AppPrivateAPI.resetLoginPassword.email.submitted");
+            }
             swEvangelistInfoDO.setTid(IDUtils.randomStr());
             swEvangelistInfoDO.setUpdateDate(new Date());
             swEvangelistInfoDO.setCreateDate(new Date());
@@ -395,19 +402,24 @@ public class AppPrivateAPI {
     @RequestMapping(value = "check_user",method = RequestMethod.GET)
     @ResponseBody
     public Result checkUser(Integer userId) {
-        if(StringUtils.isBlank(userId)){
-            return Result.error("AppPrivateAPI.checkUser.receiver.not.exist");
-        }
-        SwUserBasicDO user = swUserBasicService.get(userId);
-        if (user == null) {
-            return Result.error("AppPrivateAPI.checkUser.receiver.not.exist");
-        }
-        if(user.getEmail() != null){
-            if(user.getEmail().endsWith("canceled")){
-                return Result.error("AppPrivateAPI.checkUser.receiver.written.off");
+        try {
+            if(StringUtils.isBlank(userId)){
+                return Result.error("AppPrivateAPI.checkUser.receiver.not.exist");
             }
+            SwUserBasicDO user = swUserBasicService.get(userId);
+            if (user == null) {
+                return Result.error("AppPrivateAPI.checkUser.receiver.not.exist");
+            }
+            if(user.getEmail() != null){
+                if(user.getEmail().endsWith("canceled")){
+                    return Result.error("AppPrivateAPI.checkUser.receiver.written.off");
+                }
+            }
+            return Result.ok(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
         }
-        return Result.ok(user);
     }
 
     /**
@@ -415,14 +427,26 @@ public class AppPrivateAPI {
      * */
     @RequestMapping(value = "transfer",method = RequestMethod.POST)
     @ResponseBody
-    public Result TransferAccount(HttpServletRequest request, @RequestParam Integer userId, @RequestParam double amount,
-                                                  @RequestParam String coinId, @RequestParam String remark, @RequestParam String tradingPassword) {
-        SwUserBasicDO user = AppUserUtils.getUser(request);
-        String msg = swConsumeLogService.transfer(user, userId, amount, coinId, remark, tradingPassword);
-        if(StringUtils.isNotBlank(msg)){
-            return Result.error(msg);
+    public Result TransferAccount(HttpServletRequest request,
+                                  @RequestParam Integer userId,
+                                  @RequestParam double amount,
+                                  @RequestParam String coinId,
+                                  @RequestParam String remark,
+                                  @RequestParam String tradingPassword) {
+        try {
+            if(userId == null || amount <=0 || StringUtils.isBlank(coinId) || StringUtils.isBlank(tradingPassword)){
+                return Result.error("system.params.error");
+            }
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            String msg = swConsumeLogService.transfer(user, userId, amount, coinId, remark, tradingPassword);
+            if(StringUtils.isNotBlank(msg)){
+                return Result.error(msg);
+            }
+            return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
         }
-        return Result.ok();
     }
 
     /**
@@ -431,16 +455,21 @@ public class AppPrivateAPI {
     @RequestMapping(value = "transfer_log",method = RequestMethod.GET)
     @ResponseBody
     public Result TransferLog(HttpServletRequest request, Integer page, Integer pageSize, @RequestParam(required = false) String beginDate, @RequestParam(required = false) String endDate) {
-        SwUserBasicDO user = AppUserUtils.getUser(request);
-        if(StringUtils.isNotBlank(beginDate)){
-            beginDate = beginDate + " 00:00:00";
+        try {
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            if(StringUtils.isNotBlank(beginDate)){
+                beginDate = beginDate + " 00:00:00";
+            }
+            if(StringUtils.isNotBlank(beginDate)){
+                endDate = endDate + " 23:59:59";
+            }
+            List<SwTransferRecordDO> list = swTransferRecordService.transferRecord(user.getTid(),beginDate,endDate);
+            List<SwTransferRecordDO> res = list.stream().skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
+            return Result.ok(res);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
         }
-        if(StringUtils.isNotBlank(beginDate)){
-            endDate = endDate + " 23:59:59";
-        }
-        List<SwTransferRecordDO> list = swTransferRecordService.transferRecord(user.getTid(),beginDate,endDate);
-        List<SwTransferRecordDO> res = list.stream().skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
-        return Result.ok(res);
     }
 
     /**
