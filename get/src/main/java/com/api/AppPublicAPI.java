@@ -338,6 +338,7 @@ public class AppPublicAPI {
             swChargelogDO.setStatus(CommonStatic.TRANSFER_WAITING);
             SwWalletsDO wallet = swWalletsService.getWallet(memo, coinTypeDO.getTid());
             wallet.setFrozenAmount(new BigDecimal(String.valueOf(amount)));
+            wallet.setCurrency(new BigDecimal("0"));
             wallet.setUpdateDate(new Date());
             swWalletsService.update(wallet);
             swChargelogService.save(swChargelogDO);
