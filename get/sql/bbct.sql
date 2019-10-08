@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 26/09/2019 14:43:25
+ Date: 30/09/2019 09:51:22
 */
 
 SET NAMES utf8mb4;
@@ -30,15 +30,7 @@ CREATE TABLE `sw_app_info`  (
   `create_time` datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
   `download_ios` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分包下载ios',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'app更新记录表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sw_app_info
--- ----------------------------
-INSERT INTO `sw_app_info` VALUES (1, '1.0.0', 'https://fir.im/BBCT', 'http://192.168.1.104:8081/files/499b1fbb-056c-4de9-b802-b0e7d56ff27a.wgt', 1, '2019-09-14 00:00:00.000000', '2019-09-14 00:00:00');
-INSERT INTO `sw_app_info` VALUES (17, '1.1.0', 'https://fir.im/BBCT', 'http://10.235.20.47:8081/files/23a3b1a7-70d2-4d62-828c-959748274397.wgt', NULL, '2019-09-17 09:59:12.919000', '');
-INSERT INTO `sw_app_info` VALUES (18, '1.2.0', 'https://fir.im/BBCT', 'http://10.235.20.47:8081/files/1cd824d0-82be-4c19-8238-a5e780f9f215.wgt', NULL, '2019-09-17 16:35:23.084000', '');
-INSERT INTO `sw_app_info` VALUES (19, '1.3.0', 'https://fir.im/BBCT', 'http://10.235.20.47:8081/files/56576529-f3c8-4e92-ace4-92a9bb8986ba.wgt', NULL, '2019-09-17 17:56:00.239000', '');
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'app更新记录表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -194,7 +186,7 @@ CREATE TABLE `sys_file`  (
   `url` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'URL地址',
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1274 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '文件上传' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1309 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '文件上传' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_file
@@ -467,6 +459,41 @@ INSERT INTO `sys_file` VALUES (1270, 2, '/files/ad00b7b2-d9a1-40fb-bc2d-2901935f
 INSERT INTO `sys_file` VALUES (1271, 2, '/files/de1a9b75-638c-443d-8993-d2eeb2409944.mp4', '2019-09-26 11:43:18');
 INSERT INTO `sys_file` VALUES (1272, 2, '/files/94b7b0ad-1904-4f8e-8ccc-3bac5841ff0d.mp4', '2019-09-26 11:48:15');
 INSERT INTO `sys_file` VALUES (1273, 2, '/files/d8ed286d-fd74-45de-aeef-5da692e4be83.mp4', '2019-09-26 11:48:20');
+INSERT INTO `sys_file` VALUES (1274, 0, '/files/62a02c36-1f67-4dd4-8add-37956923f2de.png', '2019-09-26 14:52:07');
+INSERT INTO `sys_file` VALUES (1275, 0, '/files/d1359301-4f56-4eae-ac86-c0290d9f1177.png', '2019-09-26 14:59:23');
+INSERT INTO `sys_file` VALUES (1276, 0, '/files/bae02410-74aa-4ed5-bb94-bb5ee120acba.png', '2019-09-26 15:20:17');
+INSERT INTO `sys_file` VALUES (1277, 0, '/files/b3939101-2a95-4fb8-9158-15d849ef5d20.png', '2019-09-26 15:26:25');
+INSERT INTO `sys_file` VALUES (1278, 2, '/files/2726c1a3-076f-4c48-973e-1d0161f3894b.mp4', '2019-09-26 15:26:33');
+INSERT INTO `sys_file` VALUES (1279, 2, '/files/a7ca2151-f1da-41c9-8316-a4b348326724.mp4', '2019-09-26 15:32:08');
+INSERT INTO `sys_file` VALUES (1280, 2, '/files/3aaa7cd6-600c-4cfd-a21d-54afb555fd1d.mp4', '2019-09-26 15:50:47');
+INSERT INTO `sys_file` VALUES (1281, 0, '/files/8c760822-c798-4a5b-a62d-2d86dd8fced3.png', '2019-09-26 15:51:34');
+INSERT INTO `sys_file` VALUES (1282, 2, '/files/b58ad5f9-a70e-4541-9c4e-32eba59b51d9.mp4', '2019-09-26 16:06:33');
+INSERT INTO `sys_file` VALUES (1283, 0, '/files/3bec52b6-5b69-46e3-9fd8-5e41b7cbd1ed.jpg', '2019-09-26 16:06:41');
+INSERT INTO `sys_file` VALUES (1284, 99, '/files/f6b16e62-235c-4d09-b0bd-d0fd5c34b5a3.wgt', '2019-09-26 17:05:53');
+INSERT INTO `sys_file` VALUES (1285, 99, '/files/31d80c21-54bc-49dc-b723-5e07ea1fb659.apk', '2019-09-26 17:13:32');
+INSERT INTO `sys_file` VALUES (1286, 0, '/files/534712d0-5665-4087-8e0c-39371b0293df.png', '2019-09-26 17:24:59');
+INSERT INTO `sys_file` VALUES (1287, 0, '/files/517a7cb6-96c9-4ce2-aea0-e7fcea45866e.png', '2019-09-26 17:27:32');
+INSERT INTO `sys_file` VALUES (1288, 0, '/files/04f2aac0-f5d3-4fef-977f-2326d423f35c.png', '2019-09-26 17:27:59');
+INSERT INTO `sys_file` VALUES (1289, 0, '/files/902c3a5e-acfb-4461-81ab-427590404e3f.png', '2019-09-26 17:28:24');
+INSERT INTO `sys_file` VALUES (1290, 0, '/files/625f24f2-50d3-4dcd-98e0-1bf452282b04.png', '2019-09-26 17:30:04');
+INSERT INTO `sys_file` VALUES (1291, 0, '/files/2f6ba8a0-674c-4451-bf27-9762a1901514.png', '2019-09-26 17:30:36');
+INSERT INTO `sys_file` VALUES (1292, 99, '/files/e3c832b2-f701-4c64-8992-2d1ff6830c64.apk', '2019-09-26 17:31:24');
+INSERT INTO `sys_file` VALUES (1293, 0, '/files/e10bc913-6a59-4995-957d-376c607f4cd9.png', '2019-09-26 17:31:40');
+INSERT INTO `sys_file` VALUES (1294, 0, '/files/16174004-10d8-44bd-8124-2d227b5b6671.png', '2019-09-26 17:32:30');
+INSERT INTO `sys_file` VALUES (1295, 0, '/files/87aa7328-003a-4337-ac47-8eaff2d2fecb.png', '2019-09-26 17:33:09');
+INSERT INTO `sys_file` VALUES (1296, 99, '/files/5f764bbc-c1a5-4918-aae4-a893afbfda69.wgt', '2019-09-26 18:15:23');
+INSERT INTO `sys_file` VALUES (1297, 2, '/files/92aedbc6-cb57-40d9-b9e4-d69db3002020.mp4', '2019-09-26 18:20:38');
+INSERT INTO `sys_file` VALUES (1298, 0, '/files/3d7b00b2-eb4f-43ec-a4e6-f01871acf680.png', '2019-09-26 19:38:49');
+INSERT INTO `sys_file` VALUES (1299, 0, '/files/b75911c6-7271-4b5f-90c2-ce0ac396b72e.png', '2019-09-26 19:39:26');
+INSERT INTO `sys_file` VALUES (1300, 0, '/files/eba872c9-2574-41fb-97d3-38d07b134594.png', '2019-09-26 19:40:22');
+INSERT INTO `sys_file` VALUES (1301, 0, '/files/66d3fd3f-fcd9-4018-81f1-0be3ca33dc1f.png', '2019-09-26 19:41:02');
+INSERT INTO `sys_file` VALUES (1302, 0, '/files/03c2581d-356d-468d-8b65-2df08c366c1b.png', '2019-09-26 19:43:50');
+INSERT INTO `sys_file` VALUES (1303, 0, '/files/08e32191-2f50-4688-be86-9c368681c3fe.png', '2019-09-26 19:44:55');
+INSERT INTO `sys_file` VALUES (1304, 2, '/files/abcd0c6a-2c3b-4332-ad4c-2f70771d2a8b.mp4', '2019-09-27 14:28:06');
+INSERT INTO `sys_file` VALUES (1305, 2, '/files/3524c9e6-fb06-4673-8693-3d9b1996d62a.mp4', '2019-09-27 14:29:51');
+INSERT INTO `sys_file` VALUES (1306, 99, '/files/a53db071-3090-4e6d-b00c-14fd1e432542.wgt', '2019-09-27 17:14:59');
+INSERT INTO `sys_file` VALUES (1307, 99, '/files/b7553fff-94a0-4cfe-a26c-e10430b078b1.wgt', '2019-09-27 17:30:15');
+INSERT INTO `sys_file` VALUES (1308, 99, '/files/c3b1558e-8d1a-4af2-b851-fbef77e4e117.wgt', '2019-09-27 17:42:59');
 
 -- ----------------------------
 -- Table structure for sys_log
@@ -484,7 +511,37 @@ CREATE TABLE `sys_log`  (
   `gmt_create` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `app` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'settlement' COMMENT '应用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_log
+-- ----------------------------
+INSERT INTO `sys_log` VALUES (1, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '119.139.196.64', '2019-09-26 14:46:11', 'sesame');
+INSERT INTO `sys_log` VALUES (2, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/product/total_currency', '{}', '119.139.196.64', '2019-09-26 14:46:11', 'sesame');
+INSERT INTO `sys_log` VALUES (3, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/product/profit_statistic', '{}', '119.139.196.64', '2019-09-26 14:46:11', 'sesame');
+INSERT INTO `sys_log` VALUES (4, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '119.139.196.64', '2019-09-26 14:46:13', 'sesame');
+INSERT INTO `sys_log` VALUES (5, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '119.139.196.64', '2019-09-26 14:46:17', 'sesame');
+INSERT INTO `sys_log` VALUES (6, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/product/principal_list', '{}', '119.139.196.64', '2019-09-26 14:46:17', 'sesame');
+INSERT INTO `sys_log` VALUES (7, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/product/currency_list', '{}', '119.139.196.64', '2019-09-26 14:46:17', 'sesame');
+INSERT INTO `sys_log` VALUES (8, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/product/my_principal', '{}', '119.139.196.64', '2019-09-26 14:46:18', 'sesame');
+INSERT INTO `sys_log` VALUES (9, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/product/my_principal_status', '{}', '119.139.196.64', '2019-09-26 14:46:18', 'sesame');
+INSERT INTO `sys_log` VALUES (10, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '119.139.196.64', '2019-09-26 14:46:19', 'sesame');
+INSERT INTO `sys_log` VALUES (11, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '119.139.196.64', '2019-09-26 14:46:21', 'sesame');
+INSERT INTO `sys_log` VALUES (12, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '119.139.196.64', '2019-09-26 14:48:31', 'sesame');
+INSERT INTO `sys_log` VALUES (13, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_appinfo', '{}', '119.139.196.64', '2019-09-26 14:48:33', 'sesame');
+INSERT INTO `sys_log` VALUES (14, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '119.139.196.64', '2019-09-26 14:48:33', 'sesame');
+INSERT INTO `sys_log` VALUES (15, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/product/profit_statistic', '{}', '119.139.196.64', '2019-09-26 14:48:34', 'sesame');
+INSERT INTO `sys_log` VALUES (16, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/product/total_currency', '{}', '119.139.196.64', '2019-09-26 14:48:34', 'sesame');
+INSERT INTO `sys_log` VALUES (17, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '119.139.196.64', '2019-09-26 14:49:12', 'sesame');
+INSERT INTO `sys_log` VALUES (18, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pc/get_appinfo', '{}', '119.139.196.64', '2019-09-26 14:49:16', 'sesame');
+INSERT INTO `sys_log` VALUES (19, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '119.139.196.64', '2019-09-26 14:49:16', 'sesame');
+INSERT INTO `sys_log` VALUES (20, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/product/total_currency', '{}', '119.139.196.64', '2019-09-26 14:49:16', 'sesame');
+INSERT INTO `sys_log` VALUES (21, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/product/profit_statistic', '{}', '119.139.196.64', '2019-09-26 14:49:16', 'sesame');
+INSERT INTO `sys_log` VALUES (22, -1, '获取用户信息为空', 'normal', NULL, '/api/app/pv/get_user_info', '{}', '119.139.196.64', '2019-09-26 14:49:18', 'sesame');
+INSERT INTO `sys_log` VALUES (23, 1, 'admin', 'error', NULL, 'http://bbct.kkg222.com/manager/tasklog/task/list', 'org.springframework.jdbc.BadSqlGrammarException: \n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_task\' doesn\'t exist\n### The error may exist in class path resource [mybatis/system/tasklog/TaskMapper.xml]\n### The error may involve defaultParameterMap\n### The error occurred while setting parameters\n### SQL: select `tid`,`job_name`,`batch_num`,`type`,`start_date`,`end_date`,`message`,`create_date`,`del_flag` from         t_task                                      order by tid desc                                     limit ?, ?\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_task\' doesn\'t exist\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_task\' doesn\'t exist', NULL, '2019-09-26 14:55:06', NULL);
+INSERT INTO `sys_log` VALUES (24, 1, 'admin', 'error', NULL, 'http://bbct.kkg222.com/manager/tasklog/task/list', 'org.springframework.jdbc.BadSqlGrammarException: \n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_task\' doesn\'t exist\n### The error may exist in class path resource [mybatis/system/tasklog/TaskMapper.xml]\n### The error may involve defaultParameterMap\n### The error occurred while setting parameters\n### SQL: select `tid`,`job_name`,`batch_num`,`type`,`start_date`,`end_date`,`message`,`create_date`,`del_flag` from         t_task                                      order by create_date desc                                     limit ?, ?\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_task\' doesn\'t exist\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_task\' doesn\'t exist', NULL, '2019-09-26 14:55:06', NULL);
+INSERT INTO `sys_log` VALUES (25, 1, 'admin', 'error', NULL, 'http://bbct.kkg222.com/manager/record/msgRecord/list', 'org.springframework.jdbc.BadSqlGrammarException: \n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_msg_record\' doesn\'t exist\n### The error may exist in class path resource [mybatis/system/record/MsgRecordMapper.xml]\n### The error may involve defaultParameterMap\n### The error occurred while setting parameters\n### SQL: select `tid`,`mobile`,`msg_content`,`status`,`create_date`,`del_flag` from t_msg_record                                      order by tid desc                                     limit ?, ?\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_msg_record\' doesn\'t exist\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_msg_record\' doesn\'t exist', NULL, '2019-09-26 14:55:07', NULL);
+INSERT INTO `sys_log` VALUES (26, 1, 'admin', 'error', NULL, 'http://bbct.kkg222.com/manager/record/msgRecord/list', 'org.springframework.jdbc.BadSqlGrammarException: \n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_msg_record\' doesn\'t exist\n### The error may exist in class path resource [mybatis/system/record/MsgRecordMapper.xml]\n### The error may involve defaultParameterMap\n### The error occurred while setting parameters\n### SQL: select `tid`,`mobile`,`msg_content`,`status`,`create_date`,`del_flag` from t_msg_record                                      order by create_date desc                                     limit ?, ?\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_msg_record\' doesn\'t exist\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table \'bbctdb.t_msg_record\' doesn\'t exist', NULL, '2019-09-26 14:55:07', NULL);
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -502,7 +559,7 @@ CREATE TABLE `sys_menu`  (
   `gmt_create` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `gmt_modified` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 345 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单管理' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 347 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单管理' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -620,6 +677,8 @@ INSERT INTO `sys_menu` VALUES (341, 339, '用户活币金列表', '/manager/get/
 INSERT INTO `sys_menu` VALUES (342, 339, '用户定币金列表', '/manager/get/swPeriodUser', 'get:swPeriodUser:swPeriodUser', 1, '', 3, NULL, NULL);
 INSERT INTO `sys_menu` VALUES (343, 339, '用户优币金列表', '/manager/get/swEvangelistUser', 'get:swEvangelistUser:swEvangelistUser', 1, '', 4, NULL, NULL);
 INSERT INTO `sys_menu` VALUES (344, 339, '用户升币金列表', '/manager/get/swPartnerUser', 'get:swPartnerUser:swPartnerUser', 1, '', 5, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (345, 317, '删除', '', 'get:appInfo:remove', 2, '', 2, NULL, NULL);
+INSERT INTO `sys_menu` VALUES (346, 317, '删除', '', 'get:appInfo:remove', 2, '', 2, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -652,7 +711,7 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) NULL DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9017 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9248 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -774,120 +833,122 @@ INSERT INTO `sys_role_menu` VALUES (7654, 6, 270);
 INSERT INTO `sys_role_menu` VALUES (7655, 6, 255);
 INSERT INTO `sys_role_menu` VALUES (7656, 6, -1);
 INSERT INTO `sys_role_menu` VALUES (7657, 6, 109);
-INSERT INTO `sys_role_menu` VALUES (8903, 1, 338);
-INSERT INTO `sys_role_menu` VALUES (8904, 1, 337);
-INSERT INTO `sys_role_menu` VALUES (8905, 1, 335);
-INSERT INTO `sys_role_menu` VALUES (8906, 1, 334);
-INSERT INTO `sys_role_menu` VALUES (8907, 1, 332);
-INSERT INTO `sys_role_menu` VALUES (8908, 1, 331);
-INSERT INTO `sys_role_menu` VALUES (8909, 1, 329);
-INSERT INTO `sys_role_menu` VALUES (8910, 1, 328);
-INSERT INTO `sys_role_menu` VALUES (8911, 1, 326);
-INSERT INTO `sys_role_menu` VALUES (8912, 1, 325);
-INSERT INTO `sys_role_menu` VALUES (8913, 1, 323);
-INSERT INTO `sys_role_menu` VALUES (8914, 1, 322);
-INSERT INTO `sys_role_menu` VALUES (8915, 1, 316);
-INSERT INTO `sys_role_menu` VALUES (8916, 1, 315);
-INSERT INTO `sys_role_menu` VALUES (8917, 1, 314);
-INSERT INTO `sys_role_menu` VALUES (8918, 1, 313);
-INSERT INTO `sys_role_menu` VALUES (8919, 1, 311);
-INSERT INTO `sys_role_menu` VALUES (8920, 1, 308);
-INSERT INTO `sys_role_menu` VALUES (8921, 1, 306);
-INSERT INTO `sys_role_menu` VALUES (8922, 1, 305);
-INSERT INTO `sys_role_menu` VALUES (8923, 1, 301);
-INSERT INTO `sys_role_menu` VALUES (8924, 1, 283);
-INSERT INTO `sys_role_menu` VALUES (8925, 1, 282);
-INSERT INTO `sys_role_menu` VALUES (8926, 1, 281);
-INSERT INTO `sys_role_menu` VALUES (8927, 1, 295);
-INSERT INTO `sys_role_menu` VALUES (8928, 1, 294);
-INSERT INTO `sys_role_menu` VALUES (8929, 1, 293);
-INSERT INTO `sys_role_menu` VALUES (8930, 1, 309);
-INSERT INTO `sys_role_menu` VALUES (8931, 1, 319);
-INSERT INTO `sys_role_menu` VALUES (8932, 1, 318);
-INSERT INTO `sys_role_menu` VALUES (8933, 1, 291);
-INSERT INTO `sys_role_menu` VALUES (8934, 1, 290);
-INSERT INTO `sys_role_menu` VALUES (8935, 1, 289);
-INSERT INTO `sys_role_menu` VALUES (8936, 1, 287);
-INSERT INTO `sys_role_menu` VALUES (8937, 1, 286);
-INSERT INTO `sys_role_menu` VALUES (8938, 1, 285);
-INSERT INTO `sys_role_menu` VALUES (8939, 1, 205);
-INSERT INTO `sys_role_menu` VALUES (8940, 1, 92);
-INSERT INTO `sys_role_menu` VALUES (8941, 1, 57);
-INSERT INTO `sys_role_menu` VALUES (8942, 1, 30);
-INSERT INTO `sys_role_menu` VALUES (8943, 1, 29);
-INSERT INTO `sys_role_menu` VALUES (8944, 1, 28);
-INSERT INTO `sys_role_menu` VALUES (8945, 1, 206);
-INSERT INTO `sys_role_menu` VALUES (8946, 1, 118);
-INSERT INTO `sys_role_menu` VALUES (8947, 1, 48);
-INSERT INTO `sys_role_menu` VALUES (8948, 1, 302);
-INSERT INTO `sys_role_menu` VALUES (8949, 1, 209);
-INSERT INTO `sys_role_menu` VALUES (8950, 1, 207);
-INSERT INTO `sys_role_menu` VALUES (8951, 1, 203);
-INSERT INTO `sys_role_menu` VALUES (8952, 1, 76);
-INSERT INTO `sys_role_menu` VALUES (8953, 1, 75);
-INSERT INTO `sys_role_menu` VALUES (8954, 1, 74);
-INSERT INTO `sys_role_menu` VALUES (8955, 1, 62);
-INSERT INTO `sys_role_menu` VALUES (8956, 1, 56);
-INSERT INTO `sys_role_menu` VALUES (8957, 1, 55);
-INSERT INTO `sys_role_menu` VALUES (8958, 1, 15);
-INSERT INTO `sys_role_menu` VALUES (8959, 1, 26);
-INSERT INTO `sys_role_menu` VALUES (8960, 1, 25);
-INSERT INTO `sys_role_menu` VALUES (8961, 1, 24);
-INSERT INTO `sys_role_menu` VALUES (8962, 1, 14);
-INSERT INTO `sys_role_menu` VALUES (8963, 1, 13);
-INSERT INTO `sys_role_menu` VALUES (8964, 1, 12);
-INSERT INTO `sys_role_menu` VALUES (8965, 1, 61);
-INSERT INTO `sys_role_menu` VALUES (8966, 1, 22);
-INSERT INTO `sys_role_menu` VALUES (8967, 1, 21);
-INSERT INTO `sys_role_menu` VALUES (8968, 1, 20);
-INSERT INTO `sys_role_menu` VALUES (8969, 1, 83);
-INSERT INTO `sys_role_menu` VALUES (8970, 1, 81);
-INSERT INTO `sys_role_menu` VALUES (8971, 1, 80);
-INSERT INTO `sys_role_menu` VALUES (8972, 1, 79);
-INSERT INTO `sys_role_menu` VALUES (8973, 1, 71);
-INSERT INTO `sys_role_menu` VALUES (8974, 1, 336);
-INSERT INTO `sys_role_menu` VALUES (8975, 1, 333);
-INSERT INTO `sys_role_menu` VALUES (8976, 1, 330);
-INSERT INTO `sys_role_menu` VALUES (8977, 1, 327);
-INSERT INTO `sys_role_menu` VALUES (8978, 1, 324);
-INSERT INTO `sys_role_menu` VALUES (8979, 1, 321);
-INSERT INTO `sys_role_menu` VALUES (8980, 1, 320);
-INSERT INTO `sys_role_menu` VALUES (8981, 1, 312);
-INSERT INTO `sys_role_menu` VALUES (8982, 1, 310);
-INSERT INTO `sys_role_menu` VALUES (8983, 1, 307);
-INSERT INTO `sys_role_menu` VALUES (8984, 1, 303);
-INSERT INTO `sys_role_menu` VALUES (8985, 1, 304);
-INSERT INTO `sys_role_menu` VALUES (8986, 1, 300);
-INSERT INTO `sys_role_menu` VALUES (8987, 1, 299);
-INSERT INTO `sys_role_menu` VALUES (8988, 1, 298);
-INSERT INTO `sys_role_menu` VALUES (8989, 1, 280);
-INSERT INTO `sys_role_menu` VALUES (8990, 1, 279);
-INSERT INTO `sys_role_menu` VALUES (8991, 1, 292);
-INSERT INTO `sys_role_menu` VALUES (8992, 1, 273);
-INSERT INTO `sys_role_menu` VALUES (8993, 1, 272);
-INSERT INTO `sys_role_menu` VALUES (8994, 1, 317);
-INSERT INTO `sys_role_menu` VALUES (8995, 1, 288);
-INSERT INTO `sys_role_menu` VALUES (8996, 1, 284);
-INSERT INTO `sys_role_menu` VALUES (8997, 1, 204);
-INSERT INTO `sys_role_menu` VALUES (8998, 1, 109);
-INSERT INTO `sys_role_menu` VALUES (8999, 1, 27);
-INSERT INTO `sys_role_menu` VALUES (9000, 1, 91);
-INSERT INTO `sys_role_menu` VALUES (9001, 1, 77);
-INSERT INTO `sys_role_menu` VALUES (9002, 1, 202);
-INSERT INTO `sys_role_menu` VALUES (9003, 1, 73);
-INSERT INTO `sys_role_menu` VALUES (9004, 1, 7);
-INSERT INTO `sys_role_menu` VALUES (9005, 1, 6);
-INSERT INTO `sys_role_menu` VALUES (9006, 1, 2);
-INSERT INTO `sys_role_menu` VALUES (9007, 1, 3);
-INSERT INTO `sys_role_menu` VALUES (9008, 1, 78);
-INSERT INTO `sys_role_menu` VALUES (9009, 1, 1);
-INSERT INTO `sys_role_menu` VALUES (9010, 1, 339);
-INSERT INTO `sys_role_menu` VALUES (9011, 1, 344);
-INSERT INTO `sys_role_menu` VALUES (9012, 1, 343);
-INSERT INTO `sys_role_menu` VALUES (9013, 1, 342);
-INSERT INTO `sys_role_menu` VALUES (9014, 1, 341);
-INSERT INTO `sys_role_menu` VALUES (9015, 1, 340);
-INSERT INTO `sys_role_menu` VALUES (9016, 1, -1);
+INSERT INTO `sys_role_menu` VALUES (9132, 1, 344);
+INSERT INTO `sys_role_menu` VALUES (9133, 1, 343);
+INSERT INTO `sys_role_menu` VALUES (9134, 1, 342);
+INSERT INTO `sys_role_menu` VALUES (9135, 1, 341);
+INSERT INTO `sys_role_menu` VALUES (9136, 1, 340);
+INSERT INTO `sys_role_menu` VALUES (9137, 1, 338);
+INSERT INTO `sys_role_menu` VALUES (9138, 1, 337);
+INSERT INTO `sys_role_menu` VALUES (9139, 1, 335);
+INSERT INTO `sys_role_menu` VALUES (9140, 1, 334);
+INSERT INTO `sys_role_menu` VALUES (9141, 1, 332);
+INSERT INTO `sys_role_menu` VALUES (9142, 1, 331);
+INSERT INTO `sys_role_menu` VALUES (9143, 1, 329);
+INSERT INTO `sys_role_menu` VALUES (9144, 1, 328);
+INSERT INTO `sys_role_menu` VALUES (9145, 1, 326);
+INSERT INTO `sys_role_menu` VALUES (9146, 1, 325);
+INSERT INTO `sys_role_menu` VALUES (9147, 1, 323);
+INSERT INTO `sys_role_menu` VALUES (9148, 1, 322);
+INSERT INTO `sys_role_menu` VALUES (9149, 1, 316);
+INSERT INTO `sys_role_menu` VALUES (9150, 1, 315);
+INSERT INTO `sys_role_menu` VALUES (9151, 1, 314);
+INSERT INTO `sys_role_menu` VALUES (9152, 1, 313);
+INSERT INTO `sys_role_menu` VALUES (9153, 1, 311);
+INSERT INTO `sys_role_menu` VALUES (9154, 1, 308);
+INSERT INTO `sys_role_menu` VALUES (9155, 1, 306);
+INSERT INTO `sys_role_menu` VALUES (9156, 1, 305);
+INSERT INTO `sys_role_menu` VALUES (9157, 1, 301);
+INSERT INTO `sys_role_menu` VALUES (9158, 1, 283);
+INSERT INTO `sys_role_menu` VALUES (9159, 1, 282);
+INSERT INTO `sys_role_menu` VALUES (9160, 1, 281);
+INSERT INTO `sys_role_menu` VALUES (9161, 1, 295);
+INSERT INTO `sys_role_menu` VALUES (9162, 1, 294);
+INSERT INTO `sys_role_menu` VALUES (9163, 1, 293);
+INSERT INTO `sys_role_menu` VALUES (9164, 1, 309);
+INSERT INTO `sys_role_menu` VALUES (9165, 1, 345);
+INSERT INTO `sys_role_menu` VALUES (9166, 1, 319);
+INSERT INTO `sys_role_menu` VALUES (9167, 1, 318);
+INSERT INTO `sys_role_menu` VALUES (9168, 1, 291);
+INSERT INTO `sys_role_menu` VALUES (9169, 1, 290);
+INSERT INTO `sys_role_menu` VALUES (9170, 1, 289);
+INSERT INTO `sys_role_menu` VALUES (9171, 1, 287);
+INSERT INTO `sys_role_menu` VALUES (9172, 1, 286);
+INSERT INTO `sys_role_menu` VALUES (9173, 1, 285);
+INSERT INTO `sys_role_menu` VALUES (9174, 1, 205);
+INSERT INTO `sys_role_menu` VALUES (9175, 1, 92);
+INSERT INTO `sys_role_menu` VALUES (9176, 1, 57);
+INSERT INTO `sys_role_menu` VALUES (9177, 1, 30);
+INSERT INTO `sys_role_menu` VALUES (9178, 1, 29);
+INSERT INTO `sys_role_menu` VALUES (9179, 1, 28);
+INSERT INTO `sys_role_menu` VALUES (9180, 1, 206);
+INSERT INTO `sys_role_menu` VALUES (9181, 1, 118);
+INSERT INTO `sys_role_menu` VALUES (9182, 1, 48);
+INSERT INTO `sys_role_menu` VALUES (9183, 1, 302);
+INSERT INTO `sys_role_menu` VALUES (9184, 1, 209);
+INSERT INTO `sys_role_menu` VALUES (9185, 1, 207);
+INSERT INTO `sys_role_menu` VALUES (9186, 1, 203);
+INSERT INTO `sys_role_menu` VALUES (9187, 1, 76);
+INSERT INTO `sys_role_menu` VALUES (9188, 1, 75);
+INSERT INTO `sys_role_menu` VALUES (9189, 1, 74);
+INSERT INTO `sys_role_menu` VALUES (9190, 1, 62);
+INSERT INTO `sys_role_menu` VALUES (9191, 1, 56);
+INSERT INTO `sys_role_menu` VALUES (9192, 1, 55);
+INSERT INTO `sys_role_menu` VALUES (9193, 1, 15);
+INSERT INTO `sys_role_menu` VALUES (9194, 1, 26);
+INSERT INTO `sys_role_menu` VALUES (9195, 1, 25);
+INSERT INTO `sys_role_menu` VALUES (9196, 1, 24);
+INSERT INTO `sys_role_menu` VALUES (9197, 1, 14);
+INSERT INTO `sys_role_menu` VALUES (9198, 1, 13);
+INSERT INTO `sys_role_menu` VALUES (9199, 1, 12);
+INSERT INTO `sys_role_menu` VALUES (9200, 1, 61);
+INSERT INTO `sys_role_menu` VALUES (9201, 1, 22);
+INSERT INTO `sys_role_menu` VALUES (9202, 1, 21);
+INSERT INTO `sys_role_menu` VALUES (9203, 1, 20);
+INSERT INTO `sys_role_menu` VALUES (9204, 1, 83);
+INSERT INTO `sys_role_menu` VALUES (9205, 1, 81);
+INSERT INTO `sys_role_menu` VALUES (9206, 1, 80);
+INSERT INTO `sys_role_menu` VALUES (9207, 1, 79);
+INSERT INTO `sys_role_menu` VALUES (9208, 1, 71);
+INSERT INTO `sys_role_menu` VALUES (9209, 1, 339);
+INSERT INTO `sys_role_menu` VALUES (9210, 1, 336);
+INSERT INTO `sys_role_menu` VALUES (9211, 1, 333);
+INSERT INTO `sys_role_menu` VALUES (9212, 1, 330);
+INSERT INTO `sys_role_menu` VALUES (9213, 1, 327);
+INSERT INTO `sys_role_menu` VALUES (9214, 1, 324);
+INSERT INTO `sys_role_menu` VALUES (9215, 1, 321);
+INSERT INTO `sys_role_menu` VALUES (9216, 1, 320);
+INSERT INTO `sys_role_menu` VALUES (9217, 1, 312);
+INSERT INTO `sys_role_menu` VALUES (9218, 1, 310);
+INSERT INTO `sys_role_menu` VALUES (9219, 1, 307);
+INSERT INTO `sys_role_menu` VALUES (9220, 1, 303);
+INSERT INTO `sys_role_menu` VALUES (9221, 1, 304);
+INSERT INTO `sys_role_menu` VALUES (9222, 1, 300);
+INSERT INTO `sys_role_menu` VALUES (9223, 1, 299);
+INSERT INTO `sys_role_menu` VALUES (9224, 1, 298);
+INSERT INTO `sys_role_menu` VALUES (9225, 1, 280);
+INSERT INTO `sys_role_menu` VALUES (9226, 1, 279);
+INSERT INTO `sys_role_menu` VALUES (9227, 1, 292);
+INSERT INTO `sys_role_menu` VALUES (9228, 1, 273);
+INSERT INTO `sys_role_menu` VALUES (9229, 1, 272);
+INSERT INTO `sys_role_menu` VALUES (9230, 1, 288);
+INSERT INTO `sys_role_menu` VALUES (9231, 1, 284);
+INSERT INTO `sys_role_menu` VALUES (9232, 1, 204);
+INSERT INTO `sys_role_menu` VALUES (9233, 1, 27);
+INSERT INTO `sys_role_menu` VALUES (9234, 1, 91);
+INSERT INTO `sys_role_menu` VALUES (9235, 1, 77);
+INSERT INTO `sys_role_menu` VALUES (9236, 1, 202);
+INSERT INTO `sys_role_menu` VALUES (9237, 1, 73);
+INSERT INTO `sys_role_menu` VALUES (9238, 1, 7);
+INSERT INTO `sys_role_menu` VALUES (9239, 1, 6);
+INSERT INTO `sys_role_menu` VALUES (9240, 1, 2);
+INSERT INTO `sys_role_menu` VALUES (9241, 1, 3);
+INSERT INTO `sys_role_menu` VALUES (9242, 1, 78);
+INSERT INTO `sys_role_menu` VALUES (9243, 1, 1);
+INSERT INTO `sys_role_menu` VALUES (9244, 1, 346);
+INSERT INTO `sys_role_menu` VALUES (9245, 1, 317);
+INSERT INTO `sys_role_menu` VALUES (9246, 1, 109);
+INSERT INTO `sys_role_menu` VALUES (9247, 1, -1);
 
 -- ----------------------------
 -- Table structure for sys_task
@@ -1048,14 +1109,6 @@ CREATE TABLE `t_mail_record`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '邮箱注册码表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of t_mail_record
--- ----------------------------
-INSERT INTO `t_mail_record` VALUES ('07b8a076e2cf4ae0ab0e646564127137', '1143178854@qq.com', '6371', 0, '2019-09-19 18:02:41', NULL, '0');
-INSERT INTO `t_mail_record` VALUES ('530cd9ef71eb448b810fde2e67f35394', 'lamanque@126.com', '9876', 1, '2019-09-19 17:44:41', NULL, '0');
-INSERT INTO `t_mail_record` VALUES ('be72fde9d0824763bcf97b792b16631e', '1145308642@qq.com', '3128', 1, '2019-09-19 17:04:57', NULL, '0');
-INSERT INTO `t_mail_record` VALUES ('d2b993982c4a4b87bda82208559232df', '27592285@qq.com', '6184', 1, '2019-09-20 10:06:58', NULL, '0');
-
--- ----------------------------
 -- Table structure for t_security_manager
 -- ----------------------------
 DROP TABLE IF EXISTS `t_security_manager`;
@@ -1102,6 +1155,7 @@ CREATE TABLE `t_sw_account_record`  (
 -- Records of t_sw_account_record
 -- ----------------------------
 INSERT INTO `t_sw_account_record` VALUES ('004184e9d95e44769c56a47799876af5', 104414, 1009, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 20.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100060.0000, NULL, NULL, '2019-09-18 10:43:00', '2019-09-18 10:43:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('0057927753b8490a9927ecae85b464ea', 104428, 1002, 9, 'cb7f09bdb0ef4174abd446d6c1e7745b', 50000.0000, 'system.benchmarking', 50000.0000, NULL, NULL, '2019-09-26 19:59:35', '2019-09-26 19:59:35', '0');
 INSERT INTO `t_sw_account_record` VALUES ('0060fd8569c040ce992dc63c6e2c940d', 104414, 1017, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 71160.0000, NULL, NULL, '2019-09-18 17:01:00', '2019-09-18 17:01:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('00d5dfc8b68a4fa99412e3ee953a0e62', 104414, 1002, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 69450.0000, NULL, NULL, '2019-09-18 12:07:00', '2019-09-18 12:07:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('00de0769de354fdfb901847996586986', 104414, 1001, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 99000.0000, NULL, NULL, '2019-09-18 15:46:09', '2019-09-18 15:46:09', '0');
@@ -1195,6 +1249,7 @@ INSERT INTO `t_sw_account_record` VALUES ('3c974013ee6f4d67b60b0b6f88283478', 10
 INSERT INTO `t_sw_account_record` VALUES ('3db21cf43c85473f879298121948ca05', 104414, 1066, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 103880.0000, NULL, NULL, '2019-09-18 17:33:00', '2019-09-18 17:33:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('3db29b07a21243eaa5a10c09556482b7', 104418, 1004, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 200.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 994650.0000, NULL, NULL, '2019-09-17 18:07:00', '2019-09-17 18:07:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('3e240a28934c445da66c917066c75fb1', 104414, 1043, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -30000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 72200.0000, NULL, NULL, '2019-09-18 17:15:30', '2019-09-18 17:15:30', '0');
+INSERT INTO `t_sw_account_record` VALUES ('3e9c639caa874500a0047600c3c20388', 104428, 1004, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -25000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 20000.0000, NULL, NULL, '2019-09-26 20:02:37', '2019-09-26 20:02:37', '0');
 INSERT INTO `t_sw_account_record` VALUES ('3eeee46f0b3a488380051bbcfdd79a19', 104414, 1019, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 300.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 71460.0000, NULL, NULL, '2019-09-18 17:02:00', '2019-09-18 17:02:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('40b9582a4bdc464e97d8fcf827775ff7', 104414, 1023, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70470.0000, NULL, NULL, '2019-09-18 12:24:00', '2019-09-18 12:24:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('412ce48567bc43b3a70e66589e7b9608', 104417, 1004, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -50000.0000, '{\"en\":\"购买定币金\",\"zh\":\"购买定币金\"}', 50000.0000, NULL, NULL, '2019-09-19 19:04:33', '2019-09-19 19:04:33', '0');
@@ -1206,6 +1261,7 @@ INSERT INTO `t_sw_account_record` VALUES ('42547538b02146e0b836687257dc822a', 10
 INSERT INTO `t_sw_account_record` VALUES ('4416623f8f054a138cb5eed2cd98393d', 104414, 1014, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 69930.0000, NULL, NULL, '2019-09-18 12:15:00', '2019-09-18 12:15:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('44340a5dc1704426923ad69119e6191c', 104420, 1014, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 99240.0000, NULL, NULL, '2019-09-19 12:07:00', '2019-09-19 12:07:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('44ef0f627e71461c8bc5c4ab738a8399', 104414, 1063, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 103700.0000, NULL, NULL, '2019-09-18 17:30:00', '2019-09-18 17:30:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('479492e89e4b4f378fdae03730cf4a00', 104428, 1007, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', 50000.0000, '{\"en\":\"取消活币金\",\"zh\":\"取消活币金\"}', 150000.0000, NULL, NULL, '2019-09-26 20:06:31', '2019-09-26 20:06:31', '0');
 INSERT INTO `t_sw_account_record` VALUES ('47ed162bd9f1412995f616a04d8ed1a0', 104426, 1002, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 99000.0000, NULL, NULL, '2019-09-19 11:55:32', '2019-09-19 11:55:32', '0');
 INSERT INTO `t_sw_account_record` VALUES ('48640d118a14489eba10808d41b8c3cc', 104425, 1005, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 99000.0000, NULL, NULL, '2019-09-19 11:58:01', '2019-09-19 11:58:01', '0');
 INSERT INTO `t_sw_account_record` VALUES ('49191217e2264650ae2d42d25929d909', 104426, 1003, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -30000.0000, '{\"en\":\"购买定币金\",\"zh\":\"购买定币金\"}', 69000.0000, NULL, NULL, '2019-09-23 18:11:03', '2019-09-23 18:11:03', '0');
@@ -1228,11 +1284,13 @@ INSERT INTO `t_sw_account_record` VALUES ('56cd7ad371eb4fbaadb353a7b2466c44', 10
 INSERT INTO `t_sw_account_record` VALUES ('5746075204254258a2cacb616e410bba', 104420, 1008, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 300.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 600.0000, NULL, NULL, '2019-09-18 12:10:00', '2019-09-18 12:10:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('57d5e2a466b24145ad665fff4eebb407', 104414, 1072, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 600.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 73660.0000, NULL, NULL, '2019-09-18 17:38:00', '2019-09-18 17:38:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('5818caf7fafa4098974d260c24264763', 104414, 1002, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -40000.0000, '{\"en\":\"购买定币金\",\"zh\":\"购买定币金\"}', 59000.0000, NULL, NULL, '2019-09-18 15:46:28', '2019-09-18 15:46:28', '0');
+INSERT INTO `t_sw_account_record` VALUES ('59448d8fb25e4e5b9706df9ca6d363fb', 104428, 1003, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 1500.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 1500.0000, NULL, NULL, '2019-09-27 20:07:00', '2019-09-27 20:07:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('5a4dbfd16a924a6790468e4d5d60212b', 104425, 1011, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 99180.0000, NULL, NULL, '2019-09-19 12:06:00', '2019-09-19 12:06:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('5af948b25c9440b898c528634b7c8f5c', 104418, 1026, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 200.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 101600.0000, NULL, NULL, '2019-09-18 10:48:00', '2019-09-18 10:48:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('5b5d7eae7a474f3ebca909ead0740d09', 104414, 1027, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70710.0000, NULL, NULL, '2019-09-18 12:28:00', '2019-09-18 12:28:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('5c0c23ba74f641ab9e218bbd66ced280', 104414, 1003, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 69360.0000, NULL, NULL, '2019-09-18 04:34:00', '2019-09-18 04:34:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('5c4cfbd6a2754df9bab931b3e37681a6', 104414, 1016, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70050.0000, NULL, NULL, '2019-09-18 12:17:00', '2019-09-18 12:17:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('5c52627a12ba417c9831420598a2af2c', 104427, 1005, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 10.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 80.0000, NULL, NULL, '2019-09-28 14:50:00', '2019-09-28 14:50:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('5e6f08ce4a3e475fb20ff7ee152c000e', 104414, 1076, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 600.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 74980.0000, NULL, NULL, '2019-09-18 17:40:00', '2019-09-18 17:40:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('5e86326b697d45fcbb007974072b27b1', 104417, 1011, 1, 'cb7f09bdb0ef4174abd446d6c1e7745b', 400.0000, '{\"en\":\"固币金到期释放\",\"zh\":\"固币金到期释放\"}', 72200.0000, NULL, NULL, '2019-09-18 15:19:29', '2019-09-18 15:19:29', '0');
 INSERT INTO `t_sw_account_record` VALUES ('5ec11bae9a324da99105662b57a90ea2', 104414, 1006, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -30000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 69000.0000, NULL, NULL, '2019-07-01 16:24:16', '2019-07-01 16:24:16', '0');
@@ -1251,12 +1309,14 @@ INSERT INTO `t_sw_account_record` VALUES ('64f945809e9e4adeb93e25bf4df9a4fe', 10
 INSERT INTO `t_sw_account_record` VALUES ('66736fbe57034faaa0423adf95a0de1c', 104414, 1033, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 30.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100190.0000, NULL, NULL, '2019-09-18 11:08:00', '2019-09-18 11:08:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('6727320598a94474b9796c620183ae0b', 104414, 1055, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 73040.0000, NULL, NULL, '2019-09-18 17:24:00', '2019-09-18 17:24:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('67d94133cf104e39881678032befd492', 104414, 1004, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 300.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 69660.0000, NULL, NULL, '2019-09-18 16:57:00', '2019-09-18 16:57:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('68d57c9bbd3a4f8db0f445ee9b56f21e', 104427, 1001, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 8000.0000, NULL, NULL, '2019-09-27 14:49:38', '2019-09-27 14:49:38', '0');
 INSERT INTO `t_sw_account_record` VALUES ('69976c0b3b2748d58d82a9e9367bd3f2', 104417, 1002, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 10.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100010.0000, NULL, NULL, '2019-09-18 10:41:00', '2019-09-18 10:41:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('69ca03f06d794b52895323f48be43908', 104414, 1041, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -40000.0000, '{\"en\":\"购买定币金\",\"zh\":\"购买定币金\"}', 59000.0000, NULL, NULL, '2019-09-18 14:55:57', '2019-09-18 14:55:57', '0');
 INSERT INTO `t_sw_account_record` VALUES ('69d6ee1e558c4dbfb07d56534d92c9c6', 104414, 1025, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70590.0000, NULL, NULL, '2019-09-18 12:26:00', '2019-09-18 12:26:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('6a3628e53e7d430ab5fe95b996873263', 104414, 1004, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 800.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 60600.0000, NULL, NULL, '2019-09-18 15:49:00', '2019-09-18 15:49:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('6a7dfadf36b048b5a234a8bdecb033e2', 104420, 1004, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', 30000.0000, '{\"en\":\"取消活币金\",\"zh\":\"取消活币金\"}', 99300.0000, NULL, NULL, '2019-09-18 11:56:09', '2019-09-18 11:56:09', '0');
 INSERT INTO `t_sw_account_record` VALUES ('6aa165a2a90345f59a8e6c0a034ebb46', 104414, 1046, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 72380.0000, NULL, NULL, '2019-09-18 17:18:00', '2019-09-18 17:18:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('6b54ce4594f24151b2bad49a3251f2a1', 104428, 1003, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -5000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 45000.0000, NULL, NULL, '2019-09-26 20:01:14', '2019-09-26 20:01:14', '0');
 INSERT INTO `t_sw_account_record` VALUES ('6b9990bf3c6a4fe7a27c9770daa4de30', 104414, 1019, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 20.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100100.0000, NULL, NULL, '2019-09-18 10:45:00', '2019-09-18 10:45:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('6bccb3caebe6441d95fdaec54e5c44c4', 104414, 1053, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 102980.0000, NULL, NULL, '2019-09-18 17:23:00', '2019-09-18 17:23:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('6c1e7f928ad94eeab3a47e4853f29b8f', 104414, 1006, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 300.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70260.0000, NULL, NULL, '2019-09-18 04:37:00', '2019-09-18 04:37:00', '0');
@@ -1269,9 +1329,11 @@ INSERT INTO `t_sw_account_record` VALUES ('6f36f7598e304b8ca44a8fc089535c76', 10
 INSERT INTO `t_sw_account_record` VALUES ('6f87718766fd4e25bf1089df079f3ba8', 104422, 1038, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 30000.0000, NULL, NULL, '2019-09-18 14:45:03', '2019-09-18 14:45:03', '0');
 INSERT INTO `t_sw_account_record` VALUES ('701589f42c0e43f384c1ccaaa4ed87f1', 104417, 1026, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 2000.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 902000.0000, NULL, NULL, '2019-09-17 17:29:00', '2019-09-17 17:29:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('70f312cbe9b24c30b3a4138f16c39a85', 104414, 1003, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 30.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 69330.0000, NULL, NULL, '2019-09-18 11:55:00', '2019-09-18 11:55:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('7135a2c352e84e358168145d6d89f250', 104428, 1004, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', 150000.0000, '{\"en\":\"取消活币金\",\"zh\":\"取消活币金\"}', 151500.0000, NULL, NULL, '2019-09-28 01:00:10', '2019-09-28 01:00:10', '0');
 INSERT INTO `t_sw_account_record` VALUES ('71942def748348e1b5bf13906fde83ed', 104420, 1005, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 600.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70200.0000, NULL, NULL, '2019-09-18 16:57:00', '2019-09-18 16:57:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('720824df910b45ad98ffd70c9aaab598', 104417, 1009, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 600.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 71400.0000, NULL, NULL, '2019-09-18 15:17:00', '2019-09-18 15:17:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('73cb9657202e42fdaa5a429659894c38', 104419, 1012, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 59000.0000, NULL, NULL, '2019-09-17 19:10:38', '2019-09-17 19:10:38', '0');
+INSERT INTO `t_sw_account_record` VALUES ('73ffdd85e42840d3a78a7067de076576', 104428, 1008, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -150000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 0.0000, NULL, NULL, '2019-09-26 20:06:42', '2019-09-26 20:06:42', '0');
 INSERT INTO `t_sw_account_record` VALUES ('7419a5abac934e9b83f73770b2255443', 104414, 1028, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70770.0000, NULL, NULL, '2019-09-18 12:29:00', '2019-09-18 12:29:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('75982636b7234451b6412fae077f97ce', 104420, 1037, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -30000.0000, '{\"en\":\"购买定币金\",\"zh\":\"购买定币金\"}', 69290.0000, NULL, NULL, '2019-09-18 11:38:08', '2019-09-18 11:38:08', '0');
 INSERT INTO `t_sw_account_record` VALUES ('761fed95197e4844837b8e565394ed34', 104418, 1012, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -5000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 994000.0000, NULL, NULL, '2019-09-17 17:12:44', '2019-09-17 17:12:44', '0');
@@ -1294,6 +1356,7 @@ INSERT INTO `t_sw_account_record` VALUES ('83f09d4786e54ad6997a518828c52c4a', 10
 INSERT INTO `t_sw_account_record` VALUES ('859e489dcc5a47c4b687fa708eb4d944', 104419, 1013, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -10000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 49000.0000, NULL, NULL, '2019-09-17 19:11:05', '2019-09-17 19:11:05', '0');
 INSERT INTO `t_sw_account_record` VALUES ('863e089f53474bc28639e9853e2976b6', 104417, 1010, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -100000.0000, '{\"en\":\"购买定币金\",\"zh\":\"购买定币金\"}', 898000.0000, NULL, NULL, '2019-09-17 17:10:23', '2019-09-17 17:10:23', '0');
 INSERT INTO `t_sw_account_record` VALUES ('885391497f8f418ea7d9d6706c4e1ec4', 104417, 1001, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 99000.0000, NULL, NULL, '2019-09-19 17:18:45', '2019-09-19 17:18:45', '0');
+INSERT INTO `t_sw_account_record` VALUES ('88d2c469869247ef84bd99c065b3b6d0', 104427, 1001, 10, 'cb7f09bdb0ef4174abd446d6c1e7745b', 2.0000, '{\"en\":\"充值\",\"zh\":\"充值\"}', 2.0000, NULL, NULL, '2019-09-26 17:58:46', '2019-09-26 17:58:46', '0');
 INSERT INTO `t_sw_account_record` VALUES ('898e05a9e21249d1925a0f8a25741e4d', 104414, 1004, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -30000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 69000.0000, NULL, NULL, '2019-09-18 11:50:15', '2019-09-18 11:50:15', '0');
 INSERT INTO `t_sw_account_record` VALUES ('8a36fb30ab2042d99db9fd9fef336977', 104426, 1001, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 99000.0000, NULL, NULL, '2019-09-19 16:07:05', '2019-09-19 16:07:05', '0');
 INSERT INTO `t_sw_account_record` VALUES ('8a40a8dcf49e43d0867a8eebb05f09c2', 104420, 1020, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 600.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 71600.0000, NULL, NULL, '2019-09-18 17:02:00', '2019-09-18 17:02:00', '0');
@@ -1306,6 +1369,7 @@ INSERT INTO `t_sw_account_record` VALUES ('8bab38ef7be24589901beb995645723f', 10
 INSERT INTO `t_sw_account_record` VALUES ('8c241b9d521548efa9abc33afb230057', 104417, 1021, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 10.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100060.0000, NULL, NULL, '2019-09-18 10:46:00', '2019-09-18 10:46:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('8c809968d4174b6db4391d6ff6872e17', 104414, 1026, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70650.0000, NULL, NULL, '2019-09-18 12:27:00', '2019-09-18 12:27:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('8d0a74492f0e4c468ee654f2be0e6033', 104414, 1022, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 20.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100120.0000, NULL, NULL, '2019-09-18 10:46:00', '2019-09-18 10:46:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('8d90fc7622ef4ce6b3eb159d2828baf4', 104428, 1006, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -50000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 0.0000, NULL, NULL, '2019-09-26 20:04:46', '2019-09-26 20:04:46', '0');
 INSERT INTO `t_sw_account_record` VALUES ('8db5f14993ea4a6ebcccffc76cfa2bd9', 104414, 1001, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 99000.0000, NULL, NULL, '2019-09-18 15:29:28', '2019-09-18 15:29:28', '0');
 INSERT INTO `t_sw_account_record` VALUES ('8db7efacb0124122a0b02a8dd2b96de8', 104414, 1039, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100250.0000, NULL, NULL, '2019-09-18 11:40:00', '2019-09-18 11:40:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('8e4e8dd7185340ac93d1a8daa4bf5637', 104413, 1018, 9, '737d784555164db2862fd74361a97165', -100.0000, 'system.benchmarking', 999800.0000, NULL, NULL, '2019-09-17 17:24:55', '2019-09-17 17:24:55', '0');
@@ -1319,6 +1383,8 @@ INSERT INTO `t_sw_account_record` VALUES ('9480c6d0440f454d8fbb330a9d56190a', 10
 INSERT INTO `t_sw_account_record` VALUES ('959487f113c9434585b9684b6d0fc882', 104419, 1014, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', 10000.0000, '{\"en\":\"取消活币金\",\"zh\":\"取消活币金\"}', 59000.0000, NULL, NULL, '2019-09-17 19:11:15', '2019-09-17 19:11:15', '0');
 INSERT INTO `t_sw_account_record` VALUES ('95a3d8987d5240ddbcafd590a6ca3e01', 104414, 1003, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 20.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100020.0000, NULL, NULL, '2019-09-18 10:41:00', '2019-09-18 10:41:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('961a803b7a3941dea3c59aaeaccacf8f', 104417, 1011, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 2000.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 4000.0000, NULL, NULL, '2019-09-17 17:41:23', '2019-09-17 17:41:23', '0');
+INSERT INTO `t_sw_account_record` VALUES ('96703056e7c241cc95d5e4ba01104fc8', 104427, 1001, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 9000.0000, NULL, NULL, '2019-09-27 14:21:26', '2019-09-27 14:21:26', '0');
+INSERT INTO `t_sw_account_record` VALUES ('9762c202823141d6bf51eed27e43c252', 104428, 1009, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -150000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 1500.0000, NULL, NULL, '2019-09-29 15:23:00', '2019-09-29 15:23:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('989031bea1834889b0d61a733e6d7729', 104413, 1020, 9, '737d784555164db2862fd74361a97165', -100.0000, 'system.benchmarking', 999700.0000, NULL, NULL, '2019-09-17 17:25:02', '2019-09-17 17:25:02', '0');
 INSERT INTO `t_sw_account_record` VALUES ('98cc9af111ca4f35bf5b220b24b0a681', 104414, 1045, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 72320.0000, NULL, NULL, '2019-09-18 17:17:00', '2019-09-18 17:17:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('9b3469904e614cc4b634a1da1c2fd44c', 104420, 1002, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 600.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 69600.0000, NULL, NULL, '2019-09-18 04:34:00', '2019-09-18 04:34:00', '0');
@@ -1332,6 +1398,7 @@ INSERT INTO `t_sw_account_record` VALUES ('9e8500774f3d4b5ba48ac9ed6471a52d', 10
 INSERT INTO `t_sw_account_record` VALUES ('9f432d6855e94b27b4be323e6a4445ca', 104413, 1009, 9, '737d784555164db2862fd74361a97165', -100.0000, 'system.benchmarking', 999000.0000, NULL, NULL, '2019-09-17 17:52:21', '2019-09-17 17:52:21', '0');
 INSERT INTO `t_sw_account_record` VALUES ('9f7558b870c24c8bbb35c9d277e59b3d', 104414, 1079, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 75700.0000, NULL, NULL, '2019-09-18 17:41:00', '2019-09-18 17:41:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('a0c7374b64674f4499d566474e50e68b', 104414, 1069, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 103000.0000, NULL, NULL, '2019-09-18 17:36:20', '2019-09-18 17:36:20', '0');
+INSERT INTO `t_sw_account_record` VALUES ('a1774e5a38104032b3937a63737c8e91', 104427, 1009, 11, 'cb7f09bdb0ef4174abd446d6c1e7745b', -7.0000, '{\"en\":\"提现\",\"zh\":\"提现\"}', -7.0000, NULL, NULL, '2019-09-26 20:16:24', '2019-09-26 20:16:24', '0');
 INSERT INTO `t_sw_account_record` VALUES ('a1d60dc479e54eafa8c6de62e0438867', 104417, 1013, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 10.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100040.0000, NULL, NULL, '2019-09-18 10:44:07', '2019-09-18 10:44:07', '0');
 INSERT INTO `t_sw_account_record` VALUES ('a3ba5650f8fa4a4292e97799078aac8a', 104417, 1002, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 1500.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 53000.0000, NULL, NULL, '2019-09-23 11:16:00', '2019-09-23 11:16:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('a51582ab0e144a31a371d84702daa7ce', 104420, 1008, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 600.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70800.0000, NULL, NULL, '2019-09-18 16:58:00', '2019-09-18 16:58:00', '0');
@@ -1367,6 +1434,7 @@ INSERT INTO `t_sw_account_record` VALUES ('bb45cf2932154286ad0c34abad1ae77f', 10
 INSERT INTO `t_sw_account_record` VALUES ('bb97d25ea7374ae594c87ca9b46fb9ba', 104414, 1040, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 102080.0000, NULL, NULL, '2019-09-18 17:13:00', '2019-09-18 17:13:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('bc893cb9caa04d07bffb15acbb924262', 104414, 1002, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -40000.0000, '{\"en\":\"购买定币金\",\"zh\":\"购买定币金\"}', 59000.0000, NULL, NULL, '2019-09-18 15:39:54', '2019-09-18 15:39:54', '0');
 INSERT INTO `t_sw_account_record` VALUES ('bca0b54baf2e4086a2bc09f5cea7157e', 104414, 1028, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 20.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100160.0000, NULL, NULL, '2019-09-18 10:48:00', '2019-09-18 10:48:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('bdf9c60228de4974b91254c405062371', 104429, 1001, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 9999000.0000, NULL, NULL, '2019-09-27 17:22:40', '2019-09-27 17:22:40', '0');
 INSERT INTO `t_sw_account_record` VALUES ('bec97b256ac645be99e5797cbf148767', 104414, 1004, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 98000.0000, NULL, NULL, '2019-07-23 16:53:35', '2019-07-23 16:53:35', '0');
 INSERT INTO `t_sw_account_record` VALUES ('bf2015bceff843e3a87aa8031c02a74e', 104414, 1001, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 1500.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 54000.0000, NULL, NULL, '2019-09-25 11:44:00', '2019-09-25 11:44:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('c04da0c87a044db9bb19146abbec63a1', 104414, 1033, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 71720.0000, NULL, NULL, '2019-09-18 17:07:00', '2019-09-18 17:07:00', '0');
@@ -1392,6 +1460,7 @@ INSERT INTO `t_sw_account_record` VALUES ('cdda364acdf3498a957abb760e073cb8', 10
 INSERT INTO `t_sw_account_record` VALUES ('ce3d5abb29d747d68287941ff83a37ad', 104420, 1005, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -30000.0000, '{\"en\":\"购买定币金\",\"zh\":\"购买定币金\"}', 69300.0000, NULL, NULL, '2019-09-18 11:56:40', '2019-09-18 11:56:40', '0');
 INSERT INTO `t_sw_account_record` VALUES ('d0a6b84a60d5460ca70c737902342a98', 104418, 1001, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 200.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 994250.0000, NULL, NULL, '2019-09-17 18:02:00', '2019-09-17 18:02:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('d0e4a137bcc84a8d822d9cc96936cbc9', 104414, 1080, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 300.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 76000.0000, NULL, NULL, '2019-09-18 17:42:00', '2019-09-18 17:42:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('d13ac419139e46819f44cd6a0255761c', 104429, 1006, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 300.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 9969300.0000, NULL, NULL, '2019-09-28 17:24:00', '2019-09-28 17:24:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('d20ab2934182450283f0770560d8fefe', 104426, 1001, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 450.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 69450.0000, NULL, NULL, '2019-09-18 18:39:00', '2019-09-18 18:39:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('d672237a4ff84e84bca60bee9e8e131a', 104414, 1003, 1, 'cb7f09bdb0ef4174abd446d6c1e7745b', 3000.0000, '{\"en\":\"固币金到期释放\",\"zh\":\"固币金到期释放\"}', 102000.0000, NULL, NULL, '2019-09-19 16:02:06', '2019-09-19 16:02:06', '0');
 INSERT INTO `t_sw_account_record` VALUES ('d791ad47dd214f84acd3d0ab534bb589', 104414, 1001, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 1200.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 60200.0000, NULL, NULL, '2019-09-18 14:58:21', '2019-09-18 14:58:21', '0');
@@ -1415,6 +1484,8 @@ INSERT INTO `t_sw_account_record` VALUES ('e084f749fe194aea8e6c83a29ba310b6', 10
 INSERT INTO `t_sw_account_record` VALUES ('e0bc539c29aa4cc2bc90f507d5e6ad1d', 104417, 1009, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -2000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 998000.0000, NULL, NULL, '2019-09-17 17:09:41', '2019-09-17 17:09:41', '0');
 INSERT INTO `t_sw_account_record` VALUES ('e23f11631a87407299c695b3dcd314ee', 104419, 1011, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 129000.0000, NULL, NULL, '2019-09-18 10:43:14', '2019-09-18 10:43:14', '0');
 INSERT INTO `t_sw_account_record` VALUES ('e245b6ae38244f85bf8d3253aef2db2a', 104414, 1003, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 1200.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 60200.0000, NULL, NULL, '2019-09-18 15:31:00', '2019-09-18 15:31:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('e432f15508984c2f97b102761fe316fe', 104428, 1001, 9, '737d784555164db2862fd74361a97165', -100.0000, 'system.benchmarking', 0.0000, NULL, NULL, '2019-09-26 19:59:35', '2019-09-26 19:59:35', '0');
+INSERT INTO `t_sw_account_record` VALUES ('e6bccd25394941c4b273aa9f4c152670', 104427, 1008, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 10.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100.0000, NULL, NULL, '2019-09-29 14:50:00', '2019-09-29 14:50:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('e7f625b142ce42169994e8b8a70935ef', 104413, 1001, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 99000.0000, NULL, NULL, '2019-09-19 15:56:26', '2019-09-19 15:56:26', '0');
 INSERT INTO `t_sw_account_record` VALUES ('e8118ca596f84429a934fe7ccb3ff70d', 104418, 1004, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 200.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 100400.0000, NULL, NULL, '2019-09-18 10:42:00', '2019-09-18 10:42:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('e81d00f0631a42c8a2da23f7c8b9171e', 104414, 1036, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 101840.0000, NULL, NULL, '2019-09-18 17:09:00', '2019-09-18 17:09:00', '0');
@@ -1422,6 +1493,8 @@ INSERT INTO `t_sw_account_record` VALUES ('e84a8217653744e987a1020af2f36953', 10
 INSERT INTO `t_sw_account_record` VALUES ('e94f6bb5869c44579f0ba6c7a7e3a400', 104424, 1016, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 30.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 99120.0000, NULL, NULL, '2019-09-19 12:07:00', '2019-09-19 12:07:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('e97aa034e0b14fbfb499d427932ac931', 104425, 1015, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 99240.0000, NULL, NULL, '2019-09-19 12:07:00', '2019-09-19 12:07:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('e9f86d2f975747d5a212c2f615ef0e4f', 104420, 1011, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 600.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 71400.0000, NULL, NULL, '2019-09-18 16:59:00', '2019-09-18 16:59:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('ea231b41be0447269c489d76fe2eb03d', 104429, 1002, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -30000.0000, '{\"en\":\"购买活币金\",\"zh\":\"购买活币金\"}', 9969000.0000, NULL, NULL, '2019-09-27 17:23:01', '2019-09-27 17:23:01', '0');
+INSERT INTO `t_sw_account_record` VALUES ('ea446a0a18e94989965b72025588b0a0', 104446, 1007, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -50000.0000, '{\"en\":\"购买优币金\",\"zh\":\"购买优币金\"}', 0.0000, NULL, NULL, '2019-09-29 10:19:07', '2019-09-29 10:19:07', '0');
 INSERT INTO `t_sw_account_record` VALUES ('eb466a7983644d90b03c786fbc1c873e', 104420, 1004, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', 30000.0000, '{\"en\":\"取消活币金\",\"zh\":\"取消活币金\"}', 99000.0000, NULL, NULL, '2019-07-01 16:23:52', '2019-07-01 16:23:52', '0');
 INSERT INTO `t_sw_account_record` VALUES ('ebc15b0616c747c8b3c5a56eb3791a24', 104426, 1021, 7, 'cb7f09bdb0ef4174abd446d6c1e7745b', 600.0000, '{\"en\":\"定币金到期释放\",\"zh\":\"定币金到期释放\"}', 72600.0000, NULL, NULL, '2019-09-19 14:44:00', '2019-09-19 14:44:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('ebe624cc7b0b42da9246fff26bef105d', 104414, 1003, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 69360.0000, NULL, NULL, '2019-09-18 16:56:00', '2019-09-18 16:56:00', '0');
@@ -1430,6 +1503,7 @@ INSERT INTO `t_sw_account_record` VALUES ('ebf72c4245854c80bbf7188d8698e23a', 10
 INSERT INTO `t_sw_account_record` VALUES ('ec8b32be8b094ea39dd4c9ce9920dd8e', 104414, 1024, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70530.0000, NULL, NULL, '2019-09-18 12:25:00', '2019-09-18 12:25:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('eeb386b60a4f435baea3cccd9a49270b', 104418, 1013, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 50.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 994050.0000, NULL, NULL, '2019-09-17 17:14:05', '2019-09-17 17:14:05', '0');
 INSERT INTO `t_sw_account_record` VALUES ('eeed4493dcf34995a4b5c03967dad829', 104414, 1015, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70800.0000, NULL, NULL, '2019-09-18 17:00:00', '2019-09-18 17:00:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('ef37e22cbab84bcc82f039dcc5d7cc19', 104428, 1005, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', 25000.0000, '{\"en\":\"取消活币金\",\"zh\":\"取消活币金\"}', 45000.0000, NULL, NULL, '2019-09-26 20:03:26', '2019-09-26 20:03:26', '0');
 INSERT INTO `t_sw_account_record` VALUES ('ef7338649e28431e8f750cdc1eb08d2b', 104413, 1001, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', -1000.0000, '{\"en\":\"购买固币金\",\"zh\":\"购买固币金\"}', 99000.0000, NULL, NULL, '2019-09-19 11:44:44', '2019-09-19 11:44:44', '0');
 INSERT INTO `t_sw_account_record` VALUES ('ef7900d84acb426d9c425816ea3425b5', 104413, 1008, 9, 'cb7f09bdb0ef4174abd446d6c1e7745b', 50000.0000, 'system.benchmarking', 1450000.0000, NULL, NULL, '2019-09-17 17:52:06', '2019-09-17 17:52:06', '0');
 INSERT INTO `t_sw_account_record` VALUES ('efc298c7311f44db832a386530bf9630', 104414, 1020, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70290.0000, NULL, NULL, '2019-09-18 12:21:00', '2019-09-18 12:21:00', '0');
@@ -1459,6 +1533,7 @@ INSERT INTO `t_sw_account_record` VALUES ('fad8014bacdb4c95810d6e375a27bc9f', 10
 INSERT INTO `t_sw_account_record` VALUES ('faf79cba0df747448acd8ca7ce7a5dfc', 104418, 1017, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 200.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 101000.0000, NULL, NULL, '2019-09-18 10:45:00', '2019-09-18 10:45:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('fbd179ee117142a4af4f8ba44e3c2b49', 104414, 1006, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 69570.0000, NULL, NULL, '2019-09-18 12:09:00', '2019-09-18 12:09:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('fc3e35b00eb44f6d86a4a5a17131fb2d', 104414, 1007, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 300.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 70560.0000, NULL, NULL, '2019-09-18 04:38:00', '2019-09-18 04:38:00', '0');
+INSERT INTO `t_sw_account_record` VALUES ('fd3985dde22e4983a1fa7d61b3e13e2f', 104429, 1010, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 300.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 9969600.0000, NULL, NULL, '2019-09-29 17:24:00', '2019-09-29 17:24:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('fe94a9413b224e75ae811bcd7dd310c8', 104420, 1010, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 60.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 99180.0000, NULL, NULL, '2019-09-19 12:06:00', '2019-09-19 12:06:00', '0');
 INSERT INTO `t_sw_account_record` VALUES ('ff67c6d1bc014c7eb88d086903e79730', 104414, 1034, 8, 'cb7f09bdb0ef4174abd446d6c1e7745b', 30000.0000, '{\"en\":\"取消活币金\",\"zh\":\"取消活币金\"}', 101720.0000, NULL, NULL, '2019-09-18 17:07:02', '2019-09-18 17:07:02', '0');
 INSERT INTO `t_sw_account_record` VALUES ('ff81798ce11e4cd2ab660c2d4ad0de8a', 104414, 1016, 2, 'cb7f09bdb0ef4174abd446d6c1e7745b', 300.0000, '{\"en\":\"固币金加速释放\",\"zh\":\"固币金加速释放\"}', 71100.0000, NULL, NULL, '2019-09-18 17:01:00', '2019-09-18 17:01:00', '0');
@@ -1483,26 +1558,6 @@ CREATE TABLE `t_sw_benchlog`  (
   `ex4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex4',
   PRIMARY KEY (`tid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '对标记录表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of t_sw_benchlog
--- ----------------------------
-INSERT INTO `t_sw_benchlog` VALUES ('0fdbf68e69444e89bd501efda262e175', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 17:52:01', '2019-09-17 17:52:01', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('1aec0a3ef16b4cb9b0a1636d88398fca', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 11:37:04', '2019-09-17 11:37:04', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('796053fada67437d93194eaadad9054f', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 17:24:49', '2019-09-17 17:24:49', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('81903f7ea5e24800b094b43da1f2a444', 104414, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 1000.0000, 500000.0000, '2019-09-17 16:11:19', '2019-09-17 16:11:19', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('8965e567988b42ebbd4b6760fc911495', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 17:51:36', '2019-09-17 17:51:36', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('8c0bea53bd9e416a820ba986f40a90fc', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 17:52:21', '2019-09-17 17:52:21', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('a4c699ed13354161afcdefd86d160bf8', 104419, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 19:10:00', '2019-09-17 19:10:00', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('b1413448bfcd4d7293a5cd7b4e6fa783', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 17:52:06', '2019-09-17 17:52:06', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('b6480477ba404c0aa99a3c762e413241', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 17:24:55', '2019-09-17 17:24:55', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('bbcedf3f88a441f5bcf97a23c8b60973', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 17:25:02', '2019-09-17 17:25:02', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('cfb731d30ff04bb08e7f8f96d0c3e1c8', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 17:25:13', '2019-09-17 17:25:13', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('e383a6af04e6473e9c24c5b55088828a', 104417, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 200.0000, 100000.0000, '2019-09-19 19:04:12', '2019-09-19 19:04:12', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('ea4e97cfc5b44c94af45bfbcc958d968', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-16 20:32:39', '2019-09-16 20:32:39', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('f36d18f9485940fdb9009ac0904cee2e', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 17:51:30', '2019-09-17 17:51:30', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('f645bc7e44f64dbdbed3c7acfe587998', 104413, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-17 17:25:08', '2019-09-17 17:25:08', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_benchlog` VALUES ('f84ef85b4402455b8a14639f9690f593', 104423, '737d784555164db2862fd74361a97165', 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 50000.0000, '2019-09-18 16:12:49', '2019-09-18 16:12:49', '0', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_sw_benchmarking
@@ -1552,13 +1607,6 @@ CREATE TABLE `t_sw_chargelog`  (
   `ex5` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex5',
   PRIMARY KEY (`tid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '充币记录表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of t_sw_chargelog
--- ----------------------------
-INSERT INTO `t_sw_chargelog` VALUES ('03ea6623b65342f89a9695c6881bffa0', 104420, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, 'asdfg', '90eb6026a0e3bde80fbf50f610d1e630681165b7ad833196923e0c4a9522ced7', '1', '2019-09-18 10:58:07', '2019-09-18 10:58:32', '0', NULL, NULL, NULL);
-INSERT INTO `t_sw_chargelog` VALUES ('4b4c8276b8d9449489927326b94be0d4', 104413, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 'asdfg', '44aa9bd6c32b0a6ab2460e2db492cc543d45f181a7aac603a9debf3f1e67db46', '1', '2019-09-17 10:28:48', '2019-09-17 10:29:13', '0', NULL, NULL, NULL);
-INSERT INTO `t_sw_chargelog` VALUES ('a8d806fe9530429a99798416d85a950c', 104420, 'cb7f09bdb0ef4174abd446d6c1e7745b', 1.2345, 'deposit', '2dd983029d476754ae85b5657a8e661a5fc53cef78c3c82b07a8c72045106cb5', '1', '2019-09-20 10:02:51', '2019-09-20 10:03:16', '0', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_sw_coin_type
@@ -1704,13 +1752,6 @@ CREATE TABLE `t_sw_evangelist_info`  (
   `ex4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex4',
   PRIMARY KEY (`tid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '布道者资料申请表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of t_sw_evangelist_info
--- ----------------------------
-INSERT INTO `t_sw_evangelist_info` VALUES ('0d14e0e7f83c4c43a24a79158047a1f9', 104415, 'dhxnxn', '4679.23858', 'djxnxn@cjcjc.jcn.com', 'djdnxnxn', 'xjxnxn', 'ndnxnx', '2019-09-16 17:58:37', '2019-09-16 17:58:37', '0', '1', NULL, NULL, NULL);
-INSERT INTO `t_sw_evangelist_info` VALUES ('404566ce95614f19b8fc95f2b493641d', 104418, '江喵喵', '13418545078', 'lamanque2@126.com', 'lamanque', '微博。', '深圳', '2019-09-16 19:56:42', '2019-09-16 19:56:42', '0', '0', NULL, NULL, NULL);
-INSERT INTO `t_sw_evangelist_info` VALUES ('53c1ce2f2fbb408fb211ff31643baf20', 104414, '陈杰', '18720984237', '1143178854@qq.com', 'ill', 'hgfff', 'vghhh', '2019-09-18 15:58:14', '2019-09-18 15:58:14', '0', '1', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_sw_evangelist_user
@@ -1982,23 +2023,23 @@ INSERT INTO `t_sw_fiat_coin` VALUES (1229, '朝鲜', 2, NULL, NULL, NULL, NULL, 
 INSERT INTO `t_sw_fiat_coin` VALUES (1230, '科索沃', 2, NULL, NULL, NULL, NULL, '2019-06-18 15:22:04.365000', '2019-06-18 15:22:04.365000', 222, NULL, NULL, NULL);
 INSERT INTO `t_sw_fiat_coin` VALUES (1231, '科特迪瓦', 2, NULL, NULL, NULL, NULL, '2019-06-18 15:22:04.459000', '2019-06-18 15:22:04.459000', 225, NULL, NULL, NULL);
 INSERT INTO `t_sw_fiat_coin` VALUES (1232, '苏丹', 2, NULL, NULL, NULL, NULL, '2019-06-18 15:22:04.549000', '2019-06-18 15:22:04.549000', 249, NULL, NULL, NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1233, '台湾', 1, 'TWD', 'NT$', 32.0000, '003', '2019-06-24 12:07:31.142000', '2019-06-24 12:07:31.142000', 886, 31.0000, '31', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1234, '印度尼西亚', 1, 'IDR', 'Rp', 15000.0000, '003', '2019-06-24 12:13:05.680000', '2019-06-24 18:52:02.290000', 62, 13500.0000, '13500', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1235, '澳大利亚', 1, 'AUD', 'AUD$', 1.4000, '003', '2019-06-24 12:17:27.137000', '2019-06-24 12:17:27.137000', 61, 1.3000, '1.3', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1236, '香港', 1, 'HKD', 'HKD$', 8.0000, '003', '2019-06-24 12:21:02.652000', '2019-06-24 12:21:02.652000', 852, 7.5000, '7.5', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1237, '意大利', 1, 'EUR', '€', 1.1000, '003', '2019-06-24 12:24:22.109000', '2019-06-24 12:24:22.109000', 39, 0.9000, '0.9', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1238, '韩国', 1, 'KRW', ' ₩', 1300.0000, '003', '2019-06-24 12:27:27.367000', '2019-06-24 12:27:27.367000', 82, 1100.0000, '1100', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1239, '日本', 1, 'JPY', 'JP¥', 130.0000, '003', '2019-06-24 12:30:26.856000', '2019-06-24 12:30:48.005000', 81, 110.0000, '110', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1240, '美国', 1, 'USD', 'US$', 1.0000, '003', '2019-06-24 12:36:31.394000', '2019-06-24 13:00:26.022000', 1, 0.9800, '0.98', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1241, '越南', 1, 'VND', '₫', 24000.0000, '003', '2019-06-24 12:39:20.262000', '2019-06-24 12:39:20.262000', 84, 22000.0000, '22000', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1242, '菲律宾', 1, 'PHP', '‎₱	', 60.0000, '003', '2019-06-24 12:50:54.432000', '2019-06-24 12:50:54.432000', 63, 50.0000, '50', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1243, '印度', 1, 'INR', '₹', 70.0000, '003', '2019-06-24 13:06:15.961000', '2019-06-24 13:06:15.961000', 91, 55.0000, '55', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1244, '泰国', 1, 'THB', '฿', 32.0000, '003', '2019-06-24 16:23:57.667000', '2019-06-24 16:23:57.667000', 66, 30.0000, '30', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1245, '英国', 1, 'GBP', '£', 0.7500, '003', '2019-06-24 18:50:43.896000', '2019-06-24 18:50:43.896000', 44, 0.6500, '0.65', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1246, '柬埔寨', 1, 'KHR', '៛ ', 4300.0000, '003', '2019-06-25 10:54:39.374000', '2019-06-25 11:18:17.551000', 855, 4000.0000, '4000', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1247, '西班牙', 1, 'EUR', '€', 1.1000, '003', '2019-06-25 11:17:44.715000', '2019-06-25 11:17:44.715000', 34, 0.9000, '0.9', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1248, '阿拉伯联合酋长国', 1, 'AED', '‎د.إ', 3.8000, '003', '2019-06-26 19:20:39.978000', '2019-06-26 19:20:39.978000', 971, 3.6000, '3.6', NULL);
-INSERT INTO `t_sw_fiat_coin` VALUES (1249, '马尔代夫', 1, 'MVR ', 'Rf', 16.0000, '003', '2019-06-26 19:24:45.499000', '2019-08-14 19:44:51.877000', 960, 15.0000, '15', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1233, '中国台湾', 2, 'TWD', 'NT$', 32.0000, '003', '2019-06-24 12:07:31.142000', '2019-09-26 20:15:16.811000', 886, 31.0000, '31', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1234, '印度尼西亚', 2, 'IDR', 'Rp', 15000.0000, '003', '2019-06-24 12:13:05.680000', '2019-09-26 20:12:12.600000', 62, 13500.0000, '13500', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1235, '澳大利亚', 2, 'AUD', 'AUD$', 1.4000, '003', '2019-06-24 12:17:27.137000', '2019-09-26 20:12:17.344000', 61, 1.3000, '1.3', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1236, '中国香港', 1, 'HKD', 'HKD$', 8.0000, '003', '2019-06-24 12:21:02.652000', '2019-09-26 20:13:43.083000', 852, 7.5000, '7.5', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1237, '意大利', 2, 'EUR', '€', 1.1000, '003', '2019-06-24 12:24:22.109000', '2019-09-26 20:12:32.632000', 39, 0.9000, '0.9', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1238, '韩国', 2, 'KRW', ' ₩', 1300.0000, '003', '2019-06-24 12:27:27.367000', '2019-09-26 20:12:37.815000', 82, 1100.0000, '1100', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1239, '日本', 2, 'JPY', 'JP¥', 130.0000, '003', '2019-06-24 12:30:26.856000', '2019-09-26 20:12:03.138000', 81, 110.0000, '110', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1240, '美国', 2, 'USD', 'US$', 1.0000, '003', '2019-06-24 12:36:31.394000', '2019-09-26 20:11:58.767000', 1, 0.9800, '0.98', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1241, '越南', 2, 'VND', '₫', 24000.0000, '003', '2019-06-24 12:39:20.262000', '2019-09-26 20:12:43.118000', 84, 22000.0000, '22000', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1242, '菲律宾', 2, 'PHP', '‎₱	', 60.0000, '003', '2019-06-24 12:50:54.432000', '2019-09-26 20:12:47.248000', 63, 50.0000, '50', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1243, '印度', 2, 'INR', '₹', 70.0000, '003', '2019-06-24 13:06:15.961000', '2019-09-26 20:12:51.127000', 91, 55.0000, '55', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1244, '泰国', 2, 'THB', '฿', 32.0000, '003', '2019-06-24 16:23:57.667000', '2019-09-26 20:12:55.141000', 66, 30.0000, '30', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1245, '英国', 2, 'GBP', '£', 0.7500, '003', '2019-06-24 18:50:43.896000', '2019-09-26 20:12:58.887000', 44, 0.6500, '0.65', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1246, '柬埔寨', 2, 'KHR', '៛ ', 4300.0000, '003', '2019-06-25 10:54:39.374000', '2019-09-26 20:13:02.980000', 855, 4000.0000, '4000', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1247, '西班牙', 2, 'EUR', '€', 1.1000, '003', '2019-06-25 11:17:44.715000', '2019-09-26 20:13:07.261000', 34, 0.9000, '0.9', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1248, '阿拉伯联合酋长国', 2, 'AED', '‎د.إ', 3.8000, '003', '2019-06-26 19:20:39.978000', '2019-09-26 20:13:15.628000', 971, 3.6000, '3.6', NULL);
+INSERT INTO `t_sw_fiat_coin` VALUES (1249, '马尔代夫', 2, 'MVR ', 'Rf', 16.0000, '003', '2019-06-26 19:24:45.499000', '2019-09-26 20:13:23.688000', 960, 15.0000, '15', NULL);
 
 -- ----------------------------
 -- Table structure for t_sw_partner
@@ -2096,11 +2137,6 @@ CREATE TABLE `t_sw_period_user`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户持有定币金表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of t_sw_period_user
--- ----------------------------
-INSERT INTO `t_sw_period_user` VALUES ('efc8290a099f4d1da70bacc999af9d22', 104414, '47253ca743eb4fc48b0145611c8edee0', '2019-09-26 11:43:25', 0, 50000.00000000, NULL, NULL, '2019-09-15 11:33:02', '2019-09-26 11:44:00', '0', NULL);
-
--- ----------------------------
 -- Table structure for t_sw_principal
 -- ----------------------------
 DROP TABLE IF EXISTS `t_sw_principal`;
@@ -2153,12 +2189,6 @@ CREATE TABLE `t_sw_principal_user`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户持有固币金表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of t_sw_principal_user
--- ----------------------------
-INSERT INTO `t_sw_principal_user` VALUES ('94c2f02dce084cdc8b4202b1cf38edfc', 104414, 'b13a5180bab94fa78a35f6fb629a4fdf', 299, 0.0000, 3000.0000, 1, '2019-09-20 11:32:33', '2019-09-23 11:37:00', '0', NULL, '2019-09-21 11:32:33', NULL, NULL);
-INSERT INTO `t_sw_principal_user` VALUES ('aea60363cdad443180c688cdc1aca05a', 104414, 'b13a5180bab94fa78a35f6fb629a4fdf', 299, 0.0000, 3000.0000, 1, '2019-09-23 11:43:25', '2019-09-25 11:44:00', '0', NULL, '2019-09-24 11:43:25', NULL, NULL);
-
--- ----------------------------
 -- Table structure for t_sw_release_record
 -- ----------------------------
 DROP TABLE IF EXISTS `t_sw_release_record`;
@@ -2177,14 +2207,6 @@ CREATE TABLE `t_sw_release_record`  (
   `ex3` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '导致释放的项目id',
   PRIMARY KEY (`tid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '释放记录表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of t_sw_release_record
--- ----------------------------
-INSERT INTO `t_sw_release_record` VALUES ('2943dd36a38841148e664f08355e9766', 'aea60363cdad443180c688cdc1aca05a', 1500.0000, 3, 104414, NULL, '2019-09-24 11:44:00', '2019-09-24 11:44:00', '0', 1, 104414, 'efc8290a099f4d1da70bacc999af9d22');
-INSERT INTO `t_sw_release_record` VALUES ('7ca38e82e1a74f59bcc6f5eb3f4329a7', 'aea60363cdad443180c688cdc1aca05a', 1500.0000, 3, 104414, NULL, '2019-09-25 11:44:00', '2019-09-25 11:44:00', '0', 1, 104414, 'efc8290a099f4d1da70bacc999af9d22');
-INSERT INTO `t_sw_release_record` VALUES ('9e619894937e4ab5b8ab044833dee11f', '94c2f02dce084cdc8b4202b1cf38edfc', 1500.0000, 3, 104414, NULL, '2019-09-23 11:36:00', '2019-09-23 11:36:00', '0', 1, 104414, 'efc8290a099f4d1da70bacc999af9d22');
-INSERT INTO `t_sw_release_record` VALUES ('c3487b19ef8146e985694b1d9415a99f', '94c2f02dce084cdc8b4202b1cf38edfc', 1500.0000, 3, 104414, NULL, '2019-09-23 11:37:00', '2019-09-23 11:37:00', '0', 1, 104414, 'efc8290a099f4d1da70bacc999af9d22');
 
 -- ----------------------------
 -- Table structure for t_sw_reward_rule
@@ -2282,20 +2304,6 @@ CREATE TABLE `t_sw_transfer_record`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '转账记录表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of t_sw_transfer_record
--- ----------------------------
-INSERT INTO `t_sw_transfer_record` VALUES ('0817bbabc2864b72a50308523262d497', 104419, 104418, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 'receive from - 104419', '2019-09-17 19:12:46', '2019-09-17 19:12:46', '0', 2, NULL, NULL);
-INSERT INTO `t_sw_transfer_record` VALUES ('12650a7726fb46f1b682f40f128c801f', 104420, 104419, 'cb7f09bdb0ef4174abd446d6c1e7745b', 10.0001, 'transfer to - 104419', '2019-09-18 11:15:53', '2019-09-18 11:15:53', '0', 1, NULL, NULL);
-INSERT INTO `t_sw_transfer_record` VALUES ('12f8419407794d638108e44979876cec', 104418, 104417, 'cb7f09bdb0ef4174abd446d6c1e7745b', 123.0000, 'receive from - 104418', '2019-09-17 14:59:46', '2019-09-17 14:59:46', '0', 2, NULL, NULL);
-INSERT INTO `t_sw_transfer_record` VALUES ('147899ec2d6a4d1bb3b881e52ca90c60', 104418, 104417, 'cb7f09bdb0ef4174abd446d6c1e7745b', 123.0000, 'transfer to - 104417', '2019-09-17 14:59:46', '2019-09-17 14:59:46', '0', 1, NULL, NULL);
-INSERT INTO `t_sw_transfer_record` VALUES ('28e94dbda4994d83ba1e3ec4225bd95b', 104419, 104418, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 'transfer to - 104418', '2019-09-17 19:12:46', '2019-09-17 19:12:46', '0', 1, NULL, NULL);
-INSERT INTO `t_sw_transfer_record` VALUES ('29782e8ab483472fae50e6bd5fb4875a', 104418, 104417, 'cb7f09bdb0ef4174abd446d6c1e7745b', 357.0000, '312', '2019-09-17 15:00:18', '2019-09-17 15:00:18', '0', 2, NULL, NULL);
-INSERT INTO `t_sw_transfer_record` VALUES ('57e659af81ff4e1b948bb37213520f41', 104413, 104413, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, '巴巴变', '2019-09-17 12:03:38', '2019-09-17 12:03:38', '0', 2, NULL, NULL);
-INSERT INTO `t_sw_transfer_record` VALUES ('612ad90ae57f40e183117df212c15391', 104420, 104419, 'cb7f09bdb0ef4174abd446d6c1e7745b', 10.0001, 'receive from - 104420', '2019-09-18 11:15:53', '2019-09-18 11:15:53', '0', 2, NULL, NULL);
-INSERT INTO `t_sw_transfer_record` VALUES ('c74c0714588e4e16a34441841af2d1df', 104418, 104417, 'cb7f09bdb0ef4174abd446d6c1e7745b', 357.0000, '312', '2019-09-17 15:00:18', '2019-09-17 15:00:18', '0', 1, NULL, NULL);
-INSERT INTO `t_sw_transfer_record` VALUES ('caebd78e549a4c3a834a139a19d54f50', 104413, 104413, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, '巴巴变', '2019-09-17 12:03:38', '2019-09-17 12:03:38', '0', 1, NULL, NULL);
-
--- ----------------------------
 -- Table structure for t_sw_user_basic
 -- ----------------------------
 DROP TABLE IF EXISTS `t_sw_user_basic`;
@@ -2319,26 +2327,12 @@ CREATE TABLE `t_sw_user_basic`  (
   `ex5` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ex5',
   PRIMARY KEY (`tid`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 104427 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户基本表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 104447 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户基本表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_sw_user_basic
 -- ----------------------------
 INSERT INTO `t_sw_user_basic` VALUES (1, 'system', 0, '888888', 'aaa@aa.com', '12345678', '12345678', '86', 0, '2019-08-24 14:07:36', '2019-08-24 14:07:38', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104413, 'sz104413', 1, NULL, '1145308642@qq.com', '97facb2520dae6c25575a9c3de474ef5', '97facb2520dae6c25575a9c3de474ef5', NULL, 0, '2019-09-16 14:57:50', '2019-09-16 14:57:50', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104414, 'sz104414', 1, NULL, '27592285@qq.com', '2cea958616ebafce8f5a3a92aef5873c', '2cea958616ebafce8f5a3a92aef5873c', NULL, 0, '2019-09-16 14:59:31', '2019-09-16 14:59:31', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104415, 'sz104415', 1, NULL, '794453894@qq.com', '7e3022da6aec881e5bc6b903f2c7a0b2', '7e3022da6aec881e5bc6b903f2c7a0b2', NULL, 0, '2019-09-16 16:46:10', '2019-09-16 16:46:10', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104416, 'sz104416', 1, NULL, 'djxnxn@cjcjc.jcn.com', '97facb2520dae6c25575a9c3de474ef5', NULL, NULL, 1, '2019-09-16 17:59:36', '2019-09-16 17:59:36', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104417, 'sz104417', 104414, NULL, 'lamanque@126.com', '2cea958616ebafce8f5a3a92aef5873c', '2cea958616ebafce8f5a3a92aef5873c', NULL, 0, '2019-09-16 19:18:49', '2019-09-16 19:18:49', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104418, 'sz104418', 104417, NULL, 'lamanque1@126.com', '2cea958616ebafce8f5a3a92aef5873c', '2cea958616ebafce8f5a3a92aef5873c', NULL, 0, '2019-09-16 19:32:19', '2019-09-16 19:32:19', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104419, 'sz104419', 1, NULL, '953751751@qq.com', '97facb2520dae6c25575a9c3de474ef5', '97facb2520dae6c25575a9c3de474ef5', NULL, 0, '2019-09-17 19:05:47', '2019-09-17 19:05:47', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104420, 'sz104420', 104414, '', '953751759@qq.com', '97facb2520dae6c25575a9c3de474ef5', '97facb2520dae6c25575a9c3de474ef5', '', 0, '2019-09-18 10:52:12', '2019-09-18 14:31:22', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104421, 'sz104421', 1, '', '953751758@qq.com', '97facb2520dae6c25575a9c3de474ef5', '', '', 2, '2019-09-18 14:38:38', '2019-09-18 14:39:42', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104422, 'sz104422', 104421, '', '953751757@qq.com', '97facb2520dae6c25575a9c3de474ef5', '97facb2520dae6c25575a9c3de474ef5', '', 0, '2019-09-18 14:42:40', '2019-09-20 11:13:34', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104423, 'sz104423', 1, NULL, '1143178854@qq.com', '97facb2520dae6c25575a9c3de474ef5', '2cea958616ebafce8f5a3a92aef5873c', NULL, 1, '2019-09-18 16:00:18', '2019-09-18 16:00:18', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104424, 'sz104424', 104420, NULL, 'aaa@qq.com', '2cea958616ebafce8f5a3a92aef5873c', '97facb2520dae6c25575a9c3de474ef5', NULL, 0, '2019-07-01 16:28:03', '2019-07-01 16:28:03', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104425, 'sz104425', 104424, NULL, 'bbb@qq.com', '2cea958616ebafce8f5a3a92aef5873c', '97facb2520dae6c25575a9c3de474ef5', NULL, 0, '2019-07-01 16:29:21', '2019-07-01 16:29:21', '0', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_user_basic` VALUES (104426, 'sz104426', 104425, NULL, 'ccc@qq.com', '2cea958616ebafce8f5a3a92aef5873c', '2cea958616ebafce8f5a3a92aef5873c', NULL, 0, '2019-07-01 16:30:35', '2019-07-01 16:30:35', '0', NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_sw_wallets
@@ -2366,36 +2360,8 @@ CREATE TABLE `t_sw_wallets`  (
 -- ----------------------------
 -- Records of t_sw_wallets
 -- ----------------------------
-INSERT INTO `t_sw_wallets` VALUES ('11ce4566659d4d718acca9ac95cbc8a2', 104418, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-16 19:32:19', '2019-09-16 20:09:11', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('15989c72fb0d4e05add188e8e0598146', 104419, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-17 19:05:47', '2019-09-17 19:10:00', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('26db40893f264031a9a85388609d2612', 104423, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-18 16:00:19', '2019-09-18 16:12:49', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('2dca69945b9c4c86a82ff24f2146de75', 104421, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-18 14:38:38', '2019-09-18 14:38:38', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('3f75b897fc1346d6997f8ed5d8f9108b', 104416, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-16 17:59:36', '2019-09-16 17:59:36', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('4d4706a3f5a44975be81bf55f89b7b3f', 104420, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-18 10:52:12', '2019-09-18 10:52:12', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('4e7321f790b7491199bf6cf0900bc6cf', 104415, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-16 16:46:10', '2019-09-16 17:53:20', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('53215668821d4103bb80d043d50a8873', 104417, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-16 19:18:49', '2019-09-23 11:16:00', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('55b98dadfdbf40fd94e9be769fd21695', 104424, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-07-01 16:28:03', '2019-07-01 16:28:03', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('5a0ec828f7574253970b78d3e53f97b7', 104425, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-07-01 16:29:21', '2019-07-01 16:29:21', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('70702b20713e4485883cdaad0c498769', 104415, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-16 16:46:10', '2019-09-16 16:47:28', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('728ba7da00754873afdc5cf90e7202c7', 104419, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-17 19:05:47', '2019-09-18 10:44:33', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('78528999f0444b35b88a540a12e87bcc', 104426, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-07-01 16:30:35', '2019-07-01 16:30:35', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('7dfb31aebd9a4093baf00687f94226b3', 104423, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-18 16:00:19', '2019-09-18 16:13:24', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('88560137dea840569f6b3f0e1e2960ac', 104414, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-16 14:59:31', '2019-09-17 16:11:19', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('8ba4a202cb0d44ed8ed7838a5757aa8b', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 54000.0000, '0', 0.0000, '2019-09-16 14:59:31', '2019-09-25 11:44:00', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('9070c072ed794f27a79289b3e62c256a', 104416, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-16 17:59:36', '2019-09-16 17:59:36', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('9a9deb8226554bba831bb0555b431bd9', 104413, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-16 14:57:50', '2019-09-19 15:56:26', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('ae19e3c84f044c6e85e54076190c7a1b', 104420, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-18 10:52:12', '2019-09-20 10:03:16', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('b7e2269094fe4eb3bf0f376badfe3e42', 104413, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-16 14:57:50', '2019-09-17 17:52:21', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('c00a851499bd46d48e191ad853250663', 104418, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-16 19:32:19', '2019-09-18 10:48:00', '0', '', NULL, '', '');
 INSERT INTO `t_sw_wallets` VALUES ('c00a851499bd46d48e191ad853250664', 1, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-16 19:32:19', '2019-09-17 10:17:36', '0', '', NULL, '', '');
 INSERT INTO `t_sw_wallets` VALUES ('c5895919dbd440289ef3087e86323554', 1, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-16 19:18:49', '2019-09-16 19:18:49', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('c5895919dbd440289ef3087e86323559', 104417, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-16 19:18:49', '2019-09-19 19:04:12', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('cefc2392301e4ee2aa69248affcc7452', 104425, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-07-01 16:29:21', '2019-09-19 12:08:00', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('e11cf36df4054bb5a2ce02f4fa74e094', 104422, '737d784555164db2862fd74361a97165', 100000.0000, '0', 0.0000, '2019-09-18 14:42:40', '2019-09-18 14:44:10', '0', '', NULL, '', '');
-INSERT INTO `t_sw_wallets` VALUES ('e6f78efce65e474f96f79d67061e3a31', 104421, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-18 14:38:38', '2019-09-18 14:38:38', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('f1698099f3d94fa2a6ffa0cf6fb74fbd', 104426, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-07-01 16:30:35', '2019-09-19 16:10:00', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('f6376e2ee5ea4c8d862580b25ac4895b', 104424, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-07-01 16:28:03', '2019-09-19 12:08:00', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sw_wallets` VALUES ('fda3ec260c6a4bcf8c1a1365d3674444', 104422, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100000.0000, '0', 0.0000, '2019-09-18 14:42:40', '2019-09-18 14:45:16', '0', '', NULL, '', '');
 
 -- ----------------------------
 -- Table structure for t_sw_withdraw_address
@@ -2416,31 +2382,6 @@ CREATE TABLE `t_sw_withdraw_address`  (
   `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '删除标识',
   PRIMARY KEY (`tid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '提现地址' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of t_sw_withdraw_address
--- ----------------------------
-INSERT INTO `t_sw_withdraw_address` VALUES ('011cdbea39074cdd8a946d1a2bf59bfc', 104415, NULL, 'xhdhdnb', NULL, 'dhdbxn', '1', NULL, NULL, '2019-09-16 17:08:52', '2019-09-16 17:08:52', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('10799f36b31d490daefe99a4702acafd', 104413, NULL, '1', NULL, '1', '1', NULL, NULL, '2019-09-17 11:36:26', '2019-09-17 11:36:26', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('1a3a6560bb674a19b5fa43dd3f9035a3', 104413, NULL, '1', NULL, '1', '1', NULL, NULL, '2019-09-17 11:36:27', '2019-09-17 11:36:27', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('1d753b43c49f46e6a966304b963f7b8d', 104417, NULL, 'eosio', NULL, 'test', '1', NULL, NULL, '2019-09-17 16:28:58', '2019-09-17 16:28:58', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('36724349addd41208f8d6e35c8e0f9d6', 104413, NULL, '1', NULL, '1', '1', NULL, NULL, '2019-09-17 11:36:27', '2019-09-17 11:36:27', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('42071c9b5a6b40d9bdace0b205e108f6', 104415, NULL, 'hdhdjdjjxxjdhh', NULL, 'qw', '1', NULL, NULL, '2019-09-16 16:55:44', '2019-09-16 16:56:09', '1');
-INSERT INTO `t_sw_withdraw_address` VALUES ('44d4a4799a15489cbcf299e2dc95de99', 104419, NULL, 'ahahhshss', NULL, '1112', '1', NULL, NULL, '2019-09-17 19:06:25', '2019-09-17 19:06:25', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('55ee4ed6d1fb46a0bca64878b0275e50', 104415, NULL, 'xhdhdnb', NULL, 'dhdbxn', '1', NULL, NULL, '2019-09-16 17:08:52', '2019-09-16 17:08:52', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('5753d00e10e74cc099dc0c702bfc01e9', 104415, NULL, 'dhhddn', NULL, 'xnxnxb', '2', NULL, NULL, '2019-09-16 17:45:27', '2019-09-16 17:45:42', '1');
-INSERT INTO `t_sw_withdraw_address` VALUES ('5e1820ecb0ee4b5497a16ca992543a7f', 104418, NULL, 'eosio', NULL, '', '1', NULL, NULL, '2019-09-18 09:58:49', '2019-09-18 09:58:49', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('6dbd92fae1e64889ba73b9cd22588d49', 104413, NULL, '1', NULL, '1', '1', NULL, NULL, '2019-09-17 11:36:27', '2019-09-17 11:36:27', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('71da34abfd894da48dd3827427751e0e', 104413, NULL, '1', NULL, '1', '1', NULL, NULL, '2019-09-17 11:36:26', '2019-09-17 11:36:26', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('8225b3fdb1dd41058b6ee05f183f8eb8', 104413, NULL, '123555', NULL, '213', '1', NULL, NULL, '2019-09-17 11:42:40', '2019-09-17 11:56:50', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('8406e4c3b81243beb1fdd589bbff3baa', 104413, NULL, 'eosio', NULL, '123', '1', NULL, NULL, '2019-09-09 20:44:28', '2019-09-09 20:44:28', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('9a07163ad3504546b30b86c3bb8cbb1f', 104415, NULL, 'shdbx', NULL, 'dhdhdb', '1', NULL, NULL, '2019-09-16 17:44:23', '2019-09-16 17:44:38', '1');
-INSERT INTO `t_sw_withdraw_address` VALUES ('9eed51ca69174255888ad3e4c2eebe1f', 104413, NULL, '1', NULL, '1', '1', NULL, NULL, '2019-09-17 11:36:27', '2019-09-17 11:36:27', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('9f22a04e41ba420b939a4a3f030c5571', 104413, NULL, '1', NULL, '1', '1', NULL, NULL, '2019-09-17 11:36:27', '2019-09-17 11:36:27', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('b9b96d1e58644bb0ab7f70e82958cef0', 104413, NULL, 'eosio', NULL, '123', '1', NULL, NULL, '2019-09-16 15:49:45', '2019-09-16 19:44:51', '1');
-INSERT INTO `t_sw_withdraw_address` VALUES ('cabfb4aa1d244b70be65e71837fc5beb', 104413, NULL, '789', NULL, '987', '1', NULL, NULL, '2019-09-17 11:56:57', '2019-09-17 11:56:57', '0');
-INSERT INTO `t_sw_withdraw_address` VALUES ('f893e34e13c04107a145867e883af2aa', 104415, NULL, 'hdbdhdb', NULL, 'dnxnxn', '2', NULL, NULL, '2019-09-16 16:56:24', '2019-09-16 17:44:02', '1');
-INSERT INTO `t_sw_withdraw_address` VALUES ('f903414da7e34441a79073ce67961bf3', 104414, NULL, 'eosio', NULL, '', '1', NULL, NULL, '2019-09-17 11:39:32', '2019-09-17 11:39:32', '0');
 
 -- ----------------------------
 -- Table structure for t_sw_withlog
@@ -2466,36 +2407,6 @@ CREATE TABLE `t_sw_withlog`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '提币记录表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of t_sw_withlog
--- ----------------------------
-INSERT INTO `t_sw_withlog` VALUES ('018510b21ac54211881eb10ad03dcd34', 104418, 'cb7f09bdb0ef4174abd446d6c1e7745b', 50000.0000, 'eosio', '2', NULL, NULL, 5.0000, '2019-09-18 09:59:57', '2019-09-18 09:59:57', '0', '2', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('14da3ef073f94f17a83555da9f2df453', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 600.0000, 'eosio', '1', NULL, 'b1a41762cca5819790bce1e0154a409ed2ea146e7cb00621e00676ecb3ca351a', 5.0000, '2019-09-17 16:17:56', '2019-09-17 16:20:00', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('190c149ea9af464dae93b3f8b77d42a5', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 103.0000, 'eosio', '1', NULL, '8e5c6becebec13b849803fcda86800cda8682492269745563a057e58849896cd', 5.0000, '2019-09-20 10:07:40', '2019-09-20 10:08:31', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('1a0e4484164041f9ad4f62b4f13a3c07', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 800.0000, 'eosio', '1', NULL, 'dcbc68edf5117eae2eae8e876a1e345477a2936f2a88817cce3eabaf7a521ca0', 5.0000, '2019-09-17 16:18:30', '2019-09-17 16:20:00', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('208551f03cc3484ea6adc38707771e06', 104417, 'cb7f09bdb0ef4174abd446d6c1e7745b', 99000.0000, 'eosio', '1', NULL, 'b9580f200e1bd0edb8131a0c73b397ef5b160d538673228030fde69c2eedd4c7', 5.0000, '2019-09-19 17:45:22', '2019-09-19 17:49:59', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('22dd3747dbf34565a43cdc3c65c47d17', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 800.0000, 'eosio', '2', '{\"code\":1,\"message\":\"\\u001B[31mError 3040008: Duplicate transaction\\u001B[0m\\n\\u001B[32mYou can try embedding eosio nonce action inside your transaction to ensure uniqueness.\\u001B[0m\\n\\u001B[33mError Details:\\nduplicate transaction dcbc68edf5117eae2eae8e876a1e345477a2936f2a88817cce3eabaf7a521ca0\\u001B[0m\"}', NULL, 5.0000, '2019-09-17 16:18:23', '2019-09-17 16:18:23', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('279066e6e5954067867b7c30610557d3', 104418, 'cb7f09bdb0ef4174abd446d6c1e7745b', 2200.0000, 'eosio', '2', NULL, NULL, 5.0000, '2019-09-18 10:15:14', '2019-09-18 10:15:14', '0', '2', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('2daa290561ae40bdaea29f11d8c55021', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 'eosio', '1', NULL, '68f823f5fa04889fd6d86d524420709e93239fb8f35b7d8f6b25589d9c5a909b', 5.0000, '2019-09-17 16:16:51', '2019-09-17 16:20:00', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('2ead9bc2f4f540099d304149715be0b9', 104419, 'cb7f09bdb0ef4174abd446d6c1e7745b', 1000.0000, 'ahahhshss', '2', NULL, NULL, 5.0000, '2019-09-17 19:15:29', '2019-09-17 19:15:29', '0', '2', NULL, NULL);
-INSERT INTO `t_sw_withlog` VALUES ('30e5f7d4196d48ad846539cf54eea506', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 400.0000, 'eosio', '1', NULL, '7ee8ad54a7d34b34f5cdd2d8e6cf9bf970f05708758bc2fb35645ba857f92110', 5.0000, '2019-09-17 16:17:36', '2019-09-17 16:20:00', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('319e5719d1ca4c348421dfa6c817c76d', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 1000.0000, 'eosio', '1', NULL, '3c7ad301ad78ba8731246488e8338ff8175ee25b7ac77d2da88a281bc1e436f2', 5.0000, '2019-09-17 16:18:58', '2019-09-17 16:20:00', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('43ab6966adea4e2ea0000ac4c2374499', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 700.0000, 'eosio', '1', NULL, '9d2eb01eb7d1e619ebbd032432788227f782ae2807d1ed91d2188d52a10f7929', 5.0000, '2019-09-17 16:18:15', '2019-09-17 16:20:00', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('45951bbdc4474cf1914c9bcc73350e50', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 200.0000, 'eosio', '1', NULL, 'eb88fc8ec4e6f01ee48be78049127a361ee718a5234978cb993f1dcb039e449a', 5.0000, '2019-09-17 16:17:15', '2019-09-17 16:20:00', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('71bbffe18ad04509a7a9aae51992ed74', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 5.0000, 'eosio', '2', '{\"code\":1,\"message\":\"\\u001B[31mError 3050003: eosio_assert_message assertion failure\\u001B[0m\\n\\u001B[33mError Details:\\nassertion failure with message: must transfer positive quantity\\u001B[0m\"}', NULL, 5.0000, '2019-09-17 16:24:17', '2019-09-17 16:24:17', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('8724313ced834005b0a7e8aa2e20d834', 104418, 'cb7f09bdb0ef4174abd446d6c1e7745b', 30000.0000, 'eosio', '2', NULL, NULL, 5.0000, '2019-09-18 10:12:37', '2019-09-18 10:12:37', '0', '2', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('99ec519cfa124d6caedb25695342db94', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 2.0000, 'eosio', '2', '提现金额小于手续费！', NULL, 5.0000, '2019-09-17 16:23:38', '2019-09-17 16:23:38', '0', '2', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('a2e58fe32c7e4d47849bc9517ce00d4a', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 7.0000, 'eosio', '1', NULL, 'c6fea47c3b7f6ee75da938c6875d0cb29dc1d913b5e32ecb0d69fdff9e200ace', 5.0000, '2019-09-17 16:24:35', '2019-09-17 16:28:06', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('a38e73ed9b4346079d0f40adb97d992a', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 3.0000, 'eosio', '2', '提现金额小于手续费！', NULL, 5.0000, '2019-09-17 16:23:51', '2019-09-17 16:23:51', '0', '2', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('b14958e8a014486c868a2621d0de7bc2', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 4.0000, 'eosio', '2', '提现金额小于手续费！', NULL, 5.0000, '2019-09-17 16:24:00', '2019-09-17 16:24:00', '0', '2', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('bc0832b240c44d819ad0d98fba20217b', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 900.0000, 'eosio', '1', NULL, 'c9c4df489b012007ec956254c328b902fbbd55b6dff12d54138cd8be6d6a3752', 5.0000, '2019-09-17 16:18:45', '2019-09-17 16:20:01', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('c553c4cd8efe4640829ff4659621812a', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 6.0000, 'eosio', '1', NULL, '0555440863e851073e04d223f1184302ee62d952e692f28afe67ca07b573d930', 5.0000, '2019-09-17 16:24:26', '2019-09-17 16:25:23', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('c6e8e678ba5a4ca9afe9e13e2d1de2d4', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 100.0000, 'eosio', '1', NULL, '1b8d24bd4e7f0dcfe06a986fd7b2c17ebe45fbb777af28020f6eb55265f2a6c8', 5.0000, '2019-09-17 16:17:01', '2019-09-17 16:20:01', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('d1845e9360834e0ab05aa34698bc5f78', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 500.0000, 'eosio', '1', NULL, '6b7b000560532a16d5c3c691285d4d6463b9a556309dacb2d0ae46317b3d76cd', 5.0000, '2019-09-17 16:17:45', '2019-09-17 16:20:01', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('d411093cfd57475f9e4ee5f80a312c08', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 5.0000, 'eosio', '2', '{\"code\":1,\"message\":\"\\u001B[31mError 3050003: eosio_assert_message assertion failure\\u001B[0m\\n\\u001B[33mError Details:\\nassertion failure with message: must transfer positive quantity\\u001B[0m\"}', NULL, 5.0000, '2019-09-17 16:24:09', '2019-09-17 16:24:09', '0', '1', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('dd2dddaee18a44939491c90e4bb5c97b', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 1.0000, 'eosio', '2', '提现金额小于手续费！', NULL, 5.0000, '2019-09-17 16:23:28', '2019-09-17 16:23:28', '0', '2', '', NULL);
-INSERT INTO `t_sw_withlog` VALUES ('e1bc86298663476ea564aab20e799b4d', 104414, 'cb7f09bdb0ef4174abd446d6c1e7745b', 300.0000, 'eosio', '1', NULL, '42ba8dd657e08b3bfd57173ae40d09788fd53c9b94342dd10862c1437a7468d3', 5.0000, '2019-09-17 16:17:25', '2019-09-17 16:20:01', '0', '1', '', NULL);
-
--- ----------------------------
 -- Table structure for t_sys_config
 -- ----------------------------
 DROP TABLE IF EXISTS `t_sys_config`;
@@ -2517,11 +2428,11 @@ INSERT INTO `t_sys_config` VALUES ('002', 'IndexConfig-News', '新闻', 'IndexCo
 INSERT INTO `t_sys_config` VALUES ('003', 'IndexConfig-AboutUs', '为什么选择我们\n我们不是单一的企业，我们的服务涵盖了整个金融范围。不管是传统金融业还是新兴互联网金融。', 'IndexConfig-', '2018-09-06 14:02:17', '2018-09-11 15:03:43', '0');
 INSERT INTO `t_sys_config` VALUES ('004', 'IndexConfig-IsEnableWaiXinImg', '0', 'IndexConfig-', '2018-09-06 14:02:17', '2018-09-11 16:31:39', '0');
 INSERT INTO `t_sys_config` VALUES ('005', 'IndexConfig-PublicNumberImg', '/files/7373920f-0caf-4c01-9f65-873f432586ab.png', 'IndexConfig-', '2018-09-06 14:02:17', '2018-09-11 16:31:39', '0');
-INSERT INTO `t_sys_config` VALUES ('010b892a9195431a9e1d2d0442b14042', 'SettlementCommonConfig-PushUserNumberCoinNum', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('010b892a9195431a9e1d2d0442b14042', 'SettlementCommonConfig-PushUserNumberCoinNum', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('02c8c69f39414509b8ee0582f5ba528b', 'IndexConfig-IndexButtonName', '释放核心区块链价值', 'IndexConfig-', '2018-09-11 14:51:06', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('06dd65df6a774f199636a0b4ba6b653d', 'SettlementCommonConfig-ShopReturnTotalJson', '[\n    {\n        \"coinName\":\"GCP\",\n        \"returnPercent\":\"0.35\",\n        \"useLevel\":\"1\",\n        \"share\":true\n    },\n    {\n        \"coinName\":\"GC\",\n        \"returnPercent\":\"0\",\n        \"useLevel\":\"2\",\n        \"share\":false\n    }\n]', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('06e877df6e74407cb70f9b6bd343a554', 'SettlementCommonConfig-SecondLevelDay', '21', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('07569e622bd642069a82f9bfd3172bca', 'SettlementCommonConfig-FirstShareLevelBorder', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('06dd65df6a774f199636a0b4ba6b653d', 'SettlementCommonConfig-ShopReturnTotalJson', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
+INSERT INTO `t_sys_config` VALUES ('06e877df6e74407cb70f9b6bd343a554', 'SettlementCommonConfig-SecondLevelDay', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
+INSERT INTO `t_sys_config` VALUES ('07569e622bd642069a82f9bfd3172bca', 'SettlementCommonConfig-FirstShareLevelBorder', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('0783b5ab245f481da9cd58b4df470985', 'IndexConfig-EnglishImg', '/files/46350ad7-9cb5-446c-9d5c-87ea2ca164e5.png', 'IndexConfig-', '2018-09-11 14:43:18', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('0c15c646d0864adf921b10ff6ae65e58', 'CommonConfig-Email', '285646393@qq.com', 'CommonConfig-', '2018-09-11 11:25:05', '2018-09-19 16:00:35', '0');
 INSERT INTO `t_sys_config` VALUES ('0f7499a4e0b54757adf15bebb91053d1', 'SettlementCommonConfig-CnyExchangeRyb', '0', 'SettlementCommonConfig-', '2018-12-14 22:51:42', '2019-02-12 20:07:19', '0');
@@ -2530,59 +2441,59 @@ INSERT INTO `t_sys_config` VALUES ('12e0ef9eb62f45a0b01e41c967a941eb', 'Settleme
 INSERT INTO `t_sys_config` VALUES ('13389682a3af47569fe9ba43580d2351', 'SettlementCommonConfig-RYHExchangeProportion', '2.8', 'SettlementCommonConfig-', '2018-10-18 11:57:04', '2019-01-20 11:03:11', '0');
 INSERT INTO `t_sys_config` VALUES ('13e9af39f0174860a6b03f8aa7c5ee54', 'IndexConfig-AboutUSSixText', '综合服务', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('1993937b83b74c028b3636d267cb93ae', 'IndexConfig-AboutUSThreeImage', '/files/c9aba902-e954-4831-a0db-62ec1d5b9913.jpg', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('1d50daca5ec643038b89ac5f5c8bf446', 'SettlementCommonConfig-After21DayMultipleInner', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('1f26b73fe81f4ab9ac96b265c6233924', 'SettlementCommonConfig-ShopNumOfL1', '100', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('1d50daca5ec643038b89ac5f5c8bf446', 'SettlementCommonConfig-After21DayMultipleInner', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
+INSERT INTO `t_sys_config` VALUES ('1f26b73fe81f4ab9ac96b265c6233924', 'SettlementCommonConfig-ShopNumOfL1', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
 INSERT INTO `t_sys_config` VALUES ('20fe57b15ae1480c83c924f042a23e11', 'IndexConfig-CoreTwoTwoText', '查看更多', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('27021083071e49a6bc9ded0584faa907', 'SettlementCommonConfig-PackageRuleJson', '[\n    {\n        \"packageCode\":\"N98W2D\",\n        \"ruleCode\":\"004\"\n    },\n   {\n        \"packageCode\":\"PDZ295\",\n        \"ruleCode\":\"004\"\n    },\n    {\n        \"packageCode\":\"IN1A7N\",\n        \"ruleCode\":\"004\"\n    },\n    {\n        \"packageCode\":\"WFJ6X7\",\n        \"ruleCode\":\"005\"\n    }\n]', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('27021083071e49a6bc9ded0584faa907', 'SettlementCommonConfig-PackageRuleJson', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('271ab523a0cb49d8b7d791bf33d6a903', 'IndexConfig-CoreThreeOneText', '股权投资', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('27bc566e5b78459995022b0462e40a4f', 'IndexConfig-Core', '核心业务', 'IndexConfig-', '2018-09-06 20:39:33', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('283b9fe7525a41e8bedbe8d2fe9f416f', 'AboutUsConfig-AboutUSTwoName', '发展历程', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('2baf298fb31a463fa969518d520d9648', 'IndexConfig-CoreOneImage', '/files/4b58a678-2a98-4205-a61a-b756f38e2df2.jpg', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('2bd8be41c6d4402eb534c0a44c32ec53', 'SettlementCommonConfig-MonthPackageIncidentalCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('2bd8be41c6d4402eb534c0a44c32ec53', 'SettlementCommonConfig-MonthPackageIncidentalCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('2d069fa379604ba18a74ed9a98f8d17f', 'CommonConfig-Mobile', '0755-83256505', 'CommonConfig-', '2018-09-11 11:25:05', '2018-09-19 16:00:35', '0');
 INSERT INTO `t_sys_config` VALUES ('2e4aec3f729c4b6fafd4990389a73256', 'IndexConfig-CoreOneOneText', '产品配置', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('2ec87e3b45284402b6682817202144bb', 'TeamConfig-TeamOneText', '集团拥有世界顶级金融经济团队。来自中国，瑞典，德国，美国。香港的顶级金融人才。随着区块链研究的深入，新加坡和中国数家顶级金融机构、风险基金高调宣布参与中盈汇区块链的应用开发项目。', 'TeamConfig-', '2018-09-11 17:36:15', '2018-09-13 19:54:40', '0');
 INSERT INTO `t_sys_config` VALUES ('2f39dc2d9e854a0b9164c442b430477e', 'SettlementCommonConfig-TransferMall', '0', 'SettlementCommonConfig-', '2019-01-10 17:56:37', '2019-01-20 11:03:11', '0');
 INSERT INTO `t_sys_config` VALUES ('306699bff74b43f8bb5a07d2b703b65f', 'IndexConfig-AboutUSFiveText', '卓越专业', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('31fbb55f1ebb400aaae49c54977d15b6', 'SettlementCommonConfig-HoldProfitProportion', '50', 'SettlementCommonConfig-', '2018-10-18 11:57:04', '2019-01-20 11:03:11', '0');
-INSERT INTO `t_sys_config` VALUES ('31fd7c675d9f4426ad7f297c7b9b42f0', 'SettlementCommonConfig-PushUserNumber', '5', 'SettlementCommonConfig-', '2019-02-20 18:03:26', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('31fd7c675d9f4426ad7f297c7b9b42f0', 'SettlementCommonConfig-PushUserNumber', '', 'SettlementCommonConfig-', '2019-02-20 18:03:26', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('324b531d992741bda50489cb775c7530', 'IndexConfig-CoreThreeImage', '/files/7c3af328-4f68-4b5b-827e-e28d7c6e0bf3.jpg', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('367abd1b6b604125b790ecd56b7dc837', 'IndexConfig-AboutUSThreeText', '专业人才', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('38481d7e087347e2b092c793325b7e73', 'IndexConfig-AboutUSFiveImage', '/files/1878b3b8-d203-4690-889e-bc43eac103f3.jpg', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('38cdbf335ca54d788e25d3ece5efc6e2', 'IndexConfig-IndexAboutUSBecause', '我们不是单一的企业，我们的服务涵盖了整个金融范围。不管是传统金融业还是新兴互联网金融。', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('3a60e3c33db24f05bbd2b1ddf75d5e2b', 'IndexConfig-AboutUSSixImage', '/files/17607132-4666-4628-a7b3-6aad79ad5549.jpg', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('3a7c5e271aea452a8b4c081ec56663d6', 'AboutUsConfig-AboutUSOneName', '关于我们', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
-INSERT INTO `t_sys_config` VALUES ('3aa8bf5fc7ec42adb623e120fca3b683', 'SettlementCommonConfig-ShareOf1288TargetCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('3ad1bbc5c2de49c2880ac13ef832558e', 'SettlementCommonConfig-BackWebsiteFullName', 'K+钱包推广系统', 'SettlementCommonConfig-', '2019-02-20 18:03:26', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('3aa8bf5fc7ec42adb623e120fca3b683', 'SettlementCommonConfig-ShareOf1288TargetCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
+INSERT INTO `t_sys_config` VALUES ('3ad1bbc5c2de49c2880ac13ef832558e', 'SettlementCommonConfig-BackWebsiteFullName', 'BBCT', 'SettlementCommonConfig-', '2019-02-20 18:03:26', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('3e8796fa0cda4d839c2bdaf74815f84d', 'NewsConfig-AboutUSSmallTitle', '', 'NewsConfig-', '2018-09-14 09:59:27', '2018-09-19 16:28:35', '0');
-INSERT INTO `t_sys_config` VALUES ('3e8c7da00e7c44e9bc3ff899f20a442b', 'SettlementCommonConfig-PushUserNumberCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('3e8c7da00e7c44e9bc3ff899f20a442b', 'SettlementCommonConfig-PushUserNumberCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
 INSERT INTO `t_sys_config` VALUES ('40aa9ce199534dbe8f03bb419b29eea7', 'IndexConfig-CoreOneTwoText', '查看更多', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('4211a74a37eb40f5bc97625bb7c85d7f', 'SettlementCommonConfig-KbtToKb2Proportion', '100', 'SettlementCommonConfig-', '2019-02-26 11:47:05', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('4211a74a37eb40f5bc97625bb7c85d7f', 'SettlementCommonConfig-KbtToKb2Proportion', '', 'SettlementCommonConfig-', '2019-02-26 11:47:05', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('427b99b6dd5b414386730a262f6ad3a3', 'IndexConfig-CoreTwoUrl', '/corebusiness.html', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('4394560cb9b44815931a76b8ee40fd04', 'SettlementCommonConfig-SuperPackageRate', '[\n    {\n        \"packageCode\":\"001\",\n        \"rate\":\"0.05\"\n    },\n   {\n        \"packageCode\":\"002\",\n        \"rate\":\"0.08\"\n    },\n    {\n        \"packageCode\":\"003\",\n        \"rate\":\"0.1\"\n    }\n]', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('44776765d11c464cadd90ffeb68c68a4', 'SettlementCommonConfig-UserRegGiveCoinTotalJson', '[\n    {\n        \"regUser\":\"3\",\n        \"rewardCoin\":\"2222\",\n        \"freeProjectName\":\"注册曾送2222KBT+\"\n    },\n    {\n        \"regUser\":\"4\",\n        \"rewardCoin\":\"1111\",\n        \"freeProjectName\":\"注册曾送1111KBT+\"\n    },\n    {\n        \"regUser\":\"100000\",\n        \"rewardCoin\":\"888\",\n        \"freeProjectName\":\"注册曾送888KBT+\"\n    }\n]', 'SettlementCommonConfig-', '2019-02-20 18:14:18', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('4394560cb9b44815931a76b8ee40fd04', 'SettlementCommonConfig-SuperPackageRate', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
+INSERT INTO `t_sys_config` VALUES ('44776765d11c464cadd90ffeb68c68a4', 'SettlementCommonConfig-UserRegGiveCoinTotalJson', '', 'SettlementCommonConfig-', '2019-02-20 18:14:18', '2019-09-26 14:54:47', '0');
 INSERT INTO `t_sys_config` VALUES ('4477c3b28ab24581ae6361f1bacc429d', 'IndexConfig-AboutUSOneImage', '/files/b2cfee30-f075-4414-b087-15dc9771951a.jpg', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('4782b9644d06472a9467a037b3fa8f57', 'AboutUsConfig-AboutUSOneText', '关于我们\n中盈汇集团是一家以资产管理、财富管理、投资管理、区块链开发为核心业务的平台，是一家业务范围涵盖私募证券投资基金、股权投资、影视基金、区块链技术应用四大业务板块的现代化资产管理公司。中盈汇集团于2011年8月成立于新加坡，旗下企业包括：中盈汇（新加坡）基金会、中盈汇（新加坡）咨询有限公司、中盈汇（新加坡）科技有限公司；先后在中国内地、中国香港成立了中盈汇资产管理有限公司、中盈汇区块链科技有限公司、中盈汇投资咨询有限公司和中盈汇集团（香港）控股公司、桂林中盈汇国际旅游有限公司等。\n公司成立至今，始终走在行业最前沿。凭借这两年来的精耕细作、诚信经营，公司业务发展越发全面，除了传统的金融业，新兴互联网金融更是领先整个亚洲地区，业务范围覆盖了东南亚直至整个亚洲。', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('48695cb66175403885374cf09c3bbe63', 'IndexConfig-CoreThreeUrl', '/corebusiness.html', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('4a48e10df4ca4623834532026fffb6a6', 'SettlementCommonConfig-UserRegGiveCoinTotal', '100', 'SettlementCommonConfig-', '2019-02-12 20:07:18', '2019-02-12 20:07:18', '0');
-INSERT INTO `t_sys_config` VALUES ('4a6ff8dbafb54471a42e963b7f303309', 'SettlementCommonConfig-Before21DayMultiple', '1.5', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('4a6ff8dbafb54471a42e963b7f303309', 'SettlementCommonConfig-Before21DayMultiple', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
 INSERT INTO `t_sys_config` VALUES ('4be8e5af954a49eab35324ec9eaf7518', 'CommonConfig-RRPublicImg', '/files/6001eec1-303a-4ab1-97ee-2ade0311f556.png', 'CommonConfig-', '2018-09-11 11:49:54', '2018-09-19 16:00:35', '0');
-INSERT INTO `t_sys_config` VALUES ('4ea9cdc16d3a49fb81e8d2fc32766fee', 'SettlementCommonConfig-ConsumeCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('525ed0d6c21b417dbd3329c885200155', 'SettlementCommonConfig-PushReachedUserNumber', '25', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('5306b9570df643589f9afdc238ec79f2', 'SettlementCommonConfig-WebsiteLogo', '/files/763fb1ba-5877-4762-ad65-e9eeb594a31c.png', 'SettlementCommonConfig-', '2019-02-20 19:09:42', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('581ef6cf7ff047158e386efaff90c390', 'SettlementCommonConfig-WithFee', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('4ea9cdc16d3a49fb81e8d2fc32766fee', 'SettlementCommonConfig-ConsumeCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
+INSERT INTO `t_sys_config` VALUES ('525ed0d6c21b417dbd3329c885200155', 'SettlementCommonConfig-PushReachedUserNumber', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
+INSERT INTO `t_sys_config` VALUES ('5306b9570df643589f9afdc238ec79f2', 'SettlementCommonConfig-WebsiteLogo', '/files/62a02c36-1f67-4dd4-8add-37956923f2de.png', 'SettlementCommonConfig-', '2019-02-20 19:09:42', '2019-09-26 14:54:48', '0');
+INSERT INTO `t_sys_config` VALUES ('581ef6cf7ff047158e386efaff90c390', 'SettlementCommonConfig-WithFee', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
 INSERT INTO `t_sys_config` VALUES ('59841589dfbf453bb479a22be2935b82', 'TeamConfig-TeamTwoText', '目前，有多个顶级金融机构和风险基金与中盈汇集团紧密合作。集团的实力为投资者提供了强有力的 保障和足够的信心。能获得社会如此高的关注，不 仅是因为项目自身带着发展热潮的光环，更多的是 项目的完美落地、对技术的追求、颠覆了市场的伟 大愿景。率先为新加坡打开区块链技术，颠覆传统 金融经济是集团的宏愿。', 'TeamConfig-', '2018-09-11 17:36:15', '2018-09-13 19:54:40', '0');
 INSERT INTO `t_sys_config` VALUES ('598df99a058e40268da843a5e69c3683', 'CommonConfig-PublicNumberImg', '/files/a57c942a-42b7-46de-a652-5eed3a923295.jpg', 'CommonConfig-', '2018-09-11 11:25:05', '2018-09-11 15:33:28', '0');
 INSERT INTO `t_sys_config` VALUES ('59fce243d57345389728dc2d7aa3b685', 'IndexConfig-IndexButtonLinked', '/corebusiness.html', 'IndexConfig-', '2018-09-11 14:51:07', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('5d2b7e0829af4c059c2944952fb12521', 'IndexConfig-AboutUSFourImage', '/files/4cb77884-ef94-4d5a-8593-91b38363430c.jpg', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('5dae0779fe774694a4ca1e9dc30fc970', 'IndexConfig-CoreTwoOneText', '投资管理', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('5e3de55e6b8640ae8749217b89abe21b', 'SettlementCommonConfig-PushProfitProportion', '50', 'SettlementCommonConfig-', '2018-10-18 11:57:04', '2019-01-20 11:03:11', '0');
-INSERT INTO `t_sys_config` VALUES ('602fd71393814973865098c58c2921e1', 'SettlementCommonConfig-Before7DayMultiple', '2', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('602fd71393814973865098c58c2921e1', 'SettlementCommonConfig-Before7DayMultiple', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('60bbebafaf4d4531ad29b6f38e7c80e3', 'AboutUsConfig-AboutUSFourImage', '/files/190e7577-0b2a-43cc-bfd0-3d5c445e1c49.jpg', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('6173f0e37875470aa73245224ab78395', 'AboutUsConfig-AboutUSThreeName', '核心人物介绍', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('629b9b1ef5724edcb51215bb7a4917e9', 'CommonConfig-IsEnableWaiXinImg', '1', 'CommonConfig-', '2018-09-10 14:39:55', '2018-09-19 16:00:35', '0');
-INSERT INTO `t_sys_config` VALUES ('633f870b0c8b419eb5b3cf7fefa79d0f', 'SettlementCommonConfig-SecondShareLevelBorder', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('63a6d671349e4d78b2991ac3b2ac76b2', 'SettlementCommonConfig-Before21DayMultipleInner', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('633f870b0c8b419eb5b3cf7fefa79d0f', 'SettlementCommonConfig-SecondShareLevelBorder', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
+INSERT INTO `t_sys_config` VALUES ('63a6d671349e4d78b2991ac3b2ac76b2', 'SettlementCommonConfig-Before21DayMultipleInner', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('63bd618d4b5a4db6b03643a4e5d4d929', 'CommonConfig-Contact', '刘宇（13430837268）', 'CommonConfig-', '2018-09-14 12:01:27', '2018-09-19 16:00:35', '0');
 INSERT INTO `t_sys_config` VALUES ('658178a6b6cc4529964e4f0a4571bc57', 'AboutUsConfig-AboutUSBigTitle', '', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('65cc9652465e45648dd391a28e5ded9e', 'CommonConfig-Core', '', 'CommonConfig-', '2018-09-11 11:25:05', '2018-09-11 15:33:28', '0');
@@ -2593,56 +2504,56 @@ INSERT INTO `t_sys_config` VALUES ('6b26d95c7dbd46dba75f2f1937d06d9c', 'IndexCon
 INSERT INTO `t_sys_config` VALUES ('6be87d5b46094a67a2b33e1045440ea5', 'IndexConfig-AboutUSTwoImage', '/files/57de60c4-c760-4b78-9705-c67e1012717b.jpg', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('6e63c8e1558c488584e6b05138d65386', 'SettlementCommonConfig-TransferGames', '0', 'SettlementCommonConfig-', '2019-01-10 17:56:37', '2019-01-20 11:03:11', '0');
 INSERT INTO `t_sys_config` VALUES ('6f2e1011600945ee954b48cbf68aee9f', 'CommonConfig-CompanyCopyright', '版权所有： 中盈汇集团', 'CommonConfig-', '2018-09-11 15:33:28', '2018-09-19 16:00:35', '0');
-INSERT INTO `t_sys_config` VALUES ('7594385521ca4117b21879941ab1b648', 'SettlementCommonConfig-ConsumeRevertRatio', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('7594385521ca4117b21879941ab1b648', 'SettlementCommonConfig-ConsumeRevertRatio', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('77389e1725fd48a39ec2b50b633576d8', 'IndexConfig-IndexShowText', '给您提供专业现代化资产管理', 'IndexConfig-', '2018-09-11 14:43:18', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('78a8a489a0c7491bb2e69783afc9f482', 'AboutUsConfig-AboutUSTwoImage', '/files/84d58893-0a20-4050-9ed8-bc6fd53d22a2.jpg', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('7972ffea8872414a8d67d0770275277a', 'AboutUsConfig-AboutUSOneImage', '/files/23316c5f-4d42-461f-b225-b4d070d6c335.jpg', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('7c22f6ab571b49b6bb19f4e35085789d', 'TeamConfig-TeamThreeImage', '/files/62933708-4da2-40b5-86af-c50c617957c6.jpg', 'TeamConfig-', '2018-09-11 17:36:15', '2018-09-13 19:54:40', '0');
 INSERT INTO `t_sys_config` VALUES ('7cfe3307b7044b4ea12037373adeb5c5', 'TeamConfig-TeamOneName', '技术团队', 'TeamConfig-', '2018-09-11 17:36:15', '2018-09-13 19:54:40', '0');
-INSERT INTO `t_sys_config` VALUES ('7f51328ab3714e288a826186c76d2ed5', 'SettlementCommonConfig-MonthPackageIncidentalCoinNum', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('7f51328ab3714e288a826186c76d2ed5', 'SettlementCommonConfig-MonthPackageIncidentalCoinNum', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('7fb39bf6db73470eb09e0dcc3c81996b', 'AboutUsConfig-AboutUSFourName', '集团理念', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('80c9b98e367449cfb39109148417d538', 'TeamConfig-TeamOneImage', '/files/a3ff6af0-34a5-471b-a23a-e3210e2c3d77.jpg', 'TeamConfig-', '2018-09-11 17:36:15', '2018-09-13 19:54:40', '0');
-INSERT INTO `t_sys_config` VALUES ('8266583255f64bff81166e28882cf025', 'SettlementCommonConfig-FirstShareLevelOfPackage', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('8266583255f64bff81166e28882cf025', 'SettlementCommonConfig-FirstShareLevelOfPackage', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('8671746e21054af29388cb748f27829c', 'CoreConfig-CoreBackGroundImg', '/files/b103b3b2-5fe3-4ef6-9aa5-2207db32ed0b.jpg', 'CoreConfig-', '2018-09-13 18:34:30', '2018-09-17 16:40:15', '0');
 INSERT INTO `t_sys_config` VALUES ('8703df7ca64146d399d3192820b2144f', 'SettlementCommonConfig-TransferOther', '0', 'SettlementCommonConfig-', '2018-11-23 17:11:44', '2019-02-12 20:07:19', '0');
-INSERT INTO `t_sys_config` VALUES ('875c994887b1460e8ab0aa893dd19e00', 'SettlementCommonConfig-SuperPackageIncidentalCoin', 'UP', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('87cc0c572b19439fb3d14533ded6c8ec', 'SettlementCommonConfig-CoinTypeOfL1', 'GCP', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('875c994887b1460e8ab0aa893dd19e00', 'SettlementCommonConfig-SuperPackageIncidentalCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
+INSERT INTO `t_sys_config` VALUES ('87cc0c572b19439fb3d14533ded6c8ec', 'SettlementCommonConfig-CoinTypeOfL1', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('89e82c14c2ef4c35ba7ce47d0687be87', 'nullCore', '测试基础配置', NULL, '2018-09-06 20:50:41', '2018-09-11 10:32:04', '0');
 INSERT INTO `t_sys_config` VALUES ('8c19ead6eefd415292c1acde28516ff7', 'CommonConfig-ZYHPublicImgName', '中盈汇集团公众号', 'CommonConfig-', '2018-09-11 16:54:11', '2018-09-19 16:00:35', '0');
 INSERT INTO `t_sys_config` VALUES ('8d10e34f36ed4d17995ba18b6081ea33', 'SettlementCommonConfig-GameSuccessIP', '132.148.21.154;104.28.27.167', 'SettlementCommonConfig-', '2019-01-10 10:00:57', '2019-01-20 11:03:11', '0');
 INSERT INTO `t_sys_config` VALUES ('9112058318ff4d558d0b01b1012ac2b6', 'AboutUsConfig-AboutUSSmallTitle', '', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
-INSERT INTO `t_sys_config` VALUES ('9448bb73e90645ff868f7b576a51dbfa', 'SettlementCommonConfig-ConsumeCoinMultiple', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('9493d1d9e5044cf29960b1a98827b309', 'SettlementCommonConfig-PushReachedUserCoinType', 'GCP', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('9448bb73e90645ff868f7b576a51dbfa', 'SettlementCommonConfig-ConsumeCoinMultiple', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
+INSERT INTO `t_sys_config` VALUES ('9493d1d9e5044cf29960b1a98827b309', 'SettlementCommonConfig-PushReachedUserCoinType', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
 INSERT INTO `t_sys_config` VALUES ('95e91aca902c4b7e9b05dae8c222842a', 'IndexConfig-IndexBackGroundImg', '/files/a361cfa5-4235-4ffb-93a8-778bdb07f729.jpg', 'IndexConfig-', '2018-09-11 14:43:18', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('975216cb57094bb288e5851f02a8f266', 'SettlementCommonConfig-MonthPackageInsteadCoin', 'UP', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('975216cb57094bb288e5851f02a8f266', 'SettlementCommonConfig-MonthPackageInsteadCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('990ba03df87244dc8f6164a800b966b2', 'SettlementCommonConfig-WalletGT', '50', 'SettlementCommonConfig-', '2018-10-18 11:57:04', '2019-01-20 11:03:11', '0');
-INSERT INTO `t_sys_config` VALUES ('9a5c4a991ebd42c98780f869aa9ab9bb', 'SettlementCommonConfig-ThirdShareLevelOfBorder', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('9dfd99ad1f4549c0a7e7b5f55ac975cd', 'SettlementCommonConfig-PackageOf1288Code', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('9ea632b46fd74f97b0b533eb4d0e57ec', 'SettlementCommonConfig-PushUserNumberCheckIn', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('9f6fa96da19e4dd6a167b8569262b9fe', 'SettlementCommonConfig-RewardRuleCode', '001', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('9a5c4a991ebd42c98780f869aa9ab9bb', 'SettlementCommonConfig-ThirdShareLevelOfBorder', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
+INSERT INTO `t_sys_config` VALUES ('9dfd99ad1f4549c0a7e7b5f55ac975cd', 'SettlementCommonConfig-PackageOf1288Code', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
+INSERT INTO `t_sys_config` VALUES ('9ea632b46fd74f97b0b533eb4d0e57ec', 'SettlementCommonConfig-PushUserNumberCheckIn', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
+INSERT INTO `t_sys_config` VALUES ('9f6fa96da19e4dd6a167b8569262b9fe', 'SettlementCommonConfig-RewardRuleCode', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
 INSERT INTO `t_sys_config` VALUES ('9f82fa642f5141d9a40e4e7c7b8857a1', 'IndexConfig-CoreTwoImage', '/files/492b4ee7-0500-4b57-84d6-9e7bdfde0da0.jpg', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('a30318102acb49b9bafd3180839a7ecf', 'SettlementCommonConfig-CoinNumOfL1', '100000', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('a3dba7a2e04c47cdb49eb7de0e5ffab0', 'SettlementCommonConfig-PackageOf1288SharePercent', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('a30318102acb49b9bafd3180839a7ecf', 'SettlementCommonConfig-CoinNumOfL1', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
+INSERT INTO `t_sys_config` VALUES ('a3dba7a2e04c47cdb49eb7de0e5ffab0', 'SettlementCommonConfig-PackageOf1288SharePercent', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
 INSERT INTO `t_sys_config` VALUES ('a49952ceb6874735895b3920a05305eb', 'CommonConfig-RRPublicImgName', '瑞银RR社区公众号', 'CommonConfig-', '2018-09-11 16:54:11', '2018-09-19 16:00:35', '0');
-INSERT INTO `t_sys_config` VALUES ('a696f73cb51747eeb2dd22453354979d', 'SettlementCommonConfig-After21DayMultiple', '1', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('a696f73cb51747eeb2dd22453354979d', 'SettlementCommonConfig-After21DayMultiple', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:47', '0');
 INSERT INTO `t_sys_config` VALUES ('a8412c8d3382423fa346b034ce71609f', 'IndexConfig-CoreFourOneText', '区块链开发', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('a8fb73e46ed94e74b48cb89164efef4f', 'NewsConfig-AboutUSBigTitle', '', 'NewsConfig-', '2018-09-14 09:59:27', '2018-09-19 16:28:35', '0');
 INSERT INTO `t_sys_config` VALUES ('aad451199729480e95f3021b15ad2919', 'AboutUsConfig-AboutUSTwoText', '21世纪，人类已进入信息化时代，互联网金融、虚拟经济迅速崛起。随着“互联网+“概念的提出和发展趋势，互联网金融、数字资产逐渐成了热门词汇，它正以远超我们预期的速度迅猛发展。比特币等虚拟货币的出现和应用标志着区块链技术正式被世人认可并追求。随着“区块链“概念的提出和其发展趋势，互联网新金融、区块链经济迅速崛起，A字贫P之所以引起全球众多领域关注是因为它正在颠覆一个全以中心化的金融主导的经济时代，去中心化虚拟数字货币已成为时代的潮流这一切已经说明人类资产数字化，已是为历史进程中不可阴挡的趋势。中盈汇集团率先在新加坡试点开发“区块链”应用技术的研发。在供给侧改革，万众创新，大众创业的大背景下，创7业将通过兼并重组积聚优势生产力.股权投资将成为经济转型发展的必然选择。我国股权基金正处于蓬勃发展期，在葬资、投资、管理与退出机制上都取得了长足的进展，P〔投资的市场环境已经成熟。股权投资的时代是大势所趋，股权投资者可能成为未来最大寡家。股权投资从全球来看，正在从另类成为主流，是创新、创业、金融的核心地带，过去10年有50倍以上的增长。\n中盈汇集团专注于区块链技术应用、生物医药、节能环保、新材料、新能源、新金融、人工智能等领域。', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('abfccc52e9ca4779b80495accb499fdb', 'nullAboutUs', '关于我们的配置，啦啦啦啦啊', NULL, '2018-09-06 20:50:41', '2018-09-11 10:32:04', '0');
 INSERT INTO `t_sys_config` VALUES ('ac8990fd6df0499cac3e9d2488aa9b2d', 'IndexConfig-AboutUSFourText', '遍布全球', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('adb2499badb242b7b72b087c5ec80d76', 'SettlementCommonConfig-FilterInterface', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('adb2499badb242b7b72b087c5ec80d76', 'SettlementCommonConfig-FilterInterface', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('ae485e70d5d748bdbb0981f062fe7a79', 'IndexConfig-CoreOneUrl', '/corebusiness.html', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('af1653818fc64453b92865c47229450d', 'SettlementCommonConfig-IsEnableAdminLoginMobileCheck', '1', 'SettlementCommonConfig-', '2018-10-18 11:57:04', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('af1653818fc64453b92865c47229450d', 'SettlementCommonConfig-IsEnableAdminLoginMobileCheck', '1', 'SettlementCommonConfig-', '2018-10-18 11:57:04', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('afaa10ef5e1c4815b679faa471df85cd', 'nullIsEnableWaiXinImg', '1', NULL, '2018-09-06 20:51:04', '2018-09-10 14:41:41', '0');
 INSERT INTO `t_sys_config` VALUES ('b027096903ba4d0a8cb842cfd9bb3721', 'IndexConfig-CoreFourImage', '/files/dea4bcd2-f0c7-4ee4-82aa-5cee98d21fb6.jpg', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('b085c257906b4dbb836d8fc102a0f359', 'IndexConfig-AboutUSImg', '/img/noPicture.jpg', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-11 16:31:39', '0');
 INSERT INTO `t_sys_config` VALUES ('b412995feba043fc87e035d8f17fe4be', 'CommonConfig-Address', '深圳市福田区福田海岸环庆大厦1404-1405室', 'CommonConfig-', '2018-09-11 11:25:05', '2018-09-19 16:00:35', '0');
-INSERT INTO `t_sys_config` VALUES ('b70f062f2cc1405599998c4ec7e09004', 'SettlementCommonConfig-MinWithLimit', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('b70f062f2cc1405599998c4ec7e09004', 'SettlementCommonConfig-MinWithLimit', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('be006dbfd4c640c48f407bcbff3d6b6a', 'IndexConfig-AboutUSTwoText', '资源交流', 'IndexConfig-', '2018-09-11 18:20:41', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('be156e7c8042428ea548843f4caad4ef', 'SettlementCommonConfig-WebsiteURL', 'http://10.235.20.42:8080', 'SettlementCommonConfig-', '2019-02-22 16:55:07', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('be29905759d341bea816803d3eb4be8b', 'SettlementCommonConfig-UserNumOfL1', '5000', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('be156e7c8042428ea548843f4caad4ef', 'SettlementCommonConfig-WebsiteURL', 'http://bbct.kkg222.com', 'SettlementCommonConfig-', '2019-02-22 16:55:07', '2019-09-26 14:54:47', '0');
+INSERT INTO `t_sys_config` VALUES ('be29905759d341bea816803d3eb4be8b', 'SettlementCommonConfig-UserNumOfL1', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('c2f7fddb70714929a937980d0d61c28f', 'SettlementCommonConfig-ShopConsumePerCent', '0.25', 'SettlementCommonConfig-', '2019-04-26 16:17:21', '2019-04-28 09:51:38', '0');
-INSERT INTO `t_sys_config` VALUES ('cba51e6d413d4007b4262c8263d1290e', 'SettlementCommonConfig-FirstLevelDay', '7', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('cba51e6d413d4007b4262c8263d1290e', 'SettlementCommonConfig-FirstLevelDay', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('cda3b81dcb76416796c415403dd99f99', 'SettlementCommonConfig-TranReturnPercent', '0.5', 'SettlementCommonConfig-', '2019-05-05 09:59:18', '2019-05-05 09:59:18', '0');
 INSERT INTO `t_sys_config` VALUES ('ce07fc27260348f0992eab308acdcd4f', 'SettlementCommonConfig-SettlementTransferTradingTotalLimit', '100', 'SettlementCommonConfig-', '2018-12-25 17:19:08', '2019-01-20 11:03:11', '0');
 INSERT INTO `t_sys_config` VALUES ('d198201984c04b4f9ceb739bb4839776', 'TeamConfig-TeamTwoName', '集团愿望', 'TeamConfig-', '2018-09-11 17:36:15', '2018-09-13 19:54:40', '0');
@@ -2652,26 +2563,26 @@ INSERT INTO `t_sys_config` VALUES ('d7b9786fa6e848a49392c899dc86caa4', 'TeamConf
 INSERT INTO `t_sys_config` VALUES ('d8dc0e5112e54da1aae3898cef00c0e7', 'IndexConfig-CoreFourTwoText', '查看更多', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('dae9e00de26f49b2ab4dcf3331956c25', 'AboutUsConfig-AboutUSThreeText', '夏辉，中盈汇集团懂事长瑞银RR社区、瑞银钱包创始人。现为江苏基金会会长，中国香港狮子会成员。由于其独特的敏锐性，从2015年开始专注于区块链技术应用研究，2016年进入矿圈2017年创建中盈汇集团，2018年成为矿圈大咖现托管的比特币矿机达40万台规模2017年总产值8亿元人民币。', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('db121743c14f46e8b833f48780cb3bec', 'IndexConfig-CoreThreeTwoText', '查看更多', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('dcd0111d68484ff49fa77506bf5f5dfc', 'SettlementCommonConfig-ShareOf1288SourceCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('de5d9959c971482d8baf821a48397b7b', 'SettlementCommonConfig-PushReachedUserCoinNumber', '50', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('dcd0111d68484ff49fa77506bf5f5dfc', 'SettlementCommonConfig-ShareOf1288SourceCoin', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
+INSERT INTO `t_sys_config` VALUES ('de5d9959c971482d8baf821a48397b7b', 'SettlementCommonConfig-PushReachedUserCoinNumber', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('e0c387a066e74102a42c9a7aad5a9890', 'CoreConfig-CoreButtonName', '实现商业目标', 'CoreConfig-', '2018-09-13 18:34:30', '2018-09-17 16:40:15', '0');
 INSERT INTO `t_sys_config` VALUES ('e5095e8df69945afb4db1d1ac797946b', 'CoreConfig-CoreButtonLinked', '/index.html', 'CoreConfig-', '2018-09-13 18:34:30', '2018-09-17 16:40:15', '0');
 INSERT INTO `t_sys_config` VALUES ('e7dd32b4663443da8803c884a303f162', 'IndexConfig-IndexWhyCheckUs', '为什么选择我们', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('e8327d9c20ac4953a27159580a6b5ab5', 'nullPublicNumberImg', '/files/02063ad2-2074-4d5a-89e0-4c20d8d60a61.jpg', NULL, '2018-09-06 20:50:41', '2018-09-11 10:32:04', '0');
 INSERT INTO `t_sys_config` VALUES ('ea37c37d66c845c8b86169253169028f', 'AboutUsConfig-AboutUSFourText', '颠覆了市场，颠覆传统金融经济集团使命:为投资者盈利，帮助投资者实现财富自由\n分享财富、共享资源、共赢天下\n以人为本，志同道合，信任协作，互惠共赢\n坚持理想！理想实现！', 'AboutUsConfig-', '2018-09-11 18:06:36', '2018-09-19 19:03:46', '0');
 INSERT INTO `t_sys_config` VALUES ('eb2996f4a44c49638253110372a082ff', 'CommonConfig-LogoImg', '/files/5c444493-738c-4774-8da1-faaa30ea0d48.png', 'CommonConfig-', '2018-09-11 14:03:39', '2018-09-19 16:00:35', '0');
-INSERT INTO `t_sys_config` VALUES ('ee8a30cebdb24597b2e617aa926f23d2', 'SettlementCommonConfig-Before7DayMultipleInner', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('ee8a30cebdb24597b2e617aa926f23d2', 'SettlementCommonConfig-Before7DayMultipleInner', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('ef6cfa8643604807931dda54212b5f05', 'TeamConfig-TeamTwoImage', '/files/b05dfd53-d567-4c87-b20c-2943d41981ae.jpg', 'TeamConfig-', '2018-09-11 17:36:15', '2018-09-13 19:54:40', '0');
-INSERT INTO `t_sys_config` VALUES ('efbf6d6cb5494eb5bb2214de26ab621e', 'SettlementCommonConfig-UserRegGiveCoin', 'KC', 'SettlementCommonConfig-', '2019-02-12 20:07:18', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('f19ecb3e26df440fbea5a246c44771c6', 'SettlementCommonConfig-BackWebsiteSubName', 'K+推广系统', 'SettlementCommonConfig-', '2019-02-20 18:03:26', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('efbf6d6cb5494eb5bb2214de26ab621e', 'SettlementCommonConfig-UserRegGiveCoin', '', 'SettlementCommonConfig-', '2019-02-12 20:07:18', '2019-09-26 14:54:48', '0');
+INSERT INTO `t_sys_config` VALUES ('f19ecb3e26df440fbea5a246c44771c6', 'SettlementCommonConfig-BackWebsiteSubName', 'BBCT管理系统', 'SettlementCommonConfig-', '2019-02-20 18:03:26', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('f1a206b909ec4a94a1eebb08793b3078', 'CoreConfig-CoreTextName', '释放区块链核心价值', 'CoreConfig-', '2018-09-13 18:34:30', '2018-09-17 16:40:15', '0');
 INSERT INTO `t_sys_config` VALUES ('f7103b6ce4f04e1cbae74ec8826059d3', 'IndexConfig-ChineseImg', '/files/23c76f35-fd15-4398-ad67-ed1b480e18eb.png', 'IndexConfig-', '2018-09-11 14:43:18', '2018-09-20 10:02:20', '0');
 INSERT INTO `t_sys_config` VALUES ('f942dfc2b04045efb0e3d9a4b1b8a0d2', 'SettlementCommonConfig-SettlementTransferTradingLimitTimes', '100', 'SettlementCommonConfig-', '2018-12-25 17:19:08', '2019-01-20 11:03:11', '0');
-INSERT INTO `t_sys_config` VALUES ('f9a61fc08c47487e92ccbf344122bd2b', 'SettlementCommonConfig-ThirdShareLevelOfPackage', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('f9a61fc08c47487e92ccbf344122bd2b', 'SettlementCommonConfig-ThirdShareLevelOfPackage', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
 INSERT INTO `t_sys_config` VALUES ('fc0dc65ebe5347e08033f599a5085711', 'IndexConfig-IndexAboutUs', '关于我们', 'IndexConfig-', '2018-09-11 16:31:39', '2018-09-20 10:02:20', '0');
-INSERT INTO `t_sys_config` VALUES ('fcc3384b29df4b79955ad2f5276478e7', 'SettlementCommonConfig-SecondShareLevelOfPackage', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('fda4041f3ce9456cb132ea40c85f49ad', 'SettlementCommonConfig-SystemAccountId', '1', 'SettlementCommonConfig-', '2019-02-28 01:29:01', '2019-09-10 16:17:15', '0');
-INSERT INTO `t_sys_config` VALUES ('ff055ab60cb0455094fa78e44f2e4bbe', 'SettlementCommonConfig-MonthPackageInsteadPercent', '0.5', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-10 16:17:15', '0');
+INSERT INTO `t_sys_config` VALUES ('fcc3384b29df4b79955ad2f5276478e7', 'SettlementCommonConfig-SecondShareLevelOfPackage', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:46', '0');
+INSERT INTO `t_sys_config` VALUES ('fda4041f3ce9456cb132ea40c85f49ad', 'SettlementCommonConfig-SystemAccountId', '1', 'SettlementCommonConfig-', '2019-02-28 01:29:01', '2019-09-26 14:54:47', '0');
+INSERT INTO `t_sys_config` VALUES ('ff055ab60cb0455094fa78e44f2e4bbe', 'SettlementCommonConfig-MonthPackageInsteadPercent', '', 'SettlementCommonConfig-', '2019-09-10 16:17:15', '2019-09-26 14:54:48', '0');
 INSERT INTO `t_sys_config` VALUES ('ffa39e9ca2a14e07b75290ef53aa6bd6', 'CommonConfig-ZYHPublicImg', '/files/f2c7611f-14fa-45e9-bdd9-d82613666237.png', 'CommonConfig-', '2018-09-11 11:49:54', '2018-09-19 16:00:35', '0');
 
 -- ----------------------------
@@ -2701,43 +2612,43 @@ CREATE TABLE `t_sys_information`  (
 -- Records of t_sys_information
 -- ----------------------------
 INSERT INTO `t_sys_information` VALUES ('07f7e141995245e0ad061f40e640a922', '测试推荐一级菜单', '', 3, 1, 0, NULL, '2019-09-25 16:37:52', '2019-09-25 16:38:02', '1', '', '', NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('1132818dc38d4cf5a21c8eab4035d325', '火星APP', '', 3, 1, 0, NULL, '2019-09-25 17:34:30', '2019-09-25 17:35:10', '0', '/files/c2d0f53f-07a0-4e34-aa6d-8dfe428aa0f9.png', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('13d2b4bd1f06483783451f25ad72aaea', 'Cryptokitties', '<p>领养你的专属数字猫</p>', 4, 2, 0, 'http://www.baidu.com', '2019-09-25 18:52:56', '2019-09-25 19:23:09', '0', '/files/e8490486-3caa-40c0-9636-83f15aa008db.png', 'ccbd194b04ce4226adb661c363cda722', 2, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('1132818dc38d4cf5a21c8eab4035d325', '火星APP', '', 3, 1, 0, '', '2019-09-25 17:34:30', '2019-09-26 17:34:14', '0', '/files/16174004-10d8-44bd-8124-2d227b5b6671.png', NULL, 1, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('13d2b4bd1f06483783451f25ad72aaea', 'Cryptokitties', '<p>领养你的专属数字猫</p>', 4, 2, 0, 'http://www.baidu.com', '2019-09-25 18:52:56', '2019-09-26 19:40:38', '0', '/files/eba872c9-2574-41fb-97d3-38d07b134594.png', 'ccbd194b04ce4226adb661c363cda722', 2, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('165267c1ee724f54aeeaccee73df4ef2', '测试推荐二级菜单', '', 3, 2, 0, NULL, '2019-09-25 16:38:28', '2019-09-25 16:38:55', '1', '', '07f7e141995245e0ad061f40e640a922', NULL, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('311332543bc849c8a836547e75fbceeb', '新零售通证，构建电子商务财富管理新生态', '<p>2018年全球电子商务报告的一组数据显示，北美市场电商销售额达5526亿美元，欧洲市场达3465亿美元，亚洲市场达831.7亿美元，澳大利亚市场达186亿美元，非洲和中东市场达186亿美元，南美洲市场达到177亿美元。</p><p>传统的中心化电商产业自带区域属性，主要是由支付货币及支付手段形成的隔离，而区块链可信销售网络及支付通道面向全球，尤其是那些传统销售网络及支付通道不发达的地区。&nbsp;</p><p><img src=\"http://10.235.20.47:9980/files/9396416e-ef4c-4c61-b24d-b8995126c7ec.png\" title=\"path\" alt=\"path\" width=\"439\" height=\"323\" style=\"width: 439px; height: 323px;\"/>BBCT致力于将区块链底层技术做封装，构建一个便捷化平台，让任何商业机构或者任何人都可以很简单地创造自己的生态应用，实现让个体一键进入区块链世界，自创建区块链账本、自设计Token，实现高效的工作协同和价值流通</p><p><video class=\"edui-upload-video  vjs-default-skin video-js\" controls=\"\" preload=\"none\" width=\"420\" height=\"280\" src=\"http://10.235.20.47:9980/files/94b7b0ad-1904-4f8e-8ccc-3bac5841ff0d.mp4\" data-setup=\"{}\"><source src=\"http://10.235.20.47:9980/files/94b7b0ad-1904-4f8e-8ccc-3bac5841ff0d.mp4\" type=\"video/mp4\"/></video><video class=\"edui-upload-video  vjs-default-skin video-js\" controls=\"\" preload=\"none\" width=\"420\" height=\"280\" src=\"http://10.235.20.47:9980/files/d8ed286d-fd74-45de-aeef-5da692e4be83.mp4\" data-setup=\"{}\"><source src=\"http://10.235.20.47:9980/files/d8ed286d-fd74-45de-aeef-5da692e4be83.mp4\" type=\"video/mp4\"/></video></p>', 4, 2, 0, '', '2019-09-25 18:42:05', '2019-09-26 11:48:24', '0', '/files/c2d0f53f-07a0-4e34-aa6d-8dfe428aa0f9.png', 'ffe18d0160ff45f5b62e142f466ceb49', 1, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('4241087d0ee2493fa002e8d71f7344b7', '公告', NULL, 4, 1, 0, NULL, '2019-09-25 17:35:45', '2019-09-25 17:35:45', '0', '', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('4656d725ef394976b03de86cf01964ea', '潮汐-泠鸢yousa', '<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>《潮汐》&nbsp;</strong> &nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;湿润的砂砾吧</p><p>&nbsp;&nbsp;&nbsp;&nbsp;多留恋，多可惜</p><p>&nbsp;&nbsp;&nbsp;&nbsp;随地平线</p><p>&nbsp;&nbsp;&nbsp;&nbsp;渐渐模糊的轮廓</p><p>&nbsp;&nbsp;&nbsp;&nbsp;被缤纷的潮水，淹没</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--陈杰<br/></p>', 4, 2, 0, NULL, '2019-09-25 10:44:48', '2019-09-25 15:31:35', '1', '', '', NULL, '', '');
-INSERT INTO `t_sys_information` VALUES ('4d87a1c7035b4cb08d2b18f976b7cdea', '会员商城', NULL, 2, 1, 0, NULL, '2019-09-25 17:31:19', '2019-09-25 17:31:19', '0', '/files/37200320-c583-427a-afbc-4d33d8577868.png', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('556f2791b3c6468388b6f93b1550aed7', '邀请好友', '', 2, 1, 0, '/pages/invite/invite', '2019-09-25 17:30:40', '2019-09-25 19:58:05', '0', '/files/2beb96de-204c-4fc7-adb5-9ab4a1a8140b.png', NULL, 1, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('5b7dd018d4c5477190512a10ce281fce', '金色财经', NULL, 3, 1, 0, NULL, '2019-09-25 17:32:41', '2019-09-25 17:32:41', '0', '/files/902557a5-e179-4082-a14c-ffe3df55ebd8.png', NULL, NULL, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('4d87a1c7035b4cb08d2b18f976b7cdea', '会员商城', '', 2, 1, 0, '', '2019-09-25 17:31:19', '2019-09-26 17:28:13', '0', '/files/04f2aac0-f5d3-4fef-977f-2326d423f35c.png', NULL, 1, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('556f2791b3c6468388b6f93b1550aed7', '邀请好友', '', 2, 1, 0, '/pages/invite/invite', '2019-09-25 17:30:40', '2019-09-26 17:26:28', '0', '/files/534712d0-5665-4087-8e0c-39371b0293df.png', NULL, 1, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('5b7dd018d4c5477190512a10ce281fce', '金色财经', '', 3, 1, 0, '', '2019-09-25 17:32:41', '2019-09-26 17:36:15', '0', '/files/2f6ba8a0-674c-4451-bf27-9762a1901514.png', NULL, 1, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('5f81e389c50842d3906d760f93dff2cb', '轮播图', '', 1, 1, 0, NULL, '2019-09-25 15:29:54', '2019-09-25 15:30:08', '1', 'https://www.baidu.com/img/dong_a16028f60eed614e4fa191786f32f417.gif', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('63fe6d69f66f47579ab792454bafe09e', '轮播图图片-1', '', 1, 1, 0, '/pages/currency/contract?contractType=0', '2019-09-25 17:28:48', '2019-09-25 19:57:17', '0', '/files/eaab1b2b-8237-4268-b63c-5de88c1c8e2a.png', NULL, 1, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('7148370de06f429b81180845bd2f7835', 'Edgeware', '<p>帮助持有EDG的用户解锁</p>', 4, 2, 0, 'http://www.baidu.com', '2019-09-25 18:55:38', '2019-09-25 18:55:38', '0', '/files/405b8980-c059-4b1c-bf55-b94a4b96361f.png', 'd248a1eceede4864bea3f34e3dcb6659', 2, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('63fe6d69f66f47579ab792454bafe09e', '轮播图图片-1', '', 1, 1, 0, '/pages/currency/contract?contractType=0', '2019-09-25 17:28:48', '2019-09-26 17:29:15', '0', '/files/517a7cb6-96c9-4ce2-aea0-e7fcea45866e.png', NULL, 1, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('7148370de06f429b81180845bd2f7835', 'Edgeware', '<p>帮助持有EDG的用户解锁</p>', 4, 2, 0, 'http://www.baidu.com', '2019-09-25 18:55:38', '2019-09-26 19:45:07', '0', '/files/08e32191-2f50-4688-be86-9c368681c3fe.png', 'd248a1eceede4864bea3f34e3dcb6659', 2, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('7a2c9723a17040468c57e86b252a3beb', '交易所', NULL, 4, 1, 0, NULL, '2019-09-25 17:36:37', '2019-09-25 17:36:37', '0', '', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('7af1c4a783ef419d987845b74730fccf', '火币Pro', NULL, 3, 1, 0, NULL, '2019-09-25 17:33:56', '2019-09-25 17:33:56', '0', '/files/697a8420-1e0a-48c3-86f5-5f7a8aead3b9.png', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('7f1bc8d3e101473f9e7b991744eb6f86', '火币网', '<p>www.huobi.vn</p>', 4, 2, 0, 'http://www.huobi.vn', '2019-09-25 18:44:52', '2019-09-25 18:44:52', '0', '/files/d685ccc6-99e0-4ca0-bc56-28d984258a6c.png', '7a2c9723a17040468c57e86b252a3beb', 2, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('7fc4411b6b16467591f59b9528ef3dc0', '云斗龙', '<p>可战斗的区块链游戏，领养你的专属龙</p>', 4, 2, 0, 'http://www.baidu.com', '2019-09-25 18:53:40', '2019-09-25 19:23:02', '0', '/files/a1e5b816-ff90-4be7-8477-0ffe7c2b2861.png', 'ccbd194b04ce4226adb661c363cda722', 2, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('7af1c4a783ef419d987845b74730fccf', '火币Pro', '', 3, 1, 0, '', '2019-09-25 17:33:56', '2019-09-26 17:31:52', '0', '/files/e10bc913-6a59-4995-957d-376c607f4cd9.png', NULL, 1, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('7f1bc8d3e101473f9e7b991744eb6f86', '火币网', '<p>www.huobi.vn</p>', 4, 2, 0, 'http://www.huobi.vn', '2019-09-25 18:44:52', '2019-09-26 19:39:01', '0', '/files/3d7b00b2-eb4f-43ec-a4e6-f01871acf680.png', '7a2c9723a17040468c57e86b252a3beb', 2, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('7fc4411b6b16467591f59b9528ef3dc0', '云斗龙', '<p>可战斗的区块链游戏，领养你的专属龙</p>', 4, 2, 0, 'http://www.baidu.com', '2019-09-25 18:53:40', '2019-09-26 19:41:12', '0', '/files/66d3fd3f-fcd9-4018-81f1-0be3ca33dc1f.png', 'ccbd194b04ce4226adb661c363cda722', 2, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('a8e1967c15b94731b9be4a5b141edb49', '重磅：BBCT将于9月15日推出首个实物交割的比特币合约', NULL, 4, 2, 0, 'http://www.baidu.com', '2019-09-25 18:43:13', '2019-09-25 18:43:13', '0', '/files/c2d0f53f-07a0-4e34-aa6d-8dfe428aa0f9.png', 'ffe18d0160ff45f5b62e142f466ceb49', 1, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('a9ee3f88ae4d4b2092eb907a3329f7f1', '新币网', '<p>www.xinbi.co</p>', 4, 2, 0, 'http://www.xinbi.co', '2019-09-25 18:49:05', '2019-09-25 18:49:05', '0', '/files/7c5cf08f-805d-486c-b739-7fc6ea1f201b.png', '7a2c9723a17040468c57e86b252a3beb', 2, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('a9ee3f88ae4d4b2092eb907a3329f7f1', '新币网', '<p>www.xinbi.co</p>', 4, 2, 0, 'http://www.xinbi.co', '2019-09-25 18:49:05', '2019-09-26 19:39:39', '0', '/files/b75911c6-7271-4b5f-90c2-ce0ac396b72e.png', '7a2c9723a17040468c57e86b252a3beb', 2, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('as6df4as3d2f1', '公告1', '<p>我们准备更新了</p>', 4, 1, 0, NULL, '2019-08-28 19:33:31', '2019-09-25 15:31:46', '1', '/files/344baa02-1dae-4604-a6bf-70571aec0bf4.png', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('asdf321asdf1', '新闻1', '<p>据前线记者报道....</p>', 4, 1, 0, NULL, '2019-08-28 19:33:00', '2019-09-25 15:31:57', '1', '/files/344baa02-1dae-4604-a6bf-70571aec0bf4.png', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('c97e939ae9a34fdb9edd3dc15756fa15', '进化星球', '<p>进化星球是一个支持跨链虚拟经营类区块链游</p>', 4, 2, 0, 'http://www.baidu.com', '2019-09-25 18:54:19', '2019-09-25 19:22:54', '0', '/files/af00b189-abe1-4a85-b523-4523be01053d.png', 'ccbd194b04ce4226adb661c363cda722', 2, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('c97e939ae9a34fdb9edd3dc15756fa15', '进化星球', '<p>进化星球是一个支持跨链虚拟经营类区块链游</p>', 4, 2, 0, 'http://www.baidu.com', '2019-09-25 18:54:19', '2019-09-26 19:44:33', '0', '/files/03c2581d-356d-468d-8b65-2df08c366c1b.png', 'ccbd194b04ce4226adb661c363cda722', 2, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('c9b28c002818411a9bccb03d294cd2f7', '芒种', '<p style=\"text-align: center;\"><em><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: rgb(146, 208, 80);\">《芒种》</span></strong></em></p><p style=\"text-align: center;\"><span style=\"font-size: 12px;\"><em><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong></em></span><span style=\"font-size: 12px; color: rgb(141, 179, 226);\">赵方婧</span><em><strong><br/></strong></em></p><p style=\"text-align: center;\"><span style=\"font-size: 12px;\"></span></p><p style=\"text-align: center;\">一想到你我就</p><p style=\"text-align: center;\">Wu</p><p style=\"text-align: center;\">空恨别梦久</p><p style=\"text-align: center;\">Wu</p><p style=\"text-align: center;\">烧去纸灰埋烟柳</p><p style=\"text-align: center;\">于鲜活的枝丫</p><p style=\"text-align: center;\">凋零下的无暇</p><p style=\"text-align: center;\">是收获谜底的代价</p><p style=\"text-align: center;\">余晖沾上 远行人的发</p><p style=\"text-align: center;\">他洒下手中牵挂</p><p style=\"text-align: center;\">于桥下</p><p style=\"text-align: center;\">前世迟来者</p><p style=\"text-align: center;\">擦肩而过</p><p style=\"text-align: center;\">掌心刻</p><p style=\"text-align: center;\">来生记得</p><p style=\"text-align: center;\">你眼中烟波滴落一滴墨 wo</p><p style=\"text-align: center;\">若佛说</p><p style=\"text-align: center;\">无牵无挂</p><p style=\"text-align: center;\">放下执着</p><p style=\"text-align: center;\">无相无色</p><p style=\"text-align: center;\">我怎能 波澜不惊 去附和</p><p style=\"text-align: center;\">一想到你我就</p><p style=\"text-align: center;\">Wu</p><p style=\"text-align: center;\">恨情不寿 总于苦海囚</p><p style=\"text-align: center;\">Wu</p><p style=\"text-align: center;\">新翠徒留 落花影中游</p><p style=\"text-align: center;\">Wu</p><p style=\"text-align: center;\">相思无用 才笑山盟旧</p><p style=\"text-align: center;\">Wu</p><p style=\"text-align: center;\">谓我何求</p><p style=\"text-align: center;\">种一万朵莲花</p><p style=\"text-align: center;\">在众生中发芽</p><p style=\"text-align: center;\">等红尘一万种解答</p><p style=\"text-align: center;\">念珠落进 时间的泥沙</p><p style=\"text-align: center;\">待 割舍诠释慈悲</p><p style=\"text-align: center;\">的读法</p><p style=\"text-align: center;\">前世迟来者</p><p style=\"text-align: center;\">擦肩而过</p><p style=\"text-align: center;\">掌心刻</p><p style=\"text-align: center;\">来生记得</p><p style=\"text-align: center;\">你眼中烟波滴落一滴墨 wo</p><p style=\"text-align: center;\">若佛说</p><p style=\"text-align: center;\">无牵无挂</p><p style=\"text-align: center;\">放下执着</p><p style=\"text-align: center;\">无相无色</p><p style=\"text-align: center;\">我怎能 波澜不惊 去附和</p><p style=\"text-align: center;\">一想到你我就</p><p style=\"text-align: center;\">Wu</p><p style=\"text-align: center;\">恨情不寿 总于苦海囚</p><p style=\"text-align: center;\">Wu</p><p style=\"text-align: center;\">新翠徒留 落花影中游</p><p style=\"text-align: center;\">Wu</p><p style=\"text-align: center;\">相思无用 才笑山盟旧</p><p style=\"text-align: center;\">Wu</p><p style=\"text-align: center;\">谓我何求</p><p><video class=\"edui-upload-video  vjs-default-skin     video-js\" controls=\"\" preload=\"none\" width=\"420\" height=\"280\" src=\"/files/97630eaf-e568-4d43-934d-420cbeab598f.mp4\" data-setup=\"{}\"><source src=\"/files/97630eaf-e568-4d43-934d-420cbeab598f.mp4\" type=\"video/mp4\"/></video></p><p style=\"text-align: center;\"><span style=\"font-size: 12px;\"></span></p><p style=\"display: none;\"><br/></p><p style=\"display: none;\"><br/></p><p style=\"display: none;\"><br/></p><p style=\"display: none;\"><br/></p><p style=\"display:none;\" data-background=\"background-repeat:no-repeat; background-position:center center; background-color:transparent; background-image:url(http://localhost:9980/files/d55aae42-cd7a-4b74-b6e9-8f01c2283cfd.jpg);\"><br/></p>', 4, 2, 0, NULL, '2019-09-25 11:19:02', '2019-09-25 15:31:23', '1', '', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('cc5f4f73cc3a4197a91a910de8da126c', '我是标题我是标题xxx', '<p><strong>加粗</strong></p><p><em>斜体</em></p><p><span style=\"text-decoration: underline;\">下划线</span></p><p><span style=\"color: rgb(255, 0, 0);\"><strong>红色</strong></span></p><p><span style=\"color: rgb(0, 176, 240);\"><strong>蓝色</strong></span></p><p><strong><br/></strong></p>', 4, 2, 0, NULL, '2019-09-25 18:39:26', '2019-09-25 18:39:26', '0', '', '4241087d0ee2493fa002e8d71f7344b7', 1, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('cc5f4f73cc3a4197a91a910de8da126c', '我是标题我是标题xxx', '<p><strong>加粗</strong></p><p><em>斜体</em></p><p><span style=\"text-decoration: underline;\">下划线</span></p><p><span style=\"color: rgb(255, 0, 0);\"><strong>红色</strong></span></p><p><span style=\"color: rgb(0, 176, 240);\"><strong>蓝色</strong></span></p><p><video class=\"edui-upload-video  vjs-default-skin video-js\" controls=\"\" preload=\"none\" width=\"420\" height=\"280\" src=\"http://bbct.kkg222.com/files/3524c9e6-fb06-4673-8693-3d9b1996d62a.mp4\" data-setup=\"{}\"><source src=\"http://bbct.kkg222.com/files/3524c9e6-fb06-4673-8693-3d9b1996d62a.mp4\" type=\"video/mp4\"/></video></p>', 4, 2, 0, '', '2019-09-25 18:39:26', '2019-09-27 14:29:55', '0', '', '4241087d0ee2493fa002e8d71f7344b7', 1, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('ccbd194b04ce4226adb661c363cda722', '游戏', NULL, 4, 1, 0, NULL, '2019-09-25 17:36:53', '2019-09-25 17:36:53', '0', '', NULL, NULL, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('d248a1eceede4864bea3f34e3dcb6659', '工具', NULL, 4, 1, 0, NULL, '2019-09-25 17:37:02', '2019-09-25 17:37:02', '0', '', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('d4022a4b212c4d41bfd1c73273e1206c', '关于BBCT即将上线的公告', '', 4, 2, 0, '', '2019-09-25 18:03:49', '2019-09-26 11:13:00', '0', '', '4241087d0ee2493fa002e8d71f7344b7', 1, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('df65536eb6e6450387ac54152f4caeae', '金融理财', NULL, 2, 1, 0, NULL, '2019-09-25 17:32:07', '2019-09-25 17:32:07', '0', '/files/f00f4d8c-f83f-4bbb-8a34-2bb7fa3d77df.png', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('e83f001fae3c493590b8a3224f3d7f24', '非小号', NULL, 3, 1, 0, NULL, '2019-09-25 17:35:01', '2019-09-25 17:35:01', '0', '/files/5a73dfbc-69ee-428e-b67b-25609f379999.png', NULL, NULL, NULL, NULL);
-INSERT INTO `t_sys_information` VALUES ('f65e93683531441f951b80399ebbca47', '平台红包', NULL, 2, 1, 0, NULL, '2019-09-25 17:31:41', '2019-09-25 17:31:41', '0', '/files/58a19ff4-7e0b-4d26-8e56-abdcd8909d5f.png', NULL, NULL, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('d4022a4b212c4d41bfd1c73273e1206c', '关于BBCT即将上线的公告', '<p><img src=\"http://bbct.kkg222.com/files/b3939101-2a95-4fb8-9158-15d849ef5d20.png\" title=\"path\" alt=\"path\"/></p><p><video class=\"edui-upload-video  vjs-default-skin video-js\" controls=\"\" preload=\"none\" width=\"420\" height=\"280\" src=\"http://bbct.kkg222.com/files/92aedbc6-cb57-40d9-b9e4-d69db3002020.mp4\" data-setup=\"{}\"><source src=\"http://bbct.kkg222.com/files/92aedbc6-cb57-40d9-b9e4-d69db3002020.mp4\" type=\"video/mp4\"/></video></p>', 4, 2, 0, '', '2019-09-25 18:03:49', '2019-09-26 18:20:49', '0', '', '4241087d0ee2493fa002e8d71f7344b7', 1, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('df65536eb6e6450387ac54152f4caeae', '金融理财', '', 2, 1, 0, '', '2019-09-25 17:32:07', '2019-09-26 17:35:25', '0', '/files/625f24f2-50d3-4dcd-98e0-1bf452282b04.png', NULL, 1, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('e83f001fae3c493590b8a3224f3d7f24', '非小号', '', 3, 1, 0, '', '2019-09-25 17:35:01', '2019-09-26 17:33:19', '0', '/files/87aa7328-003a-4337-ac47-8eaff2d2fecb.png', NULL, 1, NULL, NULL);
+INSERT INTO `t_sys_information` VALUES ('f65e93683531441f951b80399ebbca47', '平台红包', '', 2, 1, 0, '', '2019-09-25 17:31:41', '2019-09-26 17:35:10', '0', '/files/902c3a5e-acfb-4461-81ab-427590404e3f.png', NULL, 1, NULL, NULL);
 INSERT INTO `t_sys_information` VALUES ('ffe18d0160ff45f5b62e142f466ceb49', '新闻', NULL, 4, 1, 0, NULL, '2019-09-25 17:36:03', '2019-09-25 17:36:03', '0', '', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Procedure structure for find_recommenders
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `find_recommenders`;
-delimiter //
-CREATE PROCEDURE `find_recommenders`(in id int,in generate int)
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `find_recommenders`(in id int,in generate int)
 BEGIN
       	DECLARE var INT default 0;
         DECLARE ftid int;
@@ -2754,6 +2665,6 @@ BEGIN
 	select * from t_sw_user_basic where find_in_set(tid,idstr);
 END
 ;;
-delimiter //
+delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;

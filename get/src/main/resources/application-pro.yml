@@ -8,9 +8,12 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
 #-------------------
-    url: jdbc:mysql://10.222.12.222:3306/kplus?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-    username: kplus
-    password: Kplus.20190306
+    url: jdbc:mysql://127.0.0.1:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    username: bbctdb
+    password: Bbctdb.190620
+#    url: jdbc:mysql://127.0.0.1:3306/kplus?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+#    username: kplus
+#    password: Kplus.20190306
 #-------------------
     initialSize: 20
     minIdle: 30
@@ -36,7 +39,7 @@ spring:
     #useGlobalDataSourceStat: true
   redis:
   #-------------------
-    host: 10.222.12.222
+    host: 127.0.0.1
     port: 6379
     password:
   #-------------------
@@ -70,7 +73,8 @@ configs:
     uploadPath: /data/ftps/styftp01/ayw/
     #这个上线要改
     #-------------------
-    serverIp: http://10.235.20.47:9980
+#    serverIp: http://10.235.20.47:9980
+    serverIp: http://bbctapp.com
     #-------------------
   msg:
     # 是否开启结算系统后台验证码
@@ -102,8 +106,8 @@ configs:
       masterSecret: eVBAK1QUXN8TruLkadQLC9
       host: http://sdk.open.api.igexin.com/apiex.htm
 #-------------------
-  bbctChargeAddress: deposit
-  eosChargeAddress: deposit
+  bbctChargeAddress: bbcttokenapp
+  eosChargeAddress: bbcttokenapp
   withdrawFee: 5
   # 上面多少代可以获得加速
   generateReleaseCode: IVDMX6
@@ -111,7 +115,7 @@ configs:
   benchmarketingRate: 500
 
   blockChain:
-    url: http://10.235.20.211:8082
+    url: http://127.0.0.1:8082
     method:
       #插入userID
       insertMemo: contract.insert_memo
