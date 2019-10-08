@@ -35,7 +35,7 @@
             <if test="userId != null and userId != ''">and chargelog.user_id =
                 #{userId}
             </if>
-            <if test="coinId != null and coinId != ''">and chargelog.chargelog.coin_id =
+            <if test="coinId != null and coinId != ''">and chargelog.coin_id =
                 #{coinId}
             </if>
             <if test="amount != null and amount != ''">and chargelog.amount =
