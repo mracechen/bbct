@@ -402,10 +402,14 @@ public class AppPrivateAPI {
      * */
     @RequestMapping(value = "check_user",method = RequestMethod.GET)
     @ResponseBody
-    public Result checkUser(Integer userId) {
+    public Result checkUser(HttpServletRequest request, Integer userId) {
         try {
+            SwUserBasicDO myself = AppUserUtils.getUser(request);
             if(StringUtils.isBlank(userId)){
                 return Result.error("AppPrivateAPI.checkUser.receiver.not.exist");
+            }
+            if(myself.getTid().equals(userId)){
+                return Result.error("AppPrivateAPI.checkUser.can.not.transfer.to.himself");
             }
             SwUserBasicDO user = swUserBasicService.get(userId);
             if (user == null) {
