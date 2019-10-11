@@ -41,6 +41,12 @@ public class SwPrincipalUserServiceImpl implements SwPrincipalUserService {
     private SwAccountRecordService swAccountRecordService;
 
     @Autowired
+    private SwCurrentService swCurrentService;
+
+    @Autowired
+    private SwPeriodService swPeriodService;
+
+    @Autowired
     private Languagei18nUtils languagei18nUtils;
 
     @Override
@@ -90,21 +96,47 @@ public class SwPrincipalUserServiceImpl implements SwPrincipalUserService {
         ));
         SwUserBasicDO swUserBasicDO = swUserBasicService.get(swPrincipalUser.getUserId());
         //如果他之前已经购买过活币金或者是定币金，那么要将他们的释放时间重置，适配新购买的固币金
+        //不仅如此，还要将活币金或者是定币金导加速释放固币金的数量改变，新买的固币金×原来购买活币金或定币金的倍率
         List<SwCurrentUserDO> myCurrent = swCurrentUserService.getByUserId(swUserBasicDO.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
         if(myCurrent != null && myCurrent.size() > 1){
             throw new Exception("用户活币金数据异常，用户ID："+swUserBasicDO.getTid());
         }
         if(myCurrent != null && myCurrent.size() == 1){
             SwCurrentUserDO swCurrentUserDO = myCurrent.get(0);
+            //用户固币金下次释放额度=固币金基本额度×购买活币金倍率×释放倍率
+            //BigDecimal currentAccelerateNum = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum())).multiply(new BigDecimal(String.valueOf(swCurrentUserDO.getEx3())));
+            SwCurrentDO swCurrentDO = swCurrentService.get(swCurrentUserDO.getCurrentId());
+            BigDecimal abstractCurrentNum = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum()))
+                    .multiply(new BigDecimal(String.valueOf(swCurrentUserDO.getEx3())));
+            //释放数量核算
+            if(abstractCurrentNum.compareTo(new BigDecimal(String.valueOf(swCurrentUserDO.getEx1()))) < 0){
+                BigDecimal currentAccelerateNum = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum()))
+                        .multiply(new BigDecimal(String.valueOf(swCurrentUserDO.getEx3())))
+                        .multiply(new BigDecimal(String.valueOf(swCurrentDO.getAcceleratePercent())))
+                        .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
+                swCurrentUserDO.setEx2(currentAccelerateNum.intValue());
+            }
             swCurrentUserDO.setReleaseTime(swPrincipalUser.getCreateDate());
             swCurrentUserService.update(swCurrentUserDO);
         }
         List<SwPeriodUserDO> myPeriod = swPeriodUserService.getByUserId(swUserBasicDO.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
         if(myPeriod != null && myPeriod.size() > 1){
-            throw new Exception("用户固币金数据异常，用户ID："+swUserBasicDO.getTid());
+            throw new Exception("用户定币金数据异常，用户ID："+swUserBasicDO.getTid());
         }
         if(myPeriod != null && myPeriod.size() == 1){
             SwPeriodUserDO swPeriodUserDO = myPeriod.get(0);
+            //用户固币金下次释放额度=固币金基本额度×购买定币金倍率×释放倍率
+            //BigDecimal periodAccelerateNum = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum())).multiply(new BigDecimal(String.valueOf(swPeriodUserDO.getEx3())));
+            SwPeriodDO swPeriodDO = swPeriodService.get(swPeriodUserDO.getPeriodId());
+            BigDecimal abstractPeriodNum = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum()))
+                    .multiply(new BigDecimal(String.valueOf(swPeriodUserDO.getEx3())));
+            if(abstractPeriodNum.compareTo(new BigDecimal(String.valueOf(swPeriodUserDO.getEx1()))) < 0){
+                BigDecimal periodAccelerateNum = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum()))
+                        .multiply(new BigDecimal(String.valueOf(swPeriodUserDO.getEx3())))
+                        .multiply(new BigDecimal(String.valueOf(swPeriodDO.getAcceleratePercent())))
+                        .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
+                swPeriodUserDO.setEx2(periodAccelerateNum.intValue());
+            }
             swPeriodUserDO.setReleaseTime(swPrincipalUser.getCreateDate());
             swPeriodUserService.update(swPeriodUserDO);
         }

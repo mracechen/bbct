@@ -1,13 +1,10 @@
 package com.get.service.impl;
 
 import com.common.utils.i18n.Languagei18nUtils;
-import com.get.domain.SwAccountRecordDO;
-import com.get.domain.SwCurrentDO;
-import com.get.domain.SwWalletsDO;
-import com.get.service.SwAccountRecordService;
-import com.get.service.SwCurrentService;
-import com.get.service.SwWalletsService;
+import com.get.domain.*;
+import com.get.service.*;
 import com.get.statuc.CommonStatic;
+import com.get.statuc.NumberStatic;
 import com.get.statuc.RecordEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.dao.SwCurrentUserDao;
-import com.get.domain.SwCurrentUserDO;
-import com.get.service.SwCurrentUserService;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -35,6 +30,12 @@ public class SwCurrentUserServiceImpl implements SwCurrentUserService {
 
     @Autowired
     private SwAccountRecordService swAccountRecordService;
+
+    @Autowired
+    private SwPrincipalUserService swPrincipalUserService;
+
+    @Autowired
+    private SwPrincipalService swPrincipalService;
 
     @Autowired
     private Languagei18nUtils languagei18nUtils;
@@ -68,6 +69,14 @@ public class SwCurrentUserServiceImpl implements SwCurrentUserService {
     @Transactional(rollbackFor = Exception.class)
     public int save(SwCurrentUserDO swCurrentUser) throws Exception {
         SwCurrentDO swCurrentDO = swCurrentService.get(swCurrentUser.getCurrentId());
+        List<SwPrincipalUserDO> myPrincipal = swPrincipalUserService.getByUserId(swCurrentUser.getUserId(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+        SwPrincipalUserDO swPrincipalUserDO = myPrincipal.get(0);
+        SwPrincipalDO swPrincipalDO = swPrincipalService.get(swPrincipalUserDO.getPrincipalId());
+        BigDecimal currentAccelerateNum = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum()))
+                .multiply(new BigDecimal(String.valueOf(swCurrentUser.getEx3())))
+                .multiply(new BigDecimal(String.valueOf(swCurrentDO.getAcceleratePercent())))
+                .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
+        swCurrentUser.setEx2(currentAccelerateNum.intValue());
         if(swCurrentDO == null){
             throw new Exception("活币金异常");
         }

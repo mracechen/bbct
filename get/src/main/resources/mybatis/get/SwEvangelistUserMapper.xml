@@ -181,7 +181,7 @@
             <if test="evangelistId != null">`evangelist_id` = #{evangelistId
                         },
             </if>
-            <if test="totalNum != null">`total_num` = `total_num` + #{totalNum
+            <if test="totalNum != null">`total_num` = #{totalNum
                         },
             </if>
             <if test="leftNum != null">`left_num` = `left_num` + #{leftNum

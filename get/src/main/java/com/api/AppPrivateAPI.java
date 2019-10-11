@@ -210,8 +210,9 @@ public class AppPrivateAPI {
             Map<String,Object> params = new HashMap<>();
             params.put("delFlag",CommonStatic.NOTDELETE);
             params.put("ex1",CommonStatic.CHECK_WAITING);
+            params.put("email",swEvangelistInfoDO.getEmail());
             List<SwEvangelistInfoDO> list = swEvangelistInfoService.list(params);
-            if(list != null && list.size() > 1){
+            if(list != null && list.size() > 0){
                 return Result.error("AppPrivateAPI.resetLoginPassword.email.submitted");
             }
             swEvangelistInfoDO.setTid(IDUtils.randomStr());

@@ -27,12 +27,12 @@ public class SwCurrentUserDO implements Serializable {
     private Date releaseTime;
             //状态，0-正常，1-已释放完
     private Integer status;
-            //ex1
+            //认购金额
     private Double ex1;
-            //ex2
-    private String ex2;
-            //ex3
-    private String ex3;
+            //加速数量
+    private Integer ex2;
+            //购买倍率
+    private Integer ex3;
             //ex4
     private String ex4;
             //创建时间

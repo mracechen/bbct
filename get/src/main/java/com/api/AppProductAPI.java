@@ -686,6 +686,7 @@ public class AppProductAPI {
             swCurrentUserDO.setDelFlag(CommonStatic.NOTDELETE);
             swCurrentUserDO.setCreateDate(new Date());
             swCurrentUserDO.setUpdateDate(new Date());
+            swCurrentUserDO.setEx3(rate);
             swCurrentUserDO.setEx1(multiply.doubleValue());
             swCurrentUserDO.setReleaseTime(new Date());
             swCurrentUserDO.setCurrentId(currentId);
@@ -771,6 +772,7 @@ public class AppProductAPI {
             swPeriodUserDO.setUpdateDate(new Date());
             swPeriodUserDO.setDelFlag(CommonStatic.NOTDELETE);
             swPeriodUserDO.setPeriodId(periodId);
+            swPeriodUserDO.setEx3(rate);
             swPeriodUserDO.setEx1(multiply.doubleValue());
             swPeriodUserDO.setReleaseTime(new Date());
             swPeriodUserDO.setStatus(CommonStatic.NO_RELEASE);

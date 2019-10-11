@@ -1,13 +1,10 @@
 package com.get.service.impl;
 
 import com.common.utils.i18n.Languagei18nUtils;
-import com.get.domain.SwAccountRecordDO;
-import com.get.domain.SwPeriodDO;
-import com.get.domain.SwWalletsDO;
-import com.get.service.SwAccountRecordService;
-import com.get.service.SwPeriodService;
-import com.get.service.SwWalletsService;
+import com.get.domain.*;
+import com.get.service.*;
 import com.get.statuc.CommonStatic;
+import com.get.statuc.NumberStatic;
 import com.get.statuc.RecordEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.get.dao.SwPeriodUserDao;
-import com.get.domain.SwPeriodUserDO;
-import com.get.service.SwPeriodUserService;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -36,6 +31,12 @@ public class SwPeriodUserServiceImpl implements SwPeriodUserService {
 
     @Autowired
     private SwAccountRecordService swAccountRecordService;
+
+    @Autowired
+    private SwPrincipalUserService swPrincipalUserService;
+
+    @Autowired
+    private SwPrincipalService swPrincipalService;
 
     @Autowired
     private Languagei18nUtils languagei18nUtils;
@@ -69,6 +70,14 @@ public class SwPeriodUserServiceImpl implements SwPeriodUserService {
     @Transactional(rollbackFor = Exception.class)
     public int save(SwPeriodUserDO swPeriodUser) throws Exception{
         SwPeriodDO swPeriodDO = swPeriodService.get(swPeriodUser.getPeriodId());
+        List<SwPrincipalUserDO> myPrincipal = swPrincipalUserService.getByUserId(swPeriodUser.getUserId(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+        SwPrincipalUserDO swPrincipalUserDO = myPrincipal.get(0);
+        SwPrincipalDO swPrincipalDO = swPrincipalService.get(swPrincipalUserDO.getPrincipalId());
+        BigDecimal periodAccelerateNum = new BigDecimal(String.valueOf(swPrincipalDO.getPrincipalNum()))
+                .multiply(new BigDecimal(String.valueOf(swPeriodUser.getEx3())))
+                .multiply(new BigDecimal(String.valueOf(swPeriodDO.getAcceleratePercent())))
+                .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
+        swPeriodUser.setEx2(periodAccelerateNum.intValue());
         if(swPeriodDO == null){
             throw new Exception("定币金异常");
         }

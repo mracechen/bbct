@@ -17,29 +17,29 @@ import java.util.Date;
 public class SwPeriodUserDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-            //ID
+    //ID
     private String tid;
-            //用户ID
+    //用户ID
     private Integer userId;
-            //定币金ID
+    //定币金ID
     private String periodId;
-            //释放时间
+    //释放时间
     private Date releaseTime;
-            //状态，0-正常，1-已释放完
+    //状态，0-正常，1-已释放完
     private Integer status;
-            //认购金额
+    //认购金额
     private Double ex1;
-            //ex2
-    private String ex2;
-            //ex3
-    private String ex3;
-            //创建时间
+    //加速数量
+    private Integer ex2;
+    //购买倍率
+    private Integer ex3;
+    //创建时间
     private Date createDate;
-            //更新时间
+    //更新时间
     private Date updateDate;
-            //0为可用,1为不可用
+    //0为可用,1为不可用
     private String delFlag;
-            //说明
+    //说明
     private String remark;
 
     private Double causeReleaseNum;
@@ -47,4 +47,4 @@ public class SwPeriodUserDO implements Serializable {
     private Date expireDate;
 
     private String periodName;
-    }
+}

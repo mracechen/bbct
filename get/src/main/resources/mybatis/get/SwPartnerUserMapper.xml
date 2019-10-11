@@ -179,7 +179,7 @@
             <if test="totalNum != null">`total_num` = #{totalNum
                         },
             </if>
-            <if test="leftNum != null">`left_num` = #{leftNum
+            <if test="leftNum != null">`left_num` = `left_num` + #{leftNum
                         },
             </if>
             <if test="status != null">`status` = #{status

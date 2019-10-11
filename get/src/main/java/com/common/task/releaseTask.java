@@ -109,9 +109,10 @@ public class releaseTask {
                     swCurrentDO = swCurrentService.get(currentId);
                     userProduct.put(currentId,swCurrentDO);
                 }
-                Double acceleratePercent = swCurrentDO.getAcceleratePercent();
+                //Double acceleratePercent = swCurrentDO.getAcceleratePercent();
                 //本次将要释放的数量
-                BigDecimal releaseNum = new BigDecimal(e.getEx1().toString()).multiply(new BigDecimal(acceleratePercent.toString()));
+                //BigDecimal releaseNum = new BigDecimal(e.getEx1().toString()).multiply(new BigDecimal(acceleratePercent.toString()));
+                BigDecimal releaseNum = new BigDecimal(e.getEx2());
                 //修改释放时间，释放时间往后推一天（如果查出来的是昨天的数据，往后推一天就是今天了）
                 SwCurrentUserDO swCurrentUserDO = new SwCurrentUserDO();
                 swCurrentUserDO.setTid(e.getTid());
@@ -188,9 +189,10 @@ public class releaseTask {
                     swPeriodDO = swPeriodService.get(periodId);
                     userProduct.put(periodId,swPeriodDO);
                 }
-                Double acceleratePercent = swPeriodDO.getAcceleratePercent();
+                //Double acceleratePercent = swPeriodDO.getAcceleratePercent();
                 //本次将要释放的数量
-                BigDecimal releaseNum = new BigDecimal(e.getEx1().toString()).multiply(new BigDecimal(acceleratePercent.toString()));
+                //BigDecimal releaseNum = new BigDecimal(e.getEx1().toString()).multiply(new BigDecimal(acceleratePercent.toString()));
+                BigDecimal releaseNum = new BigDecimal(e.getEx2());
                 //判断该用户有没有持有固币金（或者优币金，升币金，三者互斥），有的话加速下放自己的固币金（固币金减少，相应的钱放到钱包，添加释放记录，添加资金记录）
                 Integer userId = e.getUserId();
                 try {
@@ -333,7 +335,7 @@ public class releaseTask {
      * 释放固币金
      * @param targetUserId 释放目标用户id
      * @param causeUserId 导致释放发生的用户id
-     * @param releaseNum 释放优币金数量
+     * @param releaseNum 释放固币金数量
      * @param causeTypeName 导致释放的类型
      * @param sign 释放唯一标识
      * @param causeId 导致释放的项目id
