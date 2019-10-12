@@ -9,12 +9,12 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
 
     #-------------------
-#    url: jdbc:mysql://10.236.10.1:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-#    username: bbctdb
-#    password: Bbctdb.190620
-    url: jdbc:mysql://localhost:3306/bbct?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-    username: root
-    password: aaa000000
+    url: jdbc:mysql://10.236.10.1:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    username: bbctdb
+    password: Bbctdb.190620
+#    url: jdbc:mysql://localhost:3306/bbct?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+#    username: root
+#    password: aaa000000
     #-------------------
     initialSize: 1
     minIdle: 3
@@ -40,12 +40,12 @@ spring:
     #useGlobalDataSourceStat: true
   redis:
   #-------------------
-#    host: 10.236.10.1
-#    port: 6379
-#    password:
-    host: 127.0.0.1
+    host: 10.236.10.1
     port: 6379
-    password: aaa000000
+    password:
+#    host: 127.0.0.1
+#    port: 6379
+#    password: aaa000000
   #-------------------
     # 连接超时时间（毫秒）
     timeout: 10000
@@ -75,13 +75,13 @@ configs:
     secretKey: adfadfdaf34523432
   file:
   #-------------------
-#    uploadPath: /data/ftps/styftp01/ayw/
-    uploadPath: E:/upload_file/
+    uploadPath: /data/ftps/styftp01/ayw/
+#    uploadPath: E:/upload_file/
   #-------------------
   #-------------------
     # 上线要改
-#    serverIp: http://bbct.kkg222.com
-    serverIp: http://10.235.20.47:9980
+    serverIp: http://bbct.kkg222.com
+#    serverIp: http://10.235.20.47:9980
   #-------------------
   trading:
     url: sfsafdsf
