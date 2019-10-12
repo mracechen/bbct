@@ -11,7 +11,7 @@ import com.get.domain.SwPrincipalDO;
  * @email sun1920185681@163.com
  * @date 2019-08-22 16:27:04
  */
-public interface SwPrincipalService {
+public interface  SwPrincipalService {
 
     SwPrincipalDO get(String tid);
 

@@ -120,11 +120,15 @@ public class AppPublicAPI {
      * 注册并校验
      */
     @RequestMapping("register")
-    public Object checkRegister(String email, String checkCode, String loginPass, Integer recomId) {
+    public Object checkRegister(String email, String checkCode,@RequestParam  String loginPass, Integer recomId,@RequestParam String loginPassS) {
         Object result = null;
+
         try {
             if (StringUtils.isBlank(email)) {
                 return Result.error("AppPublicAPI.checkRegister.mail.cannot.be.null");
+            }
+            if (!loginPass.equals(loginPassS)){
+                return Result.error("AppPublicAPI.checkRegister.password.abnormal");
             }
             SwUserBasicDO userBasicDO = new SwUserBasicDO();
             userBasicDO.setUserType(CommonStatic.USER_TYPE_COMMON);
@@ -137,11 +141,12 @@ public class AppPublicAPI {
             if (exUser.size() > 0 && StringUtils.isNotBlank(email)) {
                 return Result.error("AppPublicAPI.checkRegister.mail.exist");
             }
+
             //校验邮箱验证码
-            boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, email);
-            if (!mailRt) {
-                return Result.error("AppPublicAPI.checkRegister.check.code.error");
-            }
+//            boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, email);
+//            if (!mailRt) {
+//                return Result.error("AppPublicAPI.checkRegister.check.code.error");
+//            }
             if (userBasicDO.getRecomId() == null || userBasicDO.getRecomId() <= 0) {
                 userBasicDO.setRecomId(1);
             } else {
@@ -187,6 +192,7 @@ public class AppPublicAPI {
             String highPpassffective = StringUtils.isBlank(exSwUserBasicDO.getHighPass()) ? "1" : "2";
             result.put("highPpassffective", highPpassffective);
             result.put("email", exSwUserBasicDO.getEmail());
+            result.put("ex1",exSwUserBasicDO.getEx1());
             result.put("registerDate", DateUtils.dateFormat(exSwUserBasicDO.getCreateDate(), DateUtils.DATE_PATTERN));
             result.put("userRole", exSwUserBasicDO.getUserType());
             log.info("用户登录接口返回数据：【" + Result.ok(result).toString() + "】");
