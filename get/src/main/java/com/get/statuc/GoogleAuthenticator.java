@@ -71,6 +71,7 @@ public class GoogleAuthenticator {
 
     public boolean check_code(String secret, String code, long timeMsec) {
         Base32 codec = new Base32();
+
         byte[] decodedKey = codec.decode(secret);
         // convert unix msec time into a 30 second "window"
         // this is per the TOTP spec (see the RFC for details)
@@ -124,18 +125,10 @@ public class GoogleAuthenticator {
     }
 
 
-    public static void main(String[] arg){
-//        String s = genSecret();
-//        System.out.println(s);
 
+    public static void  main(String args[]){
         String huobi = getQRBarcode("huobi", generateSecretKey());
         System.out.println(huobi);
-//        String  code = "094012";
-//        long t = System.currentTimeMillis();
-//        GoogleAuthenticator ga = new GoogleAuthenticator();
-//        ga.setWindowSize(1);
-//        String secret = "HHSU5DHO7ZPAGKUB";
-//        boolean r = ga.check_code(secret, code, t);
-//        System.out.println("检查code是否正确？" + r);
     }
+
 }

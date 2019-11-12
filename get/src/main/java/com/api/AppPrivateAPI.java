@@ -9,12 +9,11 @@ import com.evowallet.common.ServerResponse;
 import com.evowallet.utils.MailUtil;
 import com.get.domain.*;
 import com.get.service.*;
-import com.get.statuc.CommonStatic;
-import com.get.statuc.NumberStatic;
-import com.get.statuc.RecordEnum;
+import com.get.statuc.*;
 import com.gexin.fastjson.JSON;
 import com.gexin.fastjson.JSONArray;
 import com.gexin.fastjson.JSONObject;
+import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,7 +154,7 @@ public class AppPrivateAPI {
             result.put("mobile",user.getMobile());
             result.put("username",user.getUsername());
             result.put("recomId", user.getRecomId());
-            result.put("recomId", user.getRecomId());
+            result.put("googleKey", user.getEx1());
             result.put("userPush",swUserBasicService.getUserRecomLike(user));
             result.put("teamUserNum",swUserBasicService.getChildrenTreeUserNum(user.getTid()));
             String highPpassffective = StringUtils.isBlank(user.getHighPass()) ? "1": "2";
@@ -603,7 +602,7 @@ public class AppPrivateAPI {
             BigDecimal other = new BigDecimal(String.valueOf(otherReleaseNum));
             result.put("othersReleaseNum",other);
             BigDecimal total = i.add(other).doubleValue() == 0?new BigDecimal("1"):i.add(other);
-            BigDecimal otherPercent = other.divide(total).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
+            BigDecimal otherPercent = other.divide(total,NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
             result.put("othersReleasePercent",otherPercent);
             Integer childrenUserNum = swUserBasicService.getChildrenUserNum(user.getTid());
             result.put("childUserNum",childrenUserNum);
@@ -630,6 +629,9 @@ public class AppPrivateAPI {
             if(StringUtils.isBlank(coinId) || amount == null || amount <=0 || StringUtils.isBlank(coinId)){
                 return Result.error("system.params.error");
             }
+            if(StringUtils.isBlank(user.getEx1())){
+                return Result.error("system.google.coder.not.bind");
+            }
             if(address.equals(bbctChargeAddress) || address.equals(eosChargeAddress)){
                 return Result.error("AppPrivateAPI.withdraw.address.equals.charge.address");
             }
@@ -649,8 +651,11 @@ public class AppPrivateAPI {
                 return Result.error("system.password.error");
             }
             //校验邮箱验证码
-            boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, user.getEmail());
-            if (!mailRt) {
+            //boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, user.getEmail());
+            //校验谷歌验证码
+            GoogleAuthenticator googleAuthenticator = new GoogleAuthenticator();
+            boolean b = googleAuthenticator.check_code(user.getEx1(), checkCode, System.currentTimeMillis());
+            if (!b) {
                 return Result.error("AppPublicAPI.checkRegister.check.code.error");
             }
             swWithlogService.withdraw(user.getTid(),address,amount,swCoinTypeDO.getCoinName(),memo);
@@ -661,4 +666,88 @@ public class AppPrivateAPI {
         }
     }
 
+    /**
+     * 绑定谷歌验证器-生成二维码和私钥
+     * */
+    @RequestMapping(value = "bind_google_coder",method = RequestMethod.GET)
+    @ResponseBody
+    public Result bindGoogleCoder(HttpServletRequest request, String token) {
+        try {
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            //如果是重置谷歌验证器
+            if(StringUtils.isNotBlank(user.getEx1()) && StringUtils.isNotBlank(token)){
+                String tokenValue = TokenCache.getKey(token);
+                if(StringUtils.isBlank(tokenValue)){
+                    return Result.error("system.checkCode.expired");
+                }
+            }else if((StringUtils.isBlank(user.getEx1()) && StringUtils.isNotBlank(token))
+                    || (StringUtils.isNotBlank(user.getEx1()) && StringUtils.isBlank(token))){
+                return Result.error("system.params.error");
+            }
+            String secretKey = GoogleAuthenticator.generateSecretKey();
+            String qrBarcode = GoogleAuthenticator.getQRBarcode("bbct" + user.getEmail(), secretKey);
+            Map<String,String> result = new HashMap<>();
+            result.put("secretKey",secretKey);
+            result.put("qrCode",qrBarcode);
+            return Result.ok(result);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 绑定谷歌验证器-校验动态码
+     * */
+    @RequestMapping(value = "check_google_coder",method = RequestMethod.POST)
+    @ResponseBody
+    public Result checkGoogleCoder(HttpServletRequest request, String code, String secretKey) {
+        try {
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            if(StringUtils.isBlank(code) || StringUtils.isBlank(secretKey)){
+                return Result.error("system.params.error");
+            }
+            GoogleAuthenticator c = new GoogleAuthenticator();
+            boolean checkResult = c.check_code(secretKey, code, System.currentTimeMillis());
+            if(checkResult){
+                SwUserBasicDO swUserBasicDO = new SwUserBasicDO();
+                swUserBasicDO.setTid(user.getTid());
+                swUserBasicDO.setEx1(secretKey);
+                swUserBasicService.update(swUserBasicDO);
+                return Result.ok();
+            }else{
+                return Result.error("system.checkCode.error");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
+
+    /**
+     * 重置谷歌验证器(校验密码)
+     * */
+    @RequestMapping(value = "reset_google_coder",method = RequestMethod.POST)
+    @ResponseBody
+    public Result resetGoogleCoder(HttpServletRequest request, String loginPassword) {
+        try {
+            if(StringUtils.isBlank(loginPassword)){
+                return Result.error("system.params.error");
+            }
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            String serectLoginPassword = MyMD5Utils.encodingAdmin(loginPassword);
+            if(!serectLoginPassword.equals(user.getLoginPass())){
+                return Result.error("system.password.error");
+            }
+            String token = IDUtils.randomStr();
+            String tokenValue = IDUtils.randomStr();
+            TokenCache.setKey(token,tokenValue);
+            Map<String,String> result = new HashMap<>();
+            result.put("token",token);
+            return Result.ok(result);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("system.failed.operation");
+        }
+    }
 }

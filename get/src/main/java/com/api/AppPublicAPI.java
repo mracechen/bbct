@@ -9,6 +9,7 @@ import com.evowallet.utils.MailUtil;
 import com.get.domain.*;
 import com.get.service.*;
 import com.get.statuc.CommonStatic;
+import com.get.statuc.GoogleAuthenticator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,17 +116,15 @@ public class AppPublicAPI {
         return Result.ok();
     }
 
-    /*
-     *
+    /**
      * 注册并校验
      */
     @RequestMapping("register")
-    public Object checkRegister(String email, String checkCode,@RequestParam  String loginPass, Integer recomId,@RequestParam String loginPassS) {
+    public Object checkRegister(String email, @RequestParam  String loginPass, Integer recomId,@RequestParam String loginPassS) {
         Object result = null;
-
         try {
-            if (StringUtils.isBlank(email)) {
-                return Result.error("AppPublicAPI.checkRegister.mail.cannot.be.null");
+            if (StringUtils.isBlank(email) || StringUtils.isBlank(loginPass) || recomId == null || StringUtils.isBlank(loginPassS)) {
+                return Result.error("system.params.error");
             }
             if (!loginPass.equals(loginPassS)){
                 return Result.error("AppPublicAPI.checkRegister.password.abnormal");
@@ -141,7 +140,6 @@ public class AppPublicAPI {
             if (exUser.size() > 0 && StringUtils.isNotBlank(email)) {
                 return Result.error("AppPublicAPI.checkRegister.mail.exist");
             }
-
             //校验邮箱验证码
 //            boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, email);
 //            if (!mailRt) {
@@ -218,10 +216,16 @@ public class AppPublicAPI {
             if(byEmail == null){
                 return Result.error("AppPublicAPI.resetLoginPassword.user.not.exist");
             }
+            if(StringUtils.isBlank(byEmail.getEx1())){
+                return Result.error("system.google.coder.not.bind");
+            }
             user.setTid(byEmail.getTid());
-            //发送邮箱验证码
-            boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, email);
-            if (!mailRt) {
+            //校验邮箱验证码
+            //boolean mailRt = CheckCodeUtils.checkEmailCheckCode(checkCode, email);
+            //校验谷歌验证码
+            GoogleAuthenticator googleAuthenticator = new GoogleAuthenticator();
+            boolean b = googleAuthenticator.check_code(byEmail.getEx1(), checkCode, System.currentTimeMillis());
+            if (!b) {
                 return Result.error("AppPublicAPI.checkRegister.check.code.error");
             }
             pass = MyMD5Utils.encodingAdmin(pass);

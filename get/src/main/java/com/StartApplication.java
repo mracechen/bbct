@@ -15,6 +15,10 @@ import org.springframework.context.annotation.Bean;
 
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.text.DateFormat;
 
 @EnableAutoConfiguration(exclude = {
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
@@ -25,12 +29,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableCaching
 @EnableScheduling
+@RestController
 public class StartApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) throws IllegalAccessException {
         SpringApplication.run(StartApplication.class, args);
         System.out.println("程序启动完毕！！！");
 
+    }
+
+    @RequestMapping(value = "/api/health")
+    public String health(){
+        System.out.println("进入health方法............."+ DateFormat.getDateInstance());
+        return "{\"status\":\"UP\"}";
     }
 
     @Override
