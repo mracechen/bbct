@@ -61,6 +61,9 @@ public class AppPublicAPI {
     private SwWalletsService swWalletsService;
 
     @Autowired
+    private SwEvangelistInfoService swEvangelistInfoService;
+
+    @Autowired
     private LogService logService;
 
     @Value("${configs.usercache.prefix}")
@@ -91,6 +94,53 @@ public class AppPublicAPI {
         swUserBasicService.customQueryItemUpdate(sqlContent);
     }
 */
+
+    /**
+     * 提交申请成为布道者的资料
+     * */
+    @RequestMapping(value = "apply_for_evangelist",method = RequestMethod.POST)
+    public Result resetLoginPassword(@RequestBody SwEvangelistInfoDO swEvangelistInfoDO) {
+        try {
+            if(StringUtils.isBlank(swEvangelistInfoDO.getEmail())
+                    || StringUtils.isBlank(swEvangelistInfoDO.getWeibo())
+                    || StringUtils.isBlank(swEvangelistInfoDO.getWechat())
+                    || StringUtils.isBlank(swEvangelistInfoDO.getRealName())
+                    || StringUtils.isBlank(swEvangelistInfoDO.getMobile())
+                    || StringUtils.isBlank(swEvangelistInfoDO.getEx2())
+                    || StringUtils.isBlank(swEvangelistInfoDO.getAddress())){
+                return Result.error("system.params.error");
+            }
+            SwUserBasicDO byEmail = swUserBasicService.getByEmail(swEvangelistInfoDO.getEmail());
+            if(byEmail != null){
+                return Result.error("AppPrivateAPI.resetLoginPassword.email.exist");
+            }
+            SwUserBasicDO swUserBasicDO = swUserBasicService.get(swEvangelistInfoDO.getEx2());
+            if(swUserBasicDO == null){
+                return Result.error("AppPublicAPI.checkRegister.recommender.not.exist");
+            }
+            if(swUserBasicDO.getUserType().equals(CommonStatic.USER_TYPE_COMMON) && swUserBasicDO.getTid() != 1){
+                return Result.error("AppPublicAPI.checkRegister.recommender.auth.error");
+            }
+            Map<String,Object> params = new HashMap<>();
+            params.put("delFlag",CommonStatic.NOTDELETE);
+            params.put("ex1",CommonStatic.CHECK_WAITING);
+            params.put("email",swEvangelistInfoDO.getEmail());
+            List<SwEvangelistInfoDO> list = swEvangelistInfoService.list(params);
+            if(list != null && list.size() > 0){
+                return Result.error("AppPrivateAPI.resetLoginPassword.email.submitted");
+            }
+            swEvangelistInfoDO.setTid(IDUtils.randomStr());
+            swEvangelistInfoDO.setUpdateDate(new Date());
+            swEvangelistInfoDO.setCreateDate(new Date());
+            swEvangelistInfoDO.setEx1(CommonStatic.CHECK_WAITING);
+            swEvangelistInfoDO.setDelFlag(CommonStatic.NOTDELETE);
+            swEvangelistInfoService.save(swEvangelistInfoDO);
+            return Result.ok();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("AppPrivateAPI.resetLoginPassword.register.failed");
+        }
+    }
 
 
     /**

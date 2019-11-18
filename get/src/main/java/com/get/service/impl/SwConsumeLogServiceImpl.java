@@ -154,8 +154,10 @@ public class SwConsumeLogServiceImpl implements SwConsumeLogService {
         );
         swAccountRecordService.save(accountRecordReceive);
         walletsDO.setCurrency(new BigDecimal( -amount).setScale(NumberStatic.BigDecimal_Scale_Num, NumberStatic.BigDecimal_Scale_Model));
+        walletsDO.setFrozenAmount(new BigDecimal("0"));
         int updateTransfer = swWalletsService.update(walletsDO);
         walletsDOReceive.setCurrency(new BigDecimal(amount).setScale(NumberStatic.BigDecimal_Scale_Num, NumberStatic.BigDecimal_Scale_Model));
+        walletsDOReceive.setFrozenAmount(new BigDecimal("0"));
         int updateReceive = swWalletsService.update(walletsDOReceive);
         if(updateTransfer < 1 || updateReceive < 1){
             return "system.failed.operation";

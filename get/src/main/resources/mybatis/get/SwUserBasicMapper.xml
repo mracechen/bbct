@@ -23,6 +23,11 @@
         </foreach>
     </select>
 
+    <select id="getByRecomId" resultType="com.get.domain.SwUserBasicDO">
+        select `tid`,`username`,`recom_id`,`mobile`,`email`,`login_pass`,`high_pass`,`area_code`,`user_type`,`create_date`,`update_date`,`del_flag`,`ex1`,`ex2`,`ex3`,`ex4`,`ex5`
+        from t_sw_user_basic where recom_id = #{recomId}
+    </select>
+
     <select id="findRecommenders" resultType="com.get.domain.SwUserBasicDO">
         call find_recommenders(#{userId}, #{generate})
     </select>

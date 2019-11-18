@@ -76,6 +76,14 @@ function load() {
                         title: '目标币种数量',
                     },
                     {
+                        field: 'ex1',
+                        title: '是否启用',
+                        formatter: function (value) {
+                            let str={0:"是",1:"否"};
+                            if (str[value]) return str[value]
+                        }
+                    },
+                    {
                         field: 'createDate',
                         title: '创建时间',
                         sortable: true,

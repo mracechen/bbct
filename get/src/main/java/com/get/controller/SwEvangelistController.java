@@ -50,6 +50,14 @@ public class SwEvangelistController {
         return pageUtils;
     }
 
+    @ResponseBody
+    @GetMapping("/all")
+    public List<SwEvangelistDO> all(@RequestParam Map<String, Object> params) {
+        params.put("delFlag", CommonStatic.NOTDELETE);
+        //查询列表数据
+        return swEvangelistService.list(params);
+    }
+
     @GetMapping("/add")
     @RequiresPermissions("get:swEvangelist:add")
     String add() {

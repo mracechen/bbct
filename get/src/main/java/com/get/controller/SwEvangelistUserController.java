@@ -1,16 +1,21 @@
 package com.get.controller;
 
+import com.common.utils.IDUtils;
 import com.common.utils.StringUtils;
-import com.get.statuc.CommonStatic;
-import com.get.statuc.PageUtils;
-import com.get.statuc.Query;
-import com.get.statuc.R;
+import com.get.domain.SwEvangelistDO;
+import com.get.domain.SwUserBasicDO;
+import com.get.domain.SwWalletsDO;
+import com.get.service.SwEvangelistService;
+import com.get.service.SwUserBasicService;
+import com.get.service.SwWalletsService;
+import com.get.statuc.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +35,15 @@ import com.get.service.SwEvangelistUserService;
 public class SwEvangelistUserController {
     @Autowired
     private SwEvangelistUserService swEvangelistUserService;
+
+    @Autowired
+    private SwUserBasicService swUserBasicService;
+
+    @Autowired
+    private SwEvangelistService swEvangelistService;
+
+    @Autowired
+    private SwWalletsService swWalletsService;
 
     @GetMapping()
     @RequiresPermissions("get:swEvangelistUser:swEvangelistUser")
@@ -81,9 +95,37 @@ public class SwEvangelistUserController {
     @RequiresPermissions("get:swEvangelistUser:add")
     public R save(SwEvangelistUserDO swEvangelistUser) {
         try {
+            if(swEvangelistUser.getUserId() == null){
+                return R.error("该用户不存在");
+            }
+            SwUserBasicDO swUserBasicDO = swUserBasicService.get(swEvangelistUser.getUserId());
+            if(swUserBasicDO == null){
+                return R.error("该用户不存在");
+            }
+            if(!swUserBasicDO.getUserType().equals(CommonStatic.USER_TYPE_EVANGELIST)){
+                return R.error("该用户不是布道者，无法获得优币金");
+            }
+            SwEvangelistUserDO hisEvangelist = swEvangelistUserService.getByUserId(swEvangelistUser.getUserId(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(hisEvangelist != null){
+                return R.error("该用户已拥有激活的优币金");
+            }
+            SwEvangelistDO swEvangelistDO = swEvangelistService.get(swEvangelistUser.getEvangelistId());
+            SwWalletsDO wallet = swWalletsService.getWallet(swEvangelistUser.getUserId(), swEvangelistDO.getCoinTypeId());
+            //余额不足
+            if(wallet != null && wallet.getCurrency().compareTo(new BigDecimal(String.valueOf(swEvangelistDO.getEvangelistNum()))) < 0){
+                return R.error("余额不足");
+            }
+            BigDecimal multiply = new BigDecimal(String.valueOf(swEvangelistDO.getEvangelistNum()))
+                    .multiply(new BigDecimal(String.valueOf(swEvangelistDO.getPercent())))
+                    .setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model);
+            swEvangelistUser.setTid(IDUtils.randomStr());
             swEvangelistUser.setCreateDate(new Date());
             swEvangelistUser.setUpdateDate(new Date());
             swEvangelistUser.setDelFlag(CommonStatic.NOTDELETE);
+            swEvangelistUser.setUserId(swEvangelistUser.getUserId());
+            swEvangelistUser.setStatus(CommonStatic.NO_RELEASE);
+            swEvangelistUser.setTotalNum(multiply.doubleValue());
+            swEvangelistUser.setLeftNum(multiply.doubleValue());
             if (swEvangelistUserService.save(swEvangelistUser) > 0) {
                 return R.ok();
             }

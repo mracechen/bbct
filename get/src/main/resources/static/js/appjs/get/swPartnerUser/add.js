@@ -1,4 +1,14 @@
 $().ready(function () {
+    $.ajax({
+        url:"/manager/get/swPartner/all",
+        type:"GET",
+        success:function (res) {
+            $("#partnerId").empty();
+            for(let i=0;i<res.length;i++){
+                $("#partnerId").append("<option value='"+res[i].tid+"'>"+res[i].name+"</option>");
+            }
+        }
+    });
     validateRule();
 });
 

@@ -38,4 +38,6 @@ public interface SwUserBasicDao {
     int remove(Integer tid);
 
     int batchRemove(Integer[] tids);
+
+    List<SwUserBasicDO> getByRecomId(Integer recomId);
 }

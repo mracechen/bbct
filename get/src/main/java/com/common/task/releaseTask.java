@@ -258,6 +258,7 @@ public class releaseTask {
                         SwWalletsDO wallet = swWalletsService.getWallet(swPeriodUserDO.getUserId(), swPeriodDO.getCoinTypeId());
                         BigDecimal curcurrency = wallet.getCurrency();
                         wallet.setCurrency(new BigDecimal(swPeriodUserDO.getEx1().toString()));
+                        wallet.setFrozenAmount(new BigDecimal("0"));
                         wallet.setUpdateDate(new Date());
                         swWalletsService.update(wallet);
                         //记录资金明细
@@ -272,11 +273,6 @@ public class releaseTask {
                     log.error("计算定币金是否到期时出错！");
                     e1.printStackTrace();
                 }
-//                Date date = DateUtils.dateAddDays(e.getCreateDate(), swPeriodDO.getPeriodTerm());
-                //定币金到期
-//                if(DateUtils.dateCompare(new Date(),date) > 0){
-//                    swPeriodUserDO.setStatus(CommonStatic.RELEASED);
-//                }
                 swPeriodUserService.update(swPeriodUserDO);
             });
             //固币金剩余天数监测
@@ -300,6 +296,7 @@ public class releaseTask {
                         Double leftNum = e.getLeftNum();
                         wallet.setCurrency(new BigDecimal(String.valueOf(leftNum)));
                         wallet.setUpdateDate(new Date());
+                        wallet.setFrozenAmount(new BigDecimal("0"));
                         swWalletsService.update(wallet);
                         //记录资金明细
                         swAccountRecordService.save(SwAccountRecordDO.create(
@@ -378,6 +375,7 @@ public class releaseTask {
             if(wallet != null){
                 wallet.setCurrency(releaseNum);
                 wallet.setUpdateDate(new Date());
+                wallet.setFrozenAmount(new BigDecimal("0"));
                 swWalletsService.update(wallet);
                 //记录资金明细
                 swAccountRecordService.save(SwAccountRecordDO.create(
@@ -449,6 +447,7 @@ public class releaseTask {
             if(wallet != null){
                 wallet.setCurrency(releaseNum);
                 wallet.setUpdateDate(new Date());
+                wallet.setFrozenAmount(new BigDecimal("0"));
                 swWalletsService.update(wallet);
                 //记录资金明细
                 swAccountRecordService.save(SwAccountRecordDO.create(
@@ -468,6 +467,131 @@ public class releaseTask {
                         targetUserId,
                         CommonStatic.RELEASE_TARGET_EVANGELIST));
                 log.info("sign："+sign+",用户["+causeUserId+"]的--"+causeTypeName+"["+causeId+"]--给用户["+targetUserId+"]的--固币金"+swEvangelistUserDO.getTid()+"--加速释放："+releaseNum.doubleValue());
+
+                //新需求：优币金释放时，要给上级加速50%
+                //当前布道者
+                SwUserBasicDO currentUser = swUserBasicService.get(targetUserId);
+                //当前布道者的直属上级
+                SwUserBasicDO recommender = swUserBasicService.get(currentUser.getRecomId());
+                if(recommender != null && recommender.getUserType().equals(CommonStatic.USER_TYPE_EVANGELIST)){
+                    //获取直属上级的优币金
+                    SwEvangelistUserDO recommendersUserEvangelist = swEvangelistUserService.getByUserId(recommender.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+                    if(recommendersUserEvangelist != null){
+                        //直属上级将要释放的数量（当前用户释放数量的一半）
+                        BigDecimal recommenderReleaseNum = releaseNum.multiply(new BigDecimal("0.5"));
+                        //将优币金项目放入内存
+                        String recommenderEvangelistId = recommendersUserEvangelist.getEvangelistId();
+                        SwEvangelistDO recommenderEvangelistDO;
+                        if(userProduct.containsKey(recommenderEvangelistId)){
+                            recommenderEvangelistDO = (SwEvangelistDO)userProduct.get(recommenderEvangelistId);
+                        }else{
+                            recommenderEvangelistDO = swEvangelistService.get(recommenderEvangelistId);
+                            userProduct.put(recommenderEvangelistId,recommenderEvangelistDO);
+                        }
+                        //直属上级剩余数量
+                        BigDecimal recommenderLeftNum = new BigDecimal(recommendersUserEvangelist.getLeftNum().toString());
+                        //如果剩余金额大于本次释放的金额，则剩余金额减去此次释放金额，否则全部扣掉
+                        if(recommenderLeftNum.compareTo(recommenderReleaseNum) > 0){
+                            //优币金减少释放数量
+                            recommendersUserEvangelist.setLeftNum(new BigDecimal("0").subtract(recommenderReleaseNum).doubleValue());
+                        }else{
+                            //优币金全部释放，且状态改为已释放完
+                            recommendersUserEvangelist.setLeftNum(new BigDecimal("0").subtract(recommenderLeftNum).doubleValue());
+                            recommendersUserEvangelist.setStatus(CommonStatic.RELEASED);
+                            //标记此次释放的数量等于优币金剩余的全部数量
+                            recommenderReleaseNum = recommenderLeftNum;
+                        }
+                        //更新直属上级的优币金
+                        swEvangelistUserService.update(recommendersUserEvangelist);
+                        //把优币金释放的金额放入钱包
+                        SwWalletsDO recommenderWallet = swWalletsService.getWallet(recommender.getTid(), recommenderEvangelistDO.getCoinTypeId());
+                        if(recommenderWallet != null){
+                            BigDecimal recommenderCurcurrency = recommenderWallet.getCurrency();
+                            recommenderWallet.setCurrency(recommenderReleaseNum);
+                            recommenderWallet.setFrozenAmount(new BigDecimal("0"));
+                            recommenderWallet.setUpdateDate(new Date());
+                            swWalletsService.update(recommenderWallet);
+                            //记录资金明细
+                            swAccountRecordService.save(SwAccountRecordDO.create(
+                                    recommender.getTid(),
+                                    RecordEnum.evangelist_accelerate_up.getType(),
+                                    languagei18nUtils.getMessage(RecordEnum.evangelist_accelerate_up.getDesc()),
+                                    recommenderEvangelistDO.getCoinTypeId(),
+                                    recommenderReleaseNum.doubleValue(),
+                                    recommenderCurcurrency.add(recommenderReleaseNum).doubleValue()));
+                            //记录优币金释放记录
+                            swReleaseRecordService.save(SwReleaseRecordDO.create(
+                                    recommendersUserEvangelist.getTid(),
+                                    swEvangelistUserDO.getTid(),
+                                    recommenderReleaseNum.doubleValue(),
+                                    CommonStatic.CHILD_EVANGELIST_CAUSE_RELEASE,
+                                    currentUser.getTid(),
+                                    recommender.getTid(),
+                                    CommonStatic.RELEASE_TARGET_EVANGELIST));
+                            log.info("sign："+sign+",用户["+currentUser.getTid()+"]的优币金["+swEvangelistUserDO.getTid()+"]--给用户["+recommender.getTid()+"]的优币金["+recommendersUserEvangelist.getTid()+"]加速释放："+recommenderReleaseNum.doubleValue());
+                            return true;
+                        }
+                    }
+                }else if(recommender != null && recommender.getUserType().equals(CommonStatic.USER_TYPE_PARTNER)){
+                    //获取直属上级的升币金
+                    SwPartnerUserDO recommenderPartnerUser = swPartnerUserService.getByUserId(recommender.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+                    if(recommenderPartnerUser != null){
+                        //直属上级将要释放的数量（当前用户释放数量的一半）
+                        BigDecimal recommenderReleaseNum = releaseNum.multiply(new BigDecimal("0.5"));
+                        //将升币金项目放入内存
+                        String recommenderPartnerId = recommenderPartnerUser.getPartnerId();
+                        SwPartnerDO recommenderPartner;
+                        if(userProduct.containsKey(recommenderPartnerId)){
+                            recommenderPartner = (SwPartnerDO)userProduct.get(recommenderPartnerId);
+                        }else{
+                            recommenderPartner = swPartnerService.get(recommenderPartnerId);
+                            userProduct.put(recommenderPartnerId,recommenderPartner);
+                        }
+                        //直属上级剩余数量
+                        BigDecimal recommenderLeftNum = new BigDecimal(recommenderPartnerUser.getLeftNum().toString());
+                        //如果剩余金额大于本次释放的金额，则剩余金额减去此次释放金额，否则全部扣掉
+                        if(recommenderLeftNum.compareTo(recommenderReleaseNum) > 0){
+                            //升币金减少释放数量
+                            recommenderPartnerUser.setLeftNum(new BigDecimal("0").subtract(recommenderReleaseNum).doubleValue());
+                        }else{
+                            //升币金全部释放，且状态改为已释放完
+                            recommenderPartnerUser.setLeftNum(new BigDecimal("0").subtract(recommenderLeftNum).doubleValue());
+                            recommenderPartnerUser.setStatus(CommonStatic.RELEASED);
+                            //标记此次释放的数量等于升币金剩余的全部数量
+                            recommenderReleaseNum = recommenderLeftNum;
+                        }
+                        //更新直属上级的升币金
+                        swPartnerUserService.update(recommenderPartnerUser);
+                        //把升币金释放的金额放入钱包
+                        SwWalletsDO recommenderWallet = swWalletsService.getWallet(recommender.getTid(), recommenderPartner.getCoinTypeId());
+                        if(recommenderWallet != null){
+                            BigDecimal recommenderCurcurrency = recommenderWallet.getCurrency();
+                            recommenderWallet.setCurrency(recommenderReleaseNum);
+                            recommenderWallet.setFrozenAmount(new BigDecimal("0"));
+                            recommenderWallet.setUpdateDate(new Date());
+                            swWalletsService.update(recommenderWallet);
+                            //记录资金明细
+                            swAccountRecordService.save(SwAccountRecordDO.create(
+                                    recommender.getTid(),
+                                    RecordEnum.partner_accelerate_up.getType(),
+                                    languagei18nUtils.getMessage(RecordEnum.partner_accelerate_up.getDesc()),
+                                    recommenderPartner.getCoinTypeId(),
+                                    recommenderReleaseNum.doubleValue(),
+                                    recommenderCurcurrency.add(recommenderReleaseNum).doubleValue()));
+                            //记录升币金释放记录
+                            swReleaseRecordService.save(SwReleaseRecordDO.create(
+                                    recommenderPartnerUser.getTid(),
+                                    swEvangelistUserDO.getTid(),
+                                    recommenderReleaseNum.doubleValue(),
+                                    CommonStatic.CHILD_PARTNER_CAUSE_RELEASE,
+                                    currentUser.getTid(),
+                                    recommender.getTid(),
+                                    CommonStatic.RELEASE_TARGET_PARTNER));
+                            log.info("sign："+sign+",用户["+currentUser.getTid()+"]的优币金["+swEvangelistUserDO.getTid()+"]--给用户["+recommender.getTid()+"]的升币金["+recommenderPartnerUser.getTid()+"]加速释放："+recommenderReleaseNum.doubleValue());
+                            return true;
+                        }
+                    }
+                }
                 return true;
             }
         }
@@ -516,6 +640,7 @@ public class releaseTask {
             if(wallet != null){
                 wallet.setCurrency(releaseNum);
                 wallet.setUpdateDate(new Date());
+                wallet.setFrozenAmount(new BigDecimal("0"));
                 swWalletsService.update(wallet);
                 //记录资金明细
                 swAccountRecordService.save(SwAccountRecordDO.create(
@@ -534,6 +659,131 @@ public class releaseTask {
                         targetUserId,
                         CommonStatic.RELEASE_TARGET_PARTNER));
                 log.info("sign："+sign+",用户["+causeUserId+"]的--"+causeTypeName+"["+causeId+"]--给用户["+targetUserId+"]的--固币金"+swPartnerUserDO.getTid()+"--加速释放："+releaseNum.doubleValue());
+
+                //新需求：升币金释放时，要给上级加速50%
+                //当前合伙人
+                SwUserBasicDO currentUser = swUserBasicService.get(targetUserId);
+                //当前合伙人的直属上级
+                SwUserBasicDO recommender = swUserBasicService.get(currentUser.getRecomId());
+                if(recommender != null && recommender.getUserType().equals(CommonStatic.USER_TYPE_EVANGELIST)){
+                    //获取直属上级的优币金
+                    SwEvangelistUserDO recommendersUserEvangelist = swEvangelistUserService.getByUserId(recommender.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+                    if(recommendersUserEvangelist != null){
+                        //直属上级将要释放的数量（当前用户释放数量的一半）
+                        BigDecimal recommenderReleaseNum = releaseNum.multiply(new BigDecimal("0.5"));
+                        //将优币金项目放入内存
+                        String recommenderEvangelistId = recommendersUserEvangelist.getEvangelistId();
+                        SwEvangelistDO recommenderEvangelistDO;
+                        if(userProduct.containsKey(recommenderEvangelistId)){
+                            recommenderEvangelistDO = (SwEvangelistDO)userProduct.get(recommenderEvangelistId);
+                        }else{
+                            recommenderEvangelistDO = swEvangelistService.get(recommenderEvangelistId);
+                            userProduct.put(recommenderEvangelistId,recommenderEvangelistDO);
+                        }
+                        //直属上级剩余数量
+                        BigDecimal recommenderLeftNum = new BigDecimal(recommendersUserEvangelist.getLeftNum().toString());
+                        //如果剩余金额大于本次释放的金额，则剩余金额减去此次释放金额，否则全部扣掉
+                        if(recommenderLeftNum.compareTo(recommenderReleaseNum) > 0){
+                            //优币金减少释放数量
+                            recommendersUserEvangelist.setLeftNum(new BigDecimal("0").subtract(recommenderReleaseNum).doubleValue());
+                        }else{
+                            //优币金全部释放，且状态改为已释放完
+                            recommendersUserEvangelist.setLeftNum(new BigDecimal("0").subtract(recommenderLeftNum).doubleValue());
+                            recommendersUserEvangelist.setStatus(CommonStatic.RELEASED);
+                            //标记此次释放的数量等于优币金剩余的全部数量
+                            recommenderReleaseNum = recommenderLeftNum;
+                        }
+                        //更新直属上级的优币金
+                        swEvangelistUserService.update(recommendersUserEvangelist);
+                        //把优币金释放的金额放入钱包
+                        SwWalletsDO recommenderWallet = swWalletsService.getWallet(recommender.getTid(), recommenderEvangelistDO.getCoinTypeId());
+                        if(recommenderWallet != null){
+                            BigDecimal recommenderCurcurrency = recommenderWallet.getCurrency();
+                            recommenderWallet.setCurrency(recommenderReleaseNum);
+                            recommenderWallet.setFrozenAmount(new BigDecimal("0"));
+                            recommenderWallet.setUpdateDate(new Date());
+                            swWalletsService.update(recommenderWallet);
+                            //记录资金明细
+                            swAccountRecordService.save(SwAccountRecordDO.create(
+                                    recommender.getTid(),
+                                    RecordEnum.evangelist_accelerate_up.getType(),
+                                    languagei18nUtils.getMessage(RecordEnum.evangelist_accelerate_up.getDesc()),
+                                    recommenderEvangelistDO.getCoinTypeId(),
+                                    recommenderReleaseNum.doubleValue(),
+                                    recommenderCurcurrency.add(recommenderReleaseNum).doubleValue()));
+                            //记录优币金释放记录
+                            swReleaseRecordService.save(SwReleaseRecordDO.create(
+                                    recommendersUserEvangelist.getTid(),
+                                    swPartnerUserDO.getTid(),
+                                    recommenderReleaseNum.doubleValue(),
+                                    CommonStatic.CHILD_EVANGELIST_CAUSE_RELEASE,
+                                    currentUser.getTid(),
+                                    recommender.getTid(),
+                                    CommonStatic.RELEASE_TARGET_EVANGELIST));
+                            log.info("sign："+sign+",用户["+currentUser.getTid()+"]的升币金["+swPartnerUserDO.getTid()+"]--给用户["+recommender.getTid()+"]的优币金["+recommendersUserEvangelist.getTid()+"]加速释放："+recommenderReleaseNum.doubleValue());
+                            return true;
+                        }
+                    }
+                }else if(recommender != null && recommender.getUserType().equals(CommonStatic.USER_TYPE_PARTNER)){
+                    //获取直属上级的升币金
+                    SwPartnerUserDO recommenderPartnerUser = swPartnerUserService.getByUserId(recommender.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+                    if(recommenderPartnerUser != null){
+                        //直属上级将要释放的数量（当前用户释放数量的一半）
+                        BigDecimal recommenderReleaseNum = releaseNum.multiply(new BigDecimal("0.5"));
+                        //将升币金项目放入内存
+                        String recommenderPartnerId = recommenderPartnerUser.getPartnerId();
+                        SwPartnerDO recommenderPartner;
+                        if(userProduct.containsKey(recommenderPartnerId)){
+                            recommenderPartner = (SwPartnerDO)userProduct.get(recommenderPartnerId);
+                        }else{
+                            recommenderPartner = swPartnerService.get(recommenderPartnerId);
+                            userProduct.put(recommenderPartnerId,recommenderPartner);
+                        }
+                        //直属上级剩余数量
+                        BigDecimal recommenderLeftNum = new BigDecimal(recommenderPartnerUser.getLeftNum().toString());
+                        //如果剩余金额大于本次释放的金额，则剩余金额减去此次释放金额，否则全部扣掉
+                        if(recommenderLeftNum.compareTo(recommenderReleaseNum) > 0){
+                            //升币金减少释放数量
+                            recommenderPartnerUser.setLeftNum(new BigDecimal("0").subtract(recommenderReleaseNum).doubleValue());
+                        }else{
+                            //升币金全部释放，且状态改为已释放完
+                            recommenderPartnerUser.setLeftNum(new BigDecimal("0").subtract(recommenderLeftNum).doubleValue());
+                            recommenderPartnerUser.setStatus(CommonStatic.RELEASED);
+                            //标记此次释放的数量等于升币金剩余的全部数量
+                            recommenderReleaseNum = recommenderLeftNum;
+                        }
+                        //更新直属上级的升币金
+                        swPartnerUserService.update(recommenderPartnerUser);
+                        //把升币金释放的金额放入钱包
+                        SwWalletsDO recommenderWallet = swWalletsService.getWallet(recommender.getTid(), recommenderPartner.getCoinTypeId());
+                        if(recommenderWallet != null){
+                            BigDecimal recommenderCurcurrency = recommenderWallet.getCurrency();
+                            recommenderWallet.setCurrency(recommenderReleaseNum);
+                            recommenderWallet.setFrozenAmount(new BigDecimal("0"));
+                            recommenderWallet.setUpdateDate(new Date());
+                            swWalletsService.update(recommenderWallet);
+                            //记录资金明细
+                            swAccountRecordService.save(SwAccountRecordDO.create(
+                                    recommender.getTid(),
+                                    RecordEnum.partner_accelerate_up.getType(),
+                                    languagei18nUtils.getMessage(RecordEnum.partner_accelerate_up.getDesc()),
+                                    recommenderPartner.getCoinTypeId(),
+                                    recommenderReleaseNum.doubleValue(),
+                                    recommenderCurcurrency.add(recommenderReleaseNum).doubleValue()));
+                            //记录升币金释放记录
+                            swReleaseRecordService.save(SwReleaseRecordDO.create(
+                                    recommenderPartnerUser.getTid(),
+                                    swPartnerUserDO.getTid(),
+                                    recommenderReleaseNum.doubleValue(),
+                                    CommonStatic.CHILD_PARTNER_CAUSE_RELEASE,
+                                    currentUser.getTid(),
+                                    recommender.getTid(),
+                                    CommonStatic.RELEASE_TARGET_PARTNER));
+                            log.info("sign："+sign+",用户["+currentUser.getTid()+"]的升币金["+swPartnerUserDO.getTid()+"]--给用户["+recommender.getTid()+"]的升币金["+recommenderPartnerUser.getTid()+"]加速释放："+recommenderReleaseNum.doubleValue());
+                            return true;
+                        }
+                    }
+                }
                 return true;
             }
         }

@@ -20,6 +20,8 @@ public interface SwUserBasicService {
 
     List<Integer> getByIds(List<Integer> ids);
 
+    List<SwUserBasicDO> getByRecomId(Integer recomId);
+
     SwUserBasicDO get(SwUserBasicDO swUserBasic);
 
     List<SwUserBasicDO> findRecommenders(Integer userId, Integer generate);
@@ -37,7 +39,7 @@ public interface SwUserBasicService {
 
     int update(SwUserBasicDO swUserBasic);
 
-    int adminUpdate(SwUserBasicDO swUserBasic);
+    int adminUpdate(SwUserBasicDO swUserBasic) throws Exception;
 
     int remove(Integer tid);
 

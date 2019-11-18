@@ -1,4 +1,14 @@
 $().ready(function () {
+    $.ajax({
+        url:"/manager/get/swEvangelist/all",
+        type:"GET",
+        success:function (res) {
+            $("#evangelistId").empty();
+            for(let i=0;i<res.length;i++){
+                $("#evangelistId").append("<option value='"+res[i].tid+"'>"+res[i].name+"</option>");
+            }
+        }
+    });
     validateRule();
 });
 

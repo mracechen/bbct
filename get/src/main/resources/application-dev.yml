@@ -116,8 +116,8 @@ configs:
       masterSecret: eVBAK1QUXN8TruLkadQLC9
       host: http://sdk.open.api.igexin.com/apiex.htm
 #-------------------
-  bbctChargeAddress: deposit
-  eosChargeAddress: deposit
+  bbctChargeAddress: bbcttokenapp
+  eosChargeAddress: bbcttokenapp
   withdrawFee: 5
   # 上面多少代可以获得加速
   generateReleaseCode: IVDMX6
@@ -125,7 +125,7 @@ configs:
   benchmarketingRate: 500
 
   blockChain:
-    url: http://10.235.20.85:8082
+    url: http://10.235.20.182:8082
     method:
       #插入userID
       insertMemo: contract.insert_memo

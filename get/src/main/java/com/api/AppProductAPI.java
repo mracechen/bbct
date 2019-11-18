@@ -824,8 +824,9 @@ public class AppProductAPI {
             if(!user.getUserType().equals(CommonStatic.USER_TYPE_EVANGELIST)){
                 return Result.error("system.failed.auth");
             }
-            //上级不是系统用户不能购买优币金
-            if(user.getRecomId() != 1){
+            //上级如果是普通用户(系统用户除外)，则他不能购买优币金
+            SwUserBasicDO recommender = swUserBasicService.get(user.getRecomId());
+            if(recommender.getUserType().equals(CommonStatic.USER_TYPE_COMMON) && recommender.getTid() != 1){
                 return Result.error("AppProductAPI.purchasingEvangelist.recommender.not.allow");
             }
             //拥有任意定币金，活币金，固币金或升币金，都不能购买优币金

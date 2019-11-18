@@ -1,6 +1,11 @@
 package com.get.controller;
 
+import com.common.utils.IDUtils;
 import com.common.utils.StringUtils;
+import com.get.domain.SwPartnerDO;
+import com.get.domain.SwUserBasicDO;
+import com.get.service.SwPartnerService;
+import com.get.service.SwUserBasicService;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.PageUtils;
 import com.get.statuc.Query;
@@ -11,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +36,12 @@ import com.get.service.SwPartnerUserService;
 public class SwPartnerUserController {
     @Autowired
     private SwPartnerUserService swPartnerUserService;
+
+    @Autowired
+    private SwUserBasicService swUserBasicService;
+
+    @Autowired
+    private SwPartnerService swPartnerService;
 
     @GetMapping()
     @RequiresPermissions("get:swPartnerUser:swPartnerUser")
@@ -80,11 +92,40 @@ public class SwPartnerUserController {
     @PostMapping("/save")
     @RequiresPermissions("get:swPartnerUser:add")
     public R save(SwPartnerUserDO swPartnerUser) {
-        swPartnerUser.setCreateDate(new Date());
-        swPartnerUser.setUpdateDate(new Date());
-        swPartnerUser.setDelFlag(CommonStatic.NOTDELETE);
-        if (swPartnerUserService.save(swPartnerUser) > 0) {
-            return R.ok();
+        try {
+            if(swPartnerUser.getUserId() == null){
+                return R.error("该用户不存在");
+            }
+            SwUserBasicDO swUserBasicDO = swUserBasicService.get(swPartnerUser.getUserId());
+            if(swUserBasicDO == null){
+                return R.error("该用户不存在");
+            }
+            if(!swUserBasicDO.getUserType().equals(CommonStatic.USER_TYPE_PARTNER)){
+                return R.error("该用户不是合伙人，无法获得升币金");
+            }
+            SwPartnerUserDO hisPartner = swPartnerUserService.getByUserId(swPartnerUser.getUserId(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(hisPartner != null){
+                return R.error("该用户已拥有激活的升币金");
+            }
+            SwPartnerDO swPartnerDO = swPartnerService.get(swPartnerUser.getPartnerId());
+            swPartnerUser.setTid(IDUtils.randomStr());
+            swPartnerUser.setCreateDate(new Date());
+            swPartnerUser.setUpdateDate(new Date());
+            swPartnerUser.setDelFlag(CommonStatic.NOTDELETE);
+            swPartnerUser.setPartnerId(swPartnerDO.getTid());
+            swPartnerUser.setStatus(CommonStatic.NO_RELEASE);
+            double userTotal = new BigDecimal(
+                    String.valueOf(swPartnerDO.getPartnerNum() == null ? 0 : swPartnerDO.getPartnerNum())
+            ).multiply(
+                    new BigDecimal(String.valueOf(swPartnerDO.getPercent() == null ? 0 : swPartnerDO.getPercent()))
+            ).doubleValue();
+            swPartnerUser.setTotalNum(userTotal);
+            swPartnerUser.setLeftNum(userTotal);
+            if (swPartnerUserService.save(swPartnerUser) > 0) {
+                return R.ok();
+            }
+        }catch (Exception e){
+            return R.error();
         }
         return R.error();
     }

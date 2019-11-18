@@ -214,6 +214,15 @@ public class CommonStatic {
      * */
     public static Integer CHILD_PERIOD_CAUSE_RELEASE = 5;
 
+    /**
+     * 导致释放的方式，6-下级优币金释放
+     * */
+    public static Integer CHILD_EVANGELIST_CAUSE_RELEASE = 6;
+
+    /**
+     * 导致释放的方式，7-下级升币金释放
+     * */
+    public static Integer CHILD_PARTNER_CAUSE_RELEASE = 7;
 
     /**
      * 释放目标类型，1-固币金

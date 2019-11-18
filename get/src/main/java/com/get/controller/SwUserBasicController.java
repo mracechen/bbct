@@ -96,12 +96,17 @@ public class SwUserBasicController {
     @RequestMapping("/update")
     @RequiresPermissions("get:swUserBasic:edit")
     public R update(SwUserBasicDO swUserBasic) {
-        swUserBasic.setUpdateDate(new Date());
-        int i = swUserBasicService.adminUpdate(swUserBasic);
-        if(i > 0){
-            return R.ok();
+        try {
+            swUserBasic.setUpdateDate(new Date());
+            int i = swUserBasicService.adminUpdate(swUserBasic);
+            if(i > 0){
+                return R.ok();
+            }else{
+                return R.error("该用户不满足条件，修改失败");
+            }
+        }catch (Exception e){
+            return R.error("操作拒绝");
         }
-        return R.error("操作拒绝");
     }
 
     /**

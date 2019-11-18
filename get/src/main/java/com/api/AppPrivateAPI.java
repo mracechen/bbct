@@ -45,9 +45,6 @@ public class AppPrivateAPI {
     private SwUserBasicService swUserBasicService;
 
     @Autowired
-    private SwEvangelistInfoService swEvangelistInfoService;
-
-    @Autowired
     private SwWithlogService swWithlogService;
 
     @Autowired
@@ -90,7 +87,10 @@ public class AppPrivateAPI {
     private SwTransferRecordService swTransferRecordService;
 
     @Autowired
-    private Languagei18nUtils languagei18nUtils;
+    private SwEvangelistUserService swEvangelistUserService;
+
+    @Autowired
+    private SwPartnerUserService swPartnerUserService;
 
     @Value("${configs.bbctChargeAddress}")
     private String bbctChargeAddress;
@@ -184,46 +184,6 @@ public class AppPrivateAPI {
         }else{
             log.info("获取用户登录信息接口返回值：【"+Result.ok("登录异常").toString()+"】");
             return Result.error("AppPrivateAPI.getUserInfo.login.error");
-        }
-    }
-
-    /**
-     * 提交申请成为布道者的资料
-     * */
-    @RequestMapping(value = "apply_for_evangelist",method = RequestMethod.POST)
-    public Result resetLoginPassword(@RequestBody SwEvangelistInfoDO swEvangelistInfoDO) {
-        try {
-            if(swEvangelistInfoDO.getUserId() == null
-                    || StringUtils.isBlank(swEvangelistInfoDO.getEmail())
-                    || StringUtils.isBlank(swEvangelistInfoDO.getWeibo())
-                    || StringUtils.isBlank(swEvangelistInfoDO.getWechat())
-                    || StringUtils.isBlank(swEvangelistInfoDO.getRealName())
-                    || StringUtils.isBlank(swEvangelistInfoDO.getMobile())
-                    || StringUtils.isBlank(swEvangelistInfoDO.getAddress())){
-                return Result.error("system.params.error");
-            }
-            SwUserBasicDO byEmail = swUserBasicService.getByEmail(swEvangelistInfoDO.getEmail());
-            if(byEmail != null){
-                return Result.error("AppPrivateAPI.resetLoginPassword.email.exist");
-            }
-            Map<String,Object> params = new HashMap<>();
-            params.put("delFlag",CommonStatic.NOTDELETE);
-            params.put("ex1",CommonStatic.CHECK_WAITING);
-            params.put("email",swEvangelistInfoDO.getEmail());
-            List<SwEvangelistInfoDO> list = swEvangelistInfoService.list(params);
-            if(list != null && list.size() > 0){
-                return Result.error("AppPrivateAPI.resetLoginPassword.email.submitted");
-            }
-            swEvangelistInfoDO.setTid(IDUtils.randomStr());
-            swEvangelistInfoDO.setUpdateDate(new Date());
-            swEvangelistInfoDO.setCreateDate(new Date());
-            swEvangelistInfoDO.setEx1(CommonStatic.CHECK_WAITING);
-            swEvangelistInfoDO.setDelFlag(CommonStatic.NOTDELETE);
-            swEvangelistInfoService.save(swEvangelistInfoDO);
-            return Result.ok();
-        }catch (Exception e){
-            e.printStackTrace();
-            return Result.error("AppPrivateAPI.resetLoginPassword.register.failed");
         }
     }
 
@@ -500,6 +460,23 @@ public class AppPrivateAPI {
     @ResponseBody
     public Result bench(String benchMarkingId, HttpServletRequest request) {
         SwUserBasicDO user = AppUserUtils.getUser(request);
+        //只有布道者和合伙人才能进行对标
+        if(user.getUserType().equals(CommonStatic.USER_TYPE_COMMON)){
+            return Result.error("system.failed.auth");
+        }
+        //如果当前本金没释放完，不允许对标
+        if(user.getUserType().equals(CommonStatic.USER_TYPE_EVANGELIST)){
+            SwEvangelistUserDO evangelistUserDO = swEvangelistUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(evangelistUserDO != null){
+                return Result.error("AppPrivateAPI.bench.current.evangelist.not.finished");
+            }
+        }
+        if(user.getUserType().equals(CommonStatic.USER_TYPE_PARTNER)){
+            SwPartnerUserDO partnerUserDO = swPartnerUserService.getByUserId(user.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
+            if(partnerUserDO != null){
+                return Result.error("AppPrivateAPI.bench.current.partner.not.finished");
+            }
+        }
         if(StringUtils.isBlank(benchMarkingId)){
             return Result.error("system.params.error");
         }

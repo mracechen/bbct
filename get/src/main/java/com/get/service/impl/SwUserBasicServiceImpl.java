@@ -85,6 +85,11 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
     }
 
     @Override
+    public List<SwUserBasicDO> getByRecomId(Integer recomId){
+        return swUserBasicDao.getByRecomId(recomId);
+    }
+
+    @Override
     public SwUserBasicDO get(SwUserBasicDO swUserBasic) {
         return swUserBasicDao.getByUserBasic(swUserBasic);
     }
@@ -206,30 +211,38 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int adminUpdate(SwUserBasicDO swUserBasic) {
+    public int adminUpdate(SwUserBasicDO swUserBasic) throws Exception{
         SwUserBasicDO swUserBasicDO = this.get(swUserBasic.getTid());
+        //如果试图改变用户类型
         if(swUserBasic.getUserType() != null && !swUserBasic.getUserType().equals(swUserBasicDO.getUserType())){
+            //如果试图把用户变成合伙人
             if(swUserBasic.getUserType().equals(CommonStatic.USER_TYPE_PARTNER)){
                 Boolean allow = true;
+                //用户上级必须是系统用户
                 if(swUserBasicDO.getRecomId() != 1){
                     allow = false;
                 }
+                //用户必须没有激活状态中的固币金
                 List<SwPrincipalUserDO> swPrincipalUserDOS = swPrincipalUserService.getByUserId(swUserBasic.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
                 if(swPrincipalUserDOS != null && swPrincipalUserDOS.size() > 0){
                     allow = false;
                 }
+                //用户必须没有激活状态中的活币金
                 List<SwCurrentUserDO> swCurrentUserDOS = swCurrentUserService.getByUserId(swUserBasic.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
                 if(swCurrentUserDOS != null && swCurrentUserDOS.size() > 0){
                     allow = false;
                 }
+                //用户必须没有激活状态中的定币金
                 List<SwPeriodUserDO> swPeriodUserDOS = swPeriodUserService.getByUserId(swUserBasic.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
                 if(swPeriodUserDOS != null && swPeriodUserDOS.size() > 0){
                     allow = false;
                 }
+                //用户必须没有激活状态中的优币金
                 SwEvangelistUserDO swEvangelistUserDO = swEvangelistUserService.getByUserId(swUserBasic.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
                 if(swEvangelistUserDO != null){
                     allow = false;
                 }
+                //用户必须没有激活状态中的升币金
                 SwPartnerUserDO swPartnerUserDO = swPartnerUserService.getByUserId(swUserBasic.getTid(), CommonStatic.NO_RELEASE, CommonStatic.NOTDELETE);
                 if(swPartnerUserDO != null){
                     allow = false;

@@ -21,7 +21,7 @@ public interface SwPartnerUserService {
 
     int count(Map<String, Object> map);
 
-    int save(SwPartnerUserDO swPartnerUser);
+    int save(SwPartnerUserDO swPartnerUser) throws Exception;
 
     int update(SwPartnerUserDO swPartnerUser);
 

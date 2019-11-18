@@ -1,5 +1,6 @@
 package com.get.service.impl;
 
+import com.common.utils.i18n.Languagei18nUtils;
 import com.get.domain.SwAccountRecordDO;
 import com.get.domain.SwPartnerDO;
 import com.get.domain.SwWalletsDO;
@@ -26,6 +27,18 @@ public class SwPartnerUserServiceImpl implements SwPartnerUserService {
     @Autowired
     private SwPartnerUserDao swPartnerUserDao;
 
+    @Autowired
+    private SwWalletsService swWalletsService;
+
+    @Autowired
+    private SwPartnerService swPartnerService;
+
+    @Autowired
+    private SwAccountRecordService swAccountRecordService;
+
+    @Autowired
+    private Languagei18nUtils languagei18nUtils;
+
     @Override
     public SwPartnerUserDO get(String tid) {
         return swPartnerUserDao.get(tid);
@@ -47,7 +60,28 @@ public class SwPartnerUserServiceImpl implements SwPartnerUserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int save(SwPartnerUserDO swPartnerUser){
+    public int save(SwPartnerUserDO swPartnerUser) throws Exception{
+        SwPartnerDO swPartnerDO = swPartnerService.get(swPartnerUser.getPartnerId());
+        if(swPartnerDO == null){
+            throw new Exception("升币金异常");
+        }
+        SwWalletsDO wallet = swWalletsService.getWallet(swPartnerUser.getUserId(), swPartnerDO.getCoinTypeId());
+        if(wallet == null){
+            throw new Exception("钱包异常");
+        }
+        BigDecimal currency = wallet.getCurrency();
+        wallet.setCurrency(new BigDecimal("0").subtract(new BigDecimal(String.valueOf(swPartnerDO.getPartnerNum()))));
+        wallet.setUpdateDate(new Date());
+        wallet.setFrozenAmount(new BigDecimal("0"));
+        swWalletsService.update(wallet);
+        swAccountRecordService.save(SwAccountRecordDO.create(
+                swPartnerUser.getUserId(),
+                RecordEnum.purchasing.getType(),
+                languagei18nUtils.getMessage("SwEvangelistUserServiceImpl.save.purchasing.partner"),
+                swPartnerDO.getCoinTypeId(),
+                -swPartnerDO.getPartnerNum(),
+                currency.doubleValue() - swPartnerDO.getPartnerNum()
+        ));
         return swPartnerUserDao.save(swPartnerUser);
     }
 

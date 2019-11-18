@@ -87,6 +87,7 @@ public class SwCurrentUserServiceImpl implements SwCurrentUserService {
         BigDecimal currency = wallet.getCurrency();
         wallet.setCurrency(new BigDecimal("0").subtract(new BigDecimal(String.valueOf(swCurrentUser.getEx1()))));
         wallet.setUpdateDate(new Date());
+        wallet.setFrozenAmount(new BigDecimal("0"));
         swWalletsService.update(wallet);
         swAccountRecordService.save(SwAccountRecordDO.create(
                 swCurrentUser.getUserId(),
@@ -114,6 +115,7 @@ public class SwCurrentUserServiceImpl implements SwCurrentUserService {
         BigDecimal currency = wallet.getCurrency();
         wallet.setCurrency(new BigDecimal(String.valueOf(swCurrentUser.getEx1())));
         wallet.setUpdateDate(new Date());
+        wallet.setFrozenAmount(new BigDecimal("0"));
         swWalletsService.update(wallet);
         swAccountRecordService.save(SwAccountRecordDO.create(
                 swCurrentUser.getUserId(),

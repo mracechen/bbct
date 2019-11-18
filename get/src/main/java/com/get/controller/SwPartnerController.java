@@ -50,6 +50,13 @@ public class SwPartnerController {
         return pageUtils;
     }
 
+    @ResponseBody
+    @GetMapping("/all")
+    public List<SwPartnerDO> all(@RequestParam Map<String, Object> params) {
+        params.put("delFlag", CommonStatic.NOTDELETE);
+        return swPartnerService.list(params);
+    }
+
     @GetMapping("/add")
     @RequiresPermissions("get:swPartner:add")
     String add() {

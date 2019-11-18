@@ -68,6 +68,7 @@ public class SwEvangelistUserServiceImpl implements SwEvangelistUserService {
         BigDecimal currency = wallet.getCurrency();
         wallet.setCurrency(new BigDecimal("0").subtract(new BigDecimal(String.valueOf(swEvangelistDO.getEvangelistNum()))));
         wallet.setUpdateDate(new Date());
+        wallet.setFrozenAmount(new BigDecimal("0"));
         swWalletsService.update(wallet);
         swAccountRecordService.save(SwAccountRecordDO.create(
                 swEvangelistUser.getUserId(),
