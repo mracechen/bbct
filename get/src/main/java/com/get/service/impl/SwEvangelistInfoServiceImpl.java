@@ -1,13 +1,13 @@
 package com.get.service.impl;
 
 import com.common.utils.IDUtils;
-import com.common.utils.Result;
 import com.common.utils.StringUtils;
 import com.evowallet.utils.MailUtil;
 import com.get.domain.*;
 import com.get.service.*;
 import com.get.statuc.CommonStatic;
 import com.get.statuc.NumberStatic;
+import com.get.statuc.RecordEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.get.dao.SwEvangelistInfoDao;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +37,12 @@ public class SwEvangelistInfoServiceImpl implements SwEvangelistInfoService {
 
     @Autowired
     private SwEvangelistUserService swEvangelistUserService;
+
+    @Autowired
+    private SwWalletsService swWalletsService;
+
+    @Autowired
+    private SwAccountRecordService swAccountRecordService;
 
     @Override
     public SwEvangelistInfoDO get(String tid) {
@@ -138,7 +142,28 @@ public class SwEvangelistInfoServiceImpl implements SwEvangelistInfoService {
                                     .add(new BigDecimal(String.valueOf(hisEvangelist.getLeftNum())))
                                     .setScale(NumberStatic.BigDecimal_Scale_Num, NumberStatic.BigDecimal_Scale_Model)
                                     .doubleValue();
+                            //把他的优币金删掉
+                            hisEvangelist.setDelFlag(CommonStatic.DELETE);
+                            hisEvangelist.setUpdateDate(new Date());
+                            swEvangelistUserService.update(hisEvangelist);
                         }
+
+                        //充值目标币种
+                        SwWalletsDO targetCoinWallet = swWalletsService.getWallet(recommender.getTid(), swPartnerDO.getCoinTypeId());
+                        BigDecimal targetCoinCurrenty = targetCoinWallet.getCurrency();
+                        targetCoinWallet.setCurrency(new BigDecimal(String.valueOf(swPartnerDO.getPartnerNum())));
+                        targetCoinWallet.setUpdateDate(new Date());
+                        targetCoinWallet.setFrozenAmount(new BigDecimal("0"));
+                        swWalletsService.update(targetCoinWallet);
+                        //记录充值记录
+                        swAccountRecordService.save(SwAccountRecordDO.create(
+                                recommender.getTid(),
+                                RecordEnum.purchasing.getType(),
+                                RecordEnum.purchasing.getDesc(),
+                                swPartnerDO.getCoinTypeId(),
+                                swPartnerDO.getPartnerNum(),
+                                targetCoinCurrenty.doubleValue() + swPartnerDO.getPartnerNum()
+                        ));
                         //送给该上级一个升币金
                         SwPartnerUserDO swPartnerUser = new SwPartnerUserDO();
                         swPartnerUser.setTid(IDUtils.randomStr());

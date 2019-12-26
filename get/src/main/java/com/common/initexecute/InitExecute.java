@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class InitExecute implements ApplicationListener<ContextRefreshedEvent>{
 
-    @Autowired
-    LanguageInit languageInit;
+//    @Autowired
+//    LanguageInit languageInit;
 
     @Autowired
     SysConfigInit sysConfigInit;

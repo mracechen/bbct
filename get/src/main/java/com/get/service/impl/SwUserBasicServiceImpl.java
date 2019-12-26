@@ -2,6 +2,7 @@ package com.get.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.common.feign.BlockApi;
 import com.common.utils.IDUtils;
 import com.common.utils.MyMD5Utils;
 import com.common.utils.Result;
@@ -11,6 +12,7 @@ import com.get.domain.*;
 import com.get.service.*;
 import com.get.statuc.CommonStatic;
 import com.system.sysconfig.configbean.SettlementCommonConfig;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.config.RequestConfig;
@@ -61,11 +63,11 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
     @Autowired
     private SwPartnerService swPartnerService;
 
+    @Autowired
+    private BlockApi blockApi;
+
     @Value("${configs.blockChain.url}")
     private String blockChainUrl;
-
-    @Value("${configs.blockChain.method.insertMemo}")
-    private String insertMemoMethod;
 
     private Log log = LogFactory.getLog(SwUserBasicServiceImpl.class);
 
@@ -82,6 +84,11 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
     @Override
     public List<Integer> getByIds(List<Integer> ids){
         return swUserBasicDao.getByIds(ids);
+    }
+
+    @Override
+    public SwUserBasicDO getByBlockAddress(String address) {
+        return swUserBasicDao.getByBlockAddress(address);
     }
 
     @Override
@@ -122,41 +129,6 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
         userBasicDO.setUpdateDate(new Date());
         userBasicDO.setDelFlag(CommonStatic.NOTDELETE);
         save(userBasicDO);
-        //RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000).build();
-        HttpPost post = new HttpPost(blockChainUrl);
-        //post.setConfig(requestConfig);
-        RegisterParanEntity params = new RegisterParanEntity();
-        params.setUserId(userBasicDO.getTid());
-        BaseParamEntity baseParamEntity = new BaseParamEntity(insertMemoMethod,params);
-        StringEntity entity = new StringEntity(JSON.toJSONString(baseParamEntity));
-        post.setHeader("Content-Type", "application/json;charset=utf8");
-        post.setEntity(entity);
-        log.info("注册用户，将userID["+userBasicDO.getTid()+"]传给区块链");
-        CloseableHttpResponse response = HttpClientBuilder.create().build().execute(post);
-        Boolean resultStatus = false;
-        log.info(response.getEntity().toString());
-        StringEntity entity1 = new StringEntity(response.getEntity().getContent().toString());
-        log.info(entity1);
-        if(response.getStatusLine() != null){
-            int statusCode = response.getStatusLine().getStatusCode();
-            if(statusCode == 200){
-                String s = EntityUtils.toString(response.getEntity());
-                JSONObject body = JSON.parseObject(s);
-                Object errorInfo = body.get("error");
-                if(errorInfo == null || errorInfo == "null"){
-                    resultStatus = true;
-                    log.info("区块链注册成功！");
-                }
-                log.error(body.toJSONString());
-            }else{
-                String s = EntityUtils.toString(response.getEntity());
-                JSONObject body = JSON.parseObject(s);
-                throw new Exception("区块链注册用户失败，返回信息"+body.toString());
-            }
-        }
-        if(!resultStatus){
-            throw new Exception("区块链注册用户失败！");
-        }
         Map<String, Object> queryParam = new HashMap<>();
         queryParam.put("email", userBasicDO.getEmail());
         List<SwUserBasicDO> list = swUserBasicDao.list(queryParam);
@@ -183,7 +155,6 @@ public class SwUserBasicServiceImpl implements SwUserBasicService {
                 }
             }
         }
-
         user.setUsername("sz" + user.getTid());
         swUserBasicDao.update(user);
         return Result.ok();

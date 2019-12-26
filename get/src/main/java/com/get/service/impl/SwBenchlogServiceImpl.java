@@ -1,7 +1,6 @@
 package com.get.service.impl;
 
 import com.common.utils.IDUtils;
-import com.common.utils.i18n.Languagei18nUtils;
 import com.get.domain.*;
 import com.get.service.*;
 import com.get.statuc.CommonStatic;

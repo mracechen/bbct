@@ -22,8 +22,8 @@ public class IndexController extends BaseController {
     @Autowired
     ConfigService configService;
 
-    @Autowired
-    LanguageService languageService;
+/*    @Autowired
+    LanguageService languageService;*/
 
     @GetMapping("/manager/indexLogin")
     String welcome(Model model) {

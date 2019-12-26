@@ -79,11 +79,16 @@ public class SwChargelogController {
     @PostMapping("/save")
     @RequiresPermissions("get:swChargelog:add")
     public R save(SwChargelogDO swChargelog) {
-        swChargelog.setCreateDate(new Date());
-        swChargelog.setUpdateDate(new Date());
-        swChargelog.setDelFlag(CommonStatic.NOTDELETE);
-        if (swChargelogService.save(swChargelog) > 0) {
-            return R.ok();
+        try {
+            swChargelog.setCreateDate(new Date());
+            swChargelog.setUpdateDate(new Date());
+            swChargelog.setDelFlag(CommonStatic.NOTDELETE);
+            if (swChargelogService.save(swChargelog) > 0) {
+                return R.ok();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("操作失败");
         }
         return R.error();
     }

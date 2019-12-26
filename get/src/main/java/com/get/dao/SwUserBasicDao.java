@@ -17,6 +17,8 @@ public interface SwUserBasicDao {
 
     SwUserBasicDO get(Integer tid);
 
+    SwUserBasicDO getByBlockAddress(String address);
+
     List<Integer> getByIds(@Param("ids") List<Integer> ids);
 
     List<Integer> getChildrenByIds(@Param("ids") List<Integer> ids);

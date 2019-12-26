@@ -2,6 +2,7 @@ package com.api;
 
 import com.common.basicskills.domain.LogDO;
 import com.common.basicskills.service.LogService;
+import com.common.feign.BlockApi;
 import com.common.utils.*;
 import com.common.utils.i18n.Languagei18nUtils;
 import com.evowallet.common.ServerResponse;
@@ -69,11 +70,8 @@ public class AppPublicAPI {
     @Value("${configs.usercache.prefix}")
     private String prefix;
 
-    @Value("${configs.bbctChargeAddress}")
-    private String bbctChargeAddress;
-
-    @Value("${configs.eosChargeAddress}")
-    private String eosChargeAddress;
+//    @Value("${configs.chargeAddress}")
+//    private String chargeAddress;
 
 /*    @RequestMapping(value = "chenjieSelect")
     @ResponseBody
@@ -360,79 +358,47 @@ public class AppPublicAPI {
 
 
     /**
-     * 充值
+     * 充值，直接确认到账
      * @param memo 用户id
      * @param amount 金额
-     * @param symbol 币种名称（EOS和BBCT）
+     * @param symbol 币种名称（ETH和BBCT）
      * @param txid 区块链交易id
      * */
     @RequestMapping(value = "charge",method = RequestMethod.POST)
     @ResponseBody
     public Result charge(Integer memo, Double amount, String symbol, String txid) {
         try {
-            if(memo == null || StringUtils.isBlank(symbol) || StringUtils.isBlank(txid) || amount == null){
-                log.error("区块链充值回调，参数错误！");
+            SwChargelogDO swChargelogDO = new SwChargelogDO();
+            swChargelogDO.setStatus(CommonStatic.TRANSFER_SUCCESS);
+            if(StringUtils.isBlank(memo) || StringUtils.isBlank(symbol) || StringUtils.isBlank(txid) || amount == null){
+                log.error("区块链充值，参数错误！");
+                swChargelogDO.setEx2("区块链充值，参数错误！");
+                swChargelogDO.setStatus(CommonStatic.TRANSFER_FAILED);
             }
             SwUserBasicDO swUserBasicDO = swUserBasicService.get(memo);
             if(swUserBasicDO == null){
-                log.error("区块链转账用户【"+memo+"】不存在！");
+                log.error("区块链转账用户账户不存在！");
+                swChargelogDO.setEx2("区块链转账用户账户不存在！");
+                swChargelogDO.setStatus(CommonStatic.TRANSFER_FAILED);
             }
             SwCoinTypeDO coinTypeDO = swCoinTypeService.getByCoinName(symbol);
             if(coinTypeDO == null){
                 log.error("区块链转账币种【"+symbol+"】不存在！");
+                swChargelogDO.setEx2("区块链转账币种【"+symbol+"】不存在！");
+                swChargelogDO.setStatus(CommonStatic.TRANSFER_FAILED);
+                swChargelogDO.setCoinId(null);
+            }else{
+                swChargelogDO.setCoinId(coinTypeDO.getTid());
             }
-            SwChargelogDO swChargelogDO = new SwChargelogDO();
             swChargelogDO.setTid(IDUtils.randomStr());
             swChargelogDO.setCreateDate(new Date());
             swChargelogDO.setUpdateDate(new Date());
             swChargelogDO.setDelFlag(CommonStatic.NOTDELETE);
-            swChargelogDO.setUserId(memo);
-            if(coinTypeDO.getCoinName().equals("BBCT")){
-                swChargelogDO.setAddress(bbctChargeAddress);
-            }else if(coinTypeDO.getCoinName().equals("EOS")){
-                swChargelogDO.setAddress(eosChargeAddress);
-            }
+            swChargelogDO.setUserId(swUserBasicDO.getTid());
+            swChargelogDO.setAddress(swUserBasicDO.getEx2());
             swChargelogDO.setAmount(new BigDecimal(String.valueOf(amount)));
-            swChargelogDO.setCoinId(coinTypeDO.getTid());
             swChargelogDO.setTxid(txid);
-            swChargelogDO.setStatus(CommonStatic.TRANSFER_WAITING);
-            SwWalletsDO wallet = swWalletsService.getWallet(memo, coinTypeDO.getTid());
-            wallet.setFrozenAmount(new BigDecimal(String.valueOf(amount)));
-            wallet.setCurrency(new BigDecimal("0"));
-            wallet.setUpdateDate(new Date());
-            swWalletsService.update(wallet);
-            swChargelogService.save(swChargelogDO);
-            return Result.ok();
-        }catch (Exception e){
-            log.error("区块链充值待确认，但本地充值失败！");
-            e.printStackTrace();
-            return Result.error("system.failed.operation");
-        }
-    }
-
-    /**
-     * 确认充值
-     * @param status 交易状态
-     * @param txid 区块链交易id
-     * */
-    @RequestMapping(value = "confirm_charge",method = RequestMethod.POST)
-    @ResponseBody
-    public Result confirmCharge(Integer status, String txid) {
-        try {
-            if(status == null || StringUtils.isBlank(txid)){
-                log.error("区块链充值确认，参数错误！");
-            }
-            SwChargelogDO chargelogDO = swChargelogService.getByTxid(txid);
-            if(chargelogDO == null){
-                log.error("区块链充值确认【"+txid+"】，但本地未找到该记录！");
-            }
-            if(status == 1){
-                chargelogDO.setStatus(CommonStatic.TRANSFER_SUCCESS);
-            }else{
-                chargelogDO.setStatus(CommonStatic.TRANSFER_FAILED);
-            }
-            chargelogDO.setUpdateDate(new Date());
-            swChargelogService.confirmCharge(chargelogDO);
+            swChargelogService.confirmCharge(swChargelogDO);
             return Result.ok();
         }catch (Exception e){
             log.error("区块链充值待确认，但本地充值失败！");
@@ -446,8 +412,9 @@ public class AppPublicAPI {
      * @param status 区块链交易状态，1-成功，2-失败
      * @param txid 区块链交易id
      * */
-    @RequestMapping(value = "confirm_withdraw",method = RequestMethod.POST)
+/*    @RequestMapping(value = "confirm_withdraw",method = RequestMethod.POST)
     @ResponseBody
+    @Deprecated
     public Result confirmWithdraw(Integer status, String txid) {
         if(StringUtils.isBlank(txid)){
             return Result.error("system.params.error");
@@ -467,17 +434,17 @@ public class AppPublicAPI {
                 return Result.error("system.failed.operation");
             }
         }catch (Exception e){
-            SwWalletsDO wallet = swWalletsService.getWallet(byTxid.getUserId(), byTxid.getCoinTypeId());
+            *//*SwWalletsDO wallet = swWalletsService.getWallet(byTxid.getUserId(), byTxid.getCoinTypeId());
             wallet.setCurrency(byTxid.getAmount());
             wallet.setFrozenAmount(new BigDecimal("0").subtract(byTxid.getAmount()));
             wallet.setUpdateDate(new Date());
-            swWalletsService.update(wallet);
+            swWalletsService.update(wallet);*//*
             byTxid.setStatus(CommonStatic.TRANSFER_FAILED);
             swWithlogService.update(byTxid);
             e.printStackTrace();
             return Result.error("system.failed.operation");
         }
-    }
+    }*/
 
     /**
      * 记录前端日志

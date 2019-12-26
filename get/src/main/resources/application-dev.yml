@@ -9,10 +9,10 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
 
     #-------------------
-    url: jdbc:mysql://10.236.10.1:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    url: jdbc:mysql://10.236.10.1:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
     username: bbctdb
     password: Bbctdb.190620
-#    url: jdbc:mysql://localhost:3306/bbct?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+#    url: jdbc:mysql://localhost:3306/bbct?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
 #    username: root
 #    password: aaa000000
     #-------------------
@@ -116,21 +116,26 @@ configs:
       masterSecret: eVBAK1QUXN8TruLkadQLC9
       host: http://sdk.open.api.igexin.com/apiex.htm
 #-------------------
-  bbctChargeAddress: bbcttokenapp
-  eosChargeAddress: bbcttokenapp
+#  allowTransfer: true
+#  chargeAddress: bbcttokenapp
   withdrawFee: 5
   # 上面多少代可以获得加速
   generateReleaseCode: IVDMX6
   generateNum: 3
-  benchmarketingRate: 500
+  benchmarketingRate: 16666.6667
+#  发币ERC20的合约账户
+  contract: 0x572e6cd6e32bdbbc4e1b442d05fa5bdc7f41b738
+  #ETH:benchmarketingRate: 10000
 
+#  blockChain:
+#    url: http://10.235.20.182:8082
+#    method:
+#      #插入userID
+#      insertMemo: contract.insert_memo
+#      #提现
+#      withdraw: balance.withdraw
+#      #删除userID
+#      deleteMemo: contract.erase_memo
   blockChain:
-    url: http://10.235.20.182:8082
-    method:
-      #插入userID
-      insertMemo: contract.insert_memo
-      #提现
-      withdraw: balance.withdraw
-      #删除userID
-      deleteMemo: contract.erase_memo
+    url: http://10.235.20.182:1236
 #-------------------

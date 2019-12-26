@@ -27,8 +27,8 @@ import java.util.Map;
  * @date 2018-09-05 16:07:36
  */
 
-@Controller
-@RequestMapping("${backPathPrefix}/language/language")
+//@Controller
+//@RequestMapping("${backPathPrefix}/language/language")
 public class LanguageController {
 
     @Autowired

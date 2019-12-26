@@ -82,7 +82,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by withlog.tid desc
+                order by withlog.create_date desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

@@ -1,7 +1,6 @@
 package com.get.service.impl;
 
 import com.get.statuc.CommonStatic;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

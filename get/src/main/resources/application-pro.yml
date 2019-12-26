@@ -7,17 +7,18 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-#-------------------
-    url: jdbc:mysql://127.0.0.1:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+
+    #-------------------
+#    url: jdbc:mysql://10.236.10.1:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
+#    username: bbctdb
+#    password: Bbctdb.190620
+    url: jdbc:mysql://localhost:3306/bbctdb?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
     username: bbctdb
     password: Bbctdb.190620
-#    url: jdbc:mysql://127.0.0.1:3306/kplus?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-#    username: kplus
-#    password: Kplus.20190306
-#-------------------
-    initialSize: 20
-    minIdle: 30
-    maxActive: 100
+    #-------------------
+    initialSize: 1
+    minIdle: 3
+    maxActive: 20
     # 配置获取连接等待超时的时间
     maxWait: 60000
     # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
@@ -32,13 +33,16 @@ spring:
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 20
     # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-    filters: stat,wall,slf4j
+#    filters: stat,wall,slf4j
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
   redis:
   #-------------------
+#    host: 10.236.10.1
+#    port: 6379
+#    password:
     host: 127.0.0.1
     port: 6379
     password:
@@ -48,53 +52,59 @@ spring:
     jedis:
       pool:
         # 连接池中的最大空闲连接
-        max-idle: 50
+        max-idle: 8
         # 连接池中的最小空闲连接
-        min-idle: 40
+        min-idle: 10
         # 连接池最大连接数（使用负值表示没有限制）
-        max-active: 40
+        max-active: 100
         # 连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1
-    
+    database: 4
   messages:
     encoding: UTF-8
     basename: i18n/messages
 
+
 # 系统基础一些关键的配置信息
 configs:
-  # 配置百度翻译接口,需要重新申请
+# 配置百度翻译接口
   translate:
-    url: afsdfsadfas
-    appid: sdafsdfsdaf
-    secretKey: asdfsdfsdf
+    url: http://api.fanyi.baidu.com/api/trans/vip/translate
+    # 错误码需要重新申请
+    appid: 93485094305
+    secretKey: adfadfdaf34523432
+  file:
+  #-------------------
+    uploadPath: /data/ftps/styftp01/ayw/
+#    uploadPath: E:/upload_file/
+  #-------------------
+  #-------------------
+    # 上线要改
+    serverIp: http://www.bbctapp.com
+#    serverIp: http://10.235.20.47:9980
+  #-------------------
   trading:
     url: sfsafdsf
-  file:
-    uploadPath: /data/ftps/styftp01/ayw/
-    #这个上线要改
-    #-------------------
-#    serverIp: http://10.235.20.47:9980
-    serverIp: http://bbctapp.com
-    #-------------------
   msg:
     # 是否开启结算系统后台验证码
-    checkCheckCode: true
-    # 短信的appkey
-    apikey: sfasdafdsafdsaf
-    URI_SEND_SMS: sdfsdfdsafsdf
-    URI_GET_USER_INFO: sdafsdafsdfdsf
+    checkCheckCode: false
+    # 需要申请
+    apikey: sdafsdf
+    URI_SEND_SMS: asdfdsfdsafdsfs
+    URI_GET_USER_INFO: dsafdsfdsfsdaf
   db:
     dbHost: localhost
     username: root
-    password:
+    password: root
     port: 3306
     dbname: settlement
     savePath: D:/backup/
-    commandPath: D:\ProgramFiles\mysql-5.7.23-winx64\bin\
+    commandPath: C:\Program Files\MySQL\MySQL Server 5.7\bin\
   # 结算时配置
   settlement:
      # 结算时拦截的接口
-    interceptInterface: /api/app/tradeExchange
+    interceptInterface: /api/app/tradeExchange,
+    # 系统管理员电话,如系统出现异常后就会发送短信给管理员
     adminMobile: 17370666933
     sqlFileName: settlement.sql
   usercache:
@@ -106,21 +116,26 @@ configs:
       masterSecret: eVBAK1QUXN8TruLkadQLC9
       host: http://sdk.open.api.igexin.com/apiex.htm
 #-------------------
-  bbctChargeAddress: bbcttokenapp
-  eosChargeAddress: bbcttokenapp
+#  allowTransfer: false
+#  chargeAddress: bbcttokenapp
   withdrawFee: 5
   # 上面多少代可以获得加速
   generateReleaseCode: IVDMX6
   generateNum: 3
-  benchmarketingRate: 500
+  benchmarketingRate: 16666.6667
+#  发币ERC20的合约账户
+  contract: 0xe60d6549174a6520ebb897df31f4ff3a63a760d7
+  #ETH:benchmarketingRate: 10000
 
+#  blockChain:
+#    url: http://10.235.20.182:8082
+#    method:
+#      #插入userID
+#      insertMemo: contract.insert_memo
+#      #提现
+#      withdraw: balance.withdraw
+#      #删除userID
+#      deleteMemo: contract.erase_memo
   blockChain:
-    url: http://127.0.0.1:8082
-    method:
-      #插入userID
-      insertMemo: contract.insert_memo
-      #提现
-      withdraw: balance.withdraw
-      #删除userID
-      deleteMemo: contract.erase_memo
+    url: http://127.0.0.1:1234
 #-------------------

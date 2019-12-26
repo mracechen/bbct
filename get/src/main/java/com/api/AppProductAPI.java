@@ -2,7 +2,6 @@ package com.api;
 
 import com.common.utils.*;
 import com.common.utils.i18n.Languagei18nUtils;
-import com.evowallet.common.ServerResponse;
 import com.get.domain.*;
 import com.get.service.*;
 import com.get.statuc.CommonStatic;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -178,15 +174,15 @@ public class AppProductAPI {
     }*/
 
     /**
-     * 获取可用eos金额
+     * 获取可用eth金额
      * */
-   /* @RequestMapping(value = "eos_current",method = RequestMethod.GET)
-    public Result eosCurrent(HttpServletRequest request) {
+   /* @RequestMapping(value = "eth_current",method = RequestMethod.GET)
+    public Result ethCurrent(HttpServletRequest request) {
         try {
-            SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
-            if(eos != null){
+            SwCoinTypeDO eth = swCoinTypeService.getByCoinName("ETH");
+            if(eth != null){
                 SwUserBasicDO user = AppUserUtils.getUser(request);
-                SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
+                SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), eth.getTid());
                 wallet.setCurrency(wallet.getCurrency().setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
                 if(wallet != null){
                     return Result.ok(wallet);
@@ -204,16 +200,16 @@ public class AppProductAPI {
     * 获取钱包信息列表
     * */
    @RequestMapping(value = "currency_list",method = RequestMethod.GET)
-   public Result eosCurrent(HttpServletRequest request) {
+   public Result ethCurrent(HttpServletRequest request) {
        try {
            Map<String,SwWalletsDO> result = new HashMap<>();
-           SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
+           SwCoinTypeDO eth = swCoinTypeService.getByCoinName("ETH");
            SwCoinTypeDO bbct = swCoinTypeService.getByCoinName("BBCT");
-           if(eos != null && bbct != null){
+           if(eth != null && bbct != null){
                SwUserBasicDO user = AppUserUtils.getUser(request);
-               //eos
-               SwWalletsDO eosWallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
-               result.put("eos",eosWallet);
+               //eth
+               SwWalletsDO ethWallet = swWalletsService.getWallet(user.getTid(), eth.getTid());
+               result.put("eth",ethWallet);
                //bbct
                SwWalletsDO bbctWallet = swWalletsService.getWallet(user.getTid(), bbct.getTid());
                bbctWallet.setFrozenAmount(new BigDecimal(String.valueOf(getFrozenBBCT(user))));
@@ -227,18 +223,18 @@ public class AppProductAPI {
        return Result.ok(null);
    }
     /**
-     * 获取所有冻结金额（EOS转换成bbct）
+     * 获取所有冻结金额（eth转换成bbct）
      * */
     @RequestMapping(value = "frozen_currency",method = RequestMethod.GET)
     public Result frozenCurrent(HttpServletRequest request) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             Double frozenBBCT = getFrozenBBCT(user);
-            SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
-            if(eos != null){
-                SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
+            SwCoinTypeDO eth = swCoinTypeService.getByCoinName("ETH");
+            if(eth != null){
+                SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), eth.getTid());
                 if(wallet != null){
-                    //eos换算成bbct
+                    //eth换算成bbct
                     frozenBBCT = wallet.getFrozenAmount()
                             .multiply(new BigDecimal(benchmarketingRate))
                             .add(new BigDecimal(String.valueOf(frozenBBCT)))
@@ -256,17 +252,17 @@ public class AppProductAPI {
     }
 
     /**
-     * 获取所有可用金额（EOS转换成bbct）
+     * 获取所有可用金额（ETH转换成bbct）
      * */
     @RequestMapping(value = "active_currency",method = RequestMethod.GET)
     public Result activeCurrent(HttpServletRequest request) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
-            SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
+            SwCoinTypeDO eth = swCoinTypeService.getByCoinName("ETH");
             SwCoinTypeDO bbct = swCoinTypeService.getByCoinName("BBCT");
-            SwWalletsDO eosWallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
+            SwWalletsDO ethWallet = swWalletsService.getWallet(user.getTid(), eth.getTid());
             SwWalletsDO bbctWallet = swWalletsService.getWallet(user.getTid(), bbct.getTid());
-            return Result.ok(eosWallet.getCurrency().multiply(new BigDecimal(benchmarketingRate)).add(bbctWallet.getCurrency()));
+            return Result.ok(ethWallet.getCurrency().multiply(new BigDecimal(benchmarketingRate)).add(bbctWallet.getCurrency()));
         }catch (Exception e){
             e.printStackTrace();
             return Result.error("system.failed.operation");
@@ -281,16 +277,16 @@ public class AppProductAPI {
         try {
             Map<String,BigDecimal> result = new HashMap<>();
             SwCoinTypeDO bbct = swCoinTypeService.getByCoinName("BBCT");
-            SwCoinTypeDO eos = swCoinTypeService.getByCoinName("EOS");
-            if(bbct != null && eos != null){
+            SwCoinTypeDO eth = swCoinTypeService.getByCoinName("ETH");
+            if(bbct != null && eth != null){
                 SwUserBasicDO user = AppUserUtils.getUser(request);
                 SwWalletsDO bbctWallet = swWalletsService.getWallet(user.getTid(), bbct.getTid());
                 Double frozenBBCT = getFrozenBBCT(user);
-                SwWalletsDO eosWallet = swWalletsService.getWallet(user.getTid(), eos.getTid());
-                //总冻结资金=bbct冻结资金+EOS冻结资金
-                BigDecimal frozenAmount = eosWallet.getFrozenAmount().multiply(new BigDecimal(benchmarketingRate)).add(new BigDecimal(String.valueOf(frozenBBCT)));
-                //总可用资金=bbct可用资金+EOS可用资金
-                BigDecimal activeAmount = eosWallet.getCurrency().multiply(new BigDecimal(benchmarketingRate)).add(bbctWallet.getCurrency());
+                SwWalletsDO ethWallet = swWalletsService.getWallet(user.getTid(), eth.getTid());
+                //总冻结资金=bbct冻结资金+ETH冻结资金
+                BigDecimal frozenAmount = ethWallet.getFrozenAmount().multiply(new BigDecimal(benchmarketingRate)).add(new BigDecimal(String.valueOf(frozenBBCT)));
+                //总可用资金=bbct可用资金+ETH可用资金
+                BigDecimal activeAmount = ethWallet.getCurrency().multiply(new BigDecimal(benchmarketingRate)).add(bbctWallet.getCurrency());
                 result.put("forzen",frozenAmount.setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
                 result.put("active",activeAmount.setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));
                 result.put("total",frozenAmount.add(activeAmount).setScale(NumberStatic.BigDecimal_Scale_Num,NumberStatic.BigDecimal_Scale_Model));

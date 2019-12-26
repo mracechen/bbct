@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  * @author sunYaLong
  * @data 2018/9/7
  */
-@Component
-@ConfigurationProperties(prefix = "configs.translate")
+//@Component
+//@ConfigurationProperties(prefix = "configs.translate")
 public class TranslateConfig {
 
     private String url;

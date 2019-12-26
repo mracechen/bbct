@@ -8,6 +8,7 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
+                    <label style="color: red">注意：和GET，TGC项目不一样！这里余额、冻结金额输入框中设置的值是多少，最终金额就是多少。比如你在金额输入框输入100，你的最终金额就是100，冻结金额也是如此</label>
                     <form class="form-horizontal m-t" id="signupForm">
                         <input id="tid" name="tid" th:value="${swWallets.tid}"
                                type="hidden">
@@ -47,7 +48,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">冻结金额<label style="color: red">(若不改动冻结金额，必须将此处填0)</label>：</label>
+                            <label class="col-sm-3 control-label">冻结金额：</label>
                             <div class="col-sm-8">
                                 <input id="frozenAmount" name="frozenAmount"
                                        th:value="${swWallets.frozenAmount}" class="form-control"

@@ -23,7 +23,7 @@ public interface SwChargelogService {
 
     int count(Map<String, Object> map);
 
-    int save(SwChargelogDO swChargelog);
+    int save(SwChargelogDO swChargelog) throws Exception;
 
     int update(SwChargelogDO swChargelog);
 

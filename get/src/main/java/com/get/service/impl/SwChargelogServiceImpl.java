@@ -47,6 +47,7 @@ public class SwChargelogServiceImpl implements SwChargelogService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void confirmCharge(SwChargelogDO swChargelogDO) throws Exception{
+        this.save(swChargelogDO);
         if(swChargelogDO.getStatus().equals(CommonStatic.TRANSFER_SUCCESS)){
             BigDecimal amount = swChargelogDO.getAmount();
             String coinId = swChargelogDO.getCoinId();
@@ -54,12 +55,8 @@ public class SwChargelogServiceImpl implements SwChargelogService {
             if(wallet == null){
                 throw new Exception("钱包异常");
             }
-            if(wallet.getFrozenAmount().compareTo(amount) < 0){
-                throw new Exception("冻结金额不足！");
-            }
             BigDecimal currency = wallet.getCurrency();
-           // wallet.setCurrency(amount);
-            wallet.setFrozenAmount(new BigDecimal("0").subtract(amount));
+            wallet.setFrozenAmount(new BigDecimal("0"));
             wallet.setCurrency(amount);
             wallet.setUpdateDate(new Date());
             swWalletsService.update(wallet);
@@ -71,8 +68,8 @@ public class SwChargelogServiceImpl implements SwChargelogService {
                     amount.doubleValue(),
                     currency.add(amount).doubleValue()
             ));
+            swChargelogDao.update(swChargelogDO);
         }
-        swChargelogDao.update(swChargelogDO);
     }
 
     @Override
@@ -86,7 +83,7 @@ public class SwChargelogServiceImpl implements SwChargelogService {
     }
 
     @Override
-    public int save(SwChargelogDO swChargelog) {
+    public int save(SwChargelogDO swChargelog) throws Exception{
         return swChargelogDao.save(swChargelog);
     }
 

@@ -28,6 +28,7 @@
                             onclick="batchReject()">
                         <i class="fa fa-trash"></i>批量拒绝
                     </button>
+                    <label style="color: red">注意：审核通过需要等待区块链响应，批量审核多条数据可能要等待比较长的一段时间，不要重复点击</label>
                     <button shiro:hasPermission="get:swWithlog:add" type="button"
                             class="btn  btn-primary" onclick="add()">
                         <i class="fa fa-plus" aria-hidden="true"></i>添加

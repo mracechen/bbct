@@ -1,5 +1,6 @@
 package com.get.controller;
 
+import com.common.utils.DateUtils;
 import com.get.domain.AppInfo;
 import com.get.service.AppInfoService;
 import com.get.statuc.CommonStatic;
@@ -70,7 +71,7 @@ public class AppInfoController {
     @PostMapping("/save")
     @RequiresPermissions("get:appInfo:add")
     public R save(AppInfo appInfo) {
-        appInfo.setCreateTime(new Date());
+        appInfo.setCreateTime(DateUtils.dateFormat(new Date(),DateUtils.DATE_TIME_PATTERN));
 //        appInfo.se(new Date());
 //        appInfo.setDelFlag(CommonStatic.NOTDELETE);
         if (appInfoService.save(appInfo) > 0) {

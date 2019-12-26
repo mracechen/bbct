@@ -1,11 +1,9 @@
 package com.get.service.impl;
 
 
-import com.evowallet.common.ServerResponse;
 import com.get.dao.AppInfoDao;
 import com.get.domain.AppInfo;
 import com.get.service.AppInfoService;
-import com.yunpian.sdk.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

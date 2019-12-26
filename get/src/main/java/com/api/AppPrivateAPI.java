@@ -1,33 +1,22 @@
 package com.api;
 
-import com.common.basicskills.domain.LogDO;
-import com.common.basicskills.service.LogService;
+import com.alibaba.fastjson.JSONObject;
+import com.common.feign.BlockApi;
 import com.common.utils.*;
-import com.common.utils.i18n.LanguageEnum;
-import com.common.utils.i18n.Languagei18nUtils;
-import com.evowallet.common.ServerResponse;
-import com.evowallet.utils.MailUtil;
 import com.get.domain.*;
 import com.get.service.*;
 import com.get.statuc.*;
-import com.gexin.fastjson.JSON;
-import com.gexin.fastjson.JSONArray;
-import com.gexin.fastjson.JSONObject;
-import org.apache.shiro.web.filter.mgt.DefaultFilter;
+import com.system.sysconfig.configbean.SettlementCommonConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
-import static org.apache.shiro.web.filter.mgt.DefaultFilter.user;
 
 /**
  * @author longge
@@ -39,7 +28,7 @@ import static org.apache.shiro.web.filter.mgt.DefaultFilter.user;
 @RequestMapping(value = "/api/app/pv")
 public class AppPrivateAPI {
 
-    Logger log = LoggerFactory.getLogger(AppPrivateAPI.class);
+    private Logger log = LoggerFactory.getLogger(AppPrivateAPI.class);
 
     @Autowired
     private SwUserBasicService swUserBasicService;
@@ -92,11 +81,11 @@ public class AppPrivateAPI {
     @Autowired
     private SwPartnerUserService swPartnerUserService;
 
-    @Value("${configs.bbctChargeAddress}")
-    private String bbctChargeAddress;
+    @Autowired
+    private BlockApi blockApi;
 
-    @Value("${configs.eosChargeAddress}")
-    private String eosChargeAddress;
+//    @Value("${configs.chargeAddress}")
+//    private String chargeAddress;
 
     @Value("${configs.usercache.prefix}")
     private String prefix;
@@ -106,6 +95,9 @@ public class AppPrivateAPI {
 
     @Value("${configs.benchmarketingRate}")
     private Double benchmarketingRate;
+
+//    @Value("${configs.allowTransfer}")
+//    private Boolean allowTransfer;
 
     /**
      * 计价方式
@@ -154,6 +146,14 @@ public class AppPrivateAPI {
             result.put("mobile",user.getMobile());
             result.put("username",user.getUsername());
             result.put("recomId", user.getRecomId());
+            SettlementCommonConfig config = new SettlementCommonConfig();
+            String isOpen = config.getOpenCoinRepo().getFieldValue();
+            if(StringUtils.isNotBlank(isOpen) && isOpen.equals("0")){
+                result.put("allowTransfer", true);
+            }else{
+                result.put("allowTransfer", false);
+            }
+
             result.put("googleKey", user.getEx1());
             result.put("userPush",swUserBasicService.getUserRecomLike(user));
             result.put("teamUserNum",swUserBasicService.getChildrenTreeUserNum(user.getTid()));
@@ -191,12 +191,30 @@ public class AppPrivateAPI {
      * 充币地址
      * */
     @RequestMapping(value = "charge_address",method = RequestMethod.GET)
-    public Result chargeAddress(Integer type) {
+    public Result chargeAddress(HttpServletRequest request) {
         try {
-            if(type == 1){
-                return Result.ok(bbctChargeAddress);
+            SwUserBasicDO user = AppUserUtils.getUser(request);
+            SwUserBasicDO swUserBasicDO = swUserBasicService.get(user.getTid());
+            if(StringUtils.isBlank(swUserBasicDO.getEx2())){
+                //调用区块链接口，获取区块链账户地址
+                Map<String,Object> params = new HashMap<>();
+                params.put("uid",user.getTid());
+                JSONObject newAddress = blockApi.getNewAddress(params);
+                if(org.apache.commons.lang3.StringUtils.isNotBlank(newAddress.toJSONString()) && newAddress.containsKey("result")){
+                    Object result = newAddress.get("result");
+                    if(result != null){
+                        String address = String.valueOf(result);
+                        swUserBasicDO.setEx2(address);
+                        swUserBasicService.update(swUserBasicDO);
+                        return Result.ok(address);
+                    }else{
+                        throw new Exception("获取区块链账户地址失败");
+                    }
+                }else{
+                    throw new Exception("获取区块链账户地址失败");
+                }
             }else{
-                return Result.ok(eosChargeAddress);
+                return Result.ok(swUserBasicDO.getEx2());
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -600,7 +618,7 @@ public class AppPrivateAPI {
      * */
     @RequestMapping(value = "withdraw",method = RequestMethod.POST)
     @ResponseBody
-    public Result withdraw(HttpServletRequest request, String address, Double amount, String coinId, String transferPassword, String checkCode, String memo) {
+    public Result withdraw(HttpServletRequest request, String address, Double amount, String coinId, String transferPassword, String checkCode) {
         try {
             SwUserBasicDO user = AppUserUtils.getUser(request);
             if(StringUtils.isBlank(coinId) || amount == null || amount <=0 || StringUtils.isBlank(coinId)){
@@ -608,9 +626,6 @@ public class AppPrivateAPI {
             }
             if(StringUtils.isBlank(user.getEx1())){
                 return Result.error("system.google.coder.not.bind");
-            }
-            if(address.equals(bbctChargeAddress) || address.equals(eosChargeAddress)){
-                return Result.error("AppPrivateAPI.withdraw.address.equals.charge.address");
             }
             SwWalletsDO wallet = swWalletsService.getWallet(user.getTid(), coinId);
             if(wallet == null){
@@ -635,7 +650,7 @@ public class AppPrivateAPI {
             if (!b) {
                 return Result.error("AppPublicAPI.checkRegister.check.code.error");
             }
-            swWithlogService.withdraw(user.getTid(),address,amount,swCoinTypeDO.getCoinName(),memo);
+            swWithlogService.withdraw(user.getTid(),address,amount,swCoinTypeDO.getCoinName());
             return Result.ok();
         }catch (Exception e){
             e.printStackTrace();

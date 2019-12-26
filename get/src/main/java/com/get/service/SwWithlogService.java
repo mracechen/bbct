@@ -34,7 +34,7 @@ public interface SwWithlogService {
 
     int remove(String tid);
 
-    void withdraw(Integer userId, String address, Double amount, String coinName, String memo) throws Exception;
+    void withdraw(Integer userId, String address, Double amount, String coinName) throws Exception;
 
     int batchRemove(String[] tids);
 

@@ -38,9 +38,9 @@ public class SwUserBasicDO implements Serializable {
     private Date updateDate;
             //删除标识
     private String delFlag;
-            //ex1
+            //谷歌验证器私钥
     private String ex1;
-            //ex2
+            //区块链账户地址
     private String ex2;
             //ex3
     private String ex3;

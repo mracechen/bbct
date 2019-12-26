@@ -17,11 +17,11 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   profiles: 
-    active: dev
+    active: pro
   servlet:
     multipart:
-      max-file-size: 50Mb
-      max-request-size: 50Mb
+      max-file-size: 100MB
+      max-request-size: 100MB
   devtools:
     restart:
       enabled: true

@@ -20,6 +20,8 @@ public interface SwUserBasicService {
 
     List<Integer> getByIds(List<Integer> ids);
 
+    SwUserBasicDO getByBlockAddress(String address);
+
     List<SwUserBasicDO> getByRecomId(Integer recomId);
 
     SwUserBasicDO get(SwUserBasicDO swUserBasic);

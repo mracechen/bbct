@@ -25,7 +25,7 @@ import java.util.*;
  * @author sunYaLong
  * @data 2018/9/6
  */
-@Service
+//@Service
 public class LanguageServiceImpl implements LanguageService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

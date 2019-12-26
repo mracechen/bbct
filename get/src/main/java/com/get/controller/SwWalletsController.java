@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -87,7 +88,16 @@ public class SwWalletsController {
     @RequiresPermissions("get:swWallets:edit")
     public R update(SwWalletsDO swWallets) {
         swWallets.setUpdateDate(new Date());
-            swWalletsService.update(swWallets);
+        SwWalletsDO swWalletsDO = swWalletsService.get(swWallets.getTid());
+        if(swWallets.getCurrency() != null){
+            BigDecimal actualChangeCurrency = swWallets.getCurrency().subtract(swWalletsDO.getCurrency());
+            swWallets.setCurrency(actualChangeCurrency);
+        }
+        if(swWallets.getFrozenAmount() != null){
+            BigDecimal actualChangeFrozenAmount = swWallets.getFrozenAmount().subtract(swWalletsDO.getFrozenAmount());
+            swWallets.setFrozenAmount(actualChangeFrozenAmount);
+        }
+        swWalletsService.update(swWallets);
         return R.ok();
     }
 

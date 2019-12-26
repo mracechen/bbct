@@ -12,7 +12,7 @@ import java.util.Date;
  * @author gaoyuzhe
  * @date 2017/12/14.
  */
-@Configuration
+//@Configuration
 public class DateConverConfig {
     @Bean
     public Converter<String, Date> stringDateConvert() {
