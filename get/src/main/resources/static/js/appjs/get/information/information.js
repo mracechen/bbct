@@ -76,9 +76,9 @@ function load() {
                     },*/
                     {
                         field: 'type',
-                        title: '类型',
+                        title: '所属区域',
                         formatter: function (value) {
-                            var str={1:"轮播图",2:"轮播图下菜单",3:"推荐菜单",4:"table"};
+                            var str={1:"轮播图区域",2:"轮播图下区域",3:"推荐栏目区域",4:"table栏目区域"};
                             if (str[value]) return str[value]
                         },
                         sortable: true,
@@ -86,7 +86,11 @@ function load() {
                     },
                     {
                         field: 'level',
-                        title: '层级',
+                        title: '类别',
+                        formatter: function (value) {
+                            var str={1:"菜单",2:"内容"};
+                            if (str[value]) return str[value]
+                        },
                     },
                     {
                         field: 'status',

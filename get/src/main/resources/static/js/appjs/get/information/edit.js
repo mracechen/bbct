@@ -1,14 +1,16 @@
 $().ready(function () {
     validateRule();
+    levelChange();
 });
 
 function levelChange() {
     let level = $('#level option:selected').val();
     let type = $('#type option:selected').val();
     let ex1Temp = $("#ex1Temp").val();
+    $("#ex1").empty();
+    $("#ex1").append("<option value=''>请选择</option>");
     if(level == 2 && type != null && type != ''){
-        $("#ex1").empty();
-        $("#ex1").append("<option value=''>请选择</option>");
+        $("#ex1").show();
         $.ajax({
             url:"/manager/get/information/queryByProperties",
             type:"GET",
@@ -24,15 +26,18 @@ function levelChange() {
                 }
             }
         })
+    }else{
+        $("#ex1").hide();
     }
 }
 function typeChange() {
     let level = $('#level option:selected').val();
     let type = $('#type option:selected').val();
     let ex1Temp = $("#ex1Temp").val();
+    $("#ex1").empty();
+    $("#ex1").append("<option value=''>请选择</option>");
     if(level == 2 && type != null && type != ''){
-        $("#ex1").empty();
-        $("#ex1").append("<option value=''>请选择</option>");
+        $("#ex1").show();
         $.ajax({
             url:"/manager/get/information/queryByProperties",
             type:"GET",
@@ -48,6 +53,8 @@ function typeChange() {
                 }
             }
         })
+    }else{
+        $("#ex1").hide();
     }
 }
 
